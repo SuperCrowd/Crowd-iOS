@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_EditTimeVC">
+            <connections>
+                <outlet property="btnToolbar" destination="R3j-zm-Kh3" id="EZ4-ZT-1gy"/>
+                <outlet property="lblTitle" destination="vwV-7z-4Ej" id="cOu-II-J1d"/>
+                <outlet property="piker" destination="BNO-uF-vkb" id="4we-1D-a6S"/>
+                <outlet property="txtFrom" destination="nFC-D9-mNi" id="pIF-SW-iY7"/>
+                <outlet property="txtTo" destination="eJs-kn-51B" id="Yf0-ue-2vH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="94" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Years" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwV-7z-4Ej">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="xDZ-eK-Ygx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ap-SD-iAF">
+                    <rect key="frame" x="0.0" y="45" width="320" height="371"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEs-sU-nSv">
+                            <rect key="frame" x="8" y="8" width="40" height="16"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <color key="textColor" red="0.4823529411764706" green="0.50980392156862742" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PlaceHolder" adjustsFontSizeToFit="NO" minimumFontSize="17" background="textfiled3" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nFC-D9-mNi" userLabel="txt From" customClass="UITextFieldExtended">
+                            <rect key="frame" x="8" y="30" width="152" height="33"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUD-wB-5u4">
+                            <rect key="frame" x="8" y="80" width="40" height="16"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <color key="textColor" red="0.4823529412" green="0.50980392159999999" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PlaceHolder" adjustsFontSizeToFit="NO" minimumFontSize="17" background="textfiled3" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eJs-kn-51B" userLabel="txt To" customClass="UITextFieldExtended">
+                            <rect key="frame" x="8" y="104" width="152" height="33"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                        </textField>
+                        <button opaque="NO" tag="61" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dth-aI-jQl" userLabel="Edit From">
+                            <rect key="frame" x="166" y="30" width="33" height="33"/>
+                            <state key="normal" image="edit_icon_green">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnEditClicked:" destination="-1" eventType="touchUpInside" id="Ekd-FG-xyS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="62" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGd-pX-SjY" userLabel="Edit To">
+                            <rect key="frame" x="166" y="104" width="33" height="33"/>
+                            <state key="normal" image="edit_icon_green">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnEditClicked:" destination="-1" eventType="touchUpInside" id="Mje-9b-p65"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="51" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH8-Ex-rQP" userLabel="btn From">
+                            <rect key="frame" x="8" y="30" width="152" height="33"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnEditClicked:" destination="-1" eventType="touchUpInside" id="X6g-6H-PXL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="52" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcd-l2-9uV" userLabel="btn To">
+                            <rect key="frame" x="8" y="104" width="152" height="33"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnEditClicked:" destination="-1" eventType="touchUpInside" id="nGd-9J-RsN"/>
+                            </connections>
+                        </button>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BNO-uF-vkb">
+                            <rect key="frame" x="0.0" y="207" width="320" height="162"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="sdm-tt-qXh"/>
+                                <outlet property="delegate" destination="-1" id="B35-Sk-ns0"/>
+                            </connections>
+                        </pickerView>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kxb-N8-GTF">
+                            <rect key="frame" x="0.0" y="163" width="320" height="44"/>
+                            <items>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="3Xv-Cg-jd1"/>
+                                <barButtonItem title="Item" id="R3j-zm-Kh3">
+                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="9aW-xM-wDk"/>
+                            </items>
+                        </toolbar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="vwV-7z-4Ej" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Eir-am-79q"/>
+                <constraint firstItem="vwV-7z-4Ej" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="O8X-AP-mYb"/>
+                <constraint firstItem="8Ap-SD-iAF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tjf-B7-MIY"/>
+                <constraint firstAttribute="bottom" secondItem="8Ap-SD-iAF" secondAttribute="bottom" id="Ww3-aY-T0D"/>
+                <constraint firstAttribute="trailing" secondItem="vwV-7z-4Ej" secondAttribute="trailing" id="ZCO-TO-NpO"/>
+                <constraint firstItem="8Ap-SD-iAF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="45" id="p8f-Sn-ESk"/>
+                <constraint firstAttribute="trailing" secondItem="8Ap-SD-iAF" secondAttribute="trailing" id="tc6-cY-Yki"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="620" y="441"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="edit_icon_green" width="22" height="22"/>
+        <image name="textfiled3" width="152" height="33"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

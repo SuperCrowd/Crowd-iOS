@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_ChooseImageVC">
+            <connections>
+                <outlet property="imgV" destination="grE-R7-SmV" id="kkg-YN-zxn"/>
+                <outlet property="view" destination="VGA-nS-cDK" id="qIr-nH-W1u"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="VGA-nS-cDK">
+            <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="grE-R7-SmV">
+                    <rect key="frame" x="88" y="40" width="144" height="144"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the icon below to upload or take your profile picture" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="grs-7D-2gV">
+                    <rect key="frame" x="10" y="210" width="290" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="5Tk-1f-MkU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHH-SV-Lme" userLabel="Next">
+                    <rect key="frame" x="53" y="326" width="215" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Oqi-gI-2lC"/>
+                    </constraints>
+                    <state key="normal" image="next_btn_mid">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="CUw-Er-xeV"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKg-Tx-jDN" userLabel="Profile Container">
+                    <rect key="frame" x="88" y="40" width="144" height="144"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="144" id="RVp-Rq-5Jx"/>
+                        <constraint firstAttribute="height" constant="144" id="dNR-2g-VZg"/>
+                    </constraints>
+                    <state key="normal" image="profile_round">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnTake_or_Choose_Clicked:" destination="-1" eventType="touchUpInside" id="r7k-zJ-tZe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFC-oc-4rP" userLabel="Camera Button">
+                    <rect key="frame" x="147" y="265" width="26" height="22"/>
+                    <state key="normal" image="camera_icon">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnTake_or_Choose_Clicked:" destination="-1" eventType="touchUpInside" id="X6g-WO-e4b"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="gFC-oc-4rP" firstAttribute="top" secondItem="grs-7D-2gV" secondAttribute="bottom" constant="27" id="0TM-fD-lrH"/>
+                <constraint firstAttribute="trailing" secondItem="grs-7D-2gV" secondAttribute="trailing" constant="20" symbolic="YES" id="AwT-dq-tLn"/>
+                <constraint firstAttribute="trailing" secondItem="hHH-SV-Lme" secondAttribute="trailing" constant="52" id="Oa9-bd-S0b"/>
+                <constraint firstItem="grs-7D-2gV" firstAttribute="leading" secondItem="VGA-nS-cDK" secondAttribute="leading" constant="10" id="P1a-jq-bzf"/>
+                <constraint firstItem="hHH-SV-Lme" firstAttribute="centerX" secondItem="gFC-oc-4rP" secondAttribute="centerX" id="V2W-aR-iMP"/>
+                <constraint firstItem="hHH-SV-Lme" firstAttribute="leading" secondItem="VGA-nS-cDK" secondAttribute="leading" constant="53" id="XS6-53-8GB"/>
+                <constraint firstItem="UKg-Tx-jDN" firstAttribute="leading" secondItem="VGA-nS-cDK" secondAttribute="leading" constant="88" id="Xz6-We-aU8"/>
+                <constraint firstAttribute="bottom" secondItem="hHH-SV-Lme" secondAttribute="bottom" constant="40" id="fHK-hj-1VW"/>
+                <constraint firstItem="grs-7D-2gV" firstAttribute="top" secondItem="UKg-Tx-jDN" secondAttribute="bottom" constant="26" id="jzh-5u-6rZ"/>
+                <constraint firstItem="UKg-Tx-jDN" firstAttribute="top" secondItem="VGA-nS-cDK" secondAttribute="top" constant="40" id="rfi-Qs-IgJ"/>
+                <constraint firstAttribute="trailing" secondItem="UKg-Tx-jDN" secondAttribute="trailing" constant="88" id="wqn-Jc-kRH"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="camera_icon" width="26" height="19"/>
+        <image name="next_btn_mid" width="215" height="50"/>
+        <image name="profile_round" width="144" height="144"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

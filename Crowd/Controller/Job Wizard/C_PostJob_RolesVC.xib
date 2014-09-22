@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_RolesVC">
+            <connections>
+                <outlet property="txtV" destination="Mde-iU-GrG" id="ZUq-9C-Jto"/>
+                <outlet property="view" destination="sYA-p5-0jZ" id="l58-x2-G4G"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="sYA-p5-0jZ">
+            <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Roles and Responsibilities" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1o2-Q4-m79">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="ADi-kl-OXE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Describe the role in one sentence or less." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdo-KU-f8d">
+                    <rect key="frame" x="0.0" y="30" width="320" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="0Ti-m2-eBo"/>
+                        <constraint firstAttribute="height" constant="30" id="dDL-XQ-CHZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mde-iU-GrG">
+                    <rect key="frame" x="0.0" y="60" width="320" height="67"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="dzX-zx-Ujh"/>
+                    </connections>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jd1-Kt-pGv">
+                    <rect key="frame" x="53" y="135" width="214" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="wat-UB-KbN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
+                    <state key="normal" title="Next" backgroundImage="btnGreenBG">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="yUt-6t-uRJ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Mde-iU-GrG" firstAttribute="top" secondItem="1o2-Q4-m79" secondAttribute="bottom" constant="30" id="56X-pf-S09"/>
+                <constraint firstAttribute="trailing" secondItem="Mde-iU-GrG" secondAttribute="trailing" id="6Ul-9e-8ob"/>
+                <constraint firstItem="Mde-iU-GrG" firstAttribute="leading" secondItem="sYA-p5-0jZ" secondAttribute="leading" id="7tr-g1-xpp"/>
+                <constraint firstAttribute="trailing" secondItem="gdo-KU-f8d" secondAttribute="trailing" id="D6g-rd-Kna"/>
+                <constraint firstItem="jd1-Kt-pGv" firstAttribute="top" secondItem="Mde-iU-GrG" secondAttribute="bottom" constant="8" id="FAk-0M-ZGh"/>
+                <constraint firstItem="gdo-KU-f8d" firstAttribute="leading" secondItem="sYA-p5-0jZ" secondAttribute="leading" id="HpK-jQ-2Rl"/>
+                <constraint firstAttribute="trailing" secondItem="jd1-Kt-pGv" secondAttribute="trailing" constant="53" id="J0S-IW-JhO"/>
+                <constraint firstItem="1o2-Q4-m79" firstAttribute="leading" secondItem="sYA-p5-0jZ" secondAttribute="leading" id="SUY-Md-mg1"/>
+                <constraint firstAttribute="trailing" secondItem="1o2-Q4-m79" secondAttribute="trailing" id="cAA-p0-crO"/>
+                <constraint firstAttribute="bottom" secondItem="jd1-Kt-pGv" secondAttribute="bottom" constant="252" id="eC1-Gc-G2S"/>
+                <constraint firstItem="1o2-Q4-m79" firstAttribute="top" secondItem="sYA-p5-0jZ" secondAttribute="top" id="gGH-Kq-Ski"/>
+                <constraint firstItem="jd1-Kt-pGv" firstAttribute="leading" secondItem="sYA-p5-0jZ" secondAttribute="leading" constant="53" id="hDP-NS-iKp"/>
+                <constraint firstItem="gdo-KU-f8d" firstAttribute="top" secondItem="1o2-Q4-m79" secondAttribute="bottom" id="znq-CF-Jjm"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="331" y="438"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btnGreenBG" width="214" height="29"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

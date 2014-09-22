@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Cell_SkillsProfile"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idcellSkillsProfile" id="0z0-Ji-bmX" customClass="C_Cell_SkillsProfile">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0z0-Ji-bmX" id="G8c-fH-rg0">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PyV-HR-r4R" customClass="DWTagList">
+                        <rect key="frame" x="10" y="12" width="300" height="19"/>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="PyV-HR-r4R" firstAttribute="top" secondItem="G8c-fH-rg0" secondAttribute="topMargin" constant="4" id="JdT-7f-LRj"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PyV-HR-r4R" secondAttribute="bottom" constant="4" id="KMo-by-Rre"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="PyV-HR-r4R" secondAttribute="trailing" constant="2" id="gQ4-FK-nJj"/>
+                    <constraint firstItem="PyV-HR-r4R" firstAttribute="leading" secondItem="G8c-fH-rg0" secondAttribute="leadingMargin" constant="2" id="jOr-An-srA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="tagList" destination="PyV-HR-r4R" id="pqn-0f-Egw"/>
+            </connections>
+            <point key="canvasLocation" x="278" y="330"/>
+        </tableViewCell>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

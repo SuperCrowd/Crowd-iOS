@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_IndustryListingVC">
+            <connections>
+                <outlet property="searchDisplayController" destination="2Gq-99-jKU" id="nKV-H4-n2D"/>
+                <outlet property="tblView" destination="0nX-KV-PTx" id="MU5-v2-pqk"/>
+                <outlet property="view" destination="YOR-vF-ANY" id="WyK-vO-mvm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="YOR-vF-ANY">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="uHC-CG-1Ix">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="uKY-TC-Zoe"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0nX-KV-PTx">
+                    <rect key="frame" x="0.0" y="44" width="320" height="372"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="aDn-c2-1qY"/>
+                        <outlet property="delegate" destination="-1" id="qCW-6m-teC"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0nX-KV-PTx" secondAttribute="trailing" id="1mN-LV-Su9"/>
+                <constraint firstItem="0nX-KV-PTx" firstAttribute="leading" secondItem="YOR-vF-ANY" secondAttribute="leading" id="8iF-nu-6Hi"/>
+                <constraint firstItem="uHC-CG-1Ix" firstAttribute="leading" secondItem="YOR-vF-ANY" secondAttribute="leading" id="B5b-vo-adn"/>
+                <constraint firstItem="uHC-CG-1Ix" firstAttribute="top" secondItem="YOR-vF-ANY" secondAttribute="top" id="K28-Nk-itO"/>
+                <constraint firstAttribute="bottom" secondItem="0nX-KV-PTx" secondAttribute="bottom" id="T6S-qc-keP"/>
+                <constraint firstItem="0nX-KV-PTx" firstAttribute="top" secondItem="YOR-vF-ANY" secondAttribute="top" constant="44" id="UFq-tL-bKz"/>
+                <constraint firstAttribute="trailing" secondItem="uHC-CG-1Ix" secondAttribute="trailing" id="mG2-U9-syC"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="406" y="371"/>
+        </view>
+        <searchDisplayController id="2Gq-99-jKU">
+            <connections>
+                <outlet property="delegate" destination="-1" id="ZaW-Yf-Xxn"/>
+                <outlet property="searchBar" destination="uHC-CG-1Ix" id="DAO-zg-4FP"/>
+                <outlet property="searchContentsController" destination="-1" id="J93-uT-NxN"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="BdN-Ag-YFE"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="aIG-uy-teP"/>
+            </connections>
+        </searchDisplayController>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

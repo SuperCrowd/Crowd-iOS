@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_WorkHistory">
+            <connections>
+                <outlet property="tblView" destination="UB4-ri-ump" id="Pjp-JD-z0l"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="g0h-JZ-ubW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="UB4-ri-ump">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="296"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiF-7t-j9k" userLabel="Next">
+                    <rect key="frame" x="53" y="326" width="215" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="GRo-UD-KUZ"/>
+                        <constraint firstAttribute="width" constant="215" id="wfm-iJ-xyJ"/>
+                    </constraints>
+                    <state key="normal" image="next_btn_mid">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="lzS-qn-kNq"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="UB4-ri-ump" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GNF-vw-Eee"/>
+                <constraint firstAttribute="bottom" secondItem="UB4-ri-ump" secondAttribute="bottom" constant="120" id="L6F-yn-G4P"/>
+                <constraint firstAttribute="bottom" secondItem="wiF-7t-j9k" secondAttribute="bottom" constant="40" id="NeP-9a-NhP"/>
+                <constraint firstItem="UB4-ri-ump" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Rlm-3g-CGP"/>
+                <constraint firstAttribute="centerX" secondItem="wiF-7t-j9k" secondAttribute="centerX" constant="-0.5" id="qgy-Gw-g77"/>
+                <constraint firstAttribute="trailing" secondItem="UB4-ri-ump" secondAttribute="trailing" id="y7T-LU-QnW"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="501" y="399"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="next_btn_mid" width="215" height="50"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

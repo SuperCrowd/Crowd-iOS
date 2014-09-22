@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_EducationHistory">
+            <connections>
+                <outlet property="tblView" destination="rbq-me-hAU" id="wA4-bs-heY"/>
+                <outlet property="view" destination="ydU-Dk-fcv" id="lPx-wc-69u"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ydU-Dk-fcv">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="rbq-me-hAU">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="296"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="57J-yV-7Q3"/>
+                        <outlet property="delegate" destination="-1" id="0wp-RB-w5t"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKh-qK-faJ" userLabel="Next">
+                    <rect key="frame" x="53" y="326" width="215" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="215" id="ASN-kA-JCY"/>
+                        <constraint firstAttribute="height" constant="50" id="Znu-lh-zh0"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" image="next_btn_mid">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="hne-up-yzC"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="rbq-me-hAU" secondAttribute="trailing" id="6x7-LS-cqd"/>
+                <constraint firstAttribute="centerX" secondItem="UKh-qK-faJ" secondAttribute="centerX" constant="-0.5" id="DHz-o0-wD3"/>
+                <constraint firstAttribute="bottom" secondItem="rbq-me-hAU" secondAttribute="bottom" constant="120" id="G0d-rr-Rwd"/>
+                <constraint firstItem="rbq-me-hAU" firstAttribute="top" secondItem="ydU-Dk-fcv" secondAttribute="top" id="VqH-GF-qbF"/>
+                <constraint firstAttribute="bottom" secondItem="UKh-qK-faJ" secondAttribute="bottom" constant="40" id="hzT-tX-ESg"/>
+                <constraint firstItem="rbq-me-hAU" firstAttribute="leading" secondItem="ydU-Dk-fcv" secondAttribute="leading" id="k63-Zd-Phm"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="143" y="262"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="next_btn_mid" width="215" height="50"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

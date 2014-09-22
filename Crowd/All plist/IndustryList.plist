@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>key</key>
+		<string>A</string>
+		<key>value</key>
+		<array>
+			<string>Accounting</string>
+			<string>Airlines/Aviation</string>
+			<string>Alternative Dispute Resolution</string>
+			<string>Alternative Medicine</string>
+			<string>Animation</string>
+			<string>Apparel &amp; Fashion</string>
+			<string>Architecture &amp; Planning</string>
+			<string>Arts and Crafts</string>
+			<string>Automotive</string>
+			<string>Aviation &amp; Aerospace</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>B</string>
+		<key>value</key>
+		<array>
+			<string>Banking</string>
+			<string>Biotechnology</string>
+			<string>Broadcast Media</string>
+			<string>Building Materials</string>
+			<string>Business Supplies and Equipment</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>C</string>
+		<key>value</key>
+		<array>
+			<string>Capital Markets</string>
+			<string>Chemicals</string>
+			<string>Civic &amp; Social Organization</string>
+			<string>Civil Engineering</string>
+			<string>Commercial Real Estate</string>
+			<string>Computer &amp; Network Security</string>
+			<string>Computer Games</string>
+			<string>Computer Hardware</string>
+			<string>Computer Networking</string>
+			<string>Computer Software</string>
+			<string>Construction</string>
+			<string>Consumer Electronics</string>
+			<string>Consumer Goods</string>
+			<string>Consumer Services</string>
+			<string>Cosmetics</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>D</string>
+		<key>value</key>
+		<array>
+			<string>Dairy</string>
+			<string>Defense &amp; Space</string>
+			<string>Design</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>E</string>
+		<key>value</key>
+		<array>
+			<string>Education Management</string>
+			<string>E-Learning</string>
+			<string>Electrical/Electronic Manufacturing</string>
+			<string>Entertainment</string>
+			<string>Environmental Services</string>
+			<string>Events Services</string>
+			<string>Executive Office</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>F</string>
+		<key>value</key>
+		<array>
+			<string>Facilities Services</string>
+			<string>Farming</string>
+			<string>Financial Services</string>
+			<string>Fine Art</string>
+			<string>Fishery</string>
+			<string>Food &amp; Beverages</string>
+			<string>Food Production</string>
+			<string>Fund-Raising</string>
+			<string>Furniture</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>G</string>
+		<key>value</key>
+		<array>
+			<string>Gambling &amp; Casinos</string>
+			<string>Glass, Ceramics &amp; Concrete</string>
+			<string>Government Administration</string>
+			<string>Government Relations</string>
+			<string>Graphic Design</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>H</string>
+		<key>value</key>
+		<array>
+			<string>Health, Wellness and Fitness</string>
+			<string>Higher Education</string>
+			<string>Hospital &amp; Health Care</string>
+			<string>Hospitality</string>
+			<string>Human Resources</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>I</string>
+		<key>value</key>
+		<array>
+			<string>Import and Export</string>
+			<string>Individual &amp; Family Services</string>
+			<string>Industrial Automation</string>
+			<string>Information Services</string>
+			<string>Information Technology and Services</string>
+			<string>Insurance</string>
+			<string>International Affairs</string>
+			<string>International Trade and Development</string>
+			<string>Internet</string>
+			<string>Investment Banking</string>
+			<string>Investment Management</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>J</string>
+		<key>value</key>
+		<array>
+			<string>Judiciary</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>L</string>
+		<key>value</key>
+		<array>
+			<string>Law Enforcement</string>
+			<string>Law Practice</string>
+			<string>Legal Services</string>
+			<string>Legislative Office</string>
+			<string>Leisure, Travel &amp; Tourism</string>
+			<string>Libraries</string>
+			<string>Logistics and Supply Chain</string>
+			<string>Luxury Goods &amp; Jewelry</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>M</string>
+		<key>value</key>
+		<array>
+			<string>Machinery</string>
+			<string>Management Consulting</string>
+			<string>Maritime</string>
+			<string>Market Research</string>
+			<string>Marketing and Advertising</string>
+			<string>Mechanical or Industrial Engineering</string>
+			<string>Media Production</string>
+			<string>Medical Devices</string>
+			<string>Medical Practice</string>
+			<string>Mental Health Care</string>
+			<string>Military</string>
+			<string>Mining &amp; Metals</string>
+			<string>Motion Pictures and Film</string>
+			<string>Museums and Institutions</string>
+			<string>Music</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>N</string>
+		<key>value</key>
+		<array>
+			<string>Nanotechnology</string>
+			<string>Newspapers</string>
+			<string>Non-Profit Organization Management</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>O</string>
+		<key>value</key>
+		<array>
+			<string>Oil &amp; Energy</string>
+			<string>Online Media</string>
+			<string>Outsourcing/Offshoring</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>P</string>
+		<key>value</key>
+		<array>
+			<string>Package/Freight Delivery</string>
+			<string>Packaging and Containers</string>
+			<string>Paper &amp; Forest Products</string>
+			<string>Performing Arts</string>
+			<string>Pharmaceuticals</string>
+			<string>Philanthropy</string>
+			<string>Photography</string>
+			<string>Plastics</string>
+			<string>Political Organization</string>
+			<string>Primary/Secondary Education</string>
+			<string>Printing</string>
+			<string>Professional Training &amp; Coaching</string>
+			<string>Program Development</string>
+			<string>Public Policy</string>
+			<string>Public Relations and Communications</string>
+			<string>Public Safety</string>
+			<string>Publishing</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>R</string>
+		<key>value</key>
+		<array>
+			<string>Railroad Manufacture</string>
+			<string>Ranching</string>
+			<string>Real Estate</string>
+			<string>Recreational Facilities and Services</string>
+			<string>Religious Institutions</string>
+			<string>Renewables &amp; Environment</string>
+			<string>Research</string>
+			<string>Restaurants</string>
+			<string>Retail</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>S</string>
+		<key>New item</key>
+		<array>
+			<string>Security and Investigations</string>
+			<string>Semiconductors</string>
+			<string>Shipbuilding</string>
+			<string>Sporting Goods</string>
+			<string>Sports</string>
+			<string>Staffing and Recruiting</string>
+			<string>Supermarkets</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>T</string>
+		<key>value</key>
+		<array>
+			<string>Telecommunications</string>
+			<string>Textiles</string>
+			<string>Think Tanks</string>
+			<string>Tobacco</string>
+			<string>Translation and Localization</string>
+			<string>Transportation/Trucking/Railroad</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>U</string>
+		<key>value</key>
+		<array>
+			<string>Utilities</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>V</string>
+		<key>value</key>
+		<array>
+			<string>Venture Capital &amp; Private Equity</string>
+			<string>Veterinary</string>
+		</array>
+	</dict>
+	<dict>
+		<key>key</key>
+		<string>W</string>
+		<key>value</key>
+		<array>
+			<string>Warehousing</string>
+			<string>Wholesale</string>
+			<string>Wine and Spirits</string>
+			<string>Wireless</string>
+			<string>Writing and Editing</string>
+		</array>
+	</dict>
+</array>
+</plist>

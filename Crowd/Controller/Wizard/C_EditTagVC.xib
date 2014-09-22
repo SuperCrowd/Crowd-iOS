@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_EditTagVC">
+            <connections>
+                <outlet property="lblTitle" destination="apx-a6-oPA" id="qyL-A2-xQ1"/>
+                <outlet property="txtV" destination="Cv0-rG-43J" id="SMD-Z1-YnB"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apx-a6-oPA">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="03h-Vu-c4X"/>
+                        <constraint firstAttribute="height" constant="30" id="YFw-lM-WlT"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cv0-rG-43J">
+                    <rect key="frame" x="0.0" y="30" width="320" height="134"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="o7U-kP-QhA"/>
+                    </connections>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Cv0-rG-43J" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="EaB-l2-9CU"/>
+                <constraint firstAttribute="trailing" secondItem="Cv0-rG-43J" secondAttribute="trailing" id="Yel-in-MKF"/>
+                <constraint firstAttribute="trailing" secondItem="apx-a6-oPA" secondAttribute="trailing" id="ZfQ-kq-jjZ"/>
+                <constraint firstItem="apx-a6-oPA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mWv-fX-Zzh"/>
+                <constraint firstAttribute="bottom" secondItem="Cv0-rG-43J" secondAttribute="bottom" constant="252" id="pcI-82-EI1"/>
+                <constraint firstItem="Cv0-rG-43J" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rm1-56-nfY"/>
+                <constraint firstItem="apx-a6-oPA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zXU-ih-7sC"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="501" y="491"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
