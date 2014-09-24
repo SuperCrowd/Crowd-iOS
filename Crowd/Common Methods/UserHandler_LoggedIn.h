@@ -12,4 +12,7 @@
 +(NSMutableDictionary *)getDict_To_RegisterUser;
 +(C_MyUser *)getMyUser_LoggedIN;
 +(void)saveMyUser_LoggedIN:(C_MyUser *)myUser;
+
+
++(NSMutableDictionary *)getDict_To_Update_withProfileModel:(C_MyUser *)myModel;
 @end

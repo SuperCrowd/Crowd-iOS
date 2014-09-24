@@ -8,10 +8,11 @@
 
 #import "C_LeftMenuVC.h"
 #import "AppConstant.h"
+#import "M13BadgeView.h"
 
 #import "C_DashBoardVC.h"
 #import "C_PostJob_NameVC.h"
-#import "M13BadgeView.h"
+#import "C_MyProfileVC.h"
 
 #define NAME @"NameKey"
 #define IMG @"ImageKey"
@@ -190,7 +191,12 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
             break;
         case MY_PROFILE:
         {
-
+            C_MyProfileVC *objD = [[C_MyProfileVC alloc]initWithNibName:@"C_MyProfileVC" bundle:nil];
+            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objD];
+            navvv.navigationBar.translucent = NO;
+            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                
+            }];
         }
             break;
         case FIND_A_JOB:

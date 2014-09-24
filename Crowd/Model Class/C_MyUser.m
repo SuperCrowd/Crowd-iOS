@@ -256,7 +256,6 @@
 
     myUser.DateCreated = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateCreated"]] isNull];
     myUser.DateModified = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateModified"]] isNull];
-    
     @try
     {
         /*--- education ---*/
@@ -272,7 +271,7 @@
     @try
     {
         /*--- Work ---*/
-        myUser.arr_WorkALL = ([dictTTTT[@"GetUserEmploymentWithRecommendationResult"] isKindOfClass:[NSArray class]])?[self getWorkUser_withDict:dictTTTT]:[NSMutableArray array];
+        myUser.arr_WorkALL = ([dictTTTT[@"GetUserEmploymentResult"] isKindOfClass:[NSArray class]])?[self getWorkUser_withDict:dictTTTT]:[NSMutableArray array];
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);
@@ -393,7 +392,7 @@
     NSMutableArray *arrWorkFinal = [[NSMutableArray alloc]init];
     @try
     {
-        NSArray *arrWork = dictUserInfo[@"GetUserEmploymentWithRecommendationResult"];
+        NSArray *arrWork = dictUserInfo[@"GetUserEmploymentResult"];
         
         for (int i = 0;i<arrWork.count;i++)
         {

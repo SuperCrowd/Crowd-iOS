@@ -1,18 +1,18 @@
 //
-//  C_EditTimeVC.m
+//  C_MP_EditTimeVC.m
 //  Crowd
 //
-//  Created by MAC107 on 11/09/14.
+//  Created by MAC107 on 24/09/14.
 //  Copyright (c) 2014 tatva. All rights reserved.
 //
 
-#import "C_EditTimeVC.h"
+#import "C_MP_EditTimeVC.h"
 #import "AppConstant.h"
-#import "C_UserModel.h"
 #import "UITextFieldExtended.h"
 
 #define POSITION @"Position"
 #define EDUCATION @"Education"
+
 typedef NS_ENUM(NSInteger, btnTapped)
 {
     btnFrom = 51,
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
     btnEditFrom = 61,
     btnEditTo = 62
 };
-@interface C_EditTimeVC ()<UIPickerViewDataSource,UIPickerViewDelegate>
+@interface C_MP_EditTimeVC ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     __weak IBOutlet UILabel *lblTitle;
     
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
     
     NSString *strYear;
     NSString *strMonth;
-
+    
     NSMutableArray *arrYear;
     NSArray *arrMonthTo;
     NSArray *arrMonthFrom;
@@ -41,17 +41,18 @@ typedef NS_ENUM(NSInteger, btnTapped)
     
     BOOL isUpdateFrom;
 }
+
 @end
 
-@implementation C_EditTimeVC
+@implementation C_MP_EditTimeVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = _strTitle;
     lblTitle.text = @"Years";
-    self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     
+    self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     
     /*--- 10 years more for study only ---*/
     NSInteger currentYear;//
@@ -172,7 +173,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
         }
         txtTo.text = [NSString stringWithFormat:@"%@ %@",strEndM,strEndY];
     }
-    
+
     [piker reloadAllComponents];
     
     
@@ -181,6 +182,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
     isUpdateFrom = YES;
     [self updatePiker];
 }
+
 -(void)updatePiker
 {
     [piker reloadAllComponents];
@@ -196,7 +198,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
                 indexMonth  = [arrMonthTo indexOfObject:strMonth];
             
             [piker selectRow:indexMonth inComponent:0 animated:NO];
-
+            
         }
         
         if (![strYear isEqualToString:@""])
@@ -204,7 +206,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
             NSInteger indexYear = [arrYear indexOfObject:strYear];
             [piker selectRow:indexYear inComponent:1 animated:NO];
         }
-
+        
         
         if (isUpdateFrom)
             txtFrom.text = [NSString stringWithFormat:@"%@ %@",strMonth,strYear];
@@ -220,6 +222,10 @@ typedef NS_ENUM(NSInteger, btnTapped)
     
 }
 #pragma mark - IBAction
+-(void)back
+{
+    popView;
+}
 -(IBAction)btnEditClicked:(id)sender
 {
     UIButton *btn = (UIButton *)sender;
@@ -234,7 +240,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
             btnToolbar.title = @"From";
             strMonth = [[[txtFrom.text isNull] componentsSeparatedByString:@" "] objectAtIndex:0];
             strYear = [[[txtFrom.text isNull] componentsSeparatedByString:@" "] objectAtIndex:1];
-
+            
             [self updatePiker];
         }
         else
@@ -281,41 +287,45 @@ typedef NS_ENUM(NSInteger, btnTapped)
     {
         NSArray *arrMonthStart = [[txtFrom.text isNull] componentsSeparatedByString:@" "];
         
-        Positions *myPosition = _arrContent[_selectedIndexToUpdate];
-        myPosition.startDate_month = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthStart[0]]];
-        myPosition.startDate_year = arrMonthStart[1];
+        C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
         
         BOOL result = NO;
         /*--- If user choose present no need to check validation otherwise check date Validation ---*/
         if ([[txtTo.text isNull] isEqualToString:@"Present"])
         {
-            myPosition.isCurrent = @"1";
-            myPosition.endDate_month = @"";
-            myPosition.endDate_year = @"";
+            //myWork.isCurrent = @"1";
             result = YES;
         }
         else
         {
             NSArray *arrMonthEnd = [[txtTo.text isNull] componentsSeparatedByString:@" "];
-            myPosition.isCurrent = @"0";
-            myPosition.endDate_month = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthEnd[0]]];
-            myPosition.endDate_year = arrMonthEnd[1];;
-            
+            //myPosition.isCurrent = @"0";
             result = [self checkDateValidation_with:arrMonthStart[0] withStartYear:arrMonthStart[1] withEndMonth:arrMonthEnd[0] withEndYear:arrMonthEnd[1]];
         }
         
         if (result)
         {
-            [myUserModel.arrPositionUser replaceObjectAtIndex:_selectedIndexToUpdate withObject:myPosition];
+            NSArray *arrMonthEnd = [[txtTo.text isNull] componentsSeparatedByString:@" "];
+
+            myWork.StartMonth = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthStart[0]]];
+            myWork.StartYear = arrMonthStart[1];
+            if ([[txtTo.text isNull] isEqualToString:@"Present"])
+            {
+                //myWork.isCurrent = @"1";
+                myWork.EndMonth = @"";
+                myWork.EndYear = @"";
+            }
+            else
+            {
+                myWork.EndMonth = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthEnd[0]]];
+                myWork.EndYear = arrMonthEnd[1];;
+            }
             
-            [CommonMethods saveMyUser:myUserModel];
-            myUserModel = [CommonMethods getMyUser];
+            [_obj_ProfileUpdate.arr_WorkALL replaceObjectAtIndex:_selectedIndexToUpdate withObject:myWork];
             [self.navigationController popViewControllerAnimated:YES];
-            
         }
         else
         {
-            myUserModel = [CommonMethods getMyUser];
             [CommonMethods displayAlertwithTitle:@"Please be sure the start date is not after the end date." withMessage:nil withViewController:self];
         }
     }
@@ -333,10 +343,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
     {
         NSArray *arrMonthStart = [[txtFrom.text isNull] componentsSeparatedByString:@" "];
         
-        Education *myEducation = _arrContent[_selectedIndexToUpdate];
-        myEducation.startDate_month = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthStart[0]]];
-        myEducation.startDate_year = arrMonthStart[1];
-        
+        C_Model_Education *myEducation = _arrContent[_selectedIndexToUpdate];
         /*--- If user choose present no need to check validation otherwise check date Validation ---*/
         
         NSArray *arrMonthEnd = [[txtTo.text isNull] componentsSeparatedByString:@" "];
@@ -348,9 +355,6 @@ typedef NS_ENUM(NSInteger, btnTapped)
         BOOL result = YES;
         if (arrMonthEnd.count > 0)
         {
-            myEducation.endDate_month = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthEnd[0]]];
-            myEducation.endDate_year = arrMonthEnd[1];;
-            
             result = [self checkDateValidation_with:arrMonthStart[0] withStartYear:arrMonthStart[1] withEndMonth:arrMonthEnd[0] withEndYear:arrMonthEnd[1]];
         }
         else
@@ -361,16 +365,20 @@ typedef NS_ENUM(NSInteger, btnTapped)
         
         if (result)
         {
-            [myUserModel.arrEducationUser replaceObjectAtIndex:_selectedIndexToUpdate withObject:myEducation];
+            myEducation.StartMonth = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthStart[0]]];
+            myEducation.StartYear = arrMonthStart[1];
+            if (arrMonthEnd.count > 0)
+            {
+                myEducation.EndMonth = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthEnd[0]]];
+                myEducation.EndYear = arrMonthEnd[1];;
+            }
             
-            [CommonMethods saveMyUser:myUserModel];
-            myUserModel = [CommonMethods getMyUser];
+            [_obj_ProfileUpdate.arr_EducationALL replaceObjectAtIndex:_selectedIndexToUpdate withObject:myEducation];
+
             [self.navigationController popViewControllerAnimated:YES];
-            
         }
         else
         {
-            myUserModel = [CommonMethods getMyUser];
             [CommonMethods displayAlertwithTitle:@"Please be sure the start date is not after the end date." withMessage:nil withViewController:self];
         }
     }
@@ -396,61 +404,61 @@ typedef NS_ENUM(NSInteger, btnTapped)
             return YES;
         else
             return NO;
-
+        
     }
     return YES;
 }
 #pragma mark - Get Data - Position
 -(NSString *)getPosition_StartMonth
 {
-    Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
-    return [CommonMethods getMonthName:myPosition.startDate_month];
+    C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
+    return [CommonMethods getMonthName:myWork.StartMonth];
 }
 -(NSString *)getPosition_StartYear
 {
-    Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
-    return myPosition.startDate_year;
+    C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
+    return myWork.StartYear;
 }
 
 -(NSString *)getPosition_EndMonth
 {
-    Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
-    if ([myPosition.isCurrent boolValue])
+    C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
+    if ([myWork.EndMonth isEqualToString:@""])
     {
         return @"Present";
     }
-    return [CommonMethods getMonthName:myPosition.endDate_month];
+    return [CommonMethods getMonthName:myWork.EndMonth];
 }
 -(NSString *)getPosition_EndYear
 {
-    Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
-    if ([myPosition.isCurrent boolValue])
+    C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
+    if ([myWork.EndYear isEqualToString:@""])
     {
         return @"";
     }
-    return myPosition.endDate_year;
+    return myWork.EndYear;
 }
 #pragma mark - Get Data - Educxation
 -(NSString *)getEducation_StartMonth
 {
-    Education *myEducation = _arrContent[_selectedIndexToUpdate];//
-    return [CommonMethods getMonthName:myEducation.startDate_month];
+    C_Model_Education *myEducation = _arrContent[_selectedIndexToUpdate];
+    return [CommonMethods getMonthName:myEducation.StartMonth];
 }
 -(NSString *)getEducation_StartYear
 {
-    Education *myEducation = _arrContent[_selectedIndexToUpdate];//
-    return myEducation.startDate_year;
+    C_Model_Education *myEducation = _arrContent[_selectedIndexToUpdate];
+    return myEducation.StartYear;
 }
 
 -(NSString *)getEducation_EndMonth
 {
-    Education *myEducation = _arrContent[_selectedIndexToUpdate];//
-    return [CommonMethods getMonthName:myEducation.endDate_month];
+    C_Model_Education *myEducation = _arrContent[_selectedIndexToUpdate];
+    return [CommonMethods getMonthName:myEducation.EndMonth];
 }
 -(NSString *)getEducation_EndYear
 {
-    Education *myEducation = _arrContent[_selectedIndexToUpdate];//
-    return myEducation.endDate_year;
+    C_Model_Education *myEducation = _arrContent[_selectedIndexToUpdate];
+    return myEducation.EndYear;
 }
 #pragma mark - Picker Delegate
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -477,7 +485,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
     {
         if (isUpdateFrom)
         {
-          return  arrMonthFrom [row];
+            return  arrMonthFrom [row];
         }
         return arrMonthTo[row];
     }
@@ -532,12 +540,13 @@ typedef NS_ENUM(NSInteger, btnTapped)
             
         }
     }
-
+    
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

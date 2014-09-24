@@ -25,6 +25,7 @@
 #import "NSDate+Formatting.h"
 
 #import "UIImage+KTCategory.h"
+#import "SDWebImageDownloader.h"
 #import "UIImageView+WebCache.h"
 
 #import "UINavigationController+Rotation_IOS6.h"
@@ -181,6 +182,7 @@ NSString *is_PostJob_Edit_update;//update flag to show done right bar button els
 C_PostJobModel *postJob_ModelClass;
 
 
+UIImage *imgProfilePictureToUpdate;
 #define USER_INFO @"userinfo"//this is used to save data to register wizard
 #define PROFILE_PREVIEW @"profilepreviewscreendone"// once user reach profile preview screen then every time show screen till user register.
 

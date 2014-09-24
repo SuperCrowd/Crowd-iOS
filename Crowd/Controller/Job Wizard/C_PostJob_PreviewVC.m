@@ -268,7 +268,6 @@
 #pragma mark - Post Job
 -(IBAction)PostJobNOW:(id)sender
 {
-    //    NSLog(@"%@",[UserHandler_LoggedIn getDict_To_RegisterUser]);
     @try
     {
         showHUD_with_Title(@"Job Posting");

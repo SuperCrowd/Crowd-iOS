@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_MP_NameVC">
+            <connections>
+                <outlet property="scrlV" destination="mJE-lq-G10" id="juk-e6-GCc"/>
+                <outlet property="view" destination="vVr-2D-pQz" id="zhK-u8-rN2"/>
+                <outlet property="viewFirstName" destination="2eb-je-F0u" id="mAO-HB-6ob"/>
+                <outlet property="viewLastName" destination="sX1-Ja-HBZ" id="Wbh-HI-G3M"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="vVr-2D-pQz">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyo-Jn-e8v">
+                    <rect key="frame" x="53" y="326" width="215" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="215" id="5Ft-TJ-eor"/>
+                        <constraint firstAttribute="height" constant="50" id="ceU-4r-gvF"/>
+                    </constraints>
+                    <state key="normal" image="next_big_btn">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="Yyg-sE-0GX"/>
+                    </connections>
+                </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mJE-lq-G10" customClass="C_ScrollViewKeyboard">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="311"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyg-K8-mDW">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyy-oy-CTo" userLabel="View Edit">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqB-TO-aKr">
+                                            <rect key="frame" x="20" y="18" width="280" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap on the field below to make edits to your name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMG-cf-Uyo">
+                                            <rect key="frame" x="20" y="37" width="280" height="23"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="123" id="cl8-hj-C2r"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eb-je-F0u" userLabel="F Name" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="158" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="7qc-D8-1Io"/>
+                                <constraint firstAttribute="width" constant="320" id="iqi-Bf-eGG"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sX1-Ja-HBZ" userLabel="L Name" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="238" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="IKh-aP-jiT"/>
+                                <constraint firstAttribute="width" constant="320" id="QPe-t1-1ed"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="2eb-je-F0u" secondAttribute="centerX" id="1aK-S6-840"/>
+                        <constraint firstItem="fyg-K8-mDW" firstAttribute="top" secondItem="mJE-lq-G10" secondAttribute="top" id="CN7-xd-Lbh"/>
+                        <constraint firstAttribute="trailing" secondItem="fyg-K8-mDW" secondAttribute="trailing" id="CaJ-Nh-eo1"/>
+                        <constraint firstItem="2eb-je-F0u" firstAttribute="top" secondItem="fyg-K8-mDW" secondAttribute="bottom" constant="35" id="Mfe-e5-lMT"/>
+                        <constraint firstItem="fyg-K8-mDW" firstAttribute="leading" secondItem="mJE-lq-G10" secondAttribute="leading" id="Mjo-Ac-cbV"/>
+                        <constraint firstAttribute="bottom" secondItem="sX1-Ja-HBZ" secondAttribute="bottom" constant="29" id="bCp-59-KVj"/>
+                        <constraint firstItem="sX1-Ja-HBZ" firstAttribute="top" secondItem="2eb-je-F0u" secondAttribute="bottom" constant="36" id="g8h-ls-cEt"/>
+                        <constraint firstAttribute="centerX" secondItem="sX1-Ja-HBZ" secondAttribute="centerX" id="kQl-BV-ovy"/>
+                        <constraint firstAttribute="centerX" secondItem="fyg-K8-mDW" secondAttribute="centerX" id="s8f-ac-hBM"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="mJE-lq-G10" firstAttribute="leading" secondItem="vVr-2D-pQz" secondAttribute="leading" id="J1l-Uh-xje"/>
+                <constraint firstItem="mJE-lq-G10" firstAttribute="top" secondItem="vVr-2D-pQz" secondAttribute="top" id="JhF-8J-EWB"/>
+                <constraint firstAttribute="bottom" secondItem="eyo-Jn-e8v" secondAttribute="bottom" constant="40" id="Uvu-Us-ny8"/>
+                <constraint firstAttribute="bottom" secondItem="mJE-lq-G10" secondAttribute="bottom" constant="105" id="aE2-nd-YWR"/>
+                <constraint firstAttribute="trailing" secondItem="mJE-lq-G10" secondAttribute="trailing" id="dlp-h3-f2d"/>
+                <constraint firstAttribute="centerX" secondItem="eyo-Jn-e8v" secondAttribute="centerX" constant="-0.5" id="iah-ZS-KVK"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="140" y="155"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="next_big_btn" width="215" height="50"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

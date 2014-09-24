@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_MP_EditLocationVC">
+            <connections>
+                <outlet property="scrlV" destination="9Dh-OK-9dY" id="68r-eP-eku"/>
+                <outlet property="view" destination="foZ-U0-4Et" id="PYh-Pf-wNI"/>
+                <outlet property="viewCity" destination="E3G-FH-ItB" id="cOM-jl-Bvr"/>
+                <outlet property="viewCountry" destination="Hn6-kd-T9Y" id="UFR-XV-cqX"/>
+                <outlet property="viewState" destination="uWQ-Rg-K2n" id="Hmq-8V-Wxk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="foZ-U0-4Et">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Dh-OK-9dY" customClass="C_ScrollViewKeyboard">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xb3-qF-EpC">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="8ai-Tl-4ET"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3G-FH-ItB" userLabel="City" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="70" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Exv-vA-XZ5"/>
+                                <constraint firstAttribute="width" constant="320" id="cSg-GR-qdJ"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWQ-Rg-K2n" userLabel="State" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="134" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="320" id="9pq-tf-J2a"/>
+                                <constraint firstAttribute="height" constant="44" id="dnR-Oy-27z"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hn6-kd-T9Y" userLabel="Country" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="198" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="0uc-Xs-1bI"/>
+                                <constraint firstAttribute="width" constant="320" id="W5Y-7C-eam"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Hn6-kd-T9Y" secondAttribute="bottom" constant="20" id="3r9-dq-Usb"/>
+                        <constraint firstAttribute="trailing" secondItem="uWQ-Rg-K2n" secondAttribute="trailing" id="IuP-p8-xoK"/>
+                        <constraint firstItem="uWQ-Rg-K2n" firstAttribute="leading" secondItem="9Dh-OK-9dY" secondAttribute="leading" id="KIb-gV-CBI"/>
+                        <constraint firstItem="Hn6-kd-T9Y" firstAttribute="leading" secondItem="9Dh-OK-9dY" secondAttribute="leading" id="MVY-Vm-vSk"/>
+                        <constraint firstAttribute="trailing" secondItem="E3G-FH-ItB" secondAttribute="trailing" id="S2D-OH-91e"/>
+                        <constraint firstItem="Hn6-kd-T9Y" firstAttribute="top" secondItem="uWQ-Rg-K2n" secondAttribute="bottom" constant="20" id="URz-09-dXL"/>
+                        <constraint firstAttribute="centerX" secondItem="uWQ-Rg-K2n" secondAttribute="centerX" id="aXV-S8-ras"/>
+                        <constraint firstItem="Xb3-qF-EpC" firstAttribute="leading" secondItem="9Dh-OK-9dY" secondAttribute="leading" id="aXd-Hx-go6"/>
+                        <constraint firstAttribute="trailing" secondItem="Hn6-kd-T9Y" secondAttribute="trailing" id="fKj-BJ-mPj"/>
+                        <constraint firstAttribute="centerX" secondItem="E3G-FH-ItB" secondAttribute="centerX" id="j46-tY-kJJ"/>
+                        <constraint firstItem="Xb3-qF-EpC" firstAttribute="top" secondItem="9Dh-OK-9dY" secondAttribute="top" id="r2c-OU-PUf"/>
+                        <constraint firstAttribute="centerX" secondItem="Hn6-kd-T9Y" secondAttribute="centerX" id="shg-fG-d0H"/>
+                        <constraint firstItem="uWQ-Rg-K2n" firstAttribute="top" secondItem="E3G-FH-ItB" secondAttribute="bottom" constant="20" id="w0g-TP-mgp"/>
+                        <constraint firstItem="E3G-FH-ItB" firstAttribute="top" secondItem="9Dh-OK-9dY" secondAttribute="top" constant="70" id="w7S-79-Zph"/>
+                        <constraint firstAttribute="trailing" secondItem="Xb3-qF-EpC" secondAttribute="trailing" id="w92-C8-bR9"/>
+                        <constraint firstItem="E3G-FH-ItB" firstAttribute="leading" secondItem="9Dh-OK-9dY" secondAttribute="leading" id="xlD-sT-jeK"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="9Dh-OK-9dY" firstAttribute="top" secondItem="foZ-U0-4Et" secondAttribute="top" id="A5V-V4-Wj0"/>
+                <constraint firstAttribute="bottom" secondItem="9Dh-OK-9dY" secondAttribute="bottom" id="SAA-zF-Xqj"/>
+                <constraint firstAttribute="trailing" secondItem="9Dh-OK-9dY" secondAttribute="trailing" id="UcB-1T-Yh5"/>
+                <constraint firstItem="9Dh-OK-9dY" firstAttribute="leading" secondItem="foZ-U0-4Et" secondAttribute="leading" id="X7s-bk-5qT"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="481" y="491"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

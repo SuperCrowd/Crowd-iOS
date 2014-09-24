@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -18,16 +19,16 @@
                     </scrollView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="PyV-HR-r4R" firstAttribute="top" secondItem="G8c-fH-rg0" secondAttribute="topMargin" constant="4" id="JdT-7f-LRj"/>
+                    <constraint firstItem="PyV-HR-r4R" firstAttribute="top" secondItem="G8c-fH-rg0" secondAttribute="top" constant="12" id="JdT-7f-LRj"/>
                     <constraint firstAttribute="bottomMargin" secondItem="PyV-HR-r4R" secondAttribute="bottom" constant="4" id="KMo-by-Rre"/>
                     <constraint firstAttribute="trailingMargin" secondItem="PyV-HR-r4R" secondAttribute="trailing" constant="2" id="gQ4-FK-nJj"/>
-                    <constraint firstItem="PyV-HR-r4R" firstAttribute="leading" secondItem="G8c-fH-rg0" secondAttribute="leadingMargin" constant="2" id="jOr-An-srA"/>
+                    <constraint firstItem="PyV-HR-r4R" firstAttribute="leading" secondItem="G8c-fH-rg0" secondAttribute="leading" constant="10" id="jOr-An-srA"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="tagList" destination="PyV-HR-r4R" id="pqn-0f-Egw"/>
             </connections>
-            <point key="canvasLocation" x="278" y="330"/>
+            <point key="canvasLocation" x="366" y="330"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

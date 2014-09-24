@@ -229,7 +229,6 @@
 
 -(void)updateJobNow
 {
-    //    NSLog(@"%@",[UserHandler_LoggedIn getDict_To_RegisterUser]);
     @try
     {
         showHUD_with_Title(@"Job updating");

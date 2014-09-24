@@ -24,7 +24,6 @@
     {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         
     }
     //For iOS 7 & less
@@ -32,9 +31,9 @@
     {
         UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     }
-    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
     // Fonts
     
     NSShadow *shadow = [[NSShadow alloc] init];
@@ -50,8 +49,8 @@
 
 //    [UINavigationBar appearance].translucent = NO;
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0]];
-    [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
-    [SVProgressHUD setForegroundColor:[UIColor colorWithRed:72/255.0 green:190/255.0 blue:128/255.0 alpha:1.0]];
+    [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setFont:[UIFont fontWithName:@"HelveticaNueue-Thin" size:14.8f]];
 
     if ([UserDefaults objectForKey:APP_USER_INFO])

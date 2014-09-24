@@ -14,23 +14,8 @@
 
 
 @implementation UserHandler_LoggedIn
-/*
- "UserID": "0",
- "UserToken": "",
- "Email": "chintan@crowd.com",
- "FirstName": "Chintan",
- "LastName": "Ramani",
- "LocationCity": "Ahmedabad",
- "LocationState": "Gujarat",
- "LocationCountry": "India",
- "Industry": "Computers",
- "Industry2": "Industry2",
- "Summary": "Chintan Ramani Summary",
- "PhotoData": "",
- "LinkedInId": "Chintan",
- "DeviceToken": "Simulator",
- "ExperienceLevel": "1",
- */
+
+#pragma mark - REGISTER
 +(NSMutableDictionary *)getDict_To_RegisterUser
 {
     NSMutableDictionary *dictR = [NSMutableDictionary dictionary];
@@ -86,28 +71,7 @@
     
     return dictR;
 }
-/*
- "UserSkills": [
- {
- "Skill": "iOS"
- },
- {"Skill": ".NET"},{"Skill": "SQL"}],
- 
- "UserEmployments": [
- {
- "EmployerName": "Tatvasoft",
- "Title": "Sr. Software Engg",
- "LocationCity": "Ahmedabad",
- "LocationState": "Gujarat",
- "LocationCountry": "India",
- "StartMonth": "11",
- "StartYear": "2013",
- "EndMonth": "",
- "EndYear": "",
- "Summary": "Tatvasoft Summary Here",
- }
- ],
- */
+
 +(NSMutableArray *)getSkills:(C_UserModel *)myModel
 {
     NSMutableArray *arrS = [NSMutableArray array];
@@ -144,9 +108,6 @@
         }
         
         [dictT setValue:myPositions.summary forKey:@"Summary"];
-//        [dictT setObject:[self getRecommendations:myModel] forKey:@"EmploymentRecommendation"];
-
-        
         [arrP addObject:dictT];
     }
 
@@ -217,72 +178,10 @@
     }
     return arrE;
 }
-/*
- {
- "UserID": "0",
- "UserToken": "",
- "Email": "chintan@crowd.com",
- "FirstName": "Chintan",
- "LastName": "Ramani",
- "LocationCity": "Ahmedabad",
- "LocationState": "Gujarat",
- "LocationCountry": "India",
- "Industry": "Computers",
- "Industry2": "Industry2",
- "Summary": "Chintan Ramani Summary",
- "PhotoData": "",
- "LinkedInId": "Chintan",
- "DeviceToken": "Simulator",
- "ExperienceLevel": "1",
- 
- 
- "UserSkills": [
- {
- "Skill": "iOS"
- },
- {"Skill": ".NET"},{"Skill": "SQL"}],
- 
- "UserEmployments": [
- {
- "EmployerName": "Tatvasoft",
- "Title": "Sr. Software Engg",
- "LocationCity": "Ahmedabad",
- "LocationState": "Gujarat",
- "LocationCountry": "India",
- "StartMonth": "11",
- "StartYear": "2013",
- "EndMonth": "",
- "EndYear": "",
- "Summary": "Tatvasoft Summary Here",
-  }
- ],
- 
- "EmploymentRecommendation": [
- {
- "Recommendation": "Recommendation1",
- "RecommenderName": "RecommenderName1"
- }
- ]
- 
- 
- "UserEducations": [
- {
- "Name": "College",
- "Degree": "B.E.",
- "StartMonth": "4",
- "StartYear": "2009",
- "EndMonth": "5",
- "EndYear": "2013",
- "UserEducationCourse": [
- {
- "Course": "Fiber Optics"
- }
- ]
- }
- ]
- }
- */
 
+
+
+#pragma mark - Get Profile + Save profile
 +(C_MyUser *)getMyUser_LoggedIN
 {
     @try
@@ -313,4 +212,174 @@
     @finally {
     }
 }
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------*/
++(NSMutableDictionary *)getDict_To_Update_withProfileModel:(C_MyUser *)myModel
+{
+    NSMutableDictionary *dictR = [NSMutableDictionary dictionary];
+    [dictR setValue:myModel.UserId forKey:@"UserID"];
+    [dictR setValue:myModel.Token forKey:@"UserToken"];
+    
+    [dictR setValue:myModel.Email forKey:@"Email"];
+    [dictR setValue:myModel.FirstName forKey:@"FirstName"];
+    [dictR setValue:myModel.LastName forKey:@"LastName"];
+    
+    [dictR setValue:myModel.LocationCity forKey:@"LocationCity"];
+    [dictR setValue:myModel.LocationState forKey:@"LocationState"];
+    [dictR setValue:myModel.LocationCountry forKey:@"LocationCountry"];
+    
+    [dictR setValue:myModel.Industry forKey:@"Industry"];
+    [dictR setValue:myModel.Industry2 forKey:@"Industry2"];
+    
+    [dictR setValue:myModel.Summary forKey:@"Summary"];
+    if (imgProfilePictureToUpdate!=nil)
+    {
+        NSString *strBase64Image = [Base64 encode:UIImagePNGRepresentation(imgProfilePictureToUpdate)];
+        [dictR setValue:strBase64Image forKey:@"PhotoData"];
+    }
+    else
+    {
+        @try
+        {
+            UIImage *img = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,myModel.PhotoURL]];
+            if (img) {
+                NSString *strBase64Image = [Base64 encode:UIImagePNGRepresentation(img)];
+                [dictR setValue:strBase64Image forKey:@"PhotoData"];
+            }
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+    }
+    [dictR setValue:myModel.LinkedInId forKey:@"LinkedInId"];
+    [dictR setValue:[UserDefaults valueForKey:DEVICE_TOKEN] forKey:@"DeviceToken"];
+    [dictR setValue:myModel.ExperienceLevel forKey:@"ExperienceLevel"];
+    
+    /*--- Skills array ---*/
+    [dictR setObject:[self updated_Skills:myModel] forKey:@"UserSkills"];
+    
+    /*--- Position array ---*/
+    [dictR setObject:[self updated_Work:myModel] forKey:@"UserEmployments"];
+    
+    /*--- Recommendation array ---*/
+    [dictR setObject:[self updated_Recommendations:myModel] forKey:@"EmploymentRecommendation"];
+    
+    /*--- Education array ---*/
+    [dictR setObject:[self updated_Educations:myModel] forKey:@"UserEducations"];
+    
+    return dictR;
+}
+
++(NSMutableArray *)updated_Skills:(C_MyUser *)myModel
+{
+    NSMutableArray *arrS = [NSMutableArray array];
+    for (C_Model_Skills *mySkills in myModel.arr_SkillsALL)
+    {
+        [arrS addObject:@{@"Skill":mySkills.Skills}];
+    }
+    return arrS;
+}
+
++(NSMutableArray *)updated_Work:(C_MyUser *)myModel
+{
+    NSMutableArray *arrP = [NSMutableArray array];
+    for (C_Model_Work *myWork in myModel.arr_WorkALL)
+    {
+        NSMutableDictionary *dictT = [NSMutableDictionary dictionary];
+        [dictT setValue:myWork.EmployerName forKey:@"EmployerName"];
+        [dictT setValue:myWork.Title forKey:@"Title"];
+        [dictT setValue:myWork.LocationCity forKey:@"LocationCity"];
+        [dictT setValue:myWork.LocationState forKey:@"LocationState"];
+        [dictT setValue:myWork.LocationCountry forKey:@"LocationCountry"];
+        
+        @try
+        {
+            [dictT setValue:[myWork.StartMonth isNull] forKey:@"StartMonth"];
+            [dictT setValue:[myWork.StartYear isNull] forKey:@"StartYear"];
+            [dictT setValue:[myWork.EndMonth isNull] forKey:@"EndMonth"];
+            [dictT setValue:[myWork.EndYear isNull] forKey:@"EndYear"];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        
+        [dictT setValue:myWork.Summary forKey:@"Summary"];
+        [arrP addObject:dictT];
+    }
+    
+    return arrP;
+}
++(NSMutableArray *)updated_Recommendations:(C_MyUser *)myModel
+{
+    NSMutableArray *arrR = [NSMutableArray array];
+    for (C_Model_Recommendation *myRec in myModel.arr_RecommendationALL)
+    {
+        NSMutableDictionary *dictT = [NSMutableDictionary dictionary];
+        @try
+        {
+            [dictT setValue:myRec.Recommendation forKey:@"Recommendation"];
+            [dictT setValue:[NSString stringWithFormat:@"%@",myRec.RecommenderName] forKey:@"RecommenderName"];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        [arrR addObject:dictT];
+    }
+    return arrR;
+}
+
+
++(NSMutableArray *)updated_Educations:(C_MyUser *)myModel
+{
+    NSMutableArray *arrE = [NSMutableArray array];
+    for (C_Model_Education *myEdu in myModel.arr_EducationALL)
+    {
+        NSMutableDictionary *dictT = [NSMutableDictionary dictionary];
+        @try
+        {
+            [dictT setValue:myEdu.Name forKey:@"Name"];
+            [dictT setValue:myEdu.Degree forKey:@"Degree"];
+            
+            [dictT setValue:[myEdu.StartMonth isNull] forKey:@"StartMonth"];
+            [dictT setValue:[myEdu.StartYear isNull] forKey:@"StartYear"];
+            [dictT setValue:[myEdu.EndMonth isNull] forKey:@"EndMonth"];
+            [dictT setValue:[myEdu.EndYear isNull] forKey:@"EndYear"];
+            
+            /*--- add Course ---*/
+            NSMutableArray *arrTemp = [NSMutableArray array];
+            for (C_Model_Courses *myCourse  in myEdu.arrCourses)
+            {
+                @try
+                {
+                    [arrTemp addObject:@{@"Course":myCourse.Course}];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
+            }
+            
+            [dictT setObject:arrTemp forKey:@"UserEducationCourse"];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        [arrE addObject:dictT];
+    }
+    return arrE;
+}
+
 @end
