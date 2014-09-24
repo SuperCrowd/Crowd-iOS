@@ -56,9 +56,6 @@
     [encoder encodeObject:self.location_city forKey:@"location_city"];
     [encoder encodeObject:self.location_state forKey:@"location_state"];
     [encoder encodeObject:self.location_country forKey:@"location_country"];
-
-
-
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -303,10 +300,12 @@
             myPositions.isCurrent = [[NSString stringWithFormat:@"%@",dictT[@"isCurrent"]]isNull];
 
             myPositions.startDate_year = [[NSString stringWithFormat:@"%@",dictT[@"startDate"][@"year"] ]isNull];
-            myPositions.startDate_month = [[NSString stringWithFormat:@"%@",dictT[@"startDate"][@"month"]]isNull];
+            
+            NSString *strM = [[NSString stringWithFormat:@"%@",dictT[@"startDate"][@"month"]]isNull];
+            myPositions.startDate_month = ([strM isEqualToString:@""])?@"1":strM;
             
             myPositions.endDate_year = [[NSString stringWithFormat:@"%@",dictT[@"endDate"][@"year"]]isNull];
-            myPositions.endDate_month = [NSString stringWithFormat:@"%@",dictT[@"endDate"][@"month"]];
+            myPositions.endDate_month = [[NSString stringWithFormat:@"%@",dictT[@"endDate"][@"month"]] isNull];
             
             myPositions.location_city = @"";;
             myPositions.location_state = @"";;

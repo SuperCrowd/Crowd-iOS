@@ -285,7 +285,7 @@
     if ([sectionTitle isEqualToString:PROFFESSIONAL_SUMMARY])
     {
         CGFloat heightSummary = [myUserModel.summary getHeight_withFont:kFONT_LIGHT(15.0) widht:screenSize.size.width - 20.0];
-        heightFinal = 5.0 + heightSummary + 5.0;
+        heightFinal = 12.0 + heightSummary + 5.0;
         return heightFinal;
     }
     
@@ -293,7 +293,7 @@
     {
         Positions *myPosition = myUserModel.arrPositionUser[indexPath.row];
         CGFloat heightSummary = [myPosition.summary getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 20.0];
-        heightFinal = 58.0 + heightSummary + 16.0;
+        heightFinal = 58.0 + heightSummary + 16.0 + 2.0;
         return MAX(heightFinal, 90.0);
     }
     
@@ -344,7 +344,7 @@
         static NSString *cellID = @"Cell";
         UITableViewCell *cell = [tblView dequeueReusableCellWithIdentifier:cellID];
         UILabel *lblSummary ;
-        CGRect rectLBL = CGRectMake(10.0, 5.0, screenSize.size.width-20.0,0.0);
+        CGRect rectLBL = CGRectMake(10.0, 12.0, screenSize.size.width-20.0,0.0);
         if (cell == nil)
         {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];

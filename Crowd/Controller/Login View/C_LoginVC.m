@@ -44,7 +44,7 @@
     [super viewDidLoad];
     isGoToHome = NO;
     /*--- First check if user login with linkedin if not stay here ---*/
-//    if ([UserDefaults objectForKey:APP_USER_INFO])
+    if ([UserDefaults objectForKey:APP_USER_INFO])
     {
       //push to home
       isGoToHome  = YES;
@@ -52,8 +52,7 @@
       [self pushToHome:NO];
       return;
     }
-    //else
-        if (![UserDefaults objectForKey:USER_INFO])
+    else if (![UserDefaults objectForKey:USER_INFO])
     {
         
     }
@@ -197,9 +196,7 @@
             
             hideHUD;
             isGoToHome  = YES;
-            C_TutorialVC *obj = [[C_TutorialVC alloc]initWithNibName:@"C_TutorialVC" bundle:nil];
-            [self.navigationController pushViewController:obj animated:YES];
-            //[self pushToHome:YES];
+            [self pushToHome:YES];
         }
     }
     else

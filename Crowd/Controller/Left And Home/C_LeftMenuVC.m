@@ -11,7 +11,7 @@
 
 #import "C_DashBoardVC.h"
 #import "C_PostJob_NameVC.h"
-
+#import "M13BadgeView.h"
 
 #define NAME @"NameKey"
 #define IMG @"ImageKey"
@@ -29,6 +29,9 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 {
     __weak IBOutlet UIImageView *imgVUserPic;
     __weak IBOutlet UITableView *tblView;
+    
+    __weak IBOutlet UIButton *badgeSuperView;
+    M13BadgeView *badgeView;
     
     NSArray *arrInfo;
     
@@ -67,6 +70,28 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     [imgVUserPic setContentMode:UIViewContentModeScaleAspectFill];
     [imgVUserPic setClipsToBounds:YES];
     
+
+    /*--- Badge setup ---*/
+    badgeView = [[M13BadgeView alloc] initWithFrame:CGRectMake(0, 0, 24.0, 24.0)];
+    [badgeSuperView addSubview:badgeView];
+
+    badgeView.text = @"99";
+    badgeView.textColor = [UIColor whiteColor];
+    badgeView.badgeBackgroundColor = [UIColor purpleColor];
+    badgeView.borderColor = nil;
+    badgeView.font = kFONT_REGULAR(13.0);
+    badgeView.showGloss = NO;//
+    badgeView.cornerRadius = 12.0f;
+    badgeView.horizontalAlignment = M13BadgeViewHorizontalAlignmentRight;
+    badgeView.verticalAlignment = M13BadgeViewVerticalAlignmentTop;
+    badgeView.maximumWidth = 300;
+    badgeView.hidesWhenZero = YES;
+    badgeView.shadowBadge = NO;//
+    badgeView.shadowBorder = NO;//
+    badgeView.shadowText = NO;//
+    badgeView.borderWidth = 0.0;
+    
+    
     /*--- Register Cell ---*/
     tblView.delegate = self;
     tblView.dataSource = self;
@@ -77,7 +102,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [imgVUserPic sd_setImageWithURL:userInfoGlobal.PhotoURL];
+    [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,userInfoGlobal.PhotoURL]];
     
 //    [self.mm_drawerController.centerViewController.view endEditing:YES];
 }
@@ -176,6 +201,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
             break;
         case POST_A_JOB:
         {
+            is_PostJob_Edit_update = @"no";
             C_PostJob_NameVC *objP = [[C_PostJob_NameVC alloc]initWithNibName:@"C_PostJob_NameVC" bundle:nil];
             UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objP];
             navvv.navigationBar.translucent = NO;

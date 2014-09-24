@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_SkillsVC">
+            <connections>
+                <outlet property="txtV" destination="pI4-EH-aSX" id="9nb-fm-Wfj"/>
+                <outlet property="view" destination="qTL-JC-Ghg" id="NHR-kb-bR1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="qTL-JC-Ghg">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills Requirements" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssq-fE-GQI">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="x0i-sB-J8I"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Separate skills with a comma" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaG-ph-fyW">
+                    <rect key="frame" x="0.0" y="30" width="320" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="57O-cM-581"/>
+                        <constraint firstAttribute="height" constant="30" id="rlU-En-aaq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pI4-EH-aSX">
+                    <rect key="frame" x="0.0" y="60" width="320" height="67"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="V2z-rT-tNH"/>
+                    </connections>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aj-qe-avB">
+                    <rect key="frame" x="53" y="135" width="214" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="nUG-CI-Jvs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
+                    <state key="normal" title="Next" backgroundImage="btnGreenBG">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="aG1-ce-IUu"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ssq-fE-GQI" firstAttribute="top" secondItem="qTL-JC-Ghg" secondAttribute="top" id="0yR-so-osJ"/>
+                <constraint firstAttribute="trailing" secondItem="7aj-qe-avB" secondAttribute="trailing" constant="53" id="3wi-a3-LYN"/>
+                <constraint firstItem="VaG-ph-fyW" firstAttribute="leading" secondItem="qTL-JC-Ghg" secondAttribute="leading" id="6iO-aY-py5"/>
+                <constraint firstAttribute="trailing" secondItem="VaG-ph-fyW" secondAttribute="trailing" id="BOa-fV-Lyd"/>
+                <constraint firstAttribute="trailing" secondItem="ssq-fE-GQI" secondAttribute="trailing" id="FEl-l1-4aH"/>
+                <constraint firstItem="pI4-EH-aSX" firstAttribute="leading" secondItem="qTL-JC-Ghg" secondAttribute="leading" id="NkD-qL-hMz"/>
+                <constraint firstItem="7aj-qe-avB" firstAttribute="top" secondItem="pI4-EH-aSX" secondAttribute="bottom" constant="8" id="O5k-EK-yba"/>
+                <constraint firstAttribute="bottom" secondItem="7aj-qe-avB" secondAttribute="bottom" constant="252" id="PLb-mP-D6N"/>
+                <constraint firstItem="pI4-EH-aSX" firstAttribute="top" secondItem="ssq-fE-GQI" secondAttribute="bottom" constant="30" id="YvA-wv-gWg"/>
+                <constraint firstAttribute="trailing" secondItem="pI4-EH-aSX" secondAttribute="trailing" id="cL3-Jg-aP1"/>
+                <constraint firstItem="VaG-ph-fyW" firstAttribute="top" secondItem="ssq-fE-GQI" secondAttribute="bottom" id="d4n-VP-vyW"/>
+                <constraint firstItem="ssq-fE-GQI" firstAttribute="leading" secondItem="qTL-JC-Ghg" secondAttribute="leading" id="l3n-4R-aka"/>
+                <constraint firstItem="7aj-qe-avB" firstAttribute="leading" secondItem="qTL-JC-Ghg" secondAttribute="leading" constant="53" id="siX-yI-hAe"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="175" y="259"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btnGreenBG" width="214" height="29"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

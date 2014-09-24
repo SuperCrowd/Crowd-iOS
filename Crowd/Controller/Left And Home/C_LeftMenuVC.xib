@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_LeftMenuVC">
             <connections>
+                <outlet property="badgeSuperView" destination="La1-mW-d9L" id="7Cb-1p-FJJ"/>
                 <outlet property="imgVUserPic" destination="qLr-0P-uRK" id="9p4-of-Azn"/>
                 <outlet property="tblView" destination="1vS-mI-tjG" id="oUh-ds-EAO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,12 +22,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La1-mW-d9L">
-                    <rect key="frame" x="10" y="22" width="46" height="30"/>
+                    <rect key="frame" x="10" y="32" width="25" height="22"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="46" id="YNL-B0-ddQ"/>
-                        <constraint firstAttribute="height" constant="30" id="zaR-iw-7oz"/>
+                        <constraint firstAttribute="width" constant="25" id="YNL-B0-ddQ"/>
+                        <constraint firstAttribute="height" constant="22" id="zaR-iw-7oz"/>
                     </constraints>
-                    <state key="normal" title="mail">
+                    <state key="normal" image="mail-icon">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -66,7 +67,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="La1-mW-d9L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="22" id="4a5-Uu-UkJ"/>
+                <constraint firstItem="La1-mW-d9L" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="4a5-Uu-UkJ"/>
                 <constraint firstAttribute="trailing" secondItem="OJs-1c-4RQ" secondAttribute="trailing" id="AdB-4y-3dt"/>
                 <constraint firstAttribute="bottom" secondItem="1vS-mI-tjG" secondAttribute="bottom" constant="43" id="B8E-Fu-fAy"/>
                 <constraint firstAttribute="trailing" secondItem="1vS-mI-tjG" secondAttribute="trailing" id="FAd-Ai-8In"/>
@@ -89,6 +90,7 @@
     </objects>
     <resources>
         <image name="login_bg" width="320" height="568"/>
+        <image name="mail-icon" width="25" height="18"/>
         <image name="profile_round" width="144" height="144"/>
         <image name="profile_settings" width="32" height="33"/>
     </resources>

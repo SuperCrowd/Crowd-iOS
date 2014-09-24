@@ -11,7 +11,9 @@
 #import "C_PostJob_IndustryListingVC.h"
 #import "C_ViewEditableTextField.h"
 #import "C_PostJob_PositionVC.h"
-
+#import "C_PostJob_PreviewVC.h"
+#import "C_PostJob_UpdateVC.h"
+#import "C_PostJobModel.h"
 @interface C_PostJob_IndustryVC ()<UITextFieldDelegate,textSelected_PostJob_Industry>
 {
     __weak IBOutlet UIScrollView *scrlV;
@@ -27,8 +29,15 @@
     [super viewDidLoad];
     self.title = @"New Job Listing";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
-    
+    if([is_PostJob_Edit_update isEqualToString:@"edit"] ||
+        [is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(done)];
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+    }
     
     scrlV.translatesAutoresizingMaskIntoConstraints = NO;
     [self showData];
@@ -36,6 +45,26 @@
 -(void)back
 {
     popView;
+}
+-(void)done
+{
+    Class mtyC = nil;;
+    if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+    {
+        mtyC = [C_PostJob_PreviewVC class];
+    }
+    else
+    {
+        mtyC = [C_PostJob_UpdateVC class];
+    }
+    for (UIViewController *vc in self.navigationController.viewControllers)
+    {
+        if ([vc isKindOfClass:mtyC])
+        {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 -(void)btnCancelClicked:(id)sender
 {
@@ -53,7 +82,10 @@
     objT.txtName.delegate = self;
     objT.txtName.tag = 0;
     objT.txtName.adjustsFontSizeToFitWidth = YES;
-    objT.txtName.text = [dictPostNewJob valueForKey:@"industry1"];
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        objT.txtName.text = postJob_ModelClass.Industry;
+    else
+        objT.txtName.text = [dictPostNewJob valueForKey:@"Industry"];
     
     /*--- button that user cant touch textfield ---*/
     objT.btnTextField.alpha = 1.0;
@@ -68,7 +100,45 @@
     
     [scrlV addSubview:objT];
 
-    
+    BOOL showInd2 = NO;
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        if (![postJob_ModelClass.Industry2 isEqualToString:@""])
+            showInd2 = YES;
+    }
+    else
+    {
+        if (![dictPostNewJob[@"Industry2"] isEqualToString:@""])
+            showInd2 = YES;
+    }
+    if (showInd2)
+    {
+        C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis+heightV+20.0, screenSize.size.width, 55.0)];
+        objT.tag = 2;
+        
+        /*--- text field ---*/
+        objT.txtName.delegate = self;
+        objT.txtName.adjustsFontSizeToFitWidth = YES;
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+            objT.txtName.text = postJob_ModelClass.Industry2;
+        else
+            objT.txtName.text = [dictPostNewJob valueForKey:@"Industry2"];
+        
+        /*--- button that user cant touch textfield ---*/
+        objT.btnTextField.alpha = 1.0;
+        [objT.btnTextField addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        /*--- btn Edit ---*/
+        [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        /*--- set label text to blank ---*/
+        objT.lblName.text = @"";
+        
+        [scrlV addSubview:objT];
+        return;
+    }
+
     /*--- At last add button for another industry ---*/
     UIButton *btnAddIndustry = [[UIButton alloc]initWithFrame:CGRectMake(65.0, yAxis+heightV+20.0, screenSize.size.width-130.0, 30)];
     btnAddIndustry.tag = 51;
@@ -83,7 +153,6 @@
     
     
     [scrlV setContentSize:CGSizeMake(320, btnAddIndustry.frame.origin.y + btnAddIndustry.frame.size.height + 20.0)];
-
 }
 #pragma mark - IBAction
 -(void)btnEditClicked:(UIButton *)btnEdit
@@ -118,7 +187,14 @@
 }
 -(void)addText:(NSString *)strText
 {
-    [dictPostNewJob setValue:strText forKey:@"industry2"];
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        postJob_ModelClass.Industry2 = strText;
+    }
+    else
+    {
+        [dictPostNewJob setValue:strText forKey:@"Industry2"];
+    }
 
     UIButton *btnAddAnotherIndustry = (UIButton *)[scrlV viewWithTag:51];
     

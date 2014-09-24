@@ -9,6 +9,9 @@
 #import "C_PostJob_IndustryListingVC.h"
 #import "AppConstant.h"
 #import "C_PostJob_IndustryVC.h"
+#import "C_PostJob_PreviewVC.h"
+#import "C_PostJob_UpdateVC.h"
+#import "C_PostJobModel.h"
 @interface C_PostJob_IndustryListingVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -27,7 +30,15 @@
     [super viewDidLoad];
     self.title = @"New Job Listing";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+    if([is_PostJob_Edit_update isEqualToString:@"edit"]||
+       [is_PostJob_Edit_update isEqualToString:@"update" ])
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(done)];
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+    }
     
     arrContent = [[NSMutableArray alloc]init];
     arrSearch = [[NSMutableArray alloc]init];
@@ -48,7 +59,26 @@
     
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
 }
-
+-(void)done
+{
+    Class mtyC = nil;;
+    if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+    {
+        mtyC = [C_PostJob_PreviewVC class];
+    }
+    else
+    {
+        mtyC = [C_PostJob_UpdateVC class];
+    }
+    for (UIViewController *vc in self.navigationController.viewControllers)
+    {
+        if ([vc isKindOfClass:mtyC])
+        {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
+}
 -(void)back
 {
     popView;
@@ -130,8 +160,16 @@
     if (_isAdd_1)
     {
         // add industry 1 push view
-        [dictPostNewJob setValue:strText forKey:@"industry1"];
-        [dictPostNewJob setValue:@"" forKey:@"industry2"];
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        {
+            postJob_ModelClass.Industry = strText;
+        }
+        else
+        {
+            [dictPostNewJob setValue:strText forKey:@"Industry"];
+            [dictPostNewJob setValue:@"" forKey:@"Industry2"];
+        }
+        
         C_PostJob_IndustryVC *obj = [[C_PostJob_IndustryVC alloc]initWithNibName:@"C_PostJob_IndustryVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:YES];
         

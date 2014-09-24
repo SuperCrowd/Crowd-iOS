@@ -10,6 +10,9 @@
 #import "AppConstant.h"
 #import "C_ViewEditableTextField.h"
 #import "C_PostJob_LocationVC.h"
+#import "C_PostJob_PreviewVC.h"
+#import "C_PostJob_UpdateVC.h"
+#import "C_PostJobModel.h"
 @interface C_PostJob_PositionVC ()<UITextFieldDelegate>
 {
     __weak IBOutlet UITextFieldExtended *txtPosition;
@@ -22,9 +25,40 @@
     [super viewDidLoad];
     self.title = @"New Job Listing";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];    
+    if([is_PostJob_Edit_update isEqualToString:@"edit"] ||
+       [is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(done)];
+        txtPosition.text = ([is_PostJob_Edit_update isEqualToString:@"update"])?postJob_ModelClass.Title:dictPostNewJob[@"Title"];
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+    }
 }
-
+-(void)done
+{
+    if ([self checkValidation])
+    {
+        Class mtyC = nil;;
+        if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+        {
+            mtyC = [C_PostJob_PreviewVC class];
+        }
+        else
+        {
+            mtyC = [C_PostJob_UpdateVC class];
+        }
+        for (UIViewController *vc in self.navigationController.viewControllers)
+        {
+            if ([vc isKindOfClass:mtyC])
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    }
+}
 -(void)back
 {
     popView;
@@ -48,6 +82,14 @@
     
     else
     {
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        {
+            postJob_ModelClass.Title = [[NSString stringWithFormat:@"%@",txtPosition.text]isNull];
+        }
+        else
+        {
+            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtPosition.text]isNull] forKey:@"Title"];
+        }
         return YES;
     }
 }
@@ -57,7 +99,7 @@
     {
         @try
         {
-            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtPosition.text]isNull] forKey:@"position"];
+            
             C_PostJob_LocationVC *objC = [[C_PostJob_LocationVC alloc]initWithNibName:@"C_PostJob_LocationVC" bundle:nil];
             [self.navigationController pushViewController:objC animated:YES];
         }
@@ -66,8 +108,6 @@
         }
         @finally {
         }
-
-        
     }
 }
 

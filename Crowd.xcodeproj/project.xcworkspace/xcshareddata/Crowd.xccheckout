@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>024B094A-0C65-44A3-A67C-4BC7F20F3402</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Crowd</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5067665DFDFEA0E7E95F831711342A668889A843</key>
+		<string>https://github.com/iggytheiguana/BL074-iOS</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Crowd.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5067665DFDFEA0E7E95F831711342A668889A843</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/iggytheiguana/BL074-iOS</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5067665DFDFEA0E7E95F831711342A668889A843</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5067665DFDFEA0E7E95F831711342A668889A843</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Source_GIT</string>
+		</dict>
+	</array>
+</dict>
+</plist>

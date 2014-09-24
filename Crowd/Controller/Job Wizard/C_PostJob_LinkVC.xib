@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_LinkVC">
+            <connections>
+                <outlet property="txtLink" destination="7y5-0e-JXB" id="GwV-wf-Mnz"/>
+                <outlet property="view" destination="nHV-lW-ZVV" id="wl3-u8-pVK"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="nHV-lW-ZVV">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owB-Yn-WwO">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post a link for more information about the job" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4M-B9-KYB">
+                            <rect key="frame" x="20" y="8" width="280" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="eXj-Yo-Mdy"/>
+                                <constraint firstAttribute="width" constant="280" id="nUp-HE-2WN"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                            <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c31-qh-DGH" userLabel="Add Company Name">
+                            <rect key="frame" x="0.0" y="71" width="320" height="44"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="textfiled" translatesAutoresizingMaskIntoConstraints="NO" id="Ylz-YU-2EY">
+                                    <rect key="frame" x="52" y="8" width="215" height="28"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="add url" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7y5-0e-JXB" customClass="UITextFieldExtended">
+                                    <rect key="frame" x="63" y="8" width="204" height="28"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7l6-hq-q0d">
+                                    <rect key="frame" x="293" y="11" width="22" height="22"/>
+                                    <state key="normal" image="edit_icon_green">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="btnEditClicked:" destination="-1" eventType="touchUpInside" id="S5F-M0-mx9"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="320" id="LvZ-Nu-tWz"/>
+                                <constraint firstAttribute="height" constant="44" id="bia-du-o1t"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="U4M-B9-KYB" secondAttribute="trailing" constant="20" id="1lw-CH-iye"/>
+                        <constraint firstAttribute="centerX" secondItem="U4M-B9-KYB" secondAttribute="centerX" id="BS6-rD-gOO"/>
+                        <constraint firstItem="U4M-B9-KYB" firstAttribute="top" secondItem="owB-Yn-WwO" secondAttribute="top" constant="8" id="d5m-r1-pVF"/>
+                        <constraint firstAttribute="centerX" secondItem="c31-qh-DGH" secondAttribute="centerX" id="eji-rM-YT4"/>
+                        <constraint firstAttribute="bottom" secondItem="c31-qh-DGH" secondAttribute="bottom" constant="10" id="ld0-O8-kav"/>
+                        <constraint firstItem="c31-qh-DGH" firstAttribute="top" secondItem="U4M-B9-KYB" secondAttribute="bottom" constant="27" id="ru8-2Z-Ljd"/>
+                        <constraint firstItem="U4M-B9-KYB" firstAttribute="leading" secondItem="owB-Yn-WwO" secondAttribute="leading" constant="20" id="t2A-9w-3GC"/>
+                    </constraints>
+                </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kgh-Xg-tZV">
+                    <rect key="frame" x="53" y="135" width="214" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="R1a-fv-rfU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
+                    <state key="normal" title="Next" backgroundImage="btnGreenBG">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="4h0-76-5xB"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Kgh-Xg-tZV" secondAttribute="trailing" constant="53" id="3OA-d0-fdn"/>
+                <constraint firstAttribute="bottom" secondItem="Kgh-Xg-tZV" secondAttribute="bottom" constant="252" id="Gat-yN-ddi"/>
+                <constraint firstAttribute="bottom" secondItem="owB-Yn-WwO" secondAttribute="bottom" constant="291" id="X4o-Z3-g6E"/>
+                <constraint firstItem="owB-Yn-WwO" firstAttribute="top" secondItem="nHV-lW-ZVV" secondAttribute="top" id="lFZ-fP-t15"/>
+                <constraint firstItem="Kgh-Xg-tZV" firstAttribute="leading" secondItem="nHV-lW-ZVV" secondAttribute="leading" constant="53" id="tIb-Ud-vpj"/>
+                <constraint firstAttribute="trailing" secondItem="owB-Yn-WwO" secondAttribute="trailing" id="u4c-6l-VZk"/>
+                <constraint firstItem="owB-Yn-WwO" firstAttribute="leading" secondItem="nHV-lW-ZVV" secondAttribute="leading" id="waj-5T-Oux"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="140" y="155"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btnGreenBG" width="214" height="29"/>
+        <image name="edit_icon_green" width="22" height="22"/>
+        <image name="textfiled" width="216" height="28"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

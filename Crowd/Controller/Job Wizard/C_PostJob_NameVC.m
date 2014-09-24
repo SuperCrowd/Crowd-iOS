@@ -11,8 +11,9 @@
 #import "AppConstant.h"
 #import "UITextFieldExtended.h"
 #import "C_ScrollViewKeyboard.h"
+#import "C_PostJob_IndustryVC.h"
 #import "C_PostJob_IndustryListingVC.h"
-
+#import "C_PostJobModel.h"
 
 
 @interface C_PostJob_NameVC ()<UITextFieldDelegate>
@@ -26,17 +27,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IndustryList" ofType:@"plist"]];
-    dictPostNewJob = [[NSMutableDictionary alloc]init];
     self.title = @"New Job Listing";
     self.navigationItem.hidesBackButton = YES;
     
     if (_isComeFromTutorial)
     {
+        dictPostNewJob = [[NSMutableDictionary alloc]init];
+
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(back)];
+        txtName.text = @"";
+    }
+    else if([is_PostJob_Edit_update isEqualToString:@"edit"]||[is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(done)];
+        txtName.text = ([is_PostJob_Edit_update isEqualToString:@"update"])?postJob_ModelClass.Company:dictPostNewJob[@"Company"];
     }
     else
     {
+        dictPostNewJob = [[NSMutableDictionary alloc]init];
         self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+        txtName.text = @"";
     }
 
     /*--- Hide Center View Keyboard---*/
@@ -45,7 +56,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    if (![is_PostJob_Edit_update isEqualToString:@"edit"] && ![is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    }
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -56,12 +70,18 @@
 {
     popView;
 }
-
+-(void)done
+{
+    if ([self checkValidation])
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 -(void)btnMenuClicked:(id)sender
 {
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
-
+#pragma mark - IBAction
 -(IBAction)btnEditClicked:(UIButton *)btnEdit
 {
     [txtName becomeFirstResponder];
@@ -77,6 +97,13 @@
 
     else
     {
+        if ([is_PostJob_Edit_update isEqualToString:@"update"]) {
+            postJob_ModelClass.Company = [[NSString stringWithFormat:@"%@",txtName.text]isNull];
+        }
+        else
+        {
+            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtName.text]isNull] forKey:@"Company"];
+        }
         return YES;
     }
 }
@@ -84,12 +111,19 @@
 {
     if ([self checkValidation])
     {
-        [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtName.text]isNull] forKey:@"company_name"];
+        if ([is_PostJob_Edit_update isEqualToString:@"edit"]||[is_PostJob_Edit_update isEqualToString:@"update"])
+        {
+            C_PostJob_IndustryVC *obj = [[C_PostJob_IndustryVC alloc]initWithNibName:@"C_PostJob_IndustryVC" bundle:nil];
+            [self.navigationController pushViewController:obj animated:YES];
+        }
+        else
+        {
+            C_PostJob_IndustryListingVC *objC = [[C_PostJob_IndustryListingVC alloc]initWithNibName:@"C_PostJob_IndustryListingVC" bundle:nil];
+            objC.isAdd_1 = YES;
+            objC.isAdd_2 = NO;
+            [self.navigationController pushViewController:objC animated:YES];
 
-        C_PostJob_IndustryListingVC *objC = [[C_PostJob_IndustryListingVC alloc]initWithNibName:@"C_PostJob_IndustryListingVC" bundle:nil];
-        objC.isAdd_1 = YES;
-        objC.isAdd_2 = NO;
-        [self.navigationController pushViewController:objC animated:YES];
+        }
     }
 }
 //-(BOOL)textFieldShouldClear:(UITextField *)textField

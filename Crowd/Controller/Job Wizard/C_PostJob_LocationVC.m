@@ -11,6 +11,9 @@
 #import "AppConstant.h"
 #import "C_ScrollViewKeyboard.h"
 #import "C_PostJob_ExperienceVC.h"
+#import "C_PostJob_PreviewVC.h"
+#import "C_PostJob_UpdateVC.h"
+#import "C_PostJobModel.h"
 typedef NS_ENUM(NSInteger, btnEdit) {
     btnCity = 1,
     btnState = 2,
@@ -35,17 +38,62 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     [super viewDidLoad];
     self.title = @"New Job Listing";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+    if([is_PostJob_Edit_update isEqualToString:@"edit"] ||
+       [is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(done)];
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        {
+            viewCity.txtName.text = postJob_ModelClass.LocationCity;
+            viewState.txtName.text = postJob_ModelClass.LocationState;
+            viewCountry.txtName.text = postJob_ModelClass.LocationCountry;
+        }
+        else
+        {
+            viewCity.txtName.text = dictPostNewJob[@"LocationCity"];
+            viewState.txtName.text = dictPostNewJob[@"LocationState"];
+            viewCountry.txtName.text = dictPostNewJob[@"LocationCountry"];
+        }
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+#if TARGET_IPHONE_SIMULATOR
+        viewCity.txtName.text = @"Ahmedabad";
+        viewState.txtName.text = @"Gujarat";
+        viewCountry.txtName.text = @"India";
+#else
+        // Device
+#endif
+    }
+    
+    
     
     [self setupEditableView];
-#if TARGET_IPHONE_SIMULATOR
-    viewCity.txtName.text = @"Ahmedabad";
-    viewState.txtName.text = @"Gujarat";
-    viewCountry.txtName.text = @"India";
-#else
-    // Device
-#endif
-
+}
+-(void)done
+{
+    if ([self checkValidation])
+    {
+        Class mtyC = nil;;
+        if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+        {
+            mtyC = [C_PostJob_PreviewVC class];
+        }
+        else
+        {
+            mtyC = [C_PostJob_UpdateVC class];
+        }
+        for (UIViewController *vc in self.navigationController.viewControllers)
+        {
+            if ([vc isKindOfClass:mtyC])
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    }
+    
 }
 -(void)back
 {
@@ -100,6 +148,18 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     }
     else
     {
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        {
+            postJob_ModelClass.LocationCity = [[NSString stringWithFormat:@"%@",viewCity.txtName.text] isNull];
+            postJob_ModelClass.LocationState = [[NSString stringWithFormat:@"%@",viewState.txtName.text] isNull];
+            postJob_ModelClass.LocationCountry = [[NSString stringWithFormat:@"%@",viewCountry.txtName.text] isNull];
+        }
+        else
+        {
+            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",viewCity.txtName.text] isNull] forKey:@"LocationCity"];
+            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",viewState.txtName.text] isNull] forKey:@"LocationState"];
+            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",viewCountry.txtName.text] isNull] forKey:@"LocationCountry"];
+        }
         return YES;
     }
 }
@@ -110,10 +170,6 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     {
         @try
         {
-            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",viewCity.txtName.text] isNull] forKey:@"location_city"];
-            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",viewState.txtName.text] isNull] forKey:@"location_state"];
-            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",viewCountry.txtName.text] isNull] forKey:@"location_country"];
-            
             C_PostJob_ExperienceVC *obj = [[C_PostJob_ExperienceVC alloc]initWithNibName:@"C_PostJob_ExperienceVC" bundle:nil];
             [self.navigationController pushViewController:obj animated:YES];
         }

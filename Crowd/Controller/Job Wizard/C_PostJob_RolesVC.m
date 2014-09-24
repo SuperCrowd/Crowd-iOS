@@ -8,6 +8,10 @@
 
 #import "C_PostJob_RolesVC.h"
 #import "AppConstant.h"
+#import "C_PostJob_SkillsVC.h"
+#import "C_PostJob_PreviewVC.h"
+#import "C_PostJob_UpdateVC.h"
+#import "C_PostJobModel.h"
 @interface C_PostJob_RolesVC ()<UITextViewDelegate>
 {
     __weak IBOutlet UITextView *txtV;
@@ -21,8 +25,39 @@
     [super viewDidLoad];
     self.title = @"New Job Listing";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
-    
+    if([is_PostJob_Edit_update isEqualToString:@"edit"] ||
+       [is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(done)];
+        txtV.text = ([is_PostJob_Edit_update isEqualToString:@"update"])?postJob_ModelClass.Responsibilities:dictPostNewJob[@"Responsibilities"];
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+    }
+}
+-(void)done
+{
+    if ([self saveRoles])
+    {
+        Class mtyC = nil;;
+        if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+        {
+            mtyC = [C_PostJob_PreviewVC class];
+        }
+        else
+        {
+            mtyC = [C_PostJob_UpdateVC class];
+        }
+        for (UIViewController *vc in self.navigationController.viewControllers)
+        {
+            if ([vc isKindOfClass:mtyC])
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    }
 }
 -(void)back
 {
@@ -39,16 +74,29 @@
     
     [txtV becomeFirstResponder];
 }
--(IBAction)btnNextClicked:(id)sender
+-(BOOL)saveRoles
 {
     NSString *strT = [[NSString stringWithFormat:@"%@",txtV.text] isNull];
     if ([strT isEqualToString:@""])
     {
-        [CommonMethods displayAlertwithTitle:[NSString stringWithFormat:@"Please Enter your Roles and Responsibilities"] withMessage:nil withViewController:self];
+        [CommonMethods displayAlertwithTitle:@"Please Enter your Roles and Responsibilities" withMessage:nil withViewController:self];
+        return NO;
     }
     else
     {
-        [dictPostNewJob setValue:strT forKey:@"Roles"];
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+            postJob_ModelClass.Responsibilities = strT;
+        else
+            [dictPostNewJob setValue:strT forKey:@"Responsibilities"];
+        return YES;
+    }
+}
+-(IBAction)btnNextClicked:(id)sender
+{
+    if ([self saveRoles])
+    {
+        C_PostJob_SkillsVC *obj = [[C_PostJob_SkillsVC alloc]initWithNibName:@"C_PostJob_SkillsVC" bundle:nil];
+        [self.navigationController pushViewController:obj animated:YES];
     }
 }
 #pragma mark - Text View Delegate

@@ -9,6 +9,9 @@
 #import "C_PostJob_ExperienceVC.h"
 #import "AppConstant.h"
 #import "C_PostJob_RolesVC.h"
+#import "C_PostJob_PreviewVC.h"
+#import "C_PostJob_UpdateVC.h"
+#import "C_PostJobModel.h"
 typedef NS_ENUM(NSInteger, btnExperience)
 {
     btn_0_to_1 = 0,
@@ -29,11 +32,38 @@ typedef NS_ENUM(NSInteger, btnExperience)
     [super viewDidLoad];
     self.title = @"New Job Listing";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
-    
+    if([is_PostJob_Edit_update isEqualToString:@"edit"]||
+       [is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(done)];
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
+    }
     for (UIButton *btn in scrlV.subviews)
         if ([btn isKindOfClass:[UIButton class]])
             [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)done
+{
+    Class mtyC = nil;;
+    if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+    {
+        mtyC = [C_PostJob_PreviewVC class];
+    }
+    else
+    {
+        mtyC = [C_PostJob_UpdateVC class];
+    }
+    for (UIViewController *vc in self.navigationController.viewControllers)
+    {
+        if ([vc isKindOfClass:mtyC])
+        {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 -(void)back
 {
@@ -46,7 +76,15 @@ typedef NS_ENUM(NSInteger, btnExperience)
 -(IBAction)btnClicked:(UIButton *)btnExp
 {
     NSLog(@"%@",btnExp.titleLabel.text);
-    [dictPostNewJob setValue:[NSString stringWithFormat:@"%ld",(long)btnExp.tag] forKey:@"experience"];
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        postJob_ModelClass.ExperienceLevel = [NSString stringWithFormat:@"%ld",(long)btnExp.tag];
+    }
+    else
+    {
+        [dictPostNewJob setValue:[NSString stringWithFormat:@"%ld",(long)btnExp.tag] forKey:@"ExperienceLevel"];
+
+    }
     C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
     [self.navigationController pushViewController:obj animated:YES];
 }

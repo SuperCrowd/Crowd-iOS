@@ -90,21 +90,24 @@
     
     
     NSPredicate *predLocation = [NSPredicate predicateWithFormat:@"(self.location_city == nil) OR (self.location_city == '')"];
+    NSArray *arrFilterLocation = [myUserModel.arrPositionUser filteredArrayUsingPredicate:predLocation];
+    if (arrFilterLocation.count>0)
+    {
+        [CommonMethods displayAlertwithTitle:@"Please add all Location" withMessage:nil withViewController:self];
+        return;
+    }
+    
+    
     NSPredicate *predSummary = [NSPredicate predicateWithFormat:@"(self.summary == nil) OR (self.summary == '')"];
-    
-    NSPredicate *compoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[predLocation, predSummary]];
-    
-    NSArray *arrFilter = [myUserModel.arrPositionUser filteredArrayUsingPredicate:compoundPredicate];
-    if (arrFilter.count>0)
+    NSArray *arrFilterSummary = [myUserModel.arrPositionUser filteredArrayUsingPredicate:predSummary];
+    if (arrFilterSummary.count>0)
     {
-        [CommonMethods displayAlertwithTitle:@"Please add all data" withMessage:nil withViewController:self];
+        [CommonMethods displayAlertwithTitle:@"Please add Summary" withMessage:nil withViewController:self];
+        return;
     }
-    else
-    {
-        NSLog(@"Done");
-        C_EducationHistory *obj = [[C_EducationHistory alloc]initWithNibName:@"C_EducationHistory" bundle:nil];
-        [self.navigationController pushViewController:obj animated:YES];
-    }
+    
+    C_EducationHistory *obj = [[C_EducationHistory alloc]initWithNibName:@"C_EducationHistory" bundle:nil];
+    [self.navigationController pushViewController:obj animated:YES];
 }
 
 #pragma mark - Table Delegate

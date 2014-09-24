@@ -293,7 +293,7 @@ NSString *DocumentsDirectoryPath() {NSArray *paths = NSSearchPathForDirectoriesI
 
 + (UIBarButtonItem*)leftMenuButton:(UIViewController *)viewC withSelector:(SEL)mySelector
 {
-    UIImage *buttonImage = [UIImage imageNamed:@"back_icon"];
+    UIImage *buttonImage = [UIImage imageNamed:@"menu-icon"];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:buttonImage forState:UIControlStateNormal];
     button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
