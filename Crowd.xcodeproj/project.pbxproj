@@ -111,6 +111,14 @@
 		106485F619C0182400BCD1EC /* C_Cell_History.xib in Resources */ = {isa = PBXBuildFile; fileRef = 106485F419C0182400BCD1EC /* C_Cell_History.xib */; };
 		1078C13F19C3242800378CC4 /* C_Cell_Tags.m in Sources */ = {isa = PBXBuildFile; fileRef = 1078C13D19C3242800378CC4 /* C_Cell_Tags.m */; };
 		1078C14019C3242800378CC4 /* C_Cell_Tags.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1078C13E19C3242800378CC4 /* C_Cell_Tags.xib */; };
+		108285AD19D3DF310001F124 /* C_FindAJobVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 108285AB19D3DF310001F124 /* C_FindAJobVC.m */; };
+		108285AE19D3DF310001F124 /* C_FindAJobVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285AC19D3DF310001F124 /* C_FindAJobVC.xib */; };
+		108285B219D407A00001F124 /* ViewSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 108285B019D407A00001F124 /* ViewSelection.m */; };
+		108285B319D407A00001F124 /* ViewSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285B119D407A00001F124 /* ViewSelection.xib */; };
+		108285B719D40C820001F124 /* ViewFindType.m in Sources */ = {isa = PBXBuildFile; fileRef = 108285B519D40C820001F124 /* ViewFindType.m */; };
+		108285B819D40C820001F124 /* ViewFindType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285B619D40C820001F124 /* ViewFindType.xib */; };
+		108285BF19D42ADD0001F124 /* C_TempVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 108285BD19D42ADD0001F124 /* C_TempVC.m */; };
+		108285C019D42ADD0001F124 /* C_TempVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285BE19D42ADD0001F124 /* C_TempVC.xib */; };
 		10A948CF19C948AA0042999F /* C_Header_ProfilePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A948CE19C948AA0042999F /* C_Header_ProfilePreview.m */; };
 		10A948D119C948BA0042999F /* C_Header_ProfilePreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10A948D019C948BA0042999F /* C_Header_ProfilePreview.xib */; };
 		10A948DA19C96ECE0042999F /* C_Cell_PositionProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A948D819C96ECE0042999F /* C_Cell_PositionProfile.m */; };
@@ -374,6 +382,18 @@
 		1078C13C19C3242800378CC4 /* C_Cell_Tags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Cell_Tags.h; sourceTree = "<group>"; };
 		1078C13D19C3242800378CC4 /* C_Cell_Tags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Cell_Tags.m; sourceTree = "<group>"; };
 		1078C13E19C3242800378CC4 /* C_Cell_Tags.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Cell_Tags.xib; sourceTree = "<group>"; };
+		108285AA19D3DF310001F124 /* C_FindAJobVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_FindAJobVC.h; sourceTree = "<group>"; };
+		108285AB19D3DF310001F124 /* C_FindAJobVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_FindAJobVC.m; sourceTree = "<group>"; };
+		108285AC19D3DF310001F124 /* C_FindAJobVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_FindAJobVC.xib; sourceTree = "<group>"; };
+		108285AF19D407A00001F124 /* ViewSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSelection.h; sourceTree = "<group>"; };
+		108285B019D407A00001F124 /* ViewSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSelection.m; sourceTree = "<group>"; };
+		108285B119D407A00001F124 /* ViewSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewSelection.xib; sourceTree = "<group>"; };
+		108285B419D40C820001F124 /* ViewFindType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFindType.h; sourceTree = "<group>"; };
+		108285B519D40C820001F124 /* ViewFindType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFindType.m; sourceTree = "<group>"; };
+		108285B619D40C820001F124 /* ViewFindType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewFindType.xib; sourceTree = "<group>"; };
+		108285BC19D42ADD0001F124 /* C_TempVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_TempVC.h; sourceTree = "<group>"; };
+		108285BD19D42ADD0001F124 /* C_TempVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_TempVC.m; sourceTree = "<group>"; };
+		108285BE19D42ADD0001F124 /* C_TempVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_TempVC.xib; sourceTree = "<group>"; };
 		10A948CD19C948AA0042999F /* C_Header_ProfilePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Header_ProfilePreview.h; sourceTree = "<group>"; };
 		10A948CE19C948AA0042999F /* C_Header_ProfilePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Header_ProfilePreview.m; sourceTree = "<group>"; };
 		10A948D019C948BA0042999F /* C_Header_ProfilePreview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Header_ProfilePreview.xib; sourceTree = "<group>"; };
@@ -742,18 +762,18 @@
 		104CD5F819D288F300E444F8 /* Add Education Wizard */ = {
 			isa = PBXGroup;
 			children = (
-				104CD5F919D288F300E444F8 /* C_Education_Courses.h */,
-				104CD5FA19D288F300E444F8 /* C_Education_Courses.m */,
-				104CD5FB19D288F300E444F8 /* C_Education_Courses.xib */,
-				104CD5FC19D288F300E444F8 /* C_Education_Degree.h */,
-				104CD5FD19D288F300E444F8 /* C_Education_Degree.m */,
-				104CD5FE19D288F300E444F8 /* C_Education_Degree.xib */,
 				104CD5FF19D288F300E444F8 /* C_Education_SchoolVC.h */,
 				104CD60019D288F300E444F8 /* C_Education_SchoolVC.m */,
 				104CD60119D288F300E444F8 /* C_Education_SchoolVC.xib */,
+				104CD5FC19D288F300E444F8 /* C_Education_Degree.h */,
+				104CD5FD19D288F300E444F8 /* C_Education_Degree.m */,
+				104CD5FE19D288F300E444F8 /* C_Education_Degree.xib */,
 				104CD60219D288F300E444F8 /* C_Education_Time.h */,
 				104CD60319D288F300E444F8 /* C_Education_Time.m */,
 				104CD60419D288F300E444F8 /* C_Education_Time.xib */,
+				104CD5F919D288F300E444F8 /* C_Education_Courses.h */,
+				104CD5FA19D288F300E444F8 /* C_Education_Courses.m */,
+				104CD5FB19D288F300E444F8 /* C_Education_Courses.xib */,
 			);
 			path = "Add Education Wizard";
 			sourceTree = "<group>";
@@ -867,6 +887,19 @@
 				1078C13E19C3242800378CC4 /* C_Cell_Tags.xib */,
 			);
 			path = "ALL Cell";
+			sourceTree = "<group>";
+		};
+		108285A919D3DEF80001F124 /* Find A Job Wizard */ = {
+			isa = PBXGroup;
+			children = (
+				108285AA19D3DF310001F124 /* C_FindAJobVC.h */,
+				108285AB19D3DF310001F124 /* C_FindAJobVC.m */,
+				108285AC19D3DF310001F124 /* C_FindAJobVC.xib */,
+				108285BC19D42ADD0001F124 /* C_TempVC.h */,
+				108285BD19D42ADD0001F124 /* C_TempVC.m */,
+				108285BE19D42ADD0001F124 /* C_TempVC.xib */,
+			);
+			path = "Find A Job Wizard";
 			sourceTree = "<group>";
 		};
 		10A948CC19C948260042999F /* Cell Profile Preview */ = {
@@ -1173,10 +1206,11 @@
 			isa = PBXGroup;
 			children = (
 				104CD5F719D288F300E444F8 /* Register Wizard */,
-				104CD5F619D288C700E444F8 /* My Profile Wizard */,
 				106485F119C017FF00BCD1EC /* ALL Cell */,
 				100ABD9A19B99232009C1372 /* Login View */,
 				102FC4A019CB013A007F37E9 /* Left And Home */,
+				104CD5F619D288C700E444F8 /* My Profile Wizard */,
+				108285A919D3DEF80001F124 /* Find A Job Wizard */,
 				10588A6719CC4AA800DC5633 /* Job Wizard */,
 			);
 			path = Controller;
@@ -1192,6 +1226,12 @@
 				105ABB3A19BD9C9F00177C6A /* C_ViewEditableTextField.h */,
 				105ABB3B19BD9C9F00177C6A /* C_ViewEditableTextField.m */,
 				105ABB3D19BD9CB400177C6A /* C_ViewEditableTextField.xib */,
+				108285AF19D407A00001F124 /* ViewSelection.h */,
+				108285B019D407A00001F124 /* ViewSelection.m */,
+				108285B119D407A00001F124 /* ViewSelection.xib */,
+				108285B419D40C820001F124 /* ViewFindType.h */,
+				108285B519D40C820001F124 /* ViewFindType.m */,
+				108285B619D40C820001F124 /* ViewFindType.xib */,
 			);
 			path = "View Class";
 			sourceTree = "<group>";
@@ -1285,6 +1325,7 @@
 				1018251219D046EB0099E8F5 /* C_PostJob_LocationVC.xib in Resources */,
 				104CD67E19D2CE6500E444F8 /* C_MP_SkillsVC.xib in Resources */,
 				10588A6519CC2CD500DC5633 /* Helvetica_6.ttf in Resources */,
+				108285C019D42ADD0001F124 /* C_TempVC.xib in Resources */,
 				10A948E519C9902C0042999F /* C_Cell_EducationProfile.xib in Resources */,
 				104CD64119D288F300E444F8 /* C_EditTextVC.xib in Resources */,
 				104CD64B19D288F300E444F8 /* C_LocationVC.xib in Resources */,
@@ -1298,6 +1339,7 @@
 				1018251719D049F90099E8F5 /* C_PostJob_ExperienceVC.xib in Resources */,
 				10D48ADA19D2F9BD00B93675 /* C_MP_ExperienceVC.xib in Resources */,
 				1018251C19D04DF10099E8F5 /* C_PostJob_RolesVC.xib in Resources */,
+				108285AE19D3DF310001F124 /* C_FindAJobVC.xib in Resources */,
 				10588A6C19CC4C6100DC5633 /* C_PostJob_NameVC.xib in Resources */,
 				10D48AC119D2D61900B93675 /* C_MP_WorkHistoryVC.xib in Resources */,
 				104CD64D19D288F300E444F8 /* C_ProffessionalSummaryVC.xib in Resources */,
@@ -1328,8 +1370,10 @@
 				10D48AD019D2E76200B93675 /* C_MP_EditLocationVC.xib in Resources */,
 				104CD63319D288F300E444F8 /* C_Education_Courses.xib in Resources */,
 				104CD63F19D288F300E444F8 /* C_EditTagVC.xib in Resources */,
+				108285B319D407A00001F124 /* ViewSelection.xib in Resources */,
 				104CD65719D288F300E444F8 /* C_WorkHistory.xib in Resources */,
 				1018250019D022670099E8F5 /* C_PostJob_IndustryListingVC.xib in Resources */,
+				108285B819D40C820001F124 /* ViewFindType.xib in Resources */,
 				102FC4A519CB0156007F37E9 /* C_LeftMenuVC.xib in Resources */,
 				10A948DB19C96ECE0042999F /* C_Cell_PositionProfile.xib in Resources */,
 				103B3C6C19D009870022FA33 /* IndustryList.plist in Resources */,
@@ -1358,6 +1402,7 @@
 				104CD63219D288F300E444F8 /* C_Education_Courses.m in Sources */,
 				10A954A119B9919700EAAE4B /* Base64.m in Sources */,
 				10A948E419C9902C0042999F /* C_Cell_EducationProfile.m in Sources */,
+				108285AD19D3DF310001F124 /* C_FindAJobVC.m in Sources */,
 				10A954A819B9919700EAAE4B /* NSUserDefaults+Helpers.m in Sources */,
 				10D48ACF19D2E76200B93675 /* C_MP_EditLocationVC.m in Sources */,
 				10A954A519B9919700EAAE4B /* NSMutableAttributedString+Validation.m in Sources */,
@@ -1375,12 +1420,14 @@
 				104CD63619D288F300E444F8 /* C_Education_SchoolVC.m in Sources */,
 				102FC49C19CAABED007F37E9 /* UserHandler_LoggedIn.m in Sources */,
 				10A954B819B9919700EAAE4B /* MMDrawerVisualState.m in Sources */,
+				108285B719D40C820001F124 /* ViewFindType.m in Sources */,
 				1002FF8519BF129F009F87AF /* DWTagList.m in Sources */,
 				10A954A619B9919700EAAE4B /* NSObject+Validation.m in Sources */,
 				10A954AF19B9919700EAAE4B /* DownloadManager.m in Sources */,
 				10A954C319B9919700EAAE4B /* SDWebImageManager.m in Sources */,
 				100ABDAF19B99470009C1372 /* LIALinkedInHttpClient.m in Sources */,
 				10A948DA19C96ECE0042999F /* C_Cell_PositionProfile.m in Sources */,
+				108285BF19D42ADD0001F124 /* C_TempVC.m in Sources */,
 				105D46E019D17F7F00C09272 /* C_PostJobModel.m in Sources */,
 				10A954CA19B9919700EAAE4B /* UIImageView+WebCache.m in Sources */,
 				100ABDB019B99470009C1372 /* NSString+LIAEncode.m in Sources */,
@@ -1416,6 +1463,7 @@
 				10D48AD919D2F9BD00B93675 /* C_MP_ExperienceVC.m in Sources */,
 				10A954B019B9919700EAAE4B /* JSONParser.m in Sources */,
 				105ABB3C19BD9C9F00177C6A /* C_ViewEditableTextField.m in Sources */,
+				108285B219D407A00001F124 /* ViewSelection.m in Sources */,
 				1018250419D025FB0099E8F5 /* C_PostJob_IndustryVC.m in Sources */,
 				10A954C819B9919700EAAE4B /* UIImage+WebP.m in Sources */,
 				1018251119D046EB0099E8F5 /* C_PostJob_LocationVC.m in Sources */,

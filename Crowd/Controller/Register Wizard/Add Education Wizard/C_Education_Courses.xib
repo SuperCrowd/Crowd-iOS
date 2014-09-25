@@ -24,7 +24,7 @@
                         <constraint firstAttribute="height" constant="30" id="KAb-uH-7i4"/>
                         <constraint firstAttribute="height" constant="30" id="j5I-du-0VY"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="had-Qt-xsj">

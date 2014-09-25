@@ -13,7 +13,7 @@
 #import "C_DashBoardVC.h"
 #import "C_PostJob_NameVC.h"
 #import "C_MyProfileVC.h"
-
+#import "C_FindAJobVC.h"
 #define NAME @"NameKey"
 #define IMG @"ImageKey"
 typedef NS_ENUM(NSInteger, ChooseIndex)
@@ -200,7 +200,14 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
         }
             break;
         case FIND_A_JOB:
-            
+        {
+            C_FindAJobVC *objC = [[C_FindAJobVC alloc]initWithNibName:@"C_FindAJobVC" bundle:nil];
+            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
+            navvv.navigationBar.translucent = NO;
+            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                
+            }];
+        }
             break;
         case FIND_A_CANDIDATE:
             

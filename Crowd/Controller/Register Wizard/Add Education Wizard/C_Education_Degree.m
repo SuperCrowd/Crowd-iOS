@@ -52,6 +52,7 @@
         [dictAddNewEducation setValue:strT forKey:@"degree"];
 
         C_Education_Time *obj = [[C_Education_Time alloc]initWithNibName:@"C_Education_Time" bundle:nil];
+        obj.obj_ProfileUpdate = _obj_ProfileUpdate;
         [self.navigationController pushViewController:obj animated:YES];
     }
 }

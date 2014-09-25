@@ -50,6 +50,7 @@
         dictAddNewEducation = [[NSMutableDictionary alloc]init];
         [dictAddNewEducation setValue:strT forKey:@"schoolName"];
         C_Education_Degree *obj = [[C_Education_Degree alloc]initWithNibName:@"C_Education_Degree" bundle:nil];
+        obj.obj_ProfileUpdate = _obj_ProfileUpdate;
         [self.navigationController pushViewController:obj animated:YES];
     }
 }

@@ -243,7 +243,7 @@
     else if([sectionTitle isEqualToString:SKILLS])
         return 1;
     
-    return 0;//(section == arrSectionHeader.count-1)?myUserModel.arrRecommendationsUser.count:1;
+    return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

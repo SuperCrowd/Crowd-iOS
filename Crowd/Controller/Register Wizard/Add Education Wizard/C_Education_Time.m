@@ -185,6 +185,8 @@ typedef NS_ENUM(NSInteger, btnTapped)
                 [dictAddNewEducation setValue:arrMonthEnd[1] forKey:@"endDate_year"];
                 
                 C_Education_Courses *obj = [[C_Education_Courses alloc]initWithNibName:@"C_Education_Courses" bundle:nil];
+                obj.obj_ProfileUpdate = _obj_ProfileUpdate;
+
                 [self.navigationController pushViewController:obj animated:YES];
             }
             @catch (NSException *exception) {

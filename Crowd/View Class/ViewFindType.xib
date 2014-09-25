@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewFindType">
+            <connections>
+                <outlet property="btnDelete" destination="eC1-N9-hHN" id="dX9-vS-u2N"/>
+                <outlet property="btnEditType" destination="8uG-Vx-J2W" id="nee-Ub-Fir"/>
+                <outlet property="lblTitle" destination="Jr7-Nc-3qB" id="sX2-rA-xad"/>
+                <outlet property="lblType" destination="Vs1-IJ-PhV" id="Pgm-3y-zPc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jr7-Nc-3qB" userLabel="Title">
+                    <rect key="frame" x="15" y="10" width="290" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="KDd-hc-5fC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uG-Vx-J2W">
+                    <rect key="frame" x="10" y="41" width="22" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="5zF-ZD-73g"/>
+                        <constraint firstAttribute="width" constant="22" id="vzH-n2-yPd"/>
+                    </constraints>
+                    <state key="normal" image="edit_icon_green">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vs1-IJ-PhV" userLabel="Type">
+                    <rect key="frame" x="47" y="41" width="226" height="21"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC1-N9-hHN">
+                    <rect key="frame" x="278" y="41" width="32" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="6lg-df-OtP"/>
+                        <constraint firstAttribute="height" constant="22" id="hOp-B2-kAg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="D">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="eC1-N9-hHN" secondAttribute="trailing" constant="10" id="6XC-C3-a2O"/>
+                <constraint firstItem="eC1-N9-hHN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="41" id="8CO-Xp-TFh"/>
+                <constraint firstItem="Vs1-IJ-PhV" firstAttribute="leading" secondItem="8uG-Vx-J2W" secondAttribute="trailing" constant="15" id="CBA-rS-wSF"/>
+                <constraint firstAttribute="trailing" secondItem="Jr7-Nc-3qB" secondAttribute="trailing" constant="15" id="Gl5-Im-gcT"/>
+                <constraint firstItem="Jr7-Nc-3qB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="PAO-r8-jbY"/>
+                <constraint firstItem="eC1-N9-hHN" firstAttribute="leading" secondItem="Vs1-IJ-PhV" secondAttribute="trailing" constant="5" id="YAy-ng-sjS"/>
+                <constraint firstItem="8uG-Vx-J2W" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="41" id="YpI-gd-eDe"/>
+                <constraint firstAttribute="bottom" secondItem="Vs1-IJ-PhV" secondAttribute="bottom" constant="10" id="eCM-A1-yOG"/>
+                <constraint firstItem="8uG-Vx-J2W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="eOZ-02-bK0"/>
+                <constraint firstItem="Vs1-IJ-PhV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="41" id="mPm-ww-C8r"/>
+                <constraint firstItem="Jr7-Nc-3qB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="wBd-Yr-zzf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="140" y="-40"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="edit_icon_green" width="22" height="22"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

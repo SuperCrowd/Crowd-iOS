@@ -24,7 +24,7 @@
     self.title = @"Education";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
     
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Next" withSelector:@selector(btnDoneClicked:)];
+    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
 
     txtV.text = @"";
 }
@@ -59,7 +59,13 @@
         
             [self.view endEditing:YES];
 
-            [self addNewEducationWithTags:[arrTemp componentsJoinedByString:@","]];
+            if (_obj_ProfileUpdate) {
+                [self addNewEducation_LoggedInUser_WithTags:arrTemp];
+            }
+            else
+            {
+                [self addNewEducationWithTags:[arrTemp componentsJoinedByString:@","]];
+            }
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
@@ -89,6 +95,31 @@
     [CommonMethods saveMyUser:myUserModel];
     myUserModel = [CommonMethods getMyUser];
 }
+-(void)addNewEducation_LoggedInUser_WithTags:(NSArray *)arrTags
+{
+    C_Model_Education *myEducation = [[C_Model_Education alloc]init];
+    
+    myEducation.Degree = dictAddNewEducation[@"degree"];
+    myEducation.Name = dictAddNewEducation[@"schoolName"];
+    
+    myEducation.StartYear = dictAddNewEducation[@"startDate_year"];
+    myEducation.EndYear = dictAddNewEducation[@"endDate_year"];
+    
+    myEducation.StartMonth = dictAddNewEducation[@"startDate_month"];
+    myEducation.EndMonth = dictAddNewEducation[@"endDate_month"];
+    
+    NSMutableArray *arrT = [NSMutableArray array];
+    for (int i = 0; i<arrTags.count; i++)
+    {
+        C_Model_Courses *myCourse = [[C_Model_Courses alloc]init];
+        myCourse.Course = [[NSString stringWithFormat:@"%@",arrTags[i]]isNull];
+        [arrT addObject:myCourse];
+    }
+    myEducation.arrCourses = arrT;
+    
+    [_obj_ProfileUpdate.arr_EducationALL addObject:myEducation];
+}
+
 #pragma mark - Text View Delegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText
 {

@@ -19,6 +19,8 @@
 #import "C_MP_EditTagVC.h"
 
 #import "C_MP_ExperienceVC.h"
+
+#import "C_Education_SchoolVC.h"
 @interface C_MP_EducationHistory ()<UITableViewDataSource,UITableViewDelegate,DWTagListDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -115,8 +117,6 @@
 -(IBAction)btnNextClicked:(id)sender
 {
     //myEducation.Degree,myEducation.Name,myEducation.StartMonth,myEducation.StartYear,myEducation.EndMonth,myEducation.EndYear
-    
-    
     
 //    NSPredicate *predField = [NSPredicate predicateWithFormat:@"(self.arrCourses == nil) OR (self.arrCourses == ())"];
 //    NSArray *arrField = [_obj_ProfileUpdate.arr_EducationALL filteredArrayUsingPredicate:predField];;
@@ -243,7 +243,6 @@
     NSString *strSectionName = arrSectionHeader[indexPath.section];
     if ([strSectionName isEqualToString:@"Courses"])
     {
-        //Education *myEducation = myUserModel.arrEducationUser[indexPath.section/4];
         C_Cell_Tags *cell = (C_Cell_Tags *)[tblView dequeueReusableCellWithIdentifier:cellTagID forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -321,17 +320,20 @@
     
     return nil;
 }
+
+#pragma mark - Add New Education
 -(void)btnAddNewSchoolCliked:(id)sender
 {
     [dictAddNewEducation removeAllObjects];
     NSLog(@"Add new school");
-//    C_Education_SchoolVC *obj = [[C_Education_SchoolVC alloc]initWithNibName:@"C_Education_SchoolVC" bundle:nil];
-//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:obj];
-//    nav.navigationBar.translucent = NO;
-//    
-//    [self presentViewController:nav animated:YES completion:^{
-//        
-//    }];
+    C_Education_SchoolVC *obj = [[C_Education_SchoolVC alloc]initWithNibName:@"C_Education_SchoolVC" bundle:nil];
+    obj.obj_ProfileUpdate = _obj_ProfileUpdate;
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:obj];
+    nav.navigationBar.translucent = NO;
+    
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
 }
 #pragma mark - Edit Cliked - Open Specific Screen
 -(void)btnEditClicked:(UIButton *)btnEdit

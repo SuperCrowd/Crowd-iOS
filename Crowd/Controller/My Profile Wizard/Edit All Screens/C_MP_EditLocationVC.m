@@ -134,8 +134,7 @@ typedef NS_ENUM(NSInteger, btnEdit) {
             [_obj_ProfileUpdate.arr_WorkALL replaceObjectAtIndex:_selectedIndexToUpdate withObject:myWork];
             
         }
-        [CommonMethods saveMyUser:myUserModel];
-        myUserModel = [CommonMethods getMyUser];
+
         return YES;
     }
     

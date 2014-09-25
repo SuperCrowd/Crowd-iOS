@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_TempVC">
+            <connections>
+                <outlet property="searchBar" destination="Fh5-5V-ZI5" id="Zln-ud-LGW"/>
+                <outlet property="tblView" destination="rJe-GG-i66" id="67I-Bx-Onz"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewSelect" destination="84e-D8-VvZ" id="1cv-9U-fPx"/>
+                <outlet property="viewTable" destination="npe-wF-Cle" id="vGH-cK-2YX"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="376"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="84e-D8-VvZ" customClass="ViewSelection">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="7hR-s0-NF0"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="84e-D8-VvZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Lcd-9G-pCW"/>
+                <constraint firstItem="84e-D8-VvZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Spa-F4-LOe"/>
+                <constraint firstAttribute="trailing" secondItem="84e-D8-VvZ" secondAttribute="trailing" id="dfM-kx-Iew"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="140" y="154"/>
+        </view>
+        <view contentMode="scaleToFill" id="npe-wF-Cle" userLabel="View - Table">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="336"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fh5-5V-ZI5">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="1DP-bU-Es9"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                    <scopeButtonTitles>
+                        <string>Title</string>
+                        <string>Title</string>
+                    </scopeButtonTitles>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Fch-0i-dZP"/>
+                    </connections>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rJe-GG-i66">
+                    <rect key="frame" x="0.0" y="44" width="320" height="292"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="KTH-mB-0P0"/>
+                        <outlet property="delegate" destination="-1" id="Acn-q7-hfF"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="rJe-GG-i66" firstAttribute="top" secondItem="Fh5-5V-ZI5" secondAttribute="bottom" id="41O-eB-4l2"/>
+                <constraint firstAttribute="trailing" secondItem="rJe-GG-i66" secondAttribute="trailing" id="EOD-3n-IEr"/>
+                <constraint firstAttribute="bottom" secondItem="rJe-GG-i66" secondAttribute="bottom" id="HJ5-Kc-MIj"/>
+                <constraint firstItem="Fh5-5V-ZI5" firstAttribute="top" secondItem="npe-wF-Cle" secondAttribute="top" id="JTw-QP-1iK"/>
+                <constraint firstItem="Fh5-5V-ZI5" firstAttribute="leading" secondItem="npe-wF-Cle" secondAttribute="leading" id="Tgo-UI-Kj6"/>
+                <constraint firstItem="rJe-GG-i66" firstAttribute="leading" secondItem="npe-wF-Cle" secondAttribute="leading" id="ZIa-0n-EMq"/>
+                <constraint firstAttribute="trailing" secondItem="Fh5-5V-ZI5" secondAttribute="trailing" id="zJ4-Oj-Zpn"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="486" y="174"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

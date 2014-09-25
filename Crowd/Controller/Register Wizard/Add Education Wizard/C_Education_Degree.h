@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class C_MyUser;
 
 @interface C_Education_Degree : UIViewController
-
+@property(nonatomic,strong)C_MyUser *obj_ProfileUpdate;
 @end

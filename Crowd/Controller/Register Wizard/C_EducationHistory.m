@@ -295,6 +295,8 @@
     
     return nil;
 }
+#pragma mark - Add New Education
+
 -(void)btnAddNewSchoolCliked:(id)sender
 {
     [dictAddNewEducation removeAllObjects];
