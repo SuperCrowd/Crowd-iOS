@@ -104,6 +104,7 @@ typedef NS_ENUM(NSInteger, btnNext) {
     /*--- Subviews Constraint ---*/
     NSDictionary *viewsDictionary   = NSDictionaryOfVariableBindings(view1, view2, view3, view4,view5);
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[view1(width)]-0-[view2(width)]-0-[view3(width)]-0-[view4(width)]-0-[view5(width)]-0-|" options:0 metrics:@{@"width":@(width)} views:viewsDictionary]];
+    
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view1(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view1)]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view2(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view2)]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view3(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view3)]];

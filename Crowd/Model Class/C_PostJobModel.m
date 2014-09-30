@@ -41,8 +41,8 @@
         myJob.arrSkills = [NSMutableArray array];
     }
     
-    myJob.EmployerIntroduction = @"";
-    myJob.Qualifications = @"";
+    myJob.EmployerIntroduction = [[NSString stringWithFormat:@"%@",dictT[@"EmployerIntroduction"]] isNull];
+    myJob.Qualifications = [[NSString stringWithFormat:@"%@",dictT[@"Qualifications"]] isNull];
     return myJob;
 }
 @end

@@ -1,29 +1,23 @@
 //
-//  C_PostJob_UpdateVC.m
+//  C_JobViewVC.m
 //  Crowd
 //
-//  Created by MAC107 on 23/09/14.
+//  Created by MAC107 on 30/09/14.
 //  Copyright (c) 2014 tatva. All rights reserved.
 //
 
-#import "C_PostJob_UpdateVC.h"
+#import "C_JobViewVC.h"
 #import "AppConstant.h"
-#import "C_PostJob_NameVC.h"
-#import "C_PostJob_RolesVC.h"
-#import "C_PostJob_SkillsVC.h"
-
+#import "C_JobListModel.h"
+#import "DWTagList.h"
 #import "C_Header_ProfilePreview.h"
 #import "C_Cell_SkillsProfile.h"
-#import "DWTagList.h"
-
-#import "C_PostJobModel.h"
-#import "C_JobListModel.h"
-#define FIND_A_JOB @"FindAJob"
 
 #define MORE @"More Information"
 #define ROLES @"Roles and Responsibilities"
 #define SKILLS @"Skills Requirements"
-@interface C_PostJob_UpdateVC ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+
+@interface C_JobViewVC ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
     
@@ -33,16 +27,24 @@
     __weak IBOutlet UILabel *lbl_City_State;
     __weak IBOutlet UILabel *lbl_Country;
     
+    __weak IBOutlet UIView *viewBtnContainer;
+
+    __weak IBOutlet UIImageView *imgVFavourite;
+    __weak IBOutlet UIButton *btnFavourite;
+    __weak IBOutlet NSLayoutConstraint *con_viewContainerWidth;
+    __weak IBOutlet NSLayoutConstraint *con_btnFavourite;
+    
+    __weak IBOutlet UIButton *btnApply;
+    
     /*--- Section Header Table ---*/
     NSArray *arrSectionHeader;
     
     JSONParser *parser;
-    
-    BOOL isCallingService;
 }
 @end
 
-@implementation C_PostJob_UpdateVC
+
+@implementation C_JobViewVC
 -(void)back
 {
     popView;
@@ -50,28 +52,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Job Posting";
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Update" withSelector:@selector(updateJobNow)];
-    if ([_strComingFrom isEqualToString:FIND_A_JOB])
+    self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+    
+    if ([_obj_myJob.URL isEqualToString:@""])
     {
-        self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+        arrSectionHeader = @[ROLES,SKILLS];
     }
     else
     {
-        if ([postJob_ModelClass.URL isEqualToString:@""])
-        {
-            arrSectionHeader = @[ROLES,SKILLS];
-        }
-        else
-        {
-            arrSectionHeader = @[MORE,ROLES,SKILLS];
-        }
-        self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+        arrSectionHeader = @[MORE,ROLES,SKILLS];
     }
-    
-    
+
     /*--- Register Cell ---*/
-    tblView.alpha = 0.0;
     tblView.delegate = self;
     tblView.dataSource = self;
     tblView.backgroundColor = [UIColor clearColor];
@@ -79,93 +71,38 @@
     tblView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [tblView registerClass:[C_Header_ProfilePreview class] forHeaderFooterViewReuseIdentifier:cellHeaderProfilePreviewID];
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_SkillsProfile" bundle:nil] forCellReuseIdentifier:cellSkillsProfilePreviewID];
-    if ([_strComingFrom isEqualToString:FIND_A_JOB])
+    
+    
+    imgVFavourite.hidden = YES;
+    [self showData];
+    
+    if (_obj_myJob.arrSkills.count>0)
     {
-        //get data
-        isCallingService = YES;
+        [self showViewContainer];
+        [tblView reloadData];
+    }
+    else
+    {
+        viewBtnContainer.alpha = 0.0;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self getData];
         });
-        
     }
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if ([_strComingFrom isEqualToString:FIND_A_JOB])
-    {
-        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
-        if (!isCallingService)
-        {
-            tblView.alpha = 1.0;
-            [self showData];
-            if ([postJob_ModelClass.URL isEqualToString:@""])
-            {
-                arrSectionHeader = @[ROLES,SKILLS];
-            }
-            else
-            {
-                arrSectionHeader = @[MORE,ROLES,SKILLS];
-            }
-            [tblView reloadData];
-        }
-    }
-    else
-    {
-        tblView.alpha = 1.0;
-        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-        [self showData];
-        if ([postJob_ModelClass.URL isEqualToString:@""])
-        {
-            arrSectionHeader = @[ROLES,SKILLS];
-        }
-        else
-        {
-            arrSectionHeader = @[MORE,ROLES,SKILLS];
-        }
-        [tblView reloadData];
-    }
-    
 }
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
-}
-
--(void)btnMenuClicked:(id)sender
-{
-    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
-}
-
--(void)showData
-{
-    /*--- Show Header Data ---*/
-    lbl_Company.text = [[NSString stringWithFormat:@"%@",postJob_ModelClass.Company] isNull];
-    lbl_JobTitle.text = [[NSString stringWithFormat:@"%@",postJob_ModelClass.Title] isNull];
-    
-    NSString *strCity = [[NSString stringWithFormat:@"%@",postJob_ModelClass.LocationCity] isNull];
-    NSString *strState = [[NSString stringWithFormat:@"%@",postJob_ModelClass.LocationState] isNull];
-    
-    if ([strState isEqualToString:@""])
-        lbl_City_State.text = strCity;
-    else
-        lbl_City_State.text = [NSString stringWithFormat:@"%@, %@",strCity,strState];
-    
-    lbl_Country.text = [[NSString stringWithFormat:@"%@",postJob_ModelClass.LocationCountry] isNull];
-}
-
 #pragma mark - Get Data
 -(void)getData
 {
     @try
     {
-        isCallingService = YES;
         showHUD_with_Title(@"Getting Job Details");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
-                                    @"JobID":_obj_JobListModel.JobID};
+                                    @"JobID":_obj_myJob.JobID};
         parser = [[JSONParser alloc]initWith_withURL:Web_JOB_DETAIL withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getDataSuccessfull:) withObject:self];
     }
     @catch (NSException *exception) {
@@ -180,7 +117,6 @@
 -(void)getDataSuccessfull:(id)objResponse
 {
     NSLog(@"Response > %@",objResponse);
-    isCallingService = NO;
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
@@ -197,24 +133,12 @@
     {
         /*--- Save data here ---*/
         tblView.alpha = 1.0;
-        
-        
         BOOL isJobList = [[objResponse valueForKeyPath:@"GetJobDetailsResult.ResultStatus.Status"] boolValue];
         if (isJobList)
         {
             @try
             {
-                postJob_ModelClass = [C_PostJobModel addPostJobModel:[objResponse valueForKeyPath:@"GetJobDetailsResult.JobDetailsWithSkills"]];
-                //_obj_myJob = [C_JobListModel updateModel:_obj_myJob withDict:[objResponse objectForKey:@"GetJobDetailsResult"] ];
-                
-                if ([postJob_ModelClass.URL isEqualToString:@""])
-                {
-                    arrSectionHeader = @[ROLES,SKILLS];
-                }
-                else
-                {
-                    arrSectionHeader = @[MORE,ROLES,SKILLS];
-                }
+                _obj_myJob = [C_JobListModel updateModel:_obj_myJob withDict:[objResponse objectForKey:@"GetJobDetailsResult"] ];
                 
             }
             @catch (NSException *exception) {
@@ -224,6 +148,7 @@
             }
             hideHUD;
             [self showData];
+            [self showViewContainer];
             [tblView reloadData];
         }
         else
@@ -241,33 +166,87 @@
 }
 
 
+-(void)showData
+{
+    /*--- Show Header Data ---*/
+    lbl_Company.text = [[NSString stringWithFormat:@"%@",_obj_myJob.Company] isNull];
+    lbl_JobTitle.text = [[NSString stringWithFormat:@"%@",_obj_myJob.Title] isNull];
+    
+    NSString *strCity = [[NSString stringWithFormat:@"%@",_obj_myJob.LocationCity] isNull];
+    NSString *strState = [[NSString stringWithFormat:@"%@",_obj_myJob.LocationState] isNull];
+    
+    if ([strState isEqualToString:@""])
+        lbl_City_State.text = strCity;
+    else
+        lbl_City_State.text = [NSString stringWithFormat:@"%@, %@",strCity,strState];
+    
+    lbl_Country.text = [[NSString stringWithFormat:@"%@",_obj_myJob.LocationCountry] isNull];
+    
+    
+    
+}
+-(void)showViewContainer
+{
+    if (_obj_myJob.IsJobFavorite)
+    {
+        imgVFavourite.hidden = NO;
+        con_btnFavourite.constant = 10.0;
+        con_viewContainerWidth.constant = 193.0;
+        btnFavourite.hidden = YES;
+    }
+    else
+    {
+        con_btnFavourite.constant = 71.0;
+        con_viewContainerWidth.constant = 254.0;
+        
+        imgVFavourite.hidden = YES;;
+        btnFavourite.hidden = NO;
+    }
+    
+    if (_obj_myJob.IsJobApplied)
+        [btnApply setImage:[UIImage imageNamed:@"applied-btn"] forState:UIControlStateNormal];
+    else
+        [btnApply setImage:[UIImage imageNamed:@"apply-btn"] forState:UIControlStateNormal];
+    
+    viewBtnContainer.alpha = 1.0;
+}
 #pragma mark - IBAction Method
 -(void)btnMoreClicked
 {
     [CommonMethods displayAlertwithTitle:@"More Under Construction" withMessage:nil withViewController:self];
 }
+-(IBAction)btnFavouriteClicked:(id)sender
+{
+    //FavoriteJob
+    [self favouriteNow];
+}
+-(IBAction)btnApplyClicked:(id)sender
+{
+    //ApplyToJob
+    [self applyNow];
+}
 -(IBAction)btnEditClicked:(id)sender
 {
-    is_PostJob_Edit_update = @"update";
-    C_PostJob_NameVC *obj = [[C_PostJob_NameVC alloc]initWithNibName:@"C_PostJob_NameVC" bundle:nil];
-    [self.navigationController pushViewController:obj animated:YES];
+//    is_PostJob_Edit_update = @"update";
+//    C_PostJob_NameVC *obj = [[C_PostJob_NameVC alloc]initWithNibName:@"C_PostJob_NameVC" bundle:nil];
+//    [self.navigationController pushViewController:obj animated:YES];
 }
 -(void)btnEditHeaderClicked:(UIButton *)btnEditSection
 {
-    is_PostJob_Edit_update = @"update";
-    NSString *sectionTitle = arrSectionHeader[btnEditSection.tag];
-    NSLog(@"Choose Section : %@",sectionTitle);
-    
-    if ([sectionTitle isEqualToString:ROLES])
-    {
-        C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
-        [self.navigationController pushViewController:obj animated:YES];
-    }
-    else
-    {
-        C_PostJob_SkillsVC *obj = [[C_PostJob_SkillsVC alloc]initWithNibName:@"C_PostJob_SkillsVC" bundle:nil];
-        [self.navigationController pushViewController:obj animated:YES];
-    }
+//    is_PostJob_Edit_update = @"update";
+//    NSString *sectionTitle = arrSectionHeader[btnEditSection.tag];
+//    NSLog(@"Choose Section : %@",sectionTitle);
+//    
+//    if ([sectionTitle isEqualToString:ROLES])
+//    {
+//        C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
+//        [self.navigationController pushViewController:obj animated:YES];
+//    }
+//    else
+//    {
+//        C_PostJob_SkillsVC *obj = [[C_PostJob_SkillsVC alloc]initWithNibName:@"C_PostJob_SkillsVC" bundle:nil];
+//        [self.navigationController pushViewController:obj animated:YES];
+//    }
     
 }
 #pragma mark - Table Delegate
@@ -305,10 +284,10 @@
         [viewH addSubview:btnMoreInfo];
         return viewH;
     }
-
     C_Header_ProfilePreview *myHeader = (C_Header_ProfilePreview *)[tblView dequeueReusableHeaderFooterViewWithIdentifier:cellHeaderProfilePreviewID];
     //myHeader.contentView.backgroundColor = [UIColor redColor];
     myHeader.lblHeader.text = arrSectionHeader[section];
+    myHeader.btnEditHeader.alpha = 0.0;
     myHeader.btnEditHeader.tag = section;
     [myHeader.btnEditHeader addTarget:self action:@selector(btnEditHeaderClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -321,14 +300,14 @@
     
     if ([sectionTitle isEqualToString:ROLES])
     {
-        CGFloat heightSummary = [postJob_ModelClass.Responsibilities getHeight_withFont:kFONT_LIGHT(15.0) widht:screenSize.size.width - 20.0];
+        CGFloat heightSummary = [_obj_myJob.Responsibilities getHeight_withFont:kFONT_LIGHT(15.0) widht:screenSize.size.width - 20.0];
         heightFinal = 5.0 + heightSummary + 5.0;
         return heightFinal;
     }
     else
     {
         NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in postJob_ModelClass.arrSkills)
+        for (NSDictionary *mySkills in _obj_myJob.arrSkills)
         {
             [arrSkills addObject:mySkills[@"Skill"]];
         }
@@ -364,15 +343,15 @@
             [cell.contentView addSubview:lblSummary];
         }
         lblSummary = (UILabel *)[cell.contentView viewWithTag:100];
-        rectLBL.size.height = [postJob_ModelClass.Responsibilities getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width-20.0];
+        rectLBL.size.height = [_obj_myJob.Responsibilities getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width-20.0];
         lblSummary.frame = rectLBL;
-        lblSummary.text = postJob_ModelClass.Responsibilities;
+        lblSummary.text = _obj_myJob.Responsibilities;
         return cell;
     }
     else
     {
         NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in postJob_ModelClass.arrSkills)
+        for (NSDictionary *mySkills in _obj_myJob.arrSkills)
         {
             [arrSkills addObject:mySkills[@"Skill"]];
         }
@@ -396,33 +375,35 @@
 }
 
 
-#pragma mark - 
-#pragma mark - UPDATE JOB NOW
-
--(void)updateJobNow
+#pragma mark - Favourite
+-(void)favouriteNow
 {
     @try
     {
-        showHUD_with_Title(@"Job updating");
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSLog(@"%@",[self getDictParam]);
-            parser = [[JSONParser alloc]initWith_withURL:Web_POST_JOB withParam:[self getDictParam] withData:nil withType:kURLPost withSelector:@selector(getDataDone:) withObject:self];
-        });
-        
+        NSString *strYes = @"1";
+        if (_obj_myJob.IsJobFavorite)
+        {
+            strYes = @"0";
+        }
+        showHUD_with_Title(@"Favouriting Job");
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token,
+                                    @"JobID":_obj_myJob.JobID,
+                                    @"Status":strYes};
+        parser = [[JSONParser alloc]initWith_withURL:Web_JOB_FAVOURITE withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(favouriteSuccessful:) withObject:self];
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);
         hideHUD;
-        [CommonMethods displayAlertwithTitle:@"Please try again" withMessage:nil withViewController:self];
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
     }
     @finally {
     }
     
 }
--(void)getDataDone:(id)objResponse
+-(void)favouriteSuccessful:(id)objResponse
 {
-    NSLog(@"%@",objResponse);
+    NSLog(@"Response > %@",objResponse);
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
@@ -435,26 +416,29 @@
         hideHUD;
         [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
     }
-    else if([objResponse objectForKey:@"AddEditJobResult"])
+    else if([objResponse objectForKey:@"FavoriteJobResult"])
     {
         /*--- Save data here ---*/
-        BOOL isNewJobPostSuccess = [[objResponse valueForKeyPath:@"AddEditJobResult.ResultStatus.Status"] boolValue];
-        if (isNewJobPostSuccess)
+        tblView.alpha = 1.0;
+        BOOL isJobList = [[objResponse valueForKeyPath:@"FavoriteJobResult.ResultStatus.Status"] boolValue];
+        if (isJobList)
         {
-            
-            hideHUD;
-            if ([_strComingFrom isEqualToString:FIND_A_JOB])
+            @try
             {
-                [self updateModelList];
+                _obj_myJob.IsJobFavorite = !_obj_myJob.IsJobFavorite;
+                [self showViewContainer];;
             }
-            [CommonMethods displayAlertwithTitle:@"Job Updated" withMessage:nil withViewController:self];
-
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+            hideHUD;
         }
         else
         {
             hideHUD;
-            NSString *str = [objResponse valueForKeyPath:@"AddEditJobResult.ResultStatus.StatusMessage"];
-            [CommonMethods displayAlertwithTitle:str withMessage:nil withViewController:self];
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"FavoriteJobResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
         }
     }
     else
@@ -462,60 +446,99 @@
         hideHUD;
         [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
     }
+    
 }
 
 
-#pragma mark - Get Updated Dictionary
--(NSDictionary *)getDictParam
+#pragma mark - Apply
+-(void)applyNow
 {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:userInfoGlobal.UserId forKey:@"UserID"];
-    [dict setValue:userInfoGlobal.Token forKey:@"UserToken"];
-    [dict setValue:postJob_ModelClass.JobID forKey:@"JobID"];
-    [dict setValue:postJob_ModelClass.Title forKey:@"Title"];
-    [dict setValue:postJob_ModelClass.Company forKey:@"Company"];
-    [dict setValue:postJob_ModelClass.Industry forKey:@"Industry"];
-    [dict setValue:postJob_ModelClass.Industry2 forKey:@"Industry2"];
-
-    [dict setValue:postJob_ModelClass.LocationCity forKey:@"LocationCity"];
-    [dict setValue:postJob_ModelClass.LocationState forKey:@"LocationState"];
-    [dict setValue:postJob_ModelClass.LocationCountry forKey:@"LocationCountry"];
+    @try
+    {
+        NSString *strYes = @"1";
+        if (_obj_myJob.IsJobApplied)
+        {
+            strYes = @"0";
+        }
+        showHUD_with_Title(@"Please wait");
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token,
+                                    @"JobID":_obj_myJob.JobID,
+                                    @"Status":strYes};
+        parser = [[JSONParser alloc]initWith_withURL:Web_JOB_APPLY withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(applyNowSuccessful:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
     
-    [dict setValue:postJob_ModelClass.ExperienceLevel forKey:@"ExperienceLevel"];
-    [dict setValue:postJob_ModelClass.Responsibilities forKey:@"Responsibilities"];
-    [dict setValue:postJob_ModelClass.URL forKey:@"JobURL"];
-    
-    [dict setValue:postJob_ModelClass.EmployerIntroduction forKey:@"EmployerIntroduction"];
-    [dict setValue:postJob_ModelClass.Qualifications forKey:@"Qualifications"];
-
-    [dict setObject:postJob_ModelClass.arrSkills forKey:@"Skills"];
-    return dict;
 }
--(void)updateModelList
+-(void)applyNowSuccessful:(id)objResponse
 {
-    _obj_JobListModel.Title = postJob_ModelClass.Title;
-    _obj_JobListModel.Company = postJob_ModelClass.Company;
-    _obj_JobListModel.Industry = postJob_ModelClass.Industry;
-    _obj_JobListModel.Industry2 = postJob_ModelClass.Industry2;
-
-    _obj_JobListModel.LocationCity = postJob_ModelClass.LocationCity;
-    _obj_JobListModel.LocationState = postJob_ModelClass.LocationState;
-    _obj_JobListModel.LocationCountry = postJob_ModelClass.LocationCountry;
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+        return;
+    }
     
-    _obj_JobListModel.ExperienceLevel = postJob_ModelClass.ExperienceLevel;
-    _obj_JobListModel.Responsibilities = postJob_ModelClass.Responsibilities;
-    _obj_JobListModel.URL = postJob_ModelClass.URL;
+    if ([objResponse objectForKey:kURLFail])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
+    else if([objResponse objectForKey:@"ApplyToJobResult"])
+    {
+        /*--- Save data here ---*/
+        tblView.alpha = 1.0;
+        BOOL isJobList = [[objResponse valueForKeyPath:@"ApplyToJobResult.ResultStatus.Status"] boolValue];
+        if (isJobList)
+        {
+            @try
+            {
+                _obj_myJob.IsJobApplied = !_obj_myJob.IsJobApplied;
+                [self showViewContainer];;
+                
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+            hideHUD;
+        }
+        else
+        {
+            hideHUD;
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"ApplyToJobResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+        }
+    }
+    else
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
     
-    _obj_JobListModel.EmployerIntroduction = postJob_ModelClass.EmployerIntroduction;
-    _obj_JobListModel.Qualifications = postJob_ModelClass.Qualifications;
-
-    _obj_JobListModel.arrSkills = postJob_ModelClass.arrSkills;
-
 }
+
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

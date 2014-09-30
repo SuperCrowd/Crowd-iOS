@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 @protocol TypeSelectedDelegate<NSObject>
+-(void)updateContentOffsetWhenSelectTextfield;
+-(void)IndustrySelected:(NSString *)industryName;
+
+
 @end
 @interface C_TempVC : UIViewController
+@property(nonatomic,readwrite)BOOL isFirstTime;
 
+@property(nonatomic,strong)id <TypeSelectedDelegate> delegate;
 @end

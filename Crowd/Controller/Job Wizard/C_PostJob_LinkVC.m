@@ -37,6 +37,14 @@
 }
 -(void)done
 {
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        postJob_ModelClass.URL = [[NSString stringWithFormat:@"%@",txtLink.text]isNull];
+    }
+    else
+    {
+        [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtLink.text]isNull] forKey:@"JobURL"];
+    }
     Class mtyC = nil;;
     if ([is_PostJob_Edit_update isEqualToString:@"edit"])
     {

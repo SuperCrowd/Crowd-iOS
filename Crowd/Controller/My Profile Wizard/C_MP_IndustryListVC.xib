@@ -26,7 +26,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mLq-o6-EZ1">
+                <searchBar contentMode="redraw" placeholder="Search the Industry" translatesAutoresizingMaskIntoConstraints="NO" id="mLq-o6-EZ1">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="5KV-7K-xlY"/>

@@ -280,7 +280,6 @@
             [dictPostNewJob setValue:@"" forKey:@"Qualifications"];
             [dictPostNewJob setValue:@"" forKey:@"EmployerIntroduction"];
 
-            
             parser = [[JSONParser alloc]initWith_withURL:Web_POST_JOB withParam:dictPostNewJob withData:nil withType:kURLPost withSelector:@selector(getDataDone:) withObject:self];
         });
         
@@ -318,11 +317,13 @@
             hideHUD;
             postJob_ModelClass = [C_PostJobModel addPostJobModel:[objResponse valueForKeyPath:@"AddEditJobResult.JobDetailsWithSkills"]];
             
+            
+            
             C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
             UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objD];
             navvv.navigationBar.translucent = NO;
             [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:NO completion:^(BOOL finished) {
-                
+                [CommonMethods displayAlertwithTitle:@"Job Posted Successfully" withMessage:nil withViewController:objD];
             }];
             
         }

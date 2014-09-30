@@ -18,4 +18,12 @@
 #define Web_IS_USER_REGISTER_OR_UPDATE BASE_URL@"AddEditUserDetails"
 #define Web_POST_JOB BASE_URL@"AddEditJob"
 
+#define Web_JOB_LIST BASE_URL@"SearchJob"
+#define Web_JOB_DETAIL BASE_URL@"GetJobDetails"
+
+
+
+#define Web_JOB_FAVOURITE BASE_URL@"FavoriteJob"
+#define Web_JOB_APPLY BASE_URL@"ApplyToJob"
+
 #endif

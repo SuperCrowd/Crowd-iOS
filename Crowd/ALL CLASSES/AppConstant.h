@@ -134,7 +134,8 @@
 #define cellRecommendationProfilePreviewID @"idcellRecommendationProfile"
 #define cellEducationProfilePreviewID @"idcellEducationProfile"
 #define cellSkillsProfilePreviewID @"idcellSkillsProfile"
-
+#define cellFindJobListID @"idcellFindJobList"
+#define cellFindJobList_INFO_ID @"idcellFindJobList_Info"
 
 
 
