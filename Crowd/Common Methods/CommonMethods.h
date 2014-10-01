@@ -59,4 +59,6 @@ NSString *DocumentsDirectoryPath() ;
 +(NSArray *)getTagArray:(NSString *)strFinal;
 +(void)HideMyKeyboard:(MMDrawerController *)draw;
 
++ (BOOL) isValidateUrl: (NSString *)url;
+
 @end

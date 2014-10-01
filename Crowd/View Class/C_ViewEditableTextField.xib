@@ -22,7 +22,7 @@
                     <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="PlaceHolder" adjustsFontSizeToFit="NO" minimumFontSize="17" background="textfiled2" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mr3-LD-E1U" customClass="UITextFieldExtended">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="text" adjustsFontSizeToFit="NO" minimumFontSize="17" background="textfiled2" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mr3-LD-E1U" customClass="UITextFieldExtended">
                     <rect key="frame" x="75" y="2" width="215" height="51"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>

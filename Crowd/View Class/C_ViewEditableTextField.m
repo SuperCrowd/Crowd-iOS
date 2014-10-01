@@ -31,6 +31,7 @@
         
         _txtName = [[UITextFieldExtended alloc]initWithFrame:CGRectMake(53, 2, 215, 51)];
         _txtName.font = kFONT_THIN(30.0);
+        _txtName.placeholder = @"text";
         _txtName.background = [UIImage imageNamed:@"textfiled2"];
         _txtName.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self addSubview:_txtName];

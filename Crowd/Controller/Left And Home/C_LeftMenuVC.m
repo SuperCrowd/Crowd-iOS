@@ -14,6 +14,10 @@
 #import "C_PostJob_NameVC.h"
 #import "C_MyProfileVC.h"
 #import "C_FindAJobVC.h"
+#import "C_Find_CandidateVC.h"
+
+
+
 #define NAME @"NameKey"
 #define IMG @"ImageKey"
 typedef NS_ENUM(NSInteger, ChooseIndex)
@@ -107,7 +111,13 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     
 //    [self.mm_drawerController.centerViewController.view endEditing:YES];
 }
-
+-(IBAction)btnLogoutClicked:(id)sender
+{
+    [UserDefaults removeObjectForKey:PROFILE_PREVIEW];
+    [UserDefaults removeObjectForKey:USER_INFO];
+    [UserDefaults removeObjectForKey:APP_USER_INFO];
+    [appDel.navC popToRootViewControllerAnimated:YES];
+}
 #pragma mark - Table Delegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -134,6 +144,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
         
         btnIcon = [[UIButton alloc]initWithFrame:rectBtn];
         btnIcon.tag = 100;
+        btnIcon.userInteractionEnabled = NO;
         [cell.contentView addSubview:btnIcon];
         
         lblTitle = [[UILabel alloc]initWithFrame:rectLbl];
@@ -141,11 +152,9 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
         lblTitle.font = kFONT_THIN(15.0);
         lblTitle.tag = 101;
         [cell.contentView addSubview:lblTitle];
-        /*--- For Custom Cell ---*/
-        //[[NSBundle mainBundle]loadNibNamed:@"" owner:self options:nil];
-        //cell = myCell;
     }
 
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (selectedLeftControllerIndex == indexPath.row)
         cell.backgroundColor = RGBCOLOR_GREEN;
@@ -162,7 +171,6 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     
     if (indexPath.row == 0)
     {
-        
         lblTitle.frame = rectLBL_0;
         btnIcon.frame = rectBtn_0;
     }
@@ -210,7 +218,14 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
         }
             break;
         case FIND_A_CANDIDATE:
-            
+        {
+            C_Find_CandidateVC *objC = [[C_Find_CandidateVC alloc]initWithNibName:@"C_Find_CandidateVC" bundle:nil];
+            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
+            navvv.navigationBar.translucent = NO;
+            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                
+            }];
+        }
             break;
         case POST_A_JOB:
         {

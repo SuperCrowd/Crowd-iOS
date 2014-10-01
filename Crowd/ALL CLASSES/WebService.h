@@ -16,9 +16,14 @@
 //#define BASE_URL @"http://183.182.91.146/"
 #define Web_IS_USER_EXIST BASE_URL@"IsUserExists"
 #define Web_IS_USER_REGISTER_OR_UPDATE BASE_URL@"AddEditUserDetails"
+
+#define Web_GET_USER_DETAILS BASE_URL@"GetUserDetails"
+
 #define Web_POST_JOB BASE_URL@"AddEditJob"
 
 #define Web_JOB_LIST BASE_URL@"SearchJob"
+#define Web_CANDIDATE_LIST BASE_URL@"SearchCandidates"
+
 #define Web_JOB_DETAIL BASE_URL@"GetJobDetails"
 
 

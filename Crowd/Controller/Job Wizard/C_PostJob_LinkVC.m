@@ -37,31 +37,27 @@
 }
 -(void)done
 {
-    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+    if ([self checkValidation])
     {
-        postJob_ModelClass.URL = [[NSString stringWithFormat:@"%@",txtLink.text]isNull];
-    }
-    else
-    {
-        [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtLink.text]isNull] forKey:@"JobURL"];
-    }
-    Class mtyC = nil;;
-    if ([is_PostJob_Edit_update isEqualToString:@"edit"])
-    {
-        mtyC = [C_PostJob_PreviewVC class];
-    }
-    else
-    {
-        mtyC = [C_PostJob_UpdateVC class];
-    }
-    for (UIViewController *vc in self.navigationController.viewControllers)
-    {
-        if ([vc isKindOfClass:mtyC])
+        Class mtyC = nil;;
+        if ([is_PostJob_Edit_update isEqualToString:@"edit"])
         {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
+            mtyC = [C_PostJob_PreviewVC class];
+        }
+        else
+        {
+            mtyC = [C_PostJob_UpdateVC class];
+        }
+        for (UIViewController *vc in self.navigationController.viewControllers)
+        {
+            if ([vc isKindOfClass:mtyC])
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
         }
     }
+    
 }
 -(void)back
 {
@@ -75,29 +71,49 @@
 {
     [txtLink becomeFirstResponder];
 }
-
+-(BOOL)checkValidation
+{
+    NSString *strURL = [[NSString stringWithFormat:@"%@",txtLink.text]isNull];;
+    if (strURL.length > 0) {
+        if (![CommonMethods isValidateUrl:strURL])
+        {
+            showHUD_with_error(@"Please Enter Valid URL");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                hideHUD;
+            });
+            return NO;
+        }
+    }
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        postJob_ModelClass.URL = [[NSString stringWithFormat:@"%@",txtLink.text]isNull];
+    else
+        [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtLink.text]isNull] forKey:@"JobURL"];
+    return YES;
+}
 -(IBAction)btnNextClicked:(id)sender
 {
     @try
     {
-        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        if ([self checkValidation])
         {
-            postJob_ModelClass.URL = [[NSString stringWithFormat:@"%@",txtLink.text]isNull];
-            for (UIViewController *vc in self.navigationController.viewControllers)
+            if ([is_PostJob_Edit_update isEqualToString:@"update"])
             {
-                if ([vc isKindOfClass:[C_PostJob_UpdateVC class]])
+                for (UIViewController *vc in self.navigationController.viewControllers)
                 {
-                    [self.navigationController popToViewController:vc animated:YES];
-                    break;
+                    if ([vc isKindOfClass:[C_PostJob_UpdateVC class]])
+                    {
+                        [self.navigationController popToViewController:vc animated:YES];
+                        break;
+                    }
                 }
             }
+            else
+            {
+                C_PostJob_PreviewVC *obj = [[C_PostJob_PreviewVC alloc]initWithNibName:@"C_PostJob_PreviewVC" bundle:nil];
+                [self.navigationController pushViewController:obj animated:YES];
+            }
         }
-        else
-        {
-            [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtLink.text]isNull] forKey:@"JobURL"];
-            C_PostJob_PreviewVC *obj = [[C_PostJob_PreviewVC alloc]initWithNibName:@"C_PostJob_PreviewVC" bundle:nil];
-            [self.navigationController pushViewController:obj animated:YES];
-        }
+        
         
     }
     @catch (NSException *exception) {

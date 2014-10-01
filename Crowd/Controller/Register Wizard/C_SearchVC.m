@@ -130,35 +130,23 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *strText;
     if (tableView == self.searchDisplayController.searchResultsTableView)
-    {
-//        NSLog(@"%@",arrSearch[indexPath.section][@"value"][indexPath.row]);
+        strText = arrSearch[indexPath.section][@"value"][indexPath.row];
+    else
+        strText = arrContent[indexPath.section][@"value"][indexPath.row];
 
-        if (_isUpdate)
-        {
-            if ([self.delegate respondsToSelector:@selector(updateText:)])
-                [self.delegate updateText:arrSearch[indexPath.section][@"value"][indexPath.row]];
-        }
-        else
-        {
-            if ([self.delegate respondsToSelector:@selector(addText:)])
-                [self.delegate addText:arrSearch[indexPath.section][@"value"][indexPath.row]];
-        }
+    if (_isUpdate)
+    {
+        if ([self.delegate respondsToSelector:@selector(updateText:)])
+            [self.delegate updateText:strText];
     }
     else
     {
-//        NSLog(@"%@",arrContent[indexPath.section][@"value"][indexPath.row]);
-        if (_isUpdate)
-        {
-            if ([self.delegate respondsToSelector:@selector(updateText:)])
-                [self.delegate updateText:arrContent[indexPath.section][@"value"][indexPath.row]];
-        }
-        else
-        {
-            if ([self.delegate respondsToSelector:@selector(addText:)])
-                [self.delegate addText:arrContent[indexPath.section][@"value"][indexPath.row]];
-        }
+        if ([self.delegate respondsToSelector:@selector(addText:)])
+            [self.delegate addText:strText];
     }
+    
     [self dismissME];
 }
 #pragma mark -
@@ -167,30 +155,6 @@
 {
     [arrSearch removeAllObjects];
     arrSearch = [[self filterArrayUsingText:text] mutableCopy];
-    
-    /*
-    [arrSearch removeAllObjects];
-    for (int i = 0; i < [arrContent count]; i++)
-    {
-        NSMutableArray *temp = [[NSMutableArray alloc]init];
-        NSMutableArray *arrFind = arrContent[i][@"value"];
-        for (int j = 0; j < [arrFind count]; j++)
-        {
-            NSString *str = arrFind[j];
-            if ([str containsString:text])
-            {
-                [temp addObject:str];
-            }
-        }
-        
-        if ([temp count])
-        {
-            [arrSearch addObject:@{@"key":arrContent[i][@"key"],@"value":temp}];
-        }
-    }
-    NSLog(@"Search : %@",text);
-    NSLog(@"arrSearch : %@",arrSearch);
-     */
 }
 
 #pragma mark - Table Search Delegate

@@ -18,6 +18,9 @@
 
 #import "C_PostJobModel.h"
 #import "C_JobListModel.h"
+
+#import "C_WebVC.h"
+
 #define FIND_A_JOB @"FindAJob"
 
 #define MORE @"More Information"
@@ -244,7 +247,9 @@
 #pragma mark - IBAction Method
 -(void)btnMoreClicked
 {
-    [CommonMethods displayAlertwithTitle:@"More Under Construction" withMessage:nil withViewController:self];
+    C_WebVC *obj = [[C_WebVC alloc]initWithNibName:@"C_WebVC" bundle:nil];
+    obj.strURL = postJob_ModelClass.URL;
+    [self.navigationController pushViewController:obj animated:YES];
 }
 -(IBAction)btnEditClicked:(id)sender
 {
@@ -442,13 +447,16 @@
         if (isNewJobPostSuccess)
         {
             
-            hideHUD;
+            //hideHUD;
             if ([_strComingFrom isEqualToString:FIND_A_JOB])
             {
                 [self updateModelList];
             }
-            [CommonMethods displayAlertwithTitle:@"Job Updated" withMessage:nil withViewController:self];
-
+            showHUD_with_Success(@"Job Updated Successfully");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                hideHUD;
+            });
+            
         }
         else
         {

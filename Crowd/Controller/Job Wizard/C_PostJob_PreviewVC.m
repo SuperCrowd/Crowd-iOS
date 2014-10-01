@@ -314,7 +314,7 @@
         BOOL isNewJobPostSuccess = [[objResponse valueForKeyPath:@"AddEditJobResult.ResultStatus.Status"] boolValue];
         if (isNewJobPostSuccess)
         {
-            hideHUD;
+            //hideHUD;
             postJob_ModelClass = [C_PostJobModel addPostJobModel:[objResponse valueForKeyPath:@"AddEditJobResult.JobDetailsWithSkills"]];
             
             
@@ -323,7 +323,10 @@
             UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objD];
             navvv.navigationBar.translucent = NO;
             [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:NO completion:^(BOOL finished) {
-                [CommonMethods displayAlertwithTitle:@"Job Posted Successfully" withMessage:nil withViewController:objD];
+                showHUD_with_Success(@"Job Posted Successfully");
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    hideHUD;
+                });
             }];
             
         }

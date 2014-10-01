@@ -224,7 +224,6 @@
         }
         /*--- Check now if user already exist or not ---*/
         
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed to fetch current user %@", error);
         showHUD_with_error(@"Unknown Server Error. Please try again.");

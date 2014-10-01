@@ -13,6 +13,8 @@
 #import "C_Header_ProfilePreview.h"
 #import "C_Cell_SkillsProfile.h"
 
+#import "C_WebVC.h"
+
 #define MORE @"More Information"
 #define ROLES @"Roles and Responsibilities"
 #define SKILLS @"Skills Requirements"
@@ -213,7 +215,9 @@
 #pragma mark - IBAction Method
 -(void)btnMoreClicked
 {
-    [CommonMethods displayAlertwithTitle:@"More Under Construction" withMessage:nil withViewController:self];
+    C_WebVC *obj = [[C_WebVC alloc]initWithNibName:@"C_WebVC" bundle:nil];
+    obj.strURL = _obj_myJob.URL;
+    [self.navigationController pushViewController:obj animated:YES];
 }
 -(IBAction)btnFavouriteClicked:(id)sender
 {
@@ -363,7 +367,6 @@
         [mySkillCell.tagList setCornerRadius:4.0f];
         [mySkillCell.tagList setHighlightedBackgroundColor:RGBCOLOR_DARK_BROWN];
         [mySkillCell.tagList setTextColor:[UIColor blackColor]];
-        //        [cell.tagList setBorderColor:RGBCOLOR_DARK_BROWN.CGColor];
         [mySkillCell.tagList setTagBackgroundColor:RGBCOLOR_DARK_BROWN];
         [mySkillCell.tagList setBorderWidth:0.0f];
         [mySkillCell.tagList setTextShadowOffset:CGSizeMake(0, 0)];

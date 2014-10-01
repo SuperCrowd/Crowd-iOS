@@ -137,7 +137,8 @@
 #define cellFindJobListID @"idcellFindJobList"
 #define cellFindJobList_INFO_ID @"idcellFindJobList_Info"
 
-
+#define cellFindCandidate @"idcellFindCandidate"
+#define cellFindCandidate_INFO_ID @"idcellFindCandidate_Info"
 
 /*-----------------------------------------------------------------------------*/
 
@@ -155,7 +156,7 @@ CGFloat animatedDistance;
 
 #define showHUD_with_Title(status) [SVProgressHUD showWithStatus:status];
 #define showHUD_with_error(errorTitle) [SVProgressHUD showErrorWithStatus:errorTitle];
-
+#define showHUD_with_Success(successTitle) [SVProgressHUD showSuccessWithStatus:successTitle];
 /*-----------------------------------------------------------------------------*/
 
 #define text_InternetCheck @"Please check your internet connection"

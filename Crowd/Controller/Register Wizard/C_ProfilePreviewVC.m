@@ -67,7 +67,6 @@
     self.title = @"Profile";
     self.navigationItem.hidesBackButton = YES;
     
-#warning - Change this flag to done when press start on crowd
     [UserDefaults setValue:@"yes" forKey:PROFILE_PREVIEW];
     [UserDefaults synchronize];
 
@@ -186,12 +185,7 @@
 }
 #pragma mark - IBAction Methods
 -(IBAction)btnStartUsingCrowdClicked:(id)sender
-{
-#warning - Change this flag to done when press start on crowd
-    [UserDefaults setValue:@"yes" forKey:PROFILE_PREVIEW];
-    [UserDefaults synchronize];
-    
-    
+{    
     [self RegisterNOW];
 }
 -(IBAction)btnEditClicked:(id)sender
