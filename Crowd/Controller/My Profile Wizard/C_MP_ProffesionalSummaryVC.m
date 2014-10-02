@@ -34,11 +34,11 @@
 }
 -(void)doneClicked
 {
-    if ([_obj_ProfileUpdate.Summary isEqualToString:@""])
-    {
-        [CommonMethods displayAlertwithTitle:@"Please add summary" withMessage:nil withViewController:self];
-        return;
-    }
+//    if ([_obj_ProfileUpdate.Summary isEqualToString:@""])
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please add summary" withMessage:nil withViewController:self];
+//        return;
+//    }
     UpdateProfile *profile = [[UpdateProfile alloc]init];
     [profile updateProfile_WithModel:_obj_ProfileUpdate withSuccessBlock:^{
         for (UIViewController *vc in self.navigationController.viewControllers)

@@ -67,15 +67,15 @@
 }
 -(IBAction)btnNextClicked:(id)sender
 {
-    if ([myUserModel.summary isEqualToString:@""])
-    {
-        [CommonMethods displayAlertwithTitle:@"Please add summary" withMessage:nil withViewController:self];
-    }
-    else
-    {
+//    if ([myUserModel.summary isEqualToString:@""])
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please add summary" withMessage:nil withViewController:self];
+//    }
+//    else
+//    {
         C_ProfilePreviewVC *obj = [[C_ProfilePreviewVC alloc]initWithNibName:@"C_ProfilePreviewVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:YES];
-    }
+//    }
 }
 #pragma mark - Text View Delegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText

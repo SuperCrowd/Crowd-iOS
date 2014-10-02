@@ -83,13 +83,10 @@
     else
     {
         if ([is_PostJob_Edit_update isEqualToString:@"update"])
-        {
             postJob_ModelClass.Title = [[NSString stringWithFormat:@"%@",txtPosition.text]isNull];
-        }
         else
-        {
             [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtPosition.text]isNull] forKey:@"Title"];
-        }
+        
         return YES;
     }
 }
@@ -97,17 +94,8 @@
 {
     if ([self checkValidation])
     {
-        @try
-        {
-            
-            C_PostJob_LocationVC *objC = [[C_PostJob_LocationVC alloc]initWithNibName:@"C_PostJob_LocationVC" bundle:nil];
-            [self.navigationController pushViewController:objC animated:YES];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"%@",exception.description);
-        }
-        @finally {
-        }
+        C_PostJob_LocationVC *objC = [[C_PostJob_LocationVC alloc]initWithNibName:@"C_PostJob_LocationVC" bundle:nil];
+        [self.navigationController pushViewController:objC animated:YES];
     }
 }
 

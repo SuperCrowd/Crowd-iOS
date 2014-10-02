@@ -88,13 +88,13 @@
 #pragma mark - IBAction Method
 -(BOOL)checkValidation
 {
-    NSPredicate *preddegree = [NSPredicate predicateWithFormat:@"(self.Degree == nil) OR (self.Degree == '')"];
-    NSArray *arrcheckdegree = [_obj_ProfileUpdate.arr_EducationALL filteredArrayUsingPredicate:preddegree];;
-    if (arrcheckdegree.count>0)
-    {
-        [CommonMethods displayAlertwithTitle:@"Please add Degree" withMessage:nil withViewController:self];
-        return NO;
-    }
+//    NSPredicate *preddegree = [NSPredicate predicateWithFormat:@"(self.Degree == nil) OR (self.Degree == '')"];
+//    NSArray *arrcheckdegree = [_obj_ProfileUpdate.arr_EducationALL filteredArrayUsingPredicate:preddegree];;
+//    if (arrcheckdegree.count>0)
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please add Degree" withMessage:nil withViewController:self];
+//        return NO;
+//    }
     
     
     NSPredicate *predStartYear = [NSPredicate predicateWithFormat:@"(self.StartYear == nil) OR (self.StartYear == '')"];

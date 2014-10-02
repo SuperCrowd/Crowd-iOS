@@ -127,7 +127,6 @@
     NSLog(@"Response > %@",objResponse);
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
-
         //isCallingService = NO;
         hideHUD;
         [self showAlert_withTitle:@"Please Try Again"];
@@ -154,7 +153,6 @@
             }
             __weak UITableView *weaktbl = (UITableView *)tblView;
             [self setData:[objResponse valueForKeyPath:@"SearchCandidatesResult.UserDetail"] withHandler:^{
-                
                 hideHUD;
                 weaktbl.alpha = 1.0;
                 [weaktbl reloadData];
@@ -200,7 +198,6 @@
             }
             @finally {
             }
-            
         }
         
         compilation();
@@ -244,11 +241,11 @@
                                        }];
         [alert addAction:CancelAction];
         
-        UIAlertAction* LeaveAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
                                       {
                                           [self getData];
                                       }];
-        [alert addAction:LeaveAction];
+        [alert addAction:okAction];
         
         
         [self presentViewController:alert animated:YES completion:nil];
@@ -390,24 +387,10 @@
     [tblView reloadData];
 }
 #pragma mark - Extra
-
-
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

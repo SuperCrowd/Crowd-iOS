@@ -43,18 +43,16 @@
     arrContent = [[NSMutableArray alloc]init];
     arrSearch = [[NSMutableArray alloc]init];
     
-    
     tblView.sectionIndexColor = RGBCOLOR_GREEN ;
-
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor whiteColor];
     self.searchDisplayController.searchResultsTableView.separatorStyle = tblView.separatorStyle;
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     arrContent = [[NSMutableArray alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IndustryList" ofType:@"plist"]];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"key" ascending:YES];
     arrContent = [[arrContent sortedArrayUsingDescriptors:@[sort]] mutableCopy];
-    //    NSLog(@"%@",arrContent);
     [tblView reloadData];
     
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
@@ -172,13 +170,13 @@
         
         C_PostJob_IndustryVC *obj = [[C_PostJob_IndustryVC alloc]initWithNibName:@"C_PostJob_IndustryVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:YES];
-        
     }
     else if (_isAdd_2)
     {
         // add industry 2 and popview
         if ([self.delegate respondsToSelector:@selector(addText:)])
             [self.delegate addText:strText];
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
@@ -235,15 +233,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

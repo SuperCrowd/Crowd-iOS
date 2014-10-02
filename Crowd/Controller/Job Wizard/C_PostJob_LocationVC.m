@@ -134,7 +134,6 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     [self.view endEditing:YES];
     
     NSString *strCity = [viewCity.txtName.text isNull];
-    //NSString *strState = [viewState.txtName.text isNull];
     NSString *strCountry= [viewCountry.txtName.text isNull];
     if ([strCity isEqualToString:@""])
     {
@@ -165,26 +164,14 @@ typedef NS_ENUM(NSInteger, btnEdit) {
 }
 -(IBAction)btnNextClicked:(id)sender
 {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
     if ([self checkValidation])
     {
-        @try
-        {
-            C_PostJob_ExperienceVC *obj = [[C_PostJob_ExperienceVC alloc]initWithNibName:@"C_PostJob_ExperienceVC" bundle:nil];
-            [self.navigationController pushViewController:obj animated:YES];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"%@",exception.description);
-        }
-        @finally {
-        }
-        
-
+        C_PostJob_ExperienceVC *obj = [[C_PostJob_ExperienceVC alloc]initWithNibName:@"C_PostJob_ExperienceVC" bundle:nil];
+        [self.navigationController pushViewController:obj animated:YES];
     }
 }
 -(void)btnEditClicked:(id)sender
 {
-    NSLog(@"btn tapped");
     UIButton *btn = (UIButton *)sender;
     btnEdit btnSelected = btn.tag;
     switch (btnSelected) {
@@ -226,17 +213,6 @@ typedef NS_ENUM(NSInteger, btnEdit) {
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

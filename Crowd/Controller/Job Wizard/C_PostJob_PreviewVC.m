@@ -176,7 +176,6 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     C_Header_ProfilePreview *myHeader = (C_Header_ProfilePreview *)[tblView dequeueReusableHeaderFooterViewWithIdentifier:cellHeaderProfilePreviewID];
-    //myHeader.contentView.backgroundColor = [UIColor redColor];
     myHeader.lblHeader.text = arrSectionHeader[section];
     myHeader.btnEditHeader.tag = section;
     [myHeader.btnEditHeader addTarget:self action:@selector(btnEditHeaderClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -196,12 +195,13 @@
     }
     else
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in dictPostNewJob[@"Skills"])
-        {
-            [arrSkills addObject:mySkills[@"Skill"]];
-        }
-        
+//        NSMutableArray *arrSkills = [NSMutableArray array];
+//        for (NSDictionary *mySkills in dictPostNewJob[@"Skills"])
+//        {
+//            [arrSkills addObject:mySkills[@"Skill"]];
+//        }
+        NSArray *arrSkills = [dictPostNewJob valueForKeyPath:@"Skills.Skill"];
+
         DWTagList *tagList = [[DWTagList alloc]initWithFrame:CGRectMake(10.0,12.0,screenSize.size.width - 20.0 -10.0 , 21.0)];
         [tagList setTags:arrSkills];
         [tagList setAutomaticResize:YES];
@@ -240,12 +240,7 @@
     }
     else
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in dictPostNewJob[@"Skills"])
-        {
-            [arrSkills addObject:mySkills[@"Skill"]];
-        }
-        
+        NSArray *arrSkills = [dictPostNewJob valueForKeyPath:@"Skills.Skill"];
         C_Cell_SkillsProfile *mySkillCell = (C_Cell_SkillsProfile *)[tblView dequeueReusableCellWithIdentifier:cellSkillsProfilePreviewID];
         
         [mySkillCell.tagList setTags:arrSkills];

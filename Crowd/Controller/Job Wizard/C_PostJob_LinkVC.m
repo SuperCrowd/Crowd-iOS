@@ -134,30 +134,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//{
-//    "UserID":"3",
-//    "UserToken":"Dbr/k5trWmO3XRTk3AWfX90E9jwpoh59w/EaiU9df/OkFa6bxluaKsQmBtKDNDHbBpplmFe2Zo06m6TOpxxDc0mhb1DzDq0EzXjBFsfQRVTewDXwdZZ5mxNdEp4HEdrIlx43DPPRh+5uQzOzP8bob7ckkNvE7yB9HbeZVS5I1BhjHA3/8Ac2Qf0+sjkHb8mKk/bSO1NammUBSEHHCQ0u3MNYOiR1PU+Uc1gRIkGm4CmEcYZVEdD1D1i9i26QwQSqMSs/hBy6V9wgcbrApOiKrRXOcQDv7r93",
-//    "JobID": "9",
-//    "Company": "Sparsh",
-//    "Industry": "It",
-//    "Industry2": "IT",
-//    "Title": "Tatvasoft",
-//    "LocationCity": "Ahmedabad",
-//    "LocationState": "Gujarat",
-//    "LocationCountry": "India",
-//    "ExperienceLevel": "",
-//    "Responsibilities": "r1",
-//    "Qualifications": "",
-//    "EmployerIntroduction ": "",
-//    "JobURL": "testURL",
-//    "Skills": [
-//                   {
-//                         "Skill": ".NET"
-//                       },
-//                   {
-//                         "Skill": "SQL"
-//                       }    
-//                 ]
-//}
-//}
+
 @end

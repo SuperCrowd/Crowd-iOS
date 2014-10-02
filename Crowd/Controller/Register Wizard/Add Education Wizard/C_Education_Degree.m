@@ -41,12 +41,12 @@
 -(IBAction)btnDoneClicked:(id)sender
 {
     NSString *strT = [txtV.text isNull];
-    if ([strT isEqualToString:@""])
-    {
-        [CommonMethods displayAlertwithTitle:[NSString stringWithFormat:@"Please Enter your degree"] withMessage:nil withViewController:self];
-    }
-    else
-    {
+//    if ([strT isEqualToString:@""])
+//    {
+//        [CommonMethods displayAlertwithTitle:[NSString stringWithFormat:@"Please Enter your degree"] withMessage:nil withViewController:self];
+//    }
+//    else
+//    {
         [self.view endEditing:YES];
 
         [dictAddNewEducation setValue:strT forKey:@"degree"];
@@ -54,7 +54,7 @@
         C_Education_Time *obj = [[C_Education_Time alloc]initWithNibName:@"C_Education_Time" bundle:nil];
         obj.obj_ProfileUpdate = _obj_ProfileUpdate;
         [self.navigationController pushViewController:obj animated:YES];
-    }
+//    }
 }
 
 #pragma mark - Text View Delegate

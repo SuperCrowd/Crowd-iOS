@@ -15,7 +15,6 @@
 #import "C_PostJob_IndustryListingVC.h"
 #import "C_PostJobModel.h"
 
-
 @interface C_PostJob_NameVC ()<UITextFieldDelegate>
 {
     __weak IBOutlet UITextFieldExtended *txtName;
@@ -51,7 +50,7 @@
     }
 
     /*--- Hide Center View Keyboard---*/
-    [CommonMethods HideMyKeyboard:self.mm_drawerController];
+    //[CommonMethods HideMyKeyboard:self.mm_drawerController];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -80,6 +79,11 @@
 -(void)btnMenuClicked:(id)sender
 {
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    [txtName resignFirstResponder];
+}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [txtName resignFirstResponder];
 }
 #pragma mark - IBAction
 -(IBAction)btnEditClicked:(UIButton *)btnEdit

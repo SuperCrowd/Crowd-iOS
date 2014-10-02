@@ -103,13 +103,9 @@
             tblView.alpha = 1.0;
             [self showData];
             if ([postJob_ModelClass.URL isEqualToString:@""])
-            {
                 arrSectionHeader = @[ROLES,SKILLS];
-            }
             else
-            {
                 arrSectionHeader = @[MORE,ROLES,SKILLS];
-            }
             [tblView reloadData];
         }
     }
@@ -119,13 +115,9 @@
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
         [self showData];
         if ([postJob_ModelClass.URL isEqualToString:@""])
-        {
             arrSectionHeader = @[ROLES,SKILLS];
-        }
         else
-        {
             arrSectionHeader = @[MORE,ROLES,SKILLS];
-        }
         [tblView reloadData];
     }
     
@@ -178,7 +170,6 @@
     }
     @finally {
     }
-    
 }
 -(void)getDataSuccessfull:(id)objResponse
 {
@@ -200,8 +191,6 @@
     {
         /*--- Save data here ---*/
         tblView.alpha = 1.0;
-        
-        
         BOOL isJobList = [[objResponse valueForKeyPath:@"GetJobDetailsResult.ResultStatus.Status"] boolValue];
         if (isJobList)
         {
@@ -211,14 +200,9 @@
                 //_obj_myJob = [C_JobListModel updateModel:_obj_myJob withDict:[objResponse objectForKey:@"GetJobDetailsResult"] ];
                 
                 if ([postJob_ModelClass.URL isEqualToString:@""])
-                {
                     arrSectionHeader = @[ROLES,SKILLS];
-                }
                 else
-                {
                     arrSectionHeader = @[MORE,ROLES,SKILLS];
-                }
-                
             }
             @catch (NSException *exception) {
                 NSLog(@"%@",exception.description);
@@ -283,9 +267,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([arrSectionHeader[section] isEqualToString:MORE])
-    {
         return 0;
-    }
     return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -312,7 +294,6 @@
     }
 
     C_Header_ProfilePreview *myHeader = (C_Header_ProfilePreview *)[tblView dequeueReusableHeaderFooterViewWithIdentifier:cellHeaderProfilePreviewID];
-    //myHeader.contentView.backgroundColor = [UIColor redColor];
     myHeader.lblHeader.text = arrSectionHeader[section];
     myHeader.btnEditHeader.tag = section;
     [myHeader.btnEditHeader addTarget:self action:@selector(btnEditHeaderClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -332,12 +313,7 @@
     }
     else
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in postJob_ModelClass.arrSkills)
-        {
-            [arrSkills addObject:mySkills[@"Skill"]];
-        }
-        
+        NSArray *arrSkills = [postJob_ModelClass.arrSkills valueForKey:@"Skill"];
         DWTagList *tagList = [[DWTagList alloc]initWithFrame:CGRectMake(10.0,12.0,screenSize.size.width - 20.0 -10.0 , 21.0)];
         [tagList setTags:arrSkills];
         [tagList setAutomaticResize:YES];
@@ -376,12 +352,7 @@
     }
     else
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in postJob_ModelClass.arrSkills)
-        {
-            [arrSkills addObject:mySkills[@"Skill"]];
-        }
-        
+        NSArray *arrSkills = [postJob_ModelClass.arrSkills valueForKey:@"Skill"];
         C_Cell_SkillsProfile *mySkillCell = (C_Cell_SkillsProfile *)[tblView dequeueReusableCellWithIdentifier:cellSkillsProfilePreviewID];
         
         [mySkillCell.tagList setTags:arrSkills];
@@ -389,7 +360,6 @@
         [mySkillCell.tagList setCornerRadius:4.0f];
         [mySkillCell.tagList setHighlightedBackgroundColor:RGBCOLOR_DARK_BROWN];
         [mySkillCell.tagList setTextColor:[UIColor blackColor]];
-        //        [cell.tagList setBorderColor:RGBCOLOR_DARK_BROWN.CGColor];
         [mySkillCell.tagList setTagBackgroundColor:RGBCOLOR_DARK_BROWN];
         [mySkillCell.tagList setBorderWidth:0.0f];
         [mySkillCell.tagList setTextShadowOffset:CGSizeMake(0, 0)];

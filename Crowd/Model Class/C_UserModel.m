@@ -204,7 +204,7 @@
     @try
     {
         /*--- education ---*/
-        myModel.arrEducationUser = (dictLinkedIn[@"educations"])?[self getArrEducationUser_withDict:dictLinkedIn]:nil;
+        myModel.arrEducationUser = (dictLinkedIn[@"educations"])?[self getArrEducationUser_withDict:dictLinkedIn]:[NSMutableArray array];
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);
@@ -216,7 +216,7 @@
     @try
     {
         /*--- position ---*/
-        myModel.arrPositionUser = (dictLinkedIn[@"positions"])?[self getArrPositionUser_withDict:dictLinkedIn]:nil;
+        myModel.arrPositionUser = (dictLinkedIn[@"positions"])?[self getArrPositionUser_withDict:dictLinkedIn]:[NSMutableArray array];
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);
@@ -227,7 +227,7 @@
     @try
     {
         /*--- recomendation ---*/
-        myModel.arrRecommendationsUser = (dictLinkedIn[@"recommendationsReceived"])?[self getArrRecommendationUser_withDict:dictLinkedIn]:nil;
+        myModel.arrRecommendationsUser = (dictLinkedIn[@"recommendationsReceived"])?[self getArrRecommendationUser_withDict:dictLinkedIn]:[NSMutableArray array];
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);
@@ -239,7 +239,7 @@
     @try
     {
         /*--- skills ---*/
-        myModel.arrSkillsUser = (dictLinkedIn[@"skills"])?[self getArrSkillsUser_withDict:dictLinkedIn]:nil;
+        myModel.arrSkillsUser = (dictLinkedIn[@"skills"])?[self getArrSkillsUser_withDict:dictLinkedIn]:[NSMutableArray array];
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);

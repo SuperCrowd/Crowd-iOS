@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Industry";
-    tblView.sectionIndexColor = RGBCOLOR_GREEN ;
     
     /*--- back bar button ---*/
     UIImage *buttonImage = [UIImage imageNamed:@"back_icon"];
@@ -35,27 +34,23 @@
     UIBarButtonItem *retVal = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem =  retVal;
     
-    arrContent = [[NSMutableArray alloc]init];
-    arrSearch = [[NSMutableArray alloc]init];
-    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor whiteColor];
     self.searchDisplayController.searchResultsTableView.separatorStyle = tblView.separatorStyle;
     self.searchDisplayController.searchResultsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    arrContent = [[NSMutableArray alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IndustryList" ofType:@"plist"]];
     
+    arrContent = [[NSMutableArray alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IndustryList" ofType:@"plist"]];
+    arrSearch = [[NSMutableArray alloc]init];
+
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"key" ascending:YES];
     arrContent = [[arrContent sortedArrayUsingDescriptors:@[sort]] mutableCopy];
-    //    NSLog(@"%@",arrContent);
+    tblView.sectionIndexColor = RGBCOLOR_GREEN ;
     [tblView reloadData];
 }
 -(void)popME
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
-
 #pragma mark - Table Delegate
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
@@ -125,7 +120,6 @@
     else
         strText = arrContent[indexPath.section][@"value"][indexPath.row];
     
-    
     if (_isUpdate)
     {
         if ([self.delegate respondsToSelector:@selector(updateText:)])
@@ -152,12 +146,6 @@
     [self searchText:searchString];
     return YES;
 }
-#pragma mark - Extra
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (NSArray *)filterArrayUsingText:(NSString *)text
 {
     NSMutableArray *filteredWordArray = [NSMutableArray array];
@@ -183,5 +171,8 @@
     
     return filteredArray.count == 0 ? nil : filteredArray;
 }
-
+#pragma mark - Extra
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 @end

@@ -165,7 +165,6 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     }
     else
     {
-        //        constraint_scrollHeight.constant = 0.0;
         [textField resignFirstResponder];
     }
     return YES;

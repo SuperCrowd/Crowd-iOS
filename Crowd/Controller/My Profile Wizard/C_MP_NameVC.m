@@ -77,7 +77,6 @@ typedef NS_ENUM(NSInteger, btnTapped){
     viewFirstName.txtName.delegate = self;
     viewLastName.txtName.delegate = self;
     
-    
     viewFirstName.btnEdit.tag = 1.0;
     viewLastName.btnEdit.tag = 2.0;
     
@@ -110,7 +109,6 @@ typedef NS_ENUM(NSInteger, btnTapped){
     {
         [CommonMethods displayAlertwithTitle:@"Please enter last name" withMessage:nil withViewController:self];
         return NO;
-        
     }
     else
     {

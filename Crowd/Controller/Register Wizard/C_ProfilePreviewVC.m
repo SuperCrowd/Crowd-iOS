@@ -97,13 +97,12 @@
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_EducationProfile" bundle:nil] forCellReuseIdentifier:cellEducationProfilePreviewID];
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_SkillsProfile" bundle:nil] forCellReuseIdentifier:cellSkillsProfilePreviewID];
 
-    /*--- Now show Table Data ---*/
-    [self setupTableViewData];
-
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    /*--- Now show Table Data ---*/
+    [self setupTableViewData];
     [self showData];
     [tblView reloadData];
 }
@@ -123,24 +122,49 @@
 {
     /*--- Show Header Data ---*/
     lbl_Name.text = [[NSString stringWithFormat:@"%@ %@",myUserModel.firstName,myUserModel.lastName] isNull];
-    Positions *myRecentPosition = myUserModel.arrPositionUser[0];
-    lbl_JobTitle.text = myRecentPosition.title;
-    lbl_Company.text = myRecentPosition.company_name;
+    
+    if (myUserModel.arrPositionUser.count > 0)
+    {
+        Positions *myRecentPosition = myUserModel.arrPositionUser[0];
+        lbl_JobTitle.text = myRecentPosition.title;
+        lbl_Company.text = myRecentPosition.company_name;
+        NSMutableArray *arrLoc = [[NSMutableArray alloc]init];
+        if (![[myRecentPosition.location_city isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentPosition.location_city isNull]];
+        if (![[myRecentPosition.location_state isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentPosition.location_state isNull]];
+        if (![[myRecentPosition.location_country isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentPosition.location_country isNull]];
+        @try
+        {
+            NSString *strLoc = [arrLoc componentsJoinedByString:@","];
+            lbl_Location.text = [strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+    }
+    else
+    {
+        lbl_JobTitle.text = @"";
+        lbl_Company.text = @"";
+        lbl_Location.text = @"";
+    }
     
     
-    NSMutableArray *arrLoc = [[NSMutableArray alloc]init];
-    if (![[myRecentPosition.location_city isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentPosition.location_city isNull]];
-    if (![[myRecentPosition.location_state isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentPosition.location_state isNull]];
-    if (![[myRecentPosition.location_country isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentPosition.location_country isNull]];
+   
     
-    NSString *strLoc = [arrLoc componentsJoinedByString:@","];
-    lbl_Location.text = [strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "];
     
-    Education *myRecentEducation = myUserModel.arrEducationUser[0];
-    lbl_School.text = myRecentEducation.schoolName;
+    
+    
+    if (myUserModel.arrEducationUser.count > 0) {
+        Education *myRecentEducation = myUserModel.arrEducationUser[0];
+        lbl_School.text = myRecentEducation.schoolName;
+    }
+    else
+        lbl_School.text = @"";
     
     if (myUserModel.imgUserPic != nil)
         imgVUserPic.image = myUserModel.imgUserPic;
@@ -160,6 +184,7 @@
 //    EDUCATION @"Education"
 //    SKILLS @"Skills"
 
+    [arrSectionHeader removeAllObjects];
     if (![myUserModel.summary isEqualToString:@""])
     {
         [arrSectionHeader addObject:PROFFESSIONAL_SUMMARY];

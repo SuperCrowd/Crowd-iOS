@@ -83,7 +83,6 @@ typedef NS_ENUM(NSInteger, btnExperience)
     else
     {
         [dictPostNewJob setValue:[NSString stringWithFormat:@"%ld",(long)btnExp.tag] forKey:@"ExperienceLevel"];
-
     }
     C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
     [self.navigationController pushViewController:obj animated:YES];
@@ -95,14 +94,5 @@ typedef NS_ENUM(NSInteger, btnExperience)
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -115,7 +115,11 @@
         UIButton *btnAddIndustry = [[UIButton alloc]initWithFrame:CGRectMake(65.0, yAxis+heightV+20.0, screenSize.size.width-130.0, 30)];
         btnAddIndustry.tag = 51;
         btnAddIndustry.layer.cornerRadius = 10.0;
-        [btnAddIndustry setTitle:@"Add Another Industry" forState:UIControlStateNormal];
+        if ([myUserModel.industry isEqualToString:@""])
+            [btnAddIndustry setTitle:@"Add Industry" forState:UIControlStateNormal];
+        else
+            [btnAddIndustry setTitle:@"Add Another Industry" forState:UIControlStateNormal];
+        
         [btnAddIndustry.titleLabel setFont:kFONT_LIGHT(15.0)];
 
         [btnAddIndustry setBackgroundImage:[UIImage imageNamed:@"btnGreenBG"] forState:UIControlStateNormal];
@@ -188,29 +192,63 @@
 -(void)addText:(NSString *)strText
 {
     goToNext = YES;
-    UIButton *btnAddAnotherIndustry = (UIButton *)[scrlV viewWithTag:51];
-    
-    C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, btnAddAnotherIndustry.frame.origin.y, screenSize.size.width, 55.0)];
-    objT.tag = 2;
-    
-    /*--- text field ---*/
-    objT.txtName.delegate = self;
-    objT.txtName.adjustsFontSizeToFitWidth = YES;
-    objT.txtName.text = strText;
-    
-    /*--- button that user cant touch textfield ---*/
-    objT.btnTextField.alpha = 1.0;
-    [objT.btnTextField addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    /*--- btn Edit ---*/
-    [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    /*--- set label text to blank ---*/
-    objT.lblName.text = @"";
-    
-    [scrlV addSubview:objT];
-    [btnAddAnotherIndustry removeFromSuperview];
+    C_ViewEditableTextField *industry1 = (C_ViewEditableTextField *)[scrlV viewWithTag:1];
+    if (!industry1) {
+        int yAxis = 150;
+        int heightV = 55;
+
+        goToNext = YES;
+        C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis, screenSize.size.width, heightV)];
+        objT.tag = 1;
+        
+        /*--- text field ---*/
+        objT.txtName.delegate = self;
+        objT.txtName.tag = 0;
+        objT.txtName.adjustsFontSizeToFitWidth = YES;
+        objT.txtName.text = strText;
+        
+        /*--- button that user cant touch textfield ---*/
+        objT.btnTextField.alpha = 1.0;
+        [objT.btnTextField addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        /*--- btn Edit ---*/
+        [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        /*--- set label text to blank ---*/
+        objT.lblName.text = @"";
+        
+        [scrlV addSubview:objT];
+        
+        UIButton *btnAddAnotherIndustry = (UIButton *)[scrlV viewWithTag:51];
+        [btnAddAnotherIndustry setTitle:@"Add Another Industry" forState:UIControlStateNormal];
+    }
+    else
+    {
+        UIButton *btnAddAnotherIndustry = (UIButton *)[scrlV viewWithTag:51];
+        
+        C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, btnAddAnotherIndustry.frame.origin.y, screenSize.size.width, 55.0)];
+        objT.tag = 2;
+        
+        /*--- text field ---*/
+        objT.txtName.delegate = self;
+        objT.txtName.adjustsFontSizeToFitWidth = YES;
+        objT.txtName.text = strText;
+        
+        /*--- button that user cant touch textfield ---*/
+        objT.btnTextField.alpha = 1.0;
+        [objT.btnTextField addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        /*--- btn Edit ---*/
+        [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        /*--- set label text to blank ---*/
+        objT.lblName.text = @"";
+        
+        [scrlV addSubview:objT];
+        [btnAddAnotherIndustry removeFromSuperview];
+    }
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

@@ -164,7 +164,6 @@
         hideHUD;
         [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
     }
-    
 }
 
 
@@ -183,9 +182,6 @@
         lbl_City_State.text = [NSString stringWithFormat:@"%@, %@",strCity,strState];
     
     lbl_Country.text = [[NSString stringWithFormat:@"%@",_obj_myJob.LocationCountry] isNull];
-    
-    
-    
 }
 -(void)showViewContainer
 {
@@ -229,30 +225,7 @@
     //ApplyToJob
     [self applyNow];
 }
--(IBAction)btnEditClicked:(id)sender
-{
-//    is_PostJob_Edit_update = @"update";
-//    C_PostJob_NameVC *obj = [[C_PostJob_NameVC alloc]initWithNibName:@"C_PostJob_NameVC" bundle:nil];
-//    [self.navigationController pushViewController:obj animated:YES];
-}
--(void)btnEditHeaderClicked:(UIButton *)btnEditSection
-{
-//    is_PostJob_Edit_update = @"update";
-//    NSString *sectionTitle = arrSectionHeader[btnEditSection.tag];
-//    NSLog(@"Choose Section : %@",sectionTitle);
-//    
-//    if ([sectionTitle isEqualToString:ROLES])
-//    {
-//        C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
-//        [self.navigationController pushViewController:obj animated:YES];
-//    }
-//    else
-//    {
-//        C_PostJob_SkillsVC *obj = [[C_PostJob_SkillsVC alloc]initWithNibName:@"C_PostJob_SkillsVC" bundle:nil];
-//        [self.navigationController pushViewController:obj animated:YES];
-//    }
-    
-}
+
 #pragma mark - Table Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -289,12 +262,8 @@
         return viewH;
     }
     C_Header_ProfilePreview *myHeader = (C_Header_ProfilePreview *)[tblView dequeueReusableHeaderFooterViewWithIdentifier:cellHeaderProfilePreviewID];
-    //myHeader.contentView.backgroundColor = [UIColor redColor];
     myHeader.lblHeader.text = arrSectionHeader[section];
     myHeader.btnEditHeader.alpha = 0.0;
-    myHeader.btnEditHeader.tag = section;
-    [myHeader.btnEditHeader addTarget:self action:@selector(btnEditHeaderClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
     return myHeader;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -310,12 +279,7 @@
     }
     else
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in _obj_myJob.arrSkills)
-        {
-            [arrSkills addObject:mySkills[@"Skill"]];
-        }
-        
+        NSArray *arrSkills = [_obj_myJob.arrSkills valueForKey:@"Skill"];
         DWTagList *tagList = [[DWTagList alloc]initWithFrame:CGRectMake(10.0,12.0,screenSize.size.width - 20.0 -10.0 , 21.0)];
         [tagList setTags:arrSkills];
         [tagList setAutomaticResize:YES];
@@ -354,12 +318,9 @@
     }
     else
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (NSDictionary *mySkills in _obj_myJob.arrSkills)
-        {
-            [arrSkills addObject:mySkills[@"Skill"]];
-        }
-        
+
+        NSArray *arrSkills = [_obj_myJob.arrSkills valueForKey:@"Skill"];
+
         C_Cell_SkillsProfile *mySkillCell = (C_Cell_SkillsProfile *)[tblView dequeueReusableCellWithIdentifier:cellSkillsProfilePreviewID];
         
         [mySkillCell.tagList setTags:arrSkills];

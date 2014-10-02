@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 #import "LIALinkedInAuthorizationViewController.h"
 #import "NSString+LIAEncode.h"
-
+#import "AppConstant.h"
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 NSString *kLinkedInErrorDomain = @"LIALinkedInERROR";
@@ -33,6 +33,9 @@ NSString *kLinkedInDeniedByUser = @"the+user+denied+your+request";
 @property(nonatomic, copy) LIAAuthorizationCodeSuccessCallback successCallback;
 @property(nonatomic, copy) LIAAuthorizationCodeCancelCallback cancelCallback;
 @property(nonatomic, strong) LIALinkedInApplication *application;
+
+
+@property (nonatomic,strong)UIActivityIndicatorView *indicator;
 @end
 
 @interface LIALinkedInAuthorizationViewController (UIWebViewDelegate) <UIWebViewDelegate>
@@ -65,15 +68,26 @@ BOOL handlingRedirectURL;
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(tappedCancelButton:)];
 	self.navigationItem.leftBarButtonItem = cancelButton;
 
-  self.authenticationWebView = [[UIWebView alloc] init];
-  self.authenticationWebView.delegate = self;
-  self.authenticationWebView.scalesPageToFit = YES;
-  [self.view addSubview:self.authenticationWebView];
+      self.authenticationWebView = [[UIWebView alloc] init];
+      self.authenticationWebView.delegate = self;
+      self.authenticationWebView.scalesPageToFit = YES;
+      [self.view addSubview:self.authenticationWebView];
+    
+    
+    self.indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.indicator.color = RGBCOLOR_GREEN;
+    self.indicator.hidesWhenStopped = YES;
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSString *linkedIn = [NSString stringWithFormat:@"https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=%@&scope=%@&state=%@&redirect_uri=%@", self.application.clientId, self.application.grantedAccessString, self.application.state, [self.application.redirectURL LIAEncode]];
     [self.authenticationWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:linkedIn]]];
+    
+    self.indicator.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);;
+//    NSLog(@"%@",NSStringFromCGPoint(self.view.center));
+    [self.view addSubview:self.indicator];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -93,6 +107,9 @@ BOOL handlingRedirectURL;
 @implementation LIALinkedInAuthorizationViewController (UIWebViewDelegate)
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    [self.indicator startAnimating];
+    
     NSString *url = [[request URL] absoluteString];
 
     //prevent loading URL if it is the redirectURL
@@ -136,13 +153,14 @@ BOOL handlingRedirectURL;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [self.indicator stopAnimating];
     if (!handlingRedirectURL)
         self.failureCallback(error);
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 	
-	
+	[self.indicator stopAnimating];
 	/*fix for the LinkedIn Auth window - it doesn't scale right when placed into
 	 a webview inside of a form sheet modal. If we transform the HTML of the page
 	 a bit, and fix the viewport to 540px (the width of the form sheet), the problem

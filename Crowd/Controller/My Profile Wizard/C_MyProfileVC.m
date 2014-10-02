@@ -112,22 +112,33 @@
 {
     /*--- Show Header Data ---*/
     lbl_Name.text = [[NSString stringWithFormat:@"%@ %@",userInfoGlobal.FirstName,userInfoGlobal.LastName] isNull];
-    C_Model_Work *myRecentWork = userInfoGlobal.arr_WorkALL[0];
-    lbl_JobTitle.text = myRecentWork.Title;
-    lbl_Company.text = myRecentWork.EmployerName;
+    
+    /*--- show most recent work history ---*/
+    if (userInfoGlobal.arr_WorkALL.count > 0)
+    {
+        C_Model_Work *myRecentWork = userInfoGlobal.arr_WorkALL[0];
+        lbl_JobTitle.text = myRecentWork.Title;
+        lbl_Company.text = myRecentWork.EmployerName;
+        
+        NSMutableArray *arrLoc = [[NSMutableArray alloc]init];
+        if (![[myRecentWork.LocationCity isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentWork.LocationCity isNull]];
+        if (![[myRecentWork.LocationState isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentWork.LocationState isNull]];
+        if (![[myRecentWork.LocationCountry isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentWork.LocationCountry isNull]];
+        NSString *strLoc = [arrLoc componentsJoinedByString:@","];
+        lbl_Location.text = [strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "];
+    }
+    else
+    {
+        lbl_JobTitle.text = @"";
+        lbl_Company.text = @"";
+        lbl_Location.text = @"";
+    }
     
     
-    NSMutableArray *arrLoc = [[NSMutableArray alloc]init];
-    if (![[myRecentWork.LocationCity isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentWork.LocationCity isNull]];
-    if (![[myRecentWork.LocationState isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentWork.LocationState isNull]];
-    if (![[myRecentWork.LocationCountry isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentWork.LocationCountry isNull]];
-    
-    NSString *strLoc = [arrLoc componentsJoinedByString:@","];
-    lbl_Location.text = [strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "];
-    
+    /*--- show last education ---*/
     if (userInfoGlobal.arr_EducationALL.count>0) {
         C_Model_Education *myRecentEducation = userInfoGlobal.arr_EducationALL[0];
         lbl_School.text = myRecentEducation.Name;
@@ -143,11 +154,7 @@
 }
 -(void)setupTableViewData
 {
-    //    PROFFESSIONAL_SUMMARY @"Professional Summary"
-    //    WORK_EXPERIENCE @"Work Experience"
-    //    RECOMMENDATION @"Recommendations"
-    //    EDUCATION @"Education"
-    //    SKILLS @"Skills"
+    /*--- add data as per user's info ---*/
     [arrSectionHeader removeAllObjects];
     if (![userInfoGlobal.Summary isEqualToString:@""])
     {
@@ -190,14 +197,7 @@
     obj_profileUpdate = [UserHandler_LoggedIn getMyUser_LoggedIN];
     NSString *sectionTitle = arrSectionHeader[btnEditSection.tag];
     NSLog(@"Choose Section : %@",sectionTitle);
-    
-    /*
-     C_ProffessionalSummaryVC.h"
-     C_WorkHistory.h"
-     C_WorkHistory.h"
-     C_EducationHistory.h"
-     C_SkillsVC.h"
-     */
+
     if ([sectionTitle isEqualToString:PROFFESSIONAL_SUMMARY])
     {
         C_MP_ProffesionalSummaryVC *obj = [[C_MP_ProffesionalSummaryVC alloc]initWithNibName:@"C_MP_ProffesionalSummaryVC" bundle:nil];
@@ -261,7 +261,6 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     C_Header_ProfilePreview *myHeader = (C_Header_ProfilePreview *)[tblView dequeueReusableHeaderFooterViewWithIdentifier:cellHeaderProfilePreviewID];
-    //myHeader.contentView.backgroundColor = [UIColor redColor];
     myHeader.lblHeader.text = arrSectionHeader[section];
     myHeader.btnEditHeader.tag = section;
     [myHeader.btnEditHeader addTarget:self action:@selector(btnEditHeaderClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -310,12 +309,8 @@
     
     else if([sectionTitle isEqualToString:SKILLS])
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (C_Model_Skills *mySkills in userInfoGlobal.arr_SkillsALL)
-        {
-            [arrSkills addObject:mySkills.Skills];
-        }
-        
+        /*--- get array of skills ---*/
+        NSArray *arrSkills = [userInfoGlobal.arr_SkillsALL valueForKey:@"Skills"];
         DWTagList *tagList = [[DWTagList alloc]initWithFrame:CGRectMake(10.0,12.0,screenSize.size.width - 20.0 -10.0 , 21.0)];
         [tagList setTags:arrSkills];
         [tagList setAutomaticResize:YES];
@@ -329,7 +324,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *sectionTitle = arrSectionHeader[indexPath.section];
-    
+    /*--- 1. Proffessional Summary ---*/
     if ([sectionTitle isEqualToString:PROFFESSIONAL_SUMMARY])
     {
         static NSString *cellID = @"Cell";
@@ -352,7 +347,7 @@
         lblSummary.text = userInfoGlobal.Summary;
         return cell;
     }
-    
+    /*--- 2. work history ---*/
     else if([sectionTitle isEqualToString:WORK_EXPERIENCE])
     {
         C_Model_Work *myWork = userInfoGlobal.arr_WorkALL[indexPath.row];
@@ -371,7 +366,7 @@
         
         return myEduCell;
     }
-    
+    /*--- 3. recommendation ---*/
     else if([sectionTitle isEqualToString:RECOMMENDATION])
     {
         C_Model_Recommendation *myRec = userInfoGlobal.arr_RecommendationALL[indexPath.row];
@@ -385,6 +380,7 @@
         myRecCell.lblName.text = [NSString stringWithFormat:@"%@",myRec.RecommenderName];
         return myRecCell;
     }
+    /*--- 4. education ---*/
     else if([sectionTitle isEqualToString:EDUCATION])
     {
         C_Model_Education *myEducation = userInfoGlobal.arr_EducationALL[indexPath.row];
@@ -396,13 +392,11 @@
         
         return myEduCell;
     }
+    /*--- 5. skills ---*/
     else if([sectionTitle isEqualToString:SKILLS])
     {
-        NSMutableArray *arrSkills = [NSMutableArray array];
-        for (C_Model_Skills *mySkills in userInfoGlobal.arr_SkillsALL)
-        {
-            [arrSkills addObject:mySkills.Skills];
-        }
+        /*--- get array of skills ---*/
+        NSArray *arrSkills = [userInfoGlobal.arr_SkillsALL valueForKey:@"Skills"];
         
         C_Cell_SkillsProfile *mySkillCell = (C_Cell_SkillsProfile *)[tblView dequeueReusableCellWithIdentifier:cellSkillsProfilePreviewID];
         
@@ -411,7 +405,6 @@
         [mySkillCell.tagList setCornerRadius:4.0f];
         [mySkillCell.tagList setHighlightedBackgroundColor:RGBCOLOR_DARK_BROWN];
         [mySkillCell.tagList setTextColor:[UIColor blackColor]];
-        //        [cell.tagList setBorderColor:RGBCOLOR_DARK_BROWN.CGColor];
         [mySkillCell.tagList setTagBackgroundColor:RGBCOLOR_DARK_BROWN];
         [mySkillCell.tagList setBorderWidth:0.0f];
         [mySkillCell.tagList setTextShadowOffset:CGSizeMake(0, 0)];
@@ -422,11 +415,6 @@
     return nil;
 }
 
-#pragma mark - Update Profile
--(void)updateProfileNow
-{
-    NSLog(@"updateProfileNow");
-}
 
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

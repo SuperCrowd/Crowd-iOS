@@ -116,12 +116,12 @@
             {
                 [arrSkillsF addObject:@{@"Skill":str}];
             }
+            
             if ([is_PostJob_Edit_update isEqualToString:@"update"])
-            {
                 postJob_ModelClass.arrSkills = arrSkillsF;
-            }
             else
                 [dictPostNewJob setObject:arrSkillsF forKey:@"Skills"];
+            
             return YES;
         }
         else
@@ -139,7 +139,6 @@
     {
         C_PostJob_LinkVC *obj = [[C_PostJob_LinkVC alloc]initWithNibName:@"C_PostJob_LinkVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:YES];
-   
     }
 }
 #pragma mark - Text View Delegate

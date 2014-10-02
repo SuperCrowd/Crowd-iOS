@@ -45,7 +45,11 @@
     {
         [arrSectionHeader addObjectsFromArray:arrT];
     }
-    [arrSectionHeader addObject:@"Recommendations"];
+    if (myUserModel.arrRecommendationsUser.count > 0)
+    {
+        [arrSectionHeader addObject:@"Recommendations"];
+    }
+    
     
     /*--- Register Cell ---*/
     tblView.delegate = self;
@@ -98,13 +102,13 @@
     }
     
     
-    NSPredicate *predSummary = [NSPredicate predicateWithFormat:@"(self.summary == nil) OR (self.summary == '')"];
-    NSArray *arrFilterSummary = [myUserModel.arrPositionUser filteredArrayUsingPredicate:predSummary];
-    if (arrFilterSummary.count>0)
-    {
-        [CommonMethods displayAlertwithTitle:@"Please add Summary" withMessage:nil withViewController:self];
-        return;
-    }
+//    NSPredicate *predSummary = [NSPredicate predicateWithFormat:@"(self.summary == nil) OR (self.summary == '')"];
+//    NSArray *arrFilterSummary = [myUserModel.arrPositionUser filteredArrayUsingPredicate:predSummary];
+//    if (arrFilterSummary.count>0)
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please add Summary" withMessage:nil withViewController:self];
+//        return;
+//    }
     
     C_EducationHistory *obj = [[C_EducationHistory alloc]initWithNibName:@"C_EducationHistory" bundle:nil];
     [self.navigationController pushViewController:obj animated:YES];
@@ -117,7 +121,11 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (section == arrSectionHeader.count-1)?myUserModel.arrRecommendationsUser.count:1;
+    if ([arrSectionHeader[section] isEqualToString:@"Recommendations"])
+    {
+        return myUserModel.arrRecommendationsUser.count;
+    }
+    return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -142,7 +150,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //@[@"Job Title",@"Employer",@"Time Period",@"Location",@"Summary",@"Recommendations"]
-    if (indexPath.section == arrSectionHeader.count-1)
+    if ([arrSectionHeader[indexPath.section] isEqualToString:@"Recommendations"])
     {
         Recommendations *myRecommend = myUserModel.arrRecommendationsUser[indexPath.row];
         CGFloat heightLBL = [myRecommend.recommendationText getHeight_withFont:[UIFont systemFontOfSize:17.0] widht:screenSize.size.width - 64];
@@ -213,7 +221,7 @@
 
     
     cell.lblTitle.numberOfLines = 0;
-    if (indexPath.section == arrSectionHeader.count-1)
+    if ([arrSectionHeader[indexPath.section] isEqualToString:@"Recommendations"])
     {
         Recommendations *myRecommend = myUserModel.arrRecommendationsUser[indexPath.row];
         cell.lblTitle.text = myRecommend.recommendationText;
@@ -293,7 +301,7 @@
     NSInteger section = [arr[0] integerValue];
     //NSInteger index = [arr[1] integerValue];
     NSString *strTitle = arrSectionHeader[section];
-    if (section == arrSectionHeader.count-1)
+    if (([strTitle isEqualToString:@"Recommendations"]))
     {
         //NSLog(@"last Section with Index : %ld",index);
         // GOTO recommend with index

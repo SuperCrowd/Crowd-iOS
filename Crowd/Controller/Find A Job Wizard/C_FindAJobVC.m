@@ -70,11 +70,8 @@
     C_FindAJobListingVC *obj = [[C_FindAJobListingVC alloc]initWithNibName:@"C_FindAJobListingVC" bundle:nil];
     [self.navigationController pushViewController:obj animated:YES];
     
-    
     return;
-    
-    
-    
+
     
     /*--- save all local data in dict ---*/
     dictFindAJob = [[NSMutableDictionary alloc]init];

@@ -94,7 +94,6 @@
     /*--- btn Edit ---*/
     [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
     
-    
     /*--- set label text to blank ---*/
     objT.lblName.text = @"";
     
@@ -131,7 +130,6 @@
         /*--- btn Edit ---*/
         [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
         
-        
         /*--- set label text to blank ---*/
         objT.lblName.text = @"";
         
@@ -147,10 +145,8 @@
     [btnAddIndustry.titleLabel setFont:kFONT_LIGHT(15.0)];
     
     [btnAddIndustry setBackgroundImage:[UIImage imageNamed:@"btnGreenBG"] forState:UIControlStateNormal];
-    //        btnAddIndustry.backgroundColor = RGBCOLOR(72.0, 190.0, 128.0);
     [btnAddIndustry addTarget:self action:@selector(btnAddNewIndustryClicked:) forControlEvents:UIControlEventTouchUpInside];
     [scrlV addSubview:btnAddIndustry];
-    
     
     [scrlV setContentSize:CGSizeMake(320, btnAddIndustry.frame.origin.y + btnAddIndustry.frame.size.height + 20.0)];
 }
@@ -225,15 +221,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

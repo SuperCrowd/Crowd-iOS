@@ -19,7 +19,6 @@
     __weak IBOutlet DWTagList *_tagList;
     __weak IBOutlet UILabel *lblNoTag;
     
-    
     NSMutableArray *arrSkills;
 }
 
@@ -117,9 +116,7 @@
             mySkills.Skills = [strSkill isNull];
             [arrTemp addObject:mySkills];
         }
-        
         _obj_ProfileUpdate.arr_SkillsALL = arrTemp;
-
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);
@@ -131,7 +128,6 @@
 #pragma mark - Tag Delegate
 - (void)selectedTag:(NSString *)tagName tagIndex:(NSInteger)tagIndex
 {
-    NSLog(@"%@",[NSString stringWithFormat:@"You tapped tag %@ at index %ld", tagName,(long)tagIndex]);
     [self btnEditClicked:nil];
 }
 #pragma mark - Extra

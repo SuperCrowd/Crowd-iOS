@@ -42,7 +42,10 @@
     {
         [arrSectionHeader addObjectsFromArray:arrT];
     }
-    [arrSectionHeader addObject:@"Recommendations"];
+    if (_obj_ProfileUpdate.arr_RecommendationALL.count>0) {
+        [arrSectionHeader addObject:@"Recommendations"];
+    }
+    
     
     /*--- Register Cell ---*/
     tblView.delegate = self;
@@ -104,13 +107,13 @@
     }
     
     // myWork.Summary
-    NSPredicate *predSummary = [NSPredicate predicateWithFormat:@"(self.Summary == nil) OR (self.Summary == '')"];
-    NSArray *arrFilterSummary = [_obj_ProfileUpdate.arr_WorkALL filteredArrayUsingPredicate:predSummary];
-    if (arrFilterSummary.count>0)
-    {
-        [CommonMethods displayAlertwithTitle:@"Please add Summary" withMessage:nil withViewController:self];
-        return NO;
-    }
+//    NSPredicate *predSummary = [NSPredicate predicateWithFormat:@"(self.Summary == nil) OR (self.Summary == '')"];
+//    NSArray *arrFilterSummary = [_obj_ProfileUpdate.arr_WorkALL filteredArrayUsingPredicate:predSummary];
+//    if (arrFilterSummary.count>0)
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please add Summary" withMessage:nil withViewController:self];
+//        return NO;
+//    }
     return YES;
 }
 -(IBAction)btnNextClicked:(id)sender
@@ -130,7 +133,11 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (section == arrSectionHeader.count-1)?_obj_ProfileUpdate.arr_RecommendationALL.count:1;
+    if ([arrSectionHeader[section] isEqualToString:@"Recommendations"])
+    {
+        return _obj_ProfileUpdate.arr_RecommendationALL.count;
+    }
+    return 1;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -155,7 +162,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //@[@"Job Title",@"Employer",@"Time Period",@"Location",@"Summary",@"Recommendations"]
-    if (indexPath.section == arrSectionHeader.count-1)
+    if ([arrSectionHeader[indexPath.section] isEqualToString:@"Recommendations"])
     {
         C_Model_Recommendation *myRecommend = _obj_ProfileUpdate.arr_RecommendationALL[indexPath.row];
         CGFloat heightLBL = [myRecommend.Recommendation getHeight_withFont:[UIFont systemFontOfSize:17.0] widht:screenSize.size.width - 64];
@@ -228,7 +235,7 @@
     
     
     cell.lblTitle.numberOfLines = 0;
-    if (indexPath.section == arrSectionHeader.count-1)
+    if ([arrSectionHeader[indexPath.section] isEqualToString:@"Recommendations"])
     {
         C_Model_Recommendation *myRecommend = _obj_ProfileUpdate.arr_RecommendationALL[indexPath.row];
         cell.lblTitle.text = myRecommend.Recommendation;
@@ -308,7 +315,7 @@
     NSInteger section = [arr[0] integerValue];
     //NSInteger index = [arr[1] integerValue];
     NSString *strTitle = arrSectionHeader[section];
-    if (section == arrSectionHeader.count-1)
+    if ([strTitle isEqualToString:@"Recommendations"])
     {
         // GOTO recommend with index
         C_MP_EditTextVC *obj = [[C_MP_EditTextVC alloc]initWithNibName:@"C_MP_EditTextVC" bundle:nil];

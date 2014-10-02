@@ -134,11 +134,50 @@
     }
     else
     {
-        NSLog(@"already has access Token ");
+        //NSLog(@"already has access Token ");
         /*--- Get user data if already have access token ---*/
         [self requestMeWithToken:storedToken];
     }
 }
+#pragma mark - Linkedin Methods
+- (void)requestMeWithToken:(NSString *)accessToken
+{
+    showHUD_with_Title(@"Getting your Linkedin profile...")
+    [self.client GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,email-address,location,industry,summary,picture-urls::(original),positions,educations,skills,recommendations-received)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *result)
+     {
+         //https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,email-address)?oauth2_access_token=%@&format=json
+         NSLog(@"%@",result);
+         if ([result isKindOfClass:[NSDictionary class]])
+         {
+             [self checkIfUserAlreadyExist:result[@"id"] withDictionary:result];
+         }
+         else
+         {
+             hideHUD
+         }
+         
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"failed to fetch current user %@", error);
+         showHUD_with_error(@"Unknown Server Error. Please try again.");
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+             hideHUD;
+         });
+     }];
+}
+
+- (LIALinkedInHttpClient *)client
+{
+    LIALinkedInApplication *application = [LIALinkedInApplication applicationWithRedirectURL:@"http://www.google.com"//http://www.ancientprogramming.com/liaexample
+                                                                                    clientId:@"75ol7koq0lf0ed"
+                                                                                clientSecret:@"dGeJeziMKJutfZhv"
+                                                                                       state:@"DCEEFWF45453sdffef424"
+                                                                               grantedAccess:@[@"r_fullprofile", @"r_network",@"r_emailaddress",@"r_contactinfo"]];
+    return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
+}
+
+
+
+#pragma mark - Check User already exist
 -(void)checkIfUserAlreadyExist:(NSString *)strUserid withDictionary:(NSDictionary *)dict
 {
     dictUserLinkedinProfile = [NSMutableDictionary dictionaryWithDictionary:dict];
@@ -169,7 +208,6 @@
         if (!isUserExist)
         {
             // goto register wizard
-            NSLog(@"Not exist");
             hideHUD;
             myUserModel = [C_UserModel addLinkedInProfile:dictUserLinkedinProfile];
             [CommonMethods saveMyUser:myUserModel];
@@ -182,7 +220,6 @@
         }
         else
         {
-            NSLog(@"already exist");
             // user already exist.
             // add data as per service
             // save user now
@@ -205,42 +242,6 @@
         [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
     }
 
-}
-
-- (void)requestMeWithToken:(NSString *)accessToken
-{
-    showHUD_with_Title(@"Getting your Linkedin profile...")
-    [self.client GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,email-address,location,industry,summary,picture-urls::(original),positions,educations,skills,recommendations-received)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *result)
-    {
-        //https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,email-address)?oauth2_access_token=%@&format=json
-        NSLog(@"%@",result);
-        if ([result isKindOfClass:[NSDictionary class]])
-        {
-            [self checkIfUserAlreadyExist:result[@"id"] withDictionary:result];
-        }
-        else
-        {
-            hideHUD
-        }
-        /*--- Check now if user already exist or not ---*/
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed to fetch current user %@", error);
-        showHUD_with_error(@"Unknown Server Error. Please try again.");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            hideHUD;
-        });
-    }];
-}
-#pragma mark - Linkedin Methods
-- (LIALinkedInHttpClient *)client
-{
-    LIALinkedInApplication *application = [LIALinkedInApplication applicationWithRedirectURL:@"http://www.google.com"//http://www.ancientprogramming.com/liaexample
-                                                                                    clientId:@"75ol7koq0lf0ed"
-                                                                                clientSecret:@"dGeJeziMKJutfZhv"
-                                                                                       state:@"DCEEFWF45453sdffef424"
-                                                                               grantedAccess:@[@"r_fullprofile", @"r_network",@"r_emailaddress",@"r_contactinfo"]];
-    return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
 }
 
 

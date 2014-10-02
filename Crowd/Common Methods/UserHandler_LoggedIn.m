@@ -152,22 +152,28 @@
             [dictT setValue:[myEdu.endDate_year isNull] forKey:@"EndYear"];
 
             /*--- add Course ---*/
-            NSArray *arrCource = [myEdu.fieldOfStudy componentsSeparatedByString:@","];
-            NSMutableArray *arrTemp = [NSMutableArray array];
-            for (NSString *strC  in arrCource)
-            {
-                @try
+            if (myEdu.fieldOfStudy.length > 0) {
+                NSArray *arrCource = [myEdu.fieldOfStudy componentsSeparatedByString:@","];
+                NSMutableArray *arrTemp = [NSMutableArray array];
+                for (NSString *strC  in arrCource)
                 {
-                    [arrTemp addObject:@{@"Course":strC}];
+                    @try
+                    {
+                        [arrTemp addObject:@{@"Course":strC}];
+                    }
+                    @catch (NSException *exception) {
+                        NSLog(@"%@",exception.description);
+                    }
+                    @finally {
+                    }
                 }
-                @catch (NSException *exception) {
-                    NSLog(@"%@",exception.description);
-                }
-                @finally {
-                }
+                
+                [dictT setObject:arrTemp forKey:@"UserEducationCourse"];
             }
-            
-            [dictT setObject:arrTemp forKey:@"UserEducationCourse"];
+            else
+            {
+                [dictT setObject:[NSMutableArray array] forKey:@"UserEducationCourse"];
+            }
         }
         @catch (NSException *exception) {
             NSLog(@"%@",exception.description);

@@ -80,13 +80,13 @@
 #pragma mark - IBAction Method
 -(IBAction)btnNextClicked:(id)sender
 {
-    NSPredicate *preddegree = [NSPredicate predicateWithFormat:@"(self.degree == nil) OR (self.degree == '')"];
-    NSArray *arrcheckdegree = [myUserModel.arrEducationUser filteredArrayUsingPredicate:preddegree];;
-    if (arrcheckdegree.count>0)
-    {
-        [CommonMethods displayAlertwithTitle:@"Please add Degree" withMessage:nil withViewController:self];
-        return;
-    }
+//    NSPredicate *preddegree = [NSPredicate predicateWithFormat:@"(self.degree == nil) OR (self.degree == '')"];
+//    NSArray *arrcheckdegree = [myUserModel.arrEducationUser filteredArrayUsingPredicate:preddegree];;
+//    if (arrcheckdegree.count>0)
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please add Degree" withMessage:nil withViewController:self];
+//        return;
+//    }
     
     
     NSPredicate *predStartYear = [NSPredicate predicateWithFormat:@"(self.startDate_year == nil) OR (self.startDate_year == '')"];
@@ -106,13 +106,13 @@
     }
     
     
-    NSPredicate *predField = [NSPredicate predicateWithFormat:@"(self.fieldOfStudy == nil) OR (self.fieldOfStudy == '')"];
-    NSArray *arrField = [myUserModel.arrEducationUser filteredArrayUsingPredicate:predField];;
-    if (arrField.count>0)
-    {
-        [CommonMethods displayAlertwithTitle:@"Please add Courses" withMessage:nil withViewController:self];
-        return;
-    };
+//    NSPredicate *predField = [NSPredicate predicateWithFormat:@"(self.fieldOfStudy == nil) OR (self.fieldOfStudy == '')"];
+//    NSArray *arrField = [myUserModel.arrEducationUser filteredArrayUsingPredicate:predField];;
+//    if (arrField.count>0)
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please add Courses" withMessage:nil withViewController:self];
+//        return;
+//    };
     
     NSLog(@"Done");
     //push now
