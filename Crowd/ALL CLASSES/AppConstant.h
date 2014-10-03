@@ -197,5 +197,12 @@ C_MyUser *userInfoGlobal;//logged in user model
 
 NSInteger selectedLeftControllerIndex;// save left controller last selected index
 
-
+//Searh Typedef
+typedef enum {
+    INDUSTRY = 0,
+    POSITION,
+    EXPERIENCE,
+    LOCATION,
+    COMPANY
+}ViewType;
 

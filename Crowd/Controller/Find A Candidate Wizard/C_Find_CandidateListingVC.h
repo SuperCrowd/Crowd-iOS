@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface C_Find_CandidateListingVC : UIViewController
+@property(nonatomic,strong)NSMutableDictionary *dictInfoCandidate;
 
 @end

@@ -67,8 +67,8 @@
             self.connection = [NSURLConnection connectionWithRequest:postRequest delegate:self];*/
             
             NSData *body = [NSJSONSerialization dataWithJSONObject:dictParameter options:NSJSONWritingPrettyPrinted error:nil];
-           //NSString *strRequest = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
-            //NSLog(@"%@",strRequest);
+//           NSString *strRequest = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
+//            NSLog(@"%@",strRequest);
 //            strRequest = [NSString stringWithFormat:@"json_data=%@",strRequest];
 //            NSData *body = [strRequest dataUsingEncoding:NSUTF8StringEncoding];
             NSMutableURLRequest *request= [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];

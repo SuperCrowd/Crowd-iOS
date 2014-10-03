@@ -93,19 +93,20 @@
 
     @try
     {
+        NSLog(@"%@",_dictInfoJob);
         NSLog(@"page Num : %ld",(long)pageNum);
         isCallingService = YES;
         showHUD_with_Title(@"Getting Job List");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
-                                    @"Industry":@"Computer",
-                                    @"Industry2":@"",
-                                    @"ExperienceLevel":@"",
-                                    @"Position":@"",
-                                    @"LocationCity":@"",
-                                    @"LocationState":@"",
-                                    @"LocationCountry":@"",
-                                    @"Company":@"",
+                                    @"Industry":[_dictInfoJob[@"Industry"] isNull],
+                                    @"Industry2":[_dictInfoJob[@"Industry2"] isNull],
+                                    @"ExperienceLevel":[_dictInfoJob[@"ExperienceLevel"] isNull],
+                                    @"Position":[_dictInfoJob[@"Position"] isNull],
+                                    @"LocationCity":[_dictInfoJob[@"LocationCity"] isNull],
+                                    @"LocationState":[_dictInfoJob[@"LocationState"] isNull],
+                                    @"LocationCountry":[_dictInfoJob[@"LocationCountry"] isNull],
+                                    @"Company":[_dictInfoJob[@"Company"] isNull],
                                     @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum]};
         parser = [[JSONParser alloc]initWith_withURL:Web_JOB_LIST withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getDataSuccessfull:) withObject:self];
     }
@@ -151,7 +152,10 @@
             __weak UITableView *weaktbl = (UITableView *)tblView;
             [self setData:[objResponse valueForKeyPath:@"SearchJobResult.JobDetails"] withHandler:^{
                 
-                hideHUD;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                     hideHUD;
+                });
+               
                 weaktbl.alpha = 1.0;
                 [weaktbl reloadData];
             }];
@@ -163,7 +167,12 @@
             isCallingService = NO;
             hideHUD;
             NSString *strR = [objResponse valueForKeyPath:@"SearchJobResult.ResultStatus.StatusMessage"];
-            if ([strR isEqualToString:@"No Records on this Page Number!"])
+            if ([strR isEqualToString:@"No Records!"])
+            {
+                isAllDataRetrieved = YES;
+                [self showAlert_OneButton:@"No Records found"];
+            }
+            else if ([strR isEqualToString:@"No Records on this Page Number!"])
             {
                 isAllDataRetrieved = YES;
             }
@@ -253,24 +262,55 @@
     else
     {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];[alertView show];
+        alertView.tag = 101;
+    }
+}
+-(void)showAlert_OneButton:(NSString *)title
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                           if (pageNum == 1)
+                                           {
+                                               popView;
+                                           }
+                                       }];
+        [alert addAction:CancelAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];[alertView show];
+        alertView.tag = 102;
     }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (buttonIndex) {
-        case 0:
-            if (pageNum == 1)
-            {
-                popView;
-            }
-            break;
-        case 1:
-            [self getData];
-            break;
-            
-        default:
-            break;
+    if (alertView.tag == 101) {
+        switch (buttonIndex) {
+            case 0:
+                if (pageNum == 1)
+                {
+                    popView;
+                }
+                break;
+            case 1:
+                [self getData];
+                break;
+                
+            default:
+                break;
+        }
     }
+    else
+    {
+        popView;
+    }
+    
 }
 #pragma mark - Table Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

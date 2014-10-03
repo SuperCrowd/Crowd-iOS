@@ -256,6 +256,8 @@
                 NSString *strBase64Image = [Base64 encode:UIImagePNGRepresentation(img)];
                 [dictR setValue:strBase64Image forKey:@"PhotoData"];
             }
+            else
+                [dictR setValue:@"" forKey:@"PhotoData"];
         }
         @catch (NSException *exception) {
             NSLog(@"%@",exception.description);

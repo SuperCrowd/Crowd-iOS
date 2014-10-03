@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="JobCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Crowd for all jobs in the Experience" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQC-sr-Vc4">
+                        <rect key="frame" x="2" y="12" width="318" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="jPv-xF-TQo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Head Accountatnt , City Name , Country Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="204" translatesAutoresizingMaskIntoConstraints="NO" id="hzB-xM-q0U">
+                        <rect key="frame" x="59" y="40" width="204" height="45"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuR-g1-B9P">
+                        <rect key="frame" x="282" y="44" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="Dpg-Is-lUy"/>
+                            <constraint firstAttribute="height" constant="25" id="eRE-IU-nlu"/>
+                        </constraints>
+                        <state key="normal" image="deleteRed">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J28-t2-5Pj">
+                        <rect key="frame" x="8" y="37" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="ID9-0C-l7p"/>
+                            <constraint firstAttribute="width" constant="40" id="d1m-Sz-AnN"/>
+                        </constraints>
+                        <state key="normal" image="edit_icon_green">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="hQC-sr-Vc4" secondAttribute="trailing" id="07E-jS-tpv"/>
+                    <constraint firstItem="hzB-xM-q0U" firstAttribute="top" secondItem="hQC-sr-Vc4" secondAttribute="bottom" constant="8" id="2WN-bJ-31I"/>
+                    <constraint firstItem="J28-t2-5Pj" firstAttribute="top" secondItem="hQC-sr-Vc4" secondAttribute="bottom" constant="5" id="873-iI-NRp"/>
+                    <constraint firstAttribute="trailing" secondItem="zuR-g1-B9P" secondAttribute="trailing" constant="13" id="A8a-8G-jEh"/>
+                    <constraint firstItem="zuR-g1-B9P" firstAttribute="top" secondItem="hQC-sr-Vc4" secondAttribute="bottom" constant="12" id="E0D-Xo-meY"/>
+                    <constraint firstItem="J28-t2-5Pj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Oyd-YU-mWu"/>
+                    <constraint firstItem="hQC-sr-Vc4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="QAw-jk-U7a"/>
+                    <constraint firstAttribute="bottom" secondItem="hzB-xM-q0U" secondAttribute="bottom" constant="14" id="UR7-Fk-j0T"/>
+                    <constraint firstItem="zuR-g1-B9P" firstAttribute="leading" secondItem="hzB-xM-q0U" secondAttribute="trailing" constant="19" id="ckl-6S-Wk1"/>
+                    <constraint firstItem="hzB-xM-q0U" firstAttribute="leading" secondItem="J28-t2-5Pj" secondAttribute="trailing" constant="11" id="gky-W0-3f4"/>
+                    <constraint firstItem="hQC-sr-Vc4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="xbw-D3-Lbt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnDelete" destination="zuR-g1-B9P" id="iCB-wW-79b"/>
+                <outlet property="btnEdit" destination="J28-t2-5Pj" id="Ilx-PI-8cZ"/>
+                <outlet property="lblCategoryName" destination="hzB-xM-q0U" id="66M-UL-aQ3"/>
+                <outlet property="lblSearch" destination="hQC-sr-Vc4" id="wt7-vQ-miK"/>
+            </connections>
+            <point key="canvasLocation" x="335" y="233"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="deleteRed" width="28" height="28"/>
+        <image name="edit_icon_green" width="22" height="22"/>
+    </resources>
+</document>

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface C_FindAJobListingVC : UIViewController
+@property(nonatomic,strong)NSMutableDictionary *dictInfoJob;
 
 @end
