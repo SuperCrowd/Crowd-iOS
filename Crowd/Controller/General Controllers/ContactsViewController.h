@@ -49,6 +49,7 @@
 @property (nonatomic,strong)IBOutlet UIView *viewLocation;
 @property (strong, nonatomic) IBOutlet UIView *viewCompany;
 @property(strong,nonatomic)IBOutlet UITableView *tblContacts;
+@property (strong, nonatomic) IBOutlet UIView *viewTable;
 @property (nonatomic,strong) id delegate;
 @property(nonatomic)ViewType currentViewType;
 @property(nonatomic,strong)ContactModel *editModel;

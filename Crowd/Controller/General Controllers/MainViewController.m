@@ -56,8 +56,6 @@
         self.title = @"Find a Job";
     self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-
-    
     
     arrResults = [[NSMutableArray alloc]init];
     tblCategory.tableFooterView = viewBtnCriteria;
@@ -73,16 +71,10 @@
     [arrViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [dictCriteria setValue:[[NSMutableArray alloc] init] forKey:arrViews[idx]];
     }];
-    self.navigationController.navigationBarHidden = NO;
-    self.view.layer.borderWidth=0.5;
-    self.view.layer.borderColor = [UIColor blackColor].CGColor;
-   
 
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.001 * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self btnAddCriteriaPressed:nil];
     });
-    //tblCategory.backgroundColor = [UIColor purpleColor];
 }
 
 
@@ -112,7 +104,8 @@
     }
     else
     {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"if you leave your search criteria will be lost. This can not be undone." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];[alertView show];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"if you leave your search criteria will be lost. This can not be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave",nil];
+        [alertView show];
     }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -632,7 +625,12 @@
         case LOCATION:
         {
             cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for %@",self.isForCandidate?arrViews[LOCATION-1]:arrViews[LOCATION]];
-            cell.lblCategoryName.text = [NSString stringWithFormat:@"%@ \n %@ , %@",model.city,model.state,model.country];
+            if ([[model.state isNull]isEqualToString:@""])
+            {
+                cell.lblCategoryName.text = [NSString stringWithFormat:@"%@ \n %@",model.city,model.country];
+            }
+            else
+                cell.lblCategoryName.text = [NSString stringWithFormat:@"%@ \n %@ , %@",model.city,model.state,model.country];
         }
             break;
         default:

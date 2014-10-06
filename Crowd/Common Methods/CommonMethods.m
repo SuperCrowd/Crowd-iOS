@@ -409,4 +409,18 @@ NSString *DocumentsDirectoryPath() {NSArray *paths = NSSearchPathForDirectoriesI
     NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
     return [urlTest evaluateWithObject:url];
 }
+
+
+
+
++(void)addBottomLine_to_Label:(UILabel *)lbl
+{
+    CALayer* layer = [lbl layer];
+    
+    CALayer *bottomBorder = [CALayer layer];
+    bottomBorder.borderColor = RGBCOLOR(164.0, 164.0, 167.0).CGColor;
+    bottomBorder.borderWidth = 0.5;
+    bottomBorder.frame = CGRectMake(0, layer.frame.size.height-0.5, layer.frame.size.width, 1);
+    [layer addSublayer:bottomBorder];
+}
 @end

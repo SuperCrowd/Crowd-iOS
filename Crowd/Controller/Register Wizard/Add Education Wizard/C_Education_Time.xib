@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Education_Time">
             <connections>
                 <outlet property="btnToolbar" destination="aNE-pt-gVZ" id="Wsb-w1-xS1"/>
-                <outlet property="lblTitle" destination="prC-qn-97e" id="Cyz-1h-mln"/>
                 <outlet property="piker" destination="pMA-gt-VvD" id="VkI-OI-mSZ"/>
                 <outlet property="txtFrom" destination="okC-EP-G4g" id="btW-dd-TO2"/>
                 <outlet property="txtTo" destination="6E5-ld-uVf" id="DDB-qJ-ggX"/>
@@ -19,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Years" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prC-qn-97e">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Years" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prC-qn-97e">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>

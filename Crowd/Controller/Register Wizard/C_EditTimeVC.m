@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = _strTitle;
-    lblTitle.text = @"Years";
+    lblTitle.text = [NSString stringWithFormat:@"    Years"];
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton];
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     

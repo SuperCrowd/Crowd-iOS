@@ -38,6 +38,9 @@
     }
     
     lblTitle.font = kFONT_LIGHT(15.0);
+    [CommonMethods addBottomLine_to_Label:lblTitle];
+    
+    
     
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton];
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
@@ -56,6 +59,10 @@
 {
     [super viewDidAppear:animated];
     [txtV becomeFirstResponder];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        txtV.selectedRange = NSMakeRange([txtV.text length], 0);
+    });
+    
 }
 -(IBAction)btnDoneClicked:(id)sender
 {

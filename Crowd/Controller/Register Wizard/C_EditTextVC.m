@@ -31,6 +31,8 @@
 {
     __weak IBOutlet UILabel *lblTitle;
     __weak IBOutlet UITextView *txtV;
+    
+    __weak IBOutlet NSLayoutConstraint *constraint_lblHeight;
 }
 @end
 
@@ -38,12 +40,14 @@
 //@synthesize delegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = lblTitle.text = _strTitle;
+    self.title = _strTitle;
+    lblTitle.text = [NSString stringWithFormat:@"    %@",_strTitle];
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton];
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     
     
     NSString *strText;
+    constraint_lblHeight.constant = 30.0;
     if ([_strComingFrom isEqualToString:POSITION])
     {
         strText = [[self getPosition] isNull];
@@ -55,6 +59,7 @@
     else if ([_strComingFrom isEqualToString:SUMMARYVC])
     {
         strText = [myUserModel.summary isNull];
+        constraint_lblHeight.constant = 0.0;
     }
     //@[@"Job Title",@"Employer",@"Time Period",@"Location",@"Summary",@"Recommendations"]
     txtV.text = strText;
@@ -64,6 +69,9 @@
     [super viewDidAppear:animated];
     
     [txtV becomeFirstResponder];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        txtV.selectedRange = NSMakeRange([txtV.text length], 0);
+    });
 }
 -(IBAction)btnDoneClicked:(id)sender
 {

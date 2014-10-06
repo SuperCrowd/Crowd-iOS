@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_RolesVC">
             <connections>
+                <outlet property="lblSubTitle" destination="gdo-KU-f8d" id="AU7-96-uEd"/>
                 <outlet property="txtV" destination="Mde-iU-GrG" id="ZUq-9C-Jto"/>
                 <outlet property="view" destination="sYA-p5-0jZ" id="l58-x2-G4G"/>
             </connections>

@@ -60,5 +60,5 @@ NSString *DocumentsDirectoryPath() ;
 +(void)HideMyKeyboard:(MMDrawerController *)draw;
 
 + (BOOL) isValidateUrl: (NSString *)url;
-
++(void)addBottomLine_to_Label:(UILabel *)lbl;
 @end

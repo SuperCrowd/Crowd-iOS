@@ -9,8 +9,10 @@
 #import "C_DashBoardVC.h"
 #import "AppConstant.h"
 #import "C_PostJob_NameVC.h"
-@interface C_DashBoardVC ()
-
+@interface C_DashBoardVC ()<UITableViewDataSource,UITableViewDelegate>
+{
+    __weak IBOutlet UITableView *tblView;
+}
 @end
 
 @implementation C_DashBoardVC
@@ -43,7 +45,29 @@
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
-
+#pragma mark - Table Delegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"Cell";
+    UITableViewCell *cell = [tblView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        /*--- For Custom Cell ---*/
+        //[[NSBundle mainBundle]loadNibNamed:@"" owner:self options:nil];
+        //cell = myCell;
+    }
+    cell.textLabel.text = @"Dashboard";
+    return cell;
+}
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

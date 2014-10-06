@@ -7,9 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_PreviewVC">
             <connections>
                 <outlet property="lbl_City_State" destination="LMs-PI-6Gb" id="flP-Jd-gmg"/>
-                <outlet property="lbl_Company" destination="DUM-br-dL6" id="Ce1-Be-G3q"/>
+                <outlet property="lbl_Company" destination="nLv-Td-Dai" id="d8o-5Q-HRc"/>
                 <outlet property="lbl_Country" destination="Bvf-r3-pc4" id="R5z-Oz-coM"/>
-                <outlet property="lbl_JobTitle" destination="nLv-Td-Dai" id="YgJ-o3-bUF"/>
+                <outlet property="lbl_JobTitle" destination="DUM-br-dL6" id="dGS-Td-hNm"/>
                 <outlet property="tblView" destination="78W-Hp-qou" id="bTJ-5G-vl5"/>
                 <outlet property="view" destination="KvM-yF-kQn" id="ZkW-z8-xHs"/>
             </connections>

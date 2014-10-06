@@ -13,7 +13,7 @@
 @end
 
 @implementation ContactsViewController
-@synthesize viewLocation,viewExperience,viewCompany,tblContacts;
+@synthesize viewLocation,viewExperience,viewCompany,tblContacts,viewTable;
 - (void)viewDidLoad {
     [super viewDidLoad];
     sectionsDict = [[NSMutableDictionary alloc]init];
@@ -39,27 +39,38 @@
     }
     
     tblContacts.sectionIndexColor = RGBCOLOR_GREEN;
-    //searchBarCategory.tintColor = RGBCOLOR_GREEN;
 }
 
 - (IBAction)btnAddloCationPressed:(id)sender {
     
-    if (textCountry.text.length==0 || textCity.text.length==0 || textstate.text.length==0) {
+    NSString *strCity = [[NSString stringWithFormat:@"%@",textCity.text] isNull];
+    NSString *strState = [[NSString stringWithFormat:@"%@",textstate.text] isNull];
+    NSString *strCountry = [[NSString stringWithFormat:@"%@",textCountry.text] isNull];
+
+    
+    if ([strCity isEqualToString:@""]) {
             //Show specific alert
+        [CommonMethods displayAlertwithTitle:@"Please Enter City name" withMessage:nil withViewController:self];
+        
+    }
+    else if([strCountry isEqualToString:@""])
+    {
+        [CommonMethods displayAlertwithTitle:@"Please Enter Country name" withMessage:nil withViewController:self];
+
     }
     else{
         if (self.isEdit) {
-            self.editModel.city = textCity.text;
-            self.editModel.country = textCountry.text;
-            self.editModel.state = textstate.text;
+            self.editModel.city = strCity;
+            self.editModel.state = strState;
+            self.editModel.country = strCountry;
             [self cancelpressed:nil];
         }
         else{
         if ([self.delegate respondsToSelector:@selector(didselectCategory:WithType:)]) {
             ContactModel *model = [[ContactModel alloc]init];
-            model.city = textCity.text;
-            model.country = textCountry.text;
-            model.state = textstate.text;
+            model.city = strCity;
+            model.state = strState;
+            model.country = strCountry;
             model.type = self.currentViewType;
             [self.delegate didselectCategory:model
                                     WithType:self.currentViewType];
@@ -69,25 +80,19 @@
 }
 
 - (IBAction)btnExperiencePressed:(id)sender {
-    
-    
-    NSString *strSelectedYears = [NSString stringWithFormat:@"%ld",[sender tag]-99];
-        if (strSelectedYears.length>0) {
-        if (self.isEdit) {
-            self.editModel.experience = strSelectedYears;
-            [self cancelpressed:nil];
-        }
-        else{
-            ContactModel *model = [[ContactModel alloc]init];
-            model.experience = strSelectedYears;
-            model.type = self.currentViewType;
-            [self.delegate didselectCategory:model
-                                    WithType:self.currentViewType];
-        }
-        
+    NSString *strSelectedYears = [NSString stringWithFormat:@"%ld",(long)[sender tag]-99];
+    if (self.isEdit)
+    {
+        self.editModel.experience = strSelectedYears;
+        [self cancelpressed:nil];
     }
-    else{
-        //Show specific alert
+    else
+    {
+        ContactModel *model = [[ContactModel alloc]init];
+        model.experience = strSelectedYears;
+        model.type = self.currentViewType;
+        [self.delegate didselectCategory:model
+                                WithType:self.currentViewType];
     }
 }
 - (IBAction)btnDonePressed:(id)sender {
@@ -109,6 +114,7 @@
         }
         else{
             //Show specific alert
+            [CommonMethods displayAlertwithTitle:@"Please Enter Position" withMessage:nil withViewController:self];
         }
     }
     else if (self.currentViewType==COMPANY){
@@ -127,6 +133,8 @@
         }
         else{
             //Show specific alert
+            [CommonMethods displayAlertwithTitle:@"Please Enter Company" withMessage:nil withViewController:self];
+
         }
     }
 }
@@ -139,7 +147,7 @@
 -(void)addViewForEdit{
     
     viewLocation.hidden = YES;
-    tblContacts.hidden = YES;
+    viewTable.hidden = YES;
     viewLocation.hidden = YES;
     viewCompany.hidden = YES;
     btnCancel.hidden = NO;
@@ -209,7 +217,7 @@
         int count=0;
         float origin=0;
         viewLocation.hidden = YES;
-        tblContacts.hidden = YES;
+        viewTable.hidden = YES;
         viewLocation.hidden = YES;
         viewCompany.hidden = YES;
    // NSLog(@"%@",self.arrRemainedInfo);
@@ -257,11 +265,12 @@
             count++;
         }
     [self updateViewFromType];
-
 }
 
 
 -(void)btnTypePressed:(UIButton*)sender{
+    
+    [self.view endEditing:YES];
     NSUInteger tag = [sender tag]-100;
     if ( self.isForCandidate==YES) {
         for (UIButton *btn in viewButtons.subviews) {
@@ -281,19 +290,19 @@
     switch (self.currentViewType) {
         case INDUSTRY:
         {
-            tblContacts.hidden = NO;
+            viewTable.hidden = NO;
             viewLocation.hidden = YES;
             viewExperience.hidden = YES;
             viewCompany.hidden = YES;
             [tblContacts layoutIfNeeded];
             if ([self.delegate respondsToSelector:@selector(didChangeViewType:WithType:)]) {
-                [self.delegate didChangeViewType:tblContacts WithType:self.currentViewType];
+                [self.delegate didChangeViewType:viewTable WithType:self.currentViewType];
             }
         }
             break;
         case POSITION:
         {
-            tblContacts.hidden = YES;
+            viewTable.hidden = YES;
             viewLocation.hidden = YES;
             viewExperience.hidden = YES;
             viewCompany.hidden = NO;
@@ -307,7 +316,7 @@
             break;
         case COMPANY:
         {
-            tblContacts.hidden = YES;
+            viewTable.hidden = YES;
             viewLocation.hidden = YES;
             viewExperience.hidden = YES;
             viewCompany.hidden = NO;
@@ -321,7 +330,7 @@
             break;
         case LOCATION:
         {
-            tblContacts.hidden = YES;
+            viewTable.hidden = YES;
             viewLocation.hidden = NO;
             viewExperience.hidden = YES;
             viewCompany.hidden = YES;
@@ -332,7 +341,7 @@
             break;
         case EXPERIENCE:
         {
-            tblContacts.hidden = YES;
+            viewTable.hidden = YES;
             viewLocation.hidden = YES;
             viewExperience.hidden = NO;
             viewCompany.hidden = YES;

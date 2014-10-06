@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_MyProfileVC">
             <connections>
                 <outlet property="imgVUserPic" destination="xTK-Yq-y51" id="gBy-Sa-wYI"/>
-                <outlet property="lbl_Company" destination="TPa-kf-t9F" id="WaB-VL-i0A"/>
+                <outlet property="lbl_Company" destination="iBO-og-2V6" id="qdN-ed-m7J"/>
                 <outlet property="lbl_JobTitle" destination="QDl-a2-XF6" id="GUL-dI-bhR"/>
-                <outlet property="lbl_Location" destination="iBO-og-2V6" id="UwT-DA-9yk"/>
+                <outlet property="lbl_Location" destination="TPa-kf-t9F" id="Jbh-l3-gEz"/>
                 <outlet property="lbl_Name" destination="tZv-1m-9zA" id="fTF-9G-ceU"/>
                 <outlet property="lbl_School" destination="imc-eF-24z" id="9Km-yu-utc"/>
                 <outlet property="tblView" destination="UzM-V0-z1m" id="puO-VS-cNK"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -8,10 +9,10 @@
             <connections>
                 <outlet property="btn_StartUsingCrowd" destination="aW2-v6-hMC" id="Dof-CP-7Bl"/>
                 <outlet property="imgVUserPic" destination="lEU-JQ-98v" id="WdC-PN-CFZ"/>
-                <outlet property="lbl_Company" destination="DuX-Hb-QLu" id="2BE-hy-Bv8"/>
+                <outlet property="lbl_Company" destination="Taq-An-30C" id="F7C-Na-ata"/>
                 <outlet property="lbl_Congratulation" destination="Rkv-hH-Noa" id="QVl-kg-XYw"/>
                 <outlet property="lbl_JobTitle" destination="2GI-S1-xc0" id="7Xv-8l-TA8"/>
-                <outlet property="lbl_Location" destination="Taq-An-30C" id="24T-d5-4Ws"/>
+                <outlet property="lbl_Location" destination="DuX-Hb-QLu" id="OKN-uZ-azj"/>
                 <outlet property="lbl_Name" destination="Q21-g1-cpe" id="ATe-fV-51F"/>
                 <outlet property="lbl_School" destination="t9p-Dc-UHW" id="xev-mG-NJL"/>
                 <outlet property="tblView" destination="QKs-3b-Wvy" id="SuI-h6-qiq"/>
@@ -104,7 +105,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations your profile is complete, you can make changes now, or at anytime from the main menu" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="292" translatesAutoresizingMaskIntoConstraints="NO" id="Rkv-hH-Noa">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations your profile is complete, you can make changes now, or at anytime from the main menu." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="292" translatesAutoresizingMaskIntoConstraints="NO" id="Rkv-hH-Noa">
                             <rect key="frame" x="14" y="121" width="292" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="Uqz-55-Z7s"/>

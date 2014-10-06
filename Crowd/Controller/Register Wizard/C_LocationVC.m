@@ -93,7 +93,11 @@ typedef NS_ENUM(NSInteger, btnEdit) {
 //    // Device
 //#endif
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [viewCity.txtName becomeFirstResponder];
+}
 -(void)btnDoneClicked:(id)sender
 {
     if ([self checkValidation])
@@ -197,23 +201,6 @@ typedef NS_ENUM(NSInteger, btnEdit) {
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [textField becomeFirstResponder];
-//    constraint_scrollHeight.constant =  216.0;
-    
-//    if (textField == viewCity.txtName)
-//    {
-//        CGPoint point = CGPointMake(0, (IS_DEVICE_iPHONE_5)?20:20);
-//        [scrlV setContentOffset:point animated:YES];
-//    }
-//    else if(textField == viewState.txtName)
-//    {
-//        CGPoint point = CGPointMake(0, (IS_DEVICE_iPHONE_5)?60:50);
-//        [scrlV setContentOffset:point animated:YES];
-//    }
-//    else
-//    {
-//        CGPoint point = CGPointMake(0, (IS_DEVICE_iPHONE_5)?100:100);
-//        [scrlV setContentOffset:point animated:YES];
-//    }
     
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

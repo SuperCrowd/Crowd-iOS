@@ -49,6 +49,11 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     viewCountry.txtName.text = myWork.LocationCountry;
 
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [viewCity.txtName becomeFirstResponder];
+}
 -(void)back
 {
     popView;

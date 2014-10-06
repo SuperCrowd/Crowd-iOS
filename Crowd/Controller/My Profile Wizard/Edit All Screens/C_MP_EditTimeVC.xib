@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_MP_EditTimeVC">
             <connections>
                 <outlet property="btnToolbar" destination="RJb-x7-OJj" id="0sZ-IM-HRF"/>
-                <outlet property="lblTitle" destination="Aov-tI-X7t" id="aa4-5z-amc"/>
                 <outlet property="piker" destination="XMj-1l-hp2" id="uRE-GC-ay9"/>
                 <outlet property="txtFrom" destination="kcc-HZ-gX7" id="iTO-WG-biM"/>
                 <outlet property="txtTo" destination="2hZ-Gy-wJS" id="WL7-iu-hvd"/>
@@ -19,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Years" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aov-tI-X7t">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Years" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aov-tI-X7t">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>

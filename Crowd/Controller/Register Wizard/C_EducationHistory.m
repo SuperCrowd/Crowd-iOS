@@ -25,7 +25,7 @@
 @interface C_EducationHistory ()<UITableViewDataSource,UITableViewDelegate,DWTagListDelegate>
 {
     __weak IBOutlet UITableView *tblView;
-    
+
     NSMutableArray *arrSectionHeader;
 }
 @end
@@ -41,7 +41,7 @@
     {
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     }
-    
+    arrSectionHeader = [[NSMutableArray alloc]init];
     /*--- Register Cell ---*/
     tblView.delegate = self;
     tblView.dataSource = self;
@@ -67,13 +67,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [arrSectionHeader removeAllObjects];
     NSArray *arrT = @[@"School",@"Degree",@"Years",@"Courses"];
-    arrSectionHeader = [[NSMutableArray alloc]init];
+    
     for (int i = 0; i<myUserModel.arrEducationUser.count; i++)
     {
         [arrSectionHeader addObjectsFromArray:arrT];
     }
+    
     [tblView reloadData];
 }
 
@@ -152,7 +153,11 @@
         
         UIButton *btnAddSchool = [[UIButton alloc]initWithFrame:CGRectMake(65.0,10.0, screenSize.size.width-130.0, 30.0)];
         btnAddSchool.layer.cornerRadius = 10.0;
-        [btnAddSchool setTitle:@"Add Another School" forState:UIControlStateNormal];
+        if (arrSectionHeader.count == 0)
+            [btnAddSchool setTitle:@"Add School" forState:UIControlStateNormal];
+        else
+            [btnAddSchool setTitle:@"Add Another School" forState:UIControlStateNormal];
+
         [btnAddSchool.titleLabel setFont:kFONT_LIGHT(15.0)];
         [btnAddSchool setBackgroundImage:[UIImage imageNamed:@"btnGreenBG"] forState:UIControlStateNormal];
         [btnAddSchool addTarget:self action:@selector(btnAddNewSchoolCliked:) forControlEvents:UIControlEventTouchUpInside];

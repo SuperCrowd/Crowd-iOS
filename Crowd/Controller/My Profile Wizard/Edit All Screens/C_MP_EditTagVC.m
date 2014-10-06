@@ -40,6 +40,7 @@
     }
     
     lblTitle.font = kFONT_LIGHT(15.0);
+    [CommonMethods addBottomLine_to_Label:lblTitle];
     
     //Tap to add skills.  Separate skills with a comma.
     if (_strTags.length > 0)
@@ -55,6 +56,9 @@
 {
     [super viewDidAppear:animated];
     [txtV becomeFirstResponder];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        txtV.selectedRange = NSMakeRange([txtV.text length], 0);
+    });
 }
 -(void)back
 {

@@ -11,7 +11,6 @@
 #import "C_Education_Degree.h"
 @interface C_Education_SchoolVC ()<UITextViewDelegate>
 {
-    __weak IBOutlet UILabel *lblTitle;
     __weak IBOutlet UITextView *txtV;
 }
 

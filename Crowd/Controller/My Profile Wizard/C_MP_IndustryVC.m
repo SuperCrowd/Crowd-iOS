@@ -21,6 +21,8 @@
     NSInteger selectedView;
     
     BOOL goToNext;
+    
+    NSInteger yAxis;
 }
 @end
 
@@ -31,6 +33,15 @@
     self.title = @"Industry";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(doneClicked)];
+    
+    if (IS_DEVICE_iPHONE_4)
+    {
+        yAxis = 120.0;
+    }
+    else
+    {
+        yAxis = 155.0;
+    }
     
     scrlV.translatesAutoresizingMaskIntoConstraints = NO;
     [self showData];
@@ -60,71 +71,35 @@
 }
 -(void)showData
 {
-    int yAxis = 150;
-    int heightV = 55;
     
     if (![_obj_ProfileUpdate.Industry isEqualToString:@""])
     {
-        goToNext = YES;
-        C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis, screenSize.size.width, heightV)];
-        objT.tag = 1;
-        
-        /*--- text field ---*/
-        objT.txtName.delegate = self;
-        objT.txtName.tag = 0;
-        objT.txtName.adjustsFontSizeToFitWidth = YES;
-        objT.txtName.text = _obj_ProfileUpdate.Industry;
-        
-        /*--- button that user cant touch textfield ---*/
-        objT.btnTextField.alpha = 1.0;
-        [objT.btnTextField addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        /*--- btn Edit ---*/
-        [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        /*--- set label text to blank ---*/
-        objT.lblName.text = @"";
-        
-        [scrlV addSubview:objT];
+        [self addIndustry1_withText:_obj_ProfileUpdate.Industry];
     }
-    if (![_obj_ProfileUpdate.Industry2 isEqualToString:@""]) {
-        
-        goToNext = YES;
-        C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis+heightV+20.0, screenSize.size.width, 50)];
-        objT.tag = 2;
-        
-        /*--- text field ---*/
-        objT.txtName.delegate = self;
-        objT.txtName.adjustsFontSizeToFitWidth = YES;
-        objT.txtName.text = _obj_ProfileUpdate.Industry2;
-        
-        /*--- button that user cant touch textfield ---*/
-        objT.btnTextField.alpha = 1.0;
-        [objT.btnTextField addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        /*--- btn Edit ---*/
-        [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        /*--- set label text to blank ---*/
-        objT.lblName.text = @"";
-        
-        [scrlV addSubview:objT];
+    if (![_obj_ProfileUpdate.Industry2 isEqualToString:@""])
+    {
+        [self addIndustry2_withText:_obj_ProfileUpdate.Industry2];
     }
-    
+
     if ([_obj_ProfileUpdate.Industry isEqualToString:@""] || [_obj_ProfileUpdate.Industry2 isEqualToString:@""]) {
         /*--- At last add button for another industry ---*/
-        UIButton *btnAddIndustry = [[UIButton alloc]initWithFrame:CGRectMake(65.0, yAxis+heightV+20.0, screenSize.size.width-130.0, 30)];
+        CGRect frameBTN = CGRectMake(65.0, yAxis, screenSize.size.width-130.0, 30);
+        UIButton *btnAddIndustry = [[UIButton alloc]init];
+        /*--- At last add button for another industry ---*/
+        [btnAddIndustry setFrame:frameBTN];
         btnAddIndustry.tag = 51;
         btnAddIndustry.layer.cornerRadius = 10.0;
-        [btnAddIndustry setTitle:@"Add Another Industry" forState:UIControlStateNormal];
-        [btnAddIndustry.titleLabel setFont:kFONT_LIGHT(15.0)];
+        
+        if ([_obj_ProfileUpdate.Industry isEqualToString:@""])
+            [btnAddIndustry setTitle:@"Add Industry" forState:UIControlStateNormal];
+        else
+            [btnAddIndustry setTitle:@"Add Another Industry" forState:UIControlStateNormal];
+        
+        [btnAddIndustry.titleLabel setFont:kFONT_THIN(15.0)];
         
         [btnAddIndustry setBackgroundImage:[UIImage imageNamed:@"btnGreenBG"] forState:UIControlStateNormal];
         [btnAddIndustry addTarget:self action:@selector(btnAddNewIndustryClicked:) forControlEvents:UIControlEventTouchUpInside];
         [scrlV addSubview:btnAddIndustry];
-        
         
         [scrlV setContentSize:CGSizeMake(320, btnAddIndustry.frame.origin.y + btnAddIndustry.frame.size.height + 20.0)];
     }
@@ -181,10 +156,47 @@
 }
 -(void)addText:(NSString *)strText
 {
-    goToNext = YES;
+    [self addIndustry2_withText:strText];
     UIButton *btnAddAnotherIndustry = (UIButton *)[scrlV viewWithTag:51];
+    [btnAddAnotherIndustry removeFromSuperview];
+}
+
+#pragma mark - ADD Industry
+-(void)addIndustry1_withText:(NSString *)strText
+{
+    goToNext = YES;
+    C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis, screenSize.size.width, 55.0)];
     
-    C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, btnAddAnotherIndustry.frame.origin.y, screenSize.size.width, 55.0)];
+    objT.tag = 1;
+    
+    /*--- text field ---*/
+    objT.txtName.delegate = self;
+    objT.txtName.tag = 0;
+    objT.txtName.adjustsFontSizeToFitWidth = YES;
+    objT.txtName.text = strText;
+    
+    /*--- button that user cant touch textfield ---*/
+    objT.btnTextField.alpha = 1.0;
+    [objT.btnTextField addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    /*--- btn Edit ---*/
+    [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    /*--- set label text to blank ---*/
+    objT.lblName.text = @"";
+    
+    [scrlV addSubview:objT];
+    
+    yAxis = yAxis + 55.0 + 20.0;
+}
+
+
+-(void)addIndustry2_withText:(NSString *)strText
+{
+    goToNext = YES;
+    
+    C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis, screenSize.size.width, 55.0)];
     objT.tag = 2;
     
     /*--- text field ---*/
@@ -204,7 +216,7 @@
     objT.lblName.text = @"";
     
     [scrlV addSubview:objT];
-    [btnAddAnotherIndustry removeFromSuperview];
+    yAxis = yAxis + 55.0 + 20.0;
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

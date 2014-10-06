@@ -11,8 +11,8 @@
 #import "C_UserModel.h"
 @interface C_Education_Courses ()<UITextViewDelegate>
 {
-    __weak IBOutlet UILabel *lblTitle;
     __weak IBOutlet UITextView *txtV;
+    __weak IBOutlet UILabel *lblTitle;
 }
 
 @end
@@ -25,6 +25,8 @@
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
     
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
+    
+    [CommonMethods addBottomLine_to_Label:lblTitle];
 
     txtV.text = @"";
 }

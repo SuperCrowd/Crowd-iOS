@@ -8,6 +8,8 @@
 
 #import "C_PostJob_IndustryVC.h"
 #import "AppConstant.h"
+#import "C_PostJob_NameVC.h"
+
 #import "C_PostJob_IndustryListingVC.h"
 #import "C_ViewEditableTextField.h"
 #import "C_PostJob_PositionVC.h"
@@ -44,7 +46,19 @@
 }
 -(void)back
 {
-    popView;
+    if ([is_PostJob_Edit_update isEqualToString:@"no"])
+    {
+        for (UIViewController *vc in self.navigationController.viewControllers)
+        {
+            if ([vc isKindOfClass:[C_PostJob_NameVC class]])
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    }
+    else
+        popView;
 }
 -(void)done
 {
@@ -95,7 +109,7 @@
     [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     /*--- set label text to blank ---*/
-    objT.lblName.text = @"";
+    objT.lblName.text = @"Industry";
     
     [scrlV addSubview:objT];
 
@@ -131,7 +145,7 @@
         [objT.btnEdit addTarget:self action:@selector(btnEditClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         /*--- set label text to blank ---*/
-        objT.lblName.text = @"";
+        objT.lblName.text = @"Industry";
         
         [scrlV addSubview:objT];
         return;
@@ -142,7 +156,7 @@
     btnAddIndustry.tag = 51;
     btnAddIndustry.layer.cornerRadius = 10.0;
     [btnAddIndustry setTitle:@"Add Another Industry" forState:UIControlStateNormal];
-    [btnAddIndustry.titleLabel setFont:kFONT_LIGHT(15.0)];
+    [btnAddIndustry.titleLabel setFont:kFONT_THIN(15.0)];
     
     [btnAddIndustry setBackgroundImage:[UIImage imageNamed:@"btnGreenBG"] forState:UIControlStateNormal];
     [btnAddIndustry addTarget:self action:@selector(btnAddNewIndustryClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -211,7 +225,7 @@
     
     
     /*--- set label text to blank ---*/
-    objT.lblName.text = @"";
+    objT.lblName.text = @"Industry";
     
     [scrlV addSubview:objT];
     [btnAddAnotherIndustry removeFromSuperview];

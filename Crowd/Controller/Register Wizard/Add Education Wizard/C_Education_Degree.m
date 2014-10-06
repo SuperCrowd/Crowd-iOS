@@ -11,7 +11,6 @@
 #import "C_Education_Time.h"
 @interface C_Education_Degree ()<UITextViewDelegate>
 {
-    __weak IBOutlet UILabel *lblTitle;
     __weak IBOutlet UITextView *txtV;
 }
 

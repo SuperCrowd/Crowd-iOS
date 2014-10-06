@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -19,13 +18,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="PNl-f0-UQU">
-                    <rect key="frame" x="95" y="91" width="131" height="45"/>
+                    <rect key="frame" x="95" y="100" width="131" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="IuH-cH-gUl"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To get started login with LinkedIn and we will automatically fill out your Crowd profile." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="fCl-jB-fVa">
-                    <rect key="frame" x="20" y="301" width="280" height="33"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To get started login with LinkedIn and we will automatically fill out your Crowd profile." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="fCl-jB-fVa">
+                    <rect key="frame" x="20" y="300" width="280" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="280" id="ccV-zQ-cEJ"/>
                         <constraint firstAttribute="height" constant="33" id="k2c-Z8-PJh"/>
@@ -35,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tci-fK-u7Y">
-                    <rect key="frame" x="52" y="408" width="216" height="51"/>
+                    <rect key="frame" x="52" y="407" width="216" height="51"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="51" id="0S5-eO-nv5"/>
                         <constraint firstAttribute="width" constant="216" id="YzI-Jf-Yne"/>
@@ -59,8 +58,8 @@
                 <constraint firstItem="Nye-zA-xXY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WR5-fW-u5C"/>
                 <constraint firstAttribute="trailing" secondItem="Nye-zA-xXY" secondAttribute="trailing" id="eO8-Td-IvW"/>
                 <constraint firstItem="fCl-jB-fVa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="eS1-6b-uun"/>
-                <constraint firstItem="PNl-f0-UQU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="91" id="gsf-rH-QZS"/>
-                <constraint firstItem="fCl-jB-fVa" firstAttribute="top" secondItem="PNl-f0-UQU" secondAttribute="bottom" constant="165" id="uCL-X3-rNd"/>
+                <constraint firstItem="PNl-f0-UQU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="gsf-rH-QZS"/>
+                <constraint firstItem="fCl-jB-fVa" firstAttribute="top" secondItem="PNl-f0-UQU" secondAttribute="bottom" constant="155" id="uCL-X3-rNd"/>
                 <constraint firstAttribute="trailing" secondItem="Tci-fK-u7Y" secondAttribute="trailing" constant="52" id="yMZ-Tu-28v"/>
                 <constraint firstItem="Tci-fK-u7Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="52" id="zhY-HB-ZKY"/>
             </constraints>

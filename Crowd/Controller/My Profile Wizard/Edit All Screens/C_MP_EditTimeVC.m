@@ -22,8 +22,6 @@ typedef NS_ENUM(NSInteger, btnTapped)
 };
 @interface C_MP_EditTimeVC ()<UIPickerViewDataSource,UIPickerViewDelegate>
 {
-    __weak IBOutlet UILabel *lblTitle;
-    
     __weak IBOutlet UITextFieldExtended *txtFrom;
     __weak IBOutlet UITextFieldExtended *txtTo;
     
@@ -49,7 +47,6 @@ typedef NS_ENUM(NSInteger, btnTapped)
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = _strTitle;
-    lblTitle.text = @"Years";
     
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];

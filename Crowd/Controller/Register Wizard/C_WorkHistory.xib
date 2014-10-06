@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_WorkHistory">
             <connections>
+                <outlet property="lbl_Static_NoHistoryFound" destination="4Zp-C5-UpB" id="1no-px-yln"/>
                 <outlet property="tblView" destination="UB4-ri-ump" id="Pjp-JD-z0l"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="g0h-JZ-ubW"/>
             </connections>
@@ -32,13 +33,23 @@
                         <action selector="btnNextClicked:" destination="-1" eventType="touchUpInside" id="lzS-qn-kNq"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No work history found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zp-C5-UpB">
+                    <rect key="frame" x="38" y="132" width="244" height="31"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                    <color key="textColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="4Zp-C5-UpB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="F2d-ig-2SB"/>
                 <constraint firstItem="UB4-ri-ump" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GNF-vw-Eee"/>
+                <constraint firstItem="4Zp-C5-UpB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="132" id="KMo-VD-JdY"/>
                 <constraint firstAttribute="bottom" secondItem="UB4-ri-ump" secondAttribute="bottom" constant="120" id="L6F-yn-G4P"/>
                 <constraint firstAttribute="bottom" secondItem="wiF-7t-j9k" secondAttribute="bottom" constant="40" id="NeP-9a-NhP"/>
                 <constraint firstItem="UB4-ri-ump" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Rlm-3g-CGP"/>
+                <constraint firstAttribute="bottom" secondItem="4Zp-C5-UpB" secondAttribute="bottom" constant="253" id="a8y-Jy-rDh"/>
+                <constraint firstAttribute="trailing" secondItem="4Zp-C5-UpB" secondAttribute="trailing" constant="38" id="eba-5f-dt7"/>
                 <constraint firstAttribute="centerX" secondItem="wiF-7t-j9k" secondAttribute="centerX" constant="-0.5" id="qgy-Gw-g77"/>
                 <constraint firstAttribute="trailing" secondItem="UB4-ri-ump" secondAttribute="trailing" id="y7T-LU-QnW"/>
             </constraints>

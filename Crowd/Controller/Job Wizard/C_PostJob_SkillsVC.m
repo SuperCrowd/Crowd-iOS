@@ -15,6 +15,8 @@
 @interface C_PostJob_SkillsVC ()<UITextViewDelegate>
 {
     __weak IBOutlet UITextView *txtV;
+    __weak IBOutlet UILabel *lblSubTitle;
+
 }
 
 
@@ -52,6 +54,8 @@
     {
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
     }
+    [CommonMethods addBottomLine_to_Label:lblSubTitle];
+
 }
 -(void)done
 {
@@ -91,6 +95,9 @@
     [super viewDidAppear:animated];
     
     [txtV becomeFirstResponder];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        txtV.selectedRange = NSMakeRange([txtV.text length], 0);
+    });
 }
 -(BOOL)saveSkills
 {

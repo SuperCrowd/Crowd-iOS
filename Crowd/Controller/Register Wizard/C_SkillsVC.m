@@ -41,10 +41,14 @@
         [arrSkills addObject:mySkills.name];
     }
     
+    [self showData];
+}
+-(void)showData
+{
     if (arrSkills.count > 0)
     {
         lblNoTag.alpha = 0.0;
-        //_tagList.alpha = 1.0;
+        _tagList.alpha = 1.0;
         [_tagList setAutomaticResize:YES];
         
         [_tagList setTags:arrSkills];
@@ -67,7 +71,6 @@
         _tagList.alpha = 0.0;
     }
 }
-
 -(void)btnDoneClicked:(id)sender
 {
     for (UIViewController *vc in self.navigationController.viewControllers)
@@ -98,8 +101,8 @@
 {
     [arrSkills removeAllObjects];
     arrSkills = [[strText componentsSeparatedByString:@","] mutableCopy];
-    [_tagList setTags:arrSkills];
-    
+    //[_tagList setTags:arrSkills];
+    [self showData];
     @try
     {
         NSMutableArray *arrTemp = [[NSMutableArray alloc]init];
@@ -113,6 +116,7 @@
         myUserModel.arrSkillsUser = arrTemp;
         [CommonMethods saveMyUser:myUserModel];
         myUserModel = [CommonMethods getMyUser];
+
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);

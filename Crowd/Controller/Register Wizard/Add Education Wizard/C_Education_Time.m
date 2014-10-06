@@ -19,9 +19,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
     btnEditTo = 52
 };
 @interface C_Education_Time ()<UIPickerViewDataSource,UIPickerViewDelegate>
-{
-    __weak IBOutlet UILabel *lblTitle;
-    
+{    
     __weak IBOutlet UITextFieldExtended *txtFrom;
     __weak IBOutlet UITextFieldExtended *txtTo;
     
@@ -79,11 +77,11 @@ typedef NS_ENUM(NSInteger, btnTapped)
                      @"November",
                      @"December"];
     strMonth = @"January";
-    strYear = [NSString stringWithFormat:@"%ld",currentYear-10];
+    strYear = [NSString stringWithFormat:@"%ld",(long)currentYear-10];
     txtFrom.text = [[NSString stringWithFormat:@"%@ %@",strMonth,strYear] isNull];
     
     NSString *strEndM = @"January";
-    NSString *strEndY = [NSString stringWithFormat:@"%ld",currentYear-10];
+    NSString *strEndY = [NSString stringWithFormat:@"%ld",(long)currentYear-10];
 
     txtTo.text = [NSString stringWithFormat:@"%@ %@",strEndM,strEndY];
     [piker reloadAllComponents];

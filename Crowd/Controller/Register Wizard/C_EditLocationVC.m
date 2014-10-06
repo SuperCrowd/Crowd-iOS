@@ -47,7 +47,11 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     // Device
 #endif
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [viewCity.txtName becomeFirstResponder];
+}
 -(void)setupEditableView
 {
     

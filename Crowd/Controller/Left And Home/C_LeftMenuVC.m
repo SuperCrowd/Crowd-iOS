@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     rectBtn_0 = CGRectMake(totalWidth/3, 2.0, 34.0, 34.0);
     rectLBL_0 = CGRectMake(totalWidth/3+39.0, 2.0, totalWidth/2-39.0, 34.0);
     
-    rectBtn = CGRectMake(20.0, 2.0, 34.0, 34.0);
+    rectBtn = CGRectMake(15.0, 2.0, 34.0, 34.0);
     rectLbl = CGRectMake(59.0, 2.0, screenSize.size.width - 45.0 - 69.0, 34.0);//20+34+5.0
     
     /*--- Round Imageview and load---*/

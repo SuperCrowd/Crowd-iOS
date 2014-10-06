@@ -109,6 +109,7 @@
         
         [self.client getAuthorizationCode:^(NSString *code)
         {
+            showHUD_with_Title(@"Getting your Linkedin profile...")
             [self.client getAccessToken:code success:^(NSDictionary *accessTokenData)
              {
                  NSString *accessToken = [accessTokenData objectForKey:@"access_token"];
@@ -142,7 +143,7 @@
 #pragma mark - Linkedin Methods
 - (void)requestMeWithToken:(NSString *)accessToken
 {
-    showHUD_with_Title(@"Getting your Linkedin profile...")
+//    showHUD_with_Title(@"Getting your Linkedin profile...")
     [self.client GET:[NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,email-address,location,industry,summary,picture-urls::(original),positions,educations,skills,recommendations-received)?oauth2_access_token=%@&format=json", accessToken] parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *result)
      {
          //https://api.linkedin.com/v1/people/~:(id,first-name,last-name,maiden-name,email-address)?oauth2_access_token=%@&format=json

@@ -8,9 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_UpdateVC">
             <connections>
                 <outlet property="lbl_City_State" destination="ocg-L9-mnu" id="zbT-Ky-WiA"/>
-                <outlet property="lbl_Company" destination="GBa-YN-rKY" id="Qrg-Xn-dQP"/>
+                <outlet property="lbl_Company" destination="jQz-MF-WLx" id="lbF-nE-7Ei"/>
                 <outlet property="lbl_Country" destination="CDM-gu-9Ay" id="Zby-rg-UFa"/>
-                <outlet property="lbl_JobTitle" destination="jQz-MF-WLx" id="ikY-I5-w0y"/>
+                <outlet property="lbl_JobTitle" destination="GBa-YN-rKY" id="dq0-wc-avp"/>
                 <outlet property="tblView" destination="6fm-GF-FUk" id="GFh-Q0-S0l"/>
                 <outlet property="view" destination="ZaG-WM-3qt" id="6b8-ZF-7dX"/>
             </connections>

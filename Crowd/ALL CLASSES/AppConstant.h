@@ -86,6 +86,7 @@
 #define iPhone5_ImageSuffix (IS_DEVICE_iPHONE_5)?@"-568h":@""
 #define ImageName(name)([NSString stringWithFormat:@"%@%@",name,iPhone5_ImageSuffix])
 
+#define IS_DEVICE_iPHONE_4 ((UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone) && ([[UIScreen mainScreen ] bounds].size.height==480.0f))
 
 #define ios8 (([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)?20:0)
 

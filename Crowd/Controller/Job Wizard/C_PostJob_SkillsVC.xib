@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_SkillsVC">
             <connections>
+                <outlet property="lblSubTitle" destination="VaG-ph-fyW" id="Ttd-ai-bfh"/>
                 <outlet property="txtV" destination="pI4-EH-aSX" id="9nb-fm-Wfj"/>
                 <outlet property="view" destination="qTL-JC-Ghg" id="NHR-kb-bR1"/>
             </connections>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Cell_SkillsProfile"/>
@@ -14,13 +14,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PyV-HR-r4R" customClass="DWTagList">
-                        <rect key="frame" x="10" y="12" width="300" height="19"/>
+                        <rect key="frame" x="10" y="12" width="300" height="21"/>
                     </scrollView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="PyV-HR-r4R" firstAttribute="top" secondItem="G8c-fH-rg0" secondAttribute="top" constant="12" id="JdT-7f-LRj"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="PyV-HR-r4R" secondAttribute="bottom" constant="4" id="KMo-by-Rre"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="PyV-HR-r4R" secondAttribute="trailing" constant="2" id="gQ4-FK-nJj"/>
+                    <constraint firstAttribute="bottom" secondItem="PyV-HR-r4R" secondAttribute="bottom" constant="10" id="KMo-by-Rre"/>
+                    <constraint firstAttribute="trailing" secondItem="PyV-HR-r4R" secondAttribute="trailing" constant="10" id="gQ4-FK-nJj"/>
                     <constraint firstItem="PyV-HR-r4R" firstAttribute="leading" secondItem="G8c-fH-rg0" secondAttribute="leading" constant="10" id="jOr-An-srA"/>
                 </constraints>
             </tableViewCellContentView>

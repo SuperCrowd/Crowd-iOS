@@ -22,7 +22,7 @@
 @interface C_WorkHistory ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
-    
+    __weak IBOutlet UILabel *lbl_Static_NoHistoryFound;
     NSMutableArray *arrSectionHeader;
 }
 @end
@@ -75,6 +75,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (arrSectionHeader.count > 0)
+    {
+        lbl_Static_NoHistoryFound.alpha = 0.0;
+    }
+    else
+    {
+        lbl_Static_NoHistoryFound.alpha = 1.0;
+    }
     [tblView reloadData];
 }
 
