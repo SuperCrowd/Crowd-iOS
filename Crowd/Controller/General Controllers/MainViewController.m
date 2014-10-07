@@ -282,6 +282,8 @@
             case LOCATION:
             {
                 strName = [NSString stringWithFormat:@"%@,%@,%@",curModel.city,curModel.state,curModel.country];
+                NSArray *arr = [CommonMethods getTagArray:strName];
+                strName = [arr componentsJoinedByString:@","];
             }
                 break;
             case COMPANY:
@@ -358,10 +360,7 @@
 //    ="UserID" ni
 //    ="UserToken"
 //    PageNumber" nil
-    
-    
-    
-    
+
     NSMutableDictionary *dictSend = [[NSMutableDictionary alloc]init];
     [dictSend setValue:@"" forKey:@"Industry"];
     [dictSend setValue:@"" forKey:@"Industry2"];
@@ -593,20 +592,20 @@
     switch (model.type) {
         case INDUSTRY:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for %@",arrViews[INDUSTRY]];
+            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[INDUSTRY]];
             cell.lblCategoryName.text = model.name;
         }
             break;
         case POSITION:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for %@",arrViews[POSITION]];
+            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[POSITION]];
             cell.lblCategoryName.text = model.position;
 
         }
             break;
         case EXPERIENCE:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for %@",self.isForCandidate?arrViews[EXPERIENCE-1]:arrViews[EXPERIENCE]];
+            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",self.isForCandidate?arrViews[EXPERIENCE-1]:arrViews[EXPERIENCE]];
             cell.lblCategoryName.text = model.experience;
 
         }
@@ -614,23 +613,27 @@
         case COMPANY:
         {
             if (self.isForCandidate) {
-                cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for %@",arrViews[COMPANY-1]];
+                cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[COMPANY-1]];
             }
             else{
-                cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for %@",arrViews[COMPANY]];
+                cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[COMPANY]];
             }
             cell.lblCategoryName.text = model.company;
         }
             break;
         case LOCATION:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for %@",self.isForCandidate?arrViews[LOCATION-1]:arrViews[LOCATION]];
+            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",self.isForCandidate?arrViews[LOCATION-1]:arrViews[LOCATION]];
             if ([[model.state isNull]isEqualToString:@""])
             {
-                cell.lblCategoryName.text = [NSString stringWithFormat:@"%@ \n %@",model.city,model.country];
+                cell.lblCategoryName.text  = [NSString stringWithFormat:@"%@\n%@",model.city,model.country];
             }
             else
-                cell.lblCategoryName.text = [NSString stringWithFormat:@"%@ \n %@ , %@",model.city,model.state,model.country];
+            {
+                NSArray *arr = [CommonMethods getTagArray:[NSString stringWithFormat:@"%@ \n %@ , %@",model.city,model.state,model.country]];
+                NSString *strName = [arr componentsJoinedByString:@","];
+                cell.lblCategoryName.text  = strName;
+            }
         }
             break;
         default:

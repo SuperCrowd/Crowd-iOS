@@ -154,6 +154,8 @@
     goToNext = YES;
     C_ViewEditableTextField *objT = (C_ViewEditableTextField *)[scrlV viewWithTag:selectedView];
     objT.txtName.text = strText;
+    
+    [self saveIndustry];
 }
 -(void)addText:(NSString *)strText
 {
@@ -174,6 +176,8 @@
         UIButton *btnAddAnotherIndustry = (UIButton *)[scrlV viewWithTag:51];
         [btnAddAnotherIndustry removeFromSuperview];
     }
+    
+    [self saveIndustry];
 }
 
 

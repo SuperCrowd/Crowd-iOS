@@ -28,28 +28,25 @@
                             <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v22-Fa-wch" userLabel="Add Company Name">
-                            <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v22-Fa-wch" userLabel="Add Company Name">
+                            <rect key="frame" x="0.0" y="55" width="320" height="55"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="63" translatesAutoresizingMaskIntoConstraints="NO" id="N27-Cz-Q2o">
-                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                    <rect key="frame" x="8" y="17" width="42" height="21"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
                                     <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="textfiled" translatesAutoresizingMaskIntoConstraints="NO" id="BTQ-2A-Zjl">
-                                    <rect key="frame" x="52" y="8" width="216" height="28"/>
-                                </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="company name" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oJ5-u8-2Ge" customClass="UITextFieldExtended">
-                                    <rect key="frame" x="63" y="8" width="204" height="28"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="company name" adjustsFontSizeToFit="NO" minimumFontSize="17" background="textfiled2" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oJ5-u8-2Ge" customClass="UITextFieldExtended">
+                                    <rect key="frame" x="53" y="2" width="215" height="51"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="q3E-lJ-ggX"/>
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ho-BF-v9e">
-                                    <rect key="frame" x="282" y="11" width="22" height="22"/>
+                                    <rect key="frame" x="282" y="17" width="22" height="22"/>
                                     <state key="normal" image="edit_icon_green">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -60,7 +57,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="6Rk-4M-M7C"/>
+                                <constraint firstAttribute="height" constant="55" id="6Rk-4M-M7C"/>
                                 <constraint firstAttribute="width" constant="320" id="NFb-P5-fhs"/>
                             </constraints>
                         </view>
@@ -71,16 +68,17 @@
                         <constraint firstAttribute="height" constant="120" id="KNs-cf-Rj8"/>
                         <constraint firstAttribute="centerX" secondItem="v22-Fa-wch" secondAttribute="centerX" id="cDG-X2-vlx"/>
                         <constraint firstItem="Bcl-8t-Nwf" firstAttribute="top" secondItem="Co7-bC-frs" secondAttribute="top" constant="9" id="jGY-3B-FKa"/>
-                        <constraint firstItem="v22-Fa-wch" firstAttribute="top" secondItem="Bcl-8t-Nwf" secondAttribute="bottom" constant="27" id="y8Z-PN-MYr"/>
+                        <constraint firstItem="v22-Fa-wch" firstAttribute="top" secondItem="Bcl-8t-Nwf" secondAttribute="bottom" constant="10" id="y8Z-PN-MYr"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFl-lT-8fP">
-                    <rect key="frame" x="53" y="135" width="214" height="29"/>
+                    <rect key="frame" x="53" y="114" width="215" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="29" id="GsX-RW-lfX"/>
+                        <constraint firstAttribute="height" constant="50" id="GsX-RW-lfX"/>
+                        <constraint firstAttribute="width" constant="215" id="yJt-3h-8as"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
-                    <state key="normal" title="Next" backgroundImage="btnGreenBG">
+                    <state key="normal" backgroundImage="next_btn_mid">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -93,22 +91,21 @@
                 <constraint firstItem="Co7-bC-frs" firstAttribute="top" secondItem="CDN-u6-L4j" secondAttribute="top" id="QJz-We-FbG"/>
                 <constraint firstItem="Co7-bC-frs" firstAttribute="leading" secondItem="CDN-u6-L4j" secondAttribute="leading" id="TMO-ex-Jns"/>
                 <constraint firstAttribute="bottom" secondItem="WFl-lT-8fP" secondAttribute="bottom" constant="252" id="Ttl-Mh-IOp"/>
-                <constraint firstItem="WFl-lT-8fP" firstAttribute="leading" secondItem="CDN-u6-L4j" secondAttribute="leading" constant="53" id="Vsl-UC-ZZV"/>
+                <constraint firstAttribute="centerX" secondItem="WFl-lT-8fP" secondAttribute="centerX" id="Vna-xm-f3g"/>
                 <constraint firstAttribute="trailing" secondItem="Co7-bC-frs" secondAttribute="trailing" id="X0e-0Z-kbl"/>
-                <constraint firstAttribute="trailing" secondItem="WFl-lT-8fP" secondAttribute="trailing" constant="53" id="q9A-1g-9hL"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="140" y="155"/>
+            <point key="canvasLocation" x="135" y="135"/>
         </view>
     </objects>
     <resources>
-        <image name="btnGreenBG" width="214" height="29"/>
         <image name="edit_icon_green" width="22" height="22"/>
-        <image name="textfiled" width="216" height="28"/>
+        <image name="next_btn_mid" width="215" height="50"/>
+        <image name="textfiled2" width="215" height="51"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

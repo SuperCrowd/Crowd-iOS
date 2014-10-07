@@ -412,7 +412,12 @@ NSString *DocumentsDirectoryPath() {NSArray *paths = NSSearchPathForDirectoriesI
 
 
 
-
++(void)scrollToCaretInTextView:(UITextView *)textView animated:(BOOL)animated
+{
+    CGRect rect = [textView caretRectForPosition:textView.selectedTextRange.end];
+    rect.size.height += textView.textContainerInset.bottom;
+    [textView scrollRectToVisible:rect animated:animated];
+}
 +(void)addBottomLine_to_Label:(UILabel *)lbl
 {
     CALayer* layer = [lbl layer];

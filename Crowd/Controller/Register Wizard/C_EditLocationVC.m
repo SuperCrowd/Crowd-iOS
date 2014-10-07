@@ -39,13 +39,22 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     
     
     [self setupEditableView];
-#if TARGET_IPHONE_SIMULATOR
-    viewCity.txtName.text = @"Ahmedabad";
-    viewState.txtName.text = @"Gujarat";
-    viewCountry.txtName.text = @"India";
-#else
-    // Device
-#endif
+    
+    Positions *myPosition = _arrContent[_selectedIndexToUpdate];
+    viewCity.txtName.text = myPosition.location_city;
+    viewState.txtName.text = myPosition.location_state;
+    viewCountry.txtName.text = myPosition.location_country;
+    
+    
+    
+    
+//#if TARGET_IPHONE_SIMULATOR
+//    viewCity.txtName.text = @"Ahmedabad";
+//    viewState.txtName.text = @"Gujarat";
+//    viewCountry.txtName.text = @"India";
+//#else
+//    // Device
+//#endif
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -132,7 +141,6 @@ typedef NS_ENUM(NSInteger, btnEdit) {
             myPosition.location_country = strCountry;
             
             [_arrContent replaceObjectAtIndex:_selectedIndexToUpdate withObject:myPosition];
-            
         }
         [CommonMethods saveMyUser:myUserModel];
         myUserModel = [CommonMethods getMyUser];

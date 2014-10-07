@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -12,7 +13,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="9eh-Lj-5uv">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <rect key="frame" x="0.0" y="64" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OmO-xV-spZ">
@@ -29,27 +30,24 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikQ-Ev-ycM" userLabel="Add Company Name">
-                            <rect key="frame" x="0.0" y="71" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="54" width="320" height="55"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="63" translatesAutoresizingMaskIntoConstraints="NO" id="rDQ-f8-non">
-                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                    <rect key="frame" x="8" y="17" width="42" height="21"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
                                     <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="textfiled" translatesAutoresizingMaskIntoConstraints="NO" id="CK8-T7-rFZ">
-                                    <rect key="frame" x="52" y="8" width="215" height="28"/>
-                                </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Job Position" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1oN-Q4-cNo" customClass="UITextFieldExtended">
-                                    <rect key="frame" x="63" y="8" width="204" height="28"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Job Position" adjustsFontSizeToFit="NO" minimumFontSize="17" background="textfiled2" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1oN-Q4-cNo" customClass="UITextFieldExtended">
+                                    <rect key="frame" x="53" y="2" width="215" height="51"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="igH-2T-K1r"/>
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsS-TU-rt5">
-                                    <rect key="frame" x="293" y="11" width="22" height="22"/>
+                                    <rect key="frame" x="282" y="17" width="22" height="22"/>
                                     <state key="normal" image="edit_icon_green">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -61,7 +59,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="320" id="4iW-aB-etc"/>
-                                <constraint firstAttribute="height" constant="44" id="N57-Vt-spP"/>
+                                <constraint firstAttribute="height" constant="55" id="N57-Vt-spP"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -71,17 +69,18 @@
                         <constraint firstItem="pi8-nY-Cd1" firstAttribute="top" secondItem="OmO-xV-spZ" secondAttribute="top" constant="8" id="CWs-0J-2OK"/>
                         <constraint firstAttribute="centerX" secondItem="ikQ-Ev-ycM" secondAttribute="centerX" id="D1z-SX-Afv"/>
                         <constraint firstAttribute="centerX" secondItem="pi8-nY-Cd1" secondAttribute="centerX" id="RMM-GT-erL"/>
-                        <constraint firstItem="ikQ-Ev-ycM" firstAttribute="top" secondItem="pi8-nY-Cd1" secondAttribute="bottom" constant="27" id="VW7-mR-x0l"/>
+                        <constraint firstItem="ikQ-Ev-ycM" firstAttribute="top" secondItem="pi8-nY-Cd1" secondAttribute="bottom" constant="10" id="VW7-mR-x0l"/>
                         <constraint firstItem="pi8-nY-Cd1" firstAttribute="leading" secondItem="OmO-xV-spZ" secondAttribute="leading" constant="20" id="zcQ-wb-2G7"/>
                     </constraints>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nk9-C3-EDa">
-                    <rect key="frame" x="53" y="135" width="214" height="29"/>
+                    <rect key="frame" x="53" y="114" width="215" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="29" id="GXW-fN-QNN"/>
+                        <constraint firstAttribute="height" constant="50" id="GXW-fN-QNN"/>
+                        <constraint firstAttribute="width" constant="215" id="uat-Fr-xnG"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
-                    <state key="normal" title="Next" backgroundImage="btnGreenBG">
+                    <state key="normal" image="next_btn_mid">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -91,13 +90,12 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="nk9-C3-EDa" secondAttribute="centerX" constant="-0.5" id="3AE-qz-8gR"/>
                 <constraint firstAttribute="bottom" secondItem="nk9-C3-EDa" secondAttribute="bottom" constant="252" id="8Fl-MF-nu0"/>
                 <constraint firstItem="OmO-xV-spZ" firstAttribute="top" secondItem="9eh-Lj-5uv" secondAttribute="top" id="D1N-zf-qgv"/>
                 <constraint firstAttribute="bottom" secondItem="OmO-xV-spZ" secondAttribute="bottom" constant="291" id="QcQ-sL-A0n"/>
-                <constraint firstItem="nk9-C3-EDa" firstAttribute="leading" secondItem="9eh-Lj-5uv" secondAttribute="leading" constant="53" id="RtU-NR-8aq"/>
                 <constraint firstItem="OmO-xV-spZ" firstAttribute="leading" secondItem="9eh-Lj-5uv" secondAttribute="leading" id="X23-Nt-uoX"/>
                 <constraint firstAttribute="trailing" secondItem="OmO-xV-spZ" secondAttribute="trailing" id="hbg-5U-Hcr"/>
-                <constraint firstAttribute="trailing" secondItem="nk9-C3-EDa" secondAttribute="trailing" constant="53" id="j4x-n2-pE3"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -108,9 +106,9 @@
         </view>
     </objects>
     <resources>
-        <image name="btnGreenBG" width="214" height="29"/>
         <image name="edit_icon_green" width="22" height="22"/>
-        <image name="textfiled" width="216" height="28"/>
+        <image name="next_btn_mid" width="215" height="50"/>
+        <image name="textfiled2" width="215" height="51"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

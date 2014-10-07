@@ -48,16 +48,12 @@
     NSString *strCountry = [[NSString stringWithFormat:@"%@",textCountry.text] isNull];
 
     
-    if ([strCity isEqualToString:@""]) {
+    if ([strCity isEqualToString:@""] && [strState isEqualToString:@""] && [strCountry isEqualToString:@""]) {
             //Show specific alert
-        [CommonMethods displayAlertwithTitle:@"Please Enter City name" withMessage:nil withViewController:self];
+        [CommonMethods displayAlertwithTitle:@"Please Enter One of the location" withMessage:nil withViewController:self];
         
     }
-    else if([strCountry isEqualToString:@""])
-    {
-        [CommonMethods displayAlertwithTitle:@"Please Enter Country name" withMessage:nil withViewController:self];
-
-    }
+    
     else{
         if (self.isEdit) {
             self.editModel.city = strCity;

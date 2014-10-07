@@ -8,6 +8,7 @@
 
 #import "C_SearchVC.h"
 #import "AppConstant.h"
+#import "C_UserModel.h"
 @interface C_SearchVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -136,6 +137,14 @@
     else
         strText = arrContent[indexPath.section][@"value"][indexPath.row];
 
+    if ([myUserModel.industry isEqualToString:strText] ||
+        [myUserModel.industry2 isEqualToString:strText])
+    {
+        [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                          withViewController:self];
+        return;
+    }
+    
     if (_isUpdate)
     {
         if ([self.delegate respondsToSelector:@selector(updateText:)])

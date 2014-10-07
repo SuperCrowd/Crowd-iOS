@@ -81,10 +81,7 @@
 {
     popView;
 }
--(void)btnCancelClicked:(id)sender
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+
 #pragma mark - Table Delegate
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
@@ -173,21 +170,39 @@
     }
     else if (_isAdd_2)
     {
-        // add industry 2 and popview
-        if ([self.delegate respondsToSelector:@selector(addText:)])
-            [self.delegate addText:strText];
-        
-        [self.navigationController popViewControllerAnimated:YES];
+        if ([dictPostNewJob[@"Industry"] isEqualToString:strText])
+        {
+            [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                              withViewController:self];
+            
+        }
+        else
+        {
+            // add industry 2 and popview
+            if ([self.delegate respondsToSelector:@selector(addText:)])
+                [self.delegate addText:strText];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
     else
     {
-        // update text with delegate and popview
-        if ([self.delegate respondsToSelector:@selector(updateText:)])
-            [self.delegate updateText:strText];
-        
-        [self.navigationController popViewControllerAnimated:YES];
+        if ([dictPostNewJob[@"Industry"] isEqualToString:strText] ||
+            [dictPostNewJob[@"Industry2"] isEqualToString:strText])
+        {
+            [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                              withViewController:self];
+            
+        }
+        else
+        {
+            // update text with delegate and popview
+            if ([self.delegate respondsToSelector:@selector(updateText:)])
+                [self.delegate updateText:strText];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
-   
 }
 #pragma mark -
 #pragma mark - Text Search
@@ -228,6 +243,50 @@
     
     return filteredArray.count == 0 ? nil : filteredArray;
 }
+
+#pragma mark - Cancel Clicked
+-(void)btnCancelClicked:(id)sender
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* LeaveAction = [UIAlertAction actionWithTitle:@"Leave" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                      {
+                                          is_PostJob_Edit_update = @"no";
+                                          [self.navigationController popToRootViewControllerAnimated:YES];
+                                      }];
+        [alert addAction:LeaveAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave",nil];[alertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            
+            break;
+        case 1:
+            is_PostJob_Edit_update = @"no";
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

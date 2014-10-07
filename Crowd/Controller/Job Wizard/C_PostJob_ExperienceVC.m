@@ -45,6 +45,29 @@ typedef NS_ENUM(NSInteger, btnExperience)
         if ([btn isKindOfClass:[UIButton class]])
             [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self showSelectedButton];
+}
+-(void)showSelectedButton
+{
+    for (UIButton *btn in scrlV.subviews)
+        if ([btn isKindOfClass:[UIButton class]])
+            [btn setBackgroundImage:[UIImage imageNamed:@"btnGreenBG-Big"] forState:UIControlStateNormal];
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
+    {
+        UIButton *btnSel = (UIButton *)[scrlV viewWithTag:[postJob_ModelClass.ExperienceLevel integerValue]];
+        [btnSel setBackgroundImage:[UIImage imageNamed:@"btnOrangeBG-Big"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        if ([dictPostNewJob objectForKey:@"ExperienceLevel"]) {
+            UIButton *btnSel = (UIButton *)[scrlV viewWithTag:[dictPostNewJob[@"ExperienceLevel"] integerValue]];
+            [btnSel setBackgroundImage:[UIImage imageNamed:@"btnOrangeBG-Big"] forState:UIControlStateNormal];
+        }
+    }
+}
 -(void)done
 {
     Class mtyC = nil;;
@@ -69,10 +92,7 @@ typedef NS_ENUM(NSInteger, btnExperience)
 {
     popView;
 }
--(void)btnCancelClicked:(id)sender
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+
 -(IBAction)btnClicked:(UIButton *)btnExp
 {
     NSLog(@"%@",btnExp.titleLabel.text);
@@ -84,10 +104,52 @@ typedef NS_ENUM(NSInteger, btnExperience)
     {
         [dictPostNewJob setValue:[NSString stringWithFormat:@"%ld",(long)btnExp.tag] forKey:@"ExperienceLevel"];
     }
+    [self showSelectedButton];
     C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
     [self.navigationController pushViewController:obj animated:YES];
 }
-
+#pragma mark - Cancel Clicked
+-(void)btnCancelClicked:(id)sender
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* LeaveAction = [UIAlertAction actionWithTitle:@"Leave" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                      {
+                                          is_PostJob_Edit_update = @"no";
+                                          [self.navigationController popToRootViewControllerAnimated:YES];
+                                      }];
+        [alert addAction:LeaveAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave",nil];[alertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            
+            break;
+        case 1:
+            is_PostJob_Edit_update = @"no";
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            break;
+            
+        default:
+            break;
+    }
+}
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

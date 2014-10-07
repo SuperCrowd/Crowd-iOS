@@ -315,6 +315,7 @@
             
             
             C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+            objD.shouldShowUpdateButton = NO;
             UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objD];
             navvv.navigationBar.translucent = NO;
             [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:NO completion:^(BOOL finished) {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -17,7 +16,7 @@
             <rect key="frame" x="0.0" y="64" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Roles and Responsibilities" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1o2-Q4-m79">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Roles and Responsibilities" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1o2-Q4-m79">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -38,7 +37,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mde-iU-GrG">
-                    <rect key="frame" x="0.0" y="60" width="320" height="67"/>
+                    <rect key="frame" x="0.0" y="60" width="320" height="46"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -47,12 +46,13 @@
                     </connections>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jd1-Kt-pGv">
-                    <rect key="frame" x="53" y="135" width="214" height="29"/>
+                    <rect key="frame" x="53" y="114" width="215" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="29" id="wat-UB-KbN"/>
+                        <constraint firstAttribute="width" constant="215" id="eTn-PE-k1L"/>
+                        <constraint firstAttribute="height" constant="50" id="wat-UB-KbN"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
-                    <state key="normal" title="Next" backgroundImage="btnGreenBG">
+                    <state key="normal" image="next_big_btn">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -68,12 +68,11 @@
                 <constraint firstAttribute="trailing" secondItem="gdo-KU-f8d" secondAttribute="trailing" id="D6g-rd-Kna"/>
                 <constraint firstItem="jd1-Kt-pGv" firstAttribute="top" secondItem="Mde-iU-GrG" secondAttribute="bottom" constant="8" id="FAk-0M-ZGh"/>
                 <constraint firstItem="gdo-KU-f8d" firstAttribute="leading" secondItem="sYA-p5-0jZ" secondAttribute="leading" id="HpK-jQ-2Rl"/>
-                <constraint firstAttribute="trailing" secondItem="jd1-Kt-pGv" secondAttribute="trailing" constant="53" id="J0S-IW-JhO"/>
+                <constraint firstAttribute="centerX" secondItem="jd1-Kt-pGv" secondAttribute="centerX" id="Ihz-P5-9bf"/>
                 <constraint firstItem="1o2-Q4-m79" firstAttribute="leading" secondItem="sYA-p5-0jZ" secondAttribute="leading" id="SUY-Md-mg1"/>
                 <constraint firstAttribute="trailing" secondItem="1o2-Q4-m79" secondAttribute="trailing" id="cAA-p0-crO"/>
                 <constraint firstAttribute="bottom" secondItem="jd1-Kt-pGv" secondAttribute="bottom" constant="252" id="eC1-Gc-G2S"/>
                 <constraint firstItem="1o2-Q4-m79" firstAttribute="top" secondItem="sYA-p5-0jZ" secondAttribute="top" id="gGH-Kq-Ski"/>
-                <constraint firstItem="jd1-Kt-pGv" firstAttribute="leading" secondItem="sYA-p5-0jZ" secondAttribute="leading" constant="53" id="hDP-NS-iKp"/>
                 <constraint firstItem="gdo-KU-f8d" firstAttribute="top" secondItem="1o2-Q4-m79" secondAttribute="bottom" id="znq-CF-Jjm"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -83,7 +82,7 @@
         </view>
     </objects>
     <resources>
-        <image name="btnGreenBG" width="214" height="29"/>
+        <image name="next_big_btn" width="215" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

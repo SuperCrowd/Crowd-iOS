@@ -44,7 +44,6 @@
     NSString *strT = [txtV.text isNull];
     if ([strT isEqualToString:@""])
     {
-//        [CommonMethods displayAlertwithTitle:@"Please Enter your Courses" withMessage:nil withViewController:self];
         if (_obj_ProfileUpdate) {
             [self addNewEducation_LoggedInUser_WithTags:nil];
         }

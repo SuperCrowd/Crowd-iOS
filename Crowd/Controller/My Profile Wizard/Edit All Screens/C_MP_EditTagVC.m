@@ -57,7 +57,14 @@
     [super viewDidAppear:animated];
     [txtV becomeFirstResponder];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        txtV.selectedRange = NSMakeRange([txtV.text length], 0);
+        if (ios8)
+        {
+            txtV.selectedRange = NSMakeRange([txtV.text length], 0);
+        }
+        else
+        {
+            [CommonMethods scrollToCaretInTextView:txtV animated:YES];
+        }
     });
 }
 -(void)back

@@ -8,6 +8,7 @@
 
 #import "C_MP_IndustryListVC.h"
 #import "AppConstant.h"
+#import "C_MyUser.h"
 @interface C_MP_IndustryListVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -119,6 +120,14 @@
         strText = arrSearch[indexPath.section][@"value"][indexPath.row];
     else
         strText = arrContent[indexPath.section][@"value"][indexPath.row];
+    
+    if ([_obj_ProfileUpdate.Industry isEqualToString:strText] ||
+        [_obj_ProfileUpdate.Industry2 isEqualToString:strText])
+    {
+        [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                          withViewController:self];
+        return;
+    }
     
     if (_isUpdate)
     {

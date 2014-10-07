@@ -110,6 +110,7 @@
 {
     selectedView = btnEdit.superview.tag;
     C_MP_IndustryListVC *obj = [[C_MP_IndustryListVC alloc]initWithNibName:@"C_MP_IndustryListVC" bundle:nil];
+    obj.obj_ProfileUpdate = _obj_ProfileUpdate;
     obj.delegate = self;
     obj.isUpdate = YES;
     [self.navigationController pushViewController:obj animated:YES];
@@ -117,6 +118,7 @@
 -(void)btnAddNewIndustryClicked:(UIButton *)btn
 {
     C_MP_IndustryListVC *obj = [[C_MP_IndustryListVC alloc]initWithNibName:@"C_MP_IndustryListVC" bundle:nil];
+    obj.obj_ProfileUpdate = _obj_ProfileUpdate;
     obj.delegate = self;
     obj.isUpdate = NO;
     [self.navigationController pushViewController:obj animated:YES];
@@ -153,12 +155,18 @@
     goToNext = YES;
     C_ViewEditableTextField *objT = (C_ViewEditableTextField *)[scrlV viewWithTag:selectedView];
     objT.txtName.text = strText;
+    [self saveIndustry];
+    NSLog(@"%@   :   %@",_obj_ProfileUpdate.Industry,_obj_ProfileUpdate.Industry2);
+
 }
 -(void)addText:(NSString *)strText
 {
     [self addIndustry2_withText:strText];
     UIButton *btnAddAnotherIndustry = (UIButton *)[scrlV viewWithTag:51];
     [btnAddAnotherIndustry removeFromSuperview];
+    [self saveIndustry];
+    NSLog(@"%@   :   %@",_obj_ProfileUpdate.Industry,_obj_ProfileUpdate.Industry2);
+
 }
 
 #pragma mark - ADD Industry
@@ -185,7 +193,9 @@
     
     /*--- set label text to blank ---*/
     objT.lblName.text = @"";
-    
+    CGRect btnEditFrame = objT.btnEdit.frame;
+    btnEditFrame.origin.x = btnEditFrame.origin.x - 10.0;
+    objT.btnEdit.frame = btnEditFrame;
     [scrlV addSubview:objT];
     
     yAxis = yAxis + 55.0 + 20.0;
@@ -214,7 +224,9 @@
     
     /*--- set label text to blank ---*/
     objT.lblName.text = @"";
-    
+    CGRect btnEditFrame = objT.btnEdit.frame;
+    btnEditFrame.origin.x = btnEditFrame.origin.x - 10.0;
+    objT.btnEdit.frame = btnEditFrame;
     [scrlV addSubview:objT];
     yAxis = yAxis + 55.0 + 20.0;
 }

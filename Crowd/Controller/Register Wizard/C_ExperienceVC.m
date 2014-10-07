@@ -37,15 +37,36 @@ typedef NS_ENUM(NSInteger, btnExperience)
     for (UIButton *btn in scrlV.subviews)
         if ([btn isKindOfClass:[UIButton class]])
             [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self showSelectedButton];
+}
+-(void)showSelectedButton
+{
+    if (![myUserModel.experienceTotal isEqualToString:@""])
+    {
+        for (UIButton *btn in scrlV.subviews)
+            if ([btn isKindOfClass:[UIButton class]])
+                [btn setBackgroundImage:[UIImage imageNamed:@"btnGreenBG-Big"] forState:UIControlStateNormal];
+        
+        UIButton *btnSel = (UIButton *)[scrlV viewWithTag:[myUserModel.experienceTotal integerValue]];
+        [btnSel setBackgroundImage:[UIImage imageNamed:@"btnOrangeBG-Big"] forState:UIControlStateNormal];
+    }
+}
 -(IBAction)btnClicked:(UIButton *)btnExp
 {
     NSLog(@"%@",btnExp.titleLabel.text);
     myUserModel.experienceTotal = [NSString stringWithFormat:@"%ld",(long)btnExp.tag];
     [CommonMethods saveMyUser:myUserModel];
     myUserModel = [CommonMethods getMyUser];
-    
+    [self showSelectedButton];
+
     C_ProffessionalSummaryVC *obj = [[C_ProffessionalSummaryVC alloc]initWithNibName:@"C_ProffessionalSummaryVC" bundle:nil];
     [self.navigationController pushViewController:obj animated:YES];
 }

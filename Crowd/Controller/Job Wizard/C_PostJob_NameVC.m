@@ -57,6 +57,8 @@
     [super viewWillAppear:animated];
     if (![is_PostJob_Edit_update isEqualToString:@"edit"] && ![is_PostJob_Edit_update isEqualToString:@"update"])
     {
+        [dictPostNewJob removeAllObjects];
+        txtName.text = @"";
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     }
 }

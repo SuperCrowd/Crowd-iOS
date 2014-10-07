@@ -383,6 +383,7 @@
         
         /*--- Send current object and get data then fill object after that if user press update then replace object so this will appear here ---*/
         C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+        objD.shouldShowUpdateButton = NO;
         objD.obj_JobListModel = myJob;
         objD.strComingFrom = @"FindAJob";
         [self.navigationController pushViewController:objD animated:YES];

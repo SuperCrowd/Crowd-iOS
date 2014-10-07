@@ -13,10 +13,10 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="qTL-JC-Ghg">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <rect key="frame" x="0.0" y="64" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills Requirements" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssq-fE-GQI">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Skills Requirements" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssq-fE-GQI">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -37,7 +37,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pI4-EH-aSX">
-                    <rect key="frame" x="0.0" y="60" width="320" height="67"/>
+                    <rect key="frame" x="0.0" y="60" width="320" height="46"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -46,12 +46,13 @@
                     </connections>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7aj-qe-avB">
-                    <rect key="frame" x="53" y="135" width="214" height="29"/>
+                    <rect key="frame" x="53" y="114" width="215" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="29" id="nUG-CI-Jvs"/>
+                        <constraint firstAttribute="width" constant="215" id="c7j-bP-TZM"/>
+                        <constraint firstAttribute="height" constant="50" id="nUG-CI-Jvs"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
-                    <state key="normal" title="Next" backgroundImage="btnGreenBG">
+                    <state key="normal" image="next_big_btn">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -62,7 +63,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ssq-fE-GQI" firstAttribute="top" secondItem="qTL-JC-Ghg" secondAttribute="top" id="0yR-so-osJ"/>
-                <constraint firstAttribute="trailing" secondItem="7aj-qe-avB" secondAttribute="trailing" constant="53" id="3wi-a3-LYN"/>
+                <constraint firstAttribute="centerX" secondItem="7aj-qe-avB" secondAttribute="centerX" constant="-0.5" id="1Fb-8B-hZ0"/>
                 <constraint firstItem="VaG-ph-fyW" firstAttribute="leading" secondItem="qTL-JC-Ghg" secondAttribute="leading" id="6iO-aY-py5"/>
                 <constraint firstAttribute="trailing" secondItem="VaG-ph-fyW" secondAttribute="trailing" id="BOa-fV-Lyd"/>
                 <constraint firstAttribute="trailing" secondItem="ssq-fE-GQI" secondAttribute="trailing" id="FEl-l1-4aH"/>
@@ -73,7 +74,6 @@
                 <constraint firstAttribute="trailing" secondItem="pI4-EH-aSX" secondAttribute="trailing" id="cL3-Jg-aP1"/>
                 <constraint firstItem="VaG-ph-fyW" firstAttribute="top" secondItem="ssq-fE-GQI" secondAttribute="bottom" id="d4n-VP-vyW"/>
                 <constraint firstItem="ssq-fE-GQI" firstAttribute="leading" secondItem="qTL-JC-Ghg" secondAttribute="leading" id="l3n-4R-aka"/>
-                <constraint firstItem="7aj-qe-avB" firstAttribute="leading" secondItem="qTL-JC-Ghg" secondAttribute="leading" constant="53" id="siX-yI-hAe"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -82,7 +82,7 @@
         </view>
     </objects>
     <resources>
-        <image name="btnGreenBG" width="214" height="29"/>
+        <image name="next_big_btn" width="215" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

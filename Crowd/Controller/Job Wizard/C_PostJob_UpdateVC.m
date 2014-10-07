@@ -54,7 +54,6 @@
     [super viewDidLoad];
     self.title = @"Job Posting";
     self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Update" withSelector:@selector(updateJobNow)];
     if ([_strComingFrom isEqualToString:FIND_A_JOB])
     {
         self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
@@ -95,6 +94,17 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (_shouldShowUpdateButton)
+    {
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Update" withSelector:@selector(updateJobNow)];
+        
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = nil;
+        _shouldShowUpdateButton = YES;
+    }
+
     if ([_strComingFrom isEqualToString:FIND_A_JOB])
     {
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
@@ -422,6 +432,8 @@
             {
                 [self updateModelList];
             }
+            self.navigationItem.rightBarButtonItem = nil;
+            _shouldShowUpdateButton = YES;
             showHUD_with_Success(@"Job Updated Successfully");
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 hideHUD;

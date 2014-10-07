@@ -269,7 +269,9 @@
     }
     else
     {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];[alertView show];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        alertView.tag = 101;
+        [alertView show];
     }
 }
 -(void)showAlert_OneButton:(NSString *)title

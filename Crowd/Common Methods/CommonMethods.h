@@ -61,4 +61,6 @@ NSString *DocumentsDirectoryPath() ;
 
 + (BOOL) isValidateUrl: (NSString *)url;
 +(void)addBottomLine_to_Label:(UILabel *)lbl;
++(void)scrollToCaretInTextView:(UITextView *)textView animated:(BOOL)animated;
+
 @end

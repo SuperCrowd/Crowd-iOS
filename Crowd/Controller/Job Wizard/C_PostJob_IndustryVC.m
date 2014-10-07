@@ -80,10 +80,7 @@
         }
     }
 }
--(void)btnCancelClicked:(id)sender
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+
 -(void)showData
 {
     int yAxis = 150;
@@ -110,6 +107,10 @@
     
     /*--- set label text to blank ---*/
     objT.lblName.text = @"Industry";
+    
+    CGRect btnEditFrame = objT.btnEdit.frame;
+    btnEditFrame.origin.x = btnEditFrame.origin.x - 10.0;
+    objT.btnEdit.frame = btnEditFrame;
     
     [scrlV addSubview:objT];
 
@@ -147,6 +148,9 @@
         /*--- set label text to blank ---*/
         objT.lblName.text = @"Industry";
         
+        CGRect btnEditFrame = objT.btnEdit.frame;
+        btnEditFrame.origin.x = btnEditFrame.origin.x - 10.0;
+        objT.btnEdit.frame = btnEditFrame;
         [scrlV addSubview:objT];
         return;
     }
@@ -194,6 +198,14 @@
 {
     C_ViewEditableTextField *objT = (C_ViewEditableTextField *)[scrlV viewWithTag:selectedView];
     objT.txtName.text = strText;
+    if (selectedView == 1)
+    {
+        [dictPostNewJob setValue:strText forKey:@"Industry"];
+    }
+    else
+    {
+        [dictPostNewJob setValue:strText forKey:@"Industry2"];
+    }
 }
 -(void)addText:(NSString *)strText
 {
@@ -227,9 +239,59 @@
     /*--- set label text to blank ---*/
     objT.lblName.text = @"Industry";
     
+    CGRect btnEditFrame = objT.btnEdit.frame;
+    btnEditFrame.origin.x = btnEditFrame.origin.x - 10.0;
+    objT.btnEdit.frame = btnEditFrame;
     [scrlV addSubview:objT];
     [btnAddAnotherIndustry removeFromSuperview];
 }
+
+
+#pragma mark - Cancel Clicked
+-(void)btnCancelClicked:(id)sender
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* LeaveAction = [UIAlertAction actionWithTitle:@"Leave" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                      {
+                                          is_PostJob_Edit_update = @"no";
+                                          [self.navigationController popToRootViewControllerAnimated:YES];
+                                      }];
+        [alert addAction:LeaveAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave",nil];[alertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            
+            break;
+        case 1:
+            is_PostJob_Edit_update = @"no";
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

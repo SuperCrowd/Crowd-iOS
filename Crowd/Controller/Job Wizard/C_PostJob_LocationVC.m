@@ -58,13 +58,6 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     else
     {
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
-#if TARGET_IPHONE_SIMULATOR
-        viewCity.txtName.text = @"Ahmedabad";
-        viewState.txtName.text = @"Gujarat";
-        viewCountry.txtName.text = @"India";
-#else
-        // Device
-#endif
     }
 
     [self setupEditableView];
@@ -102,10 +95,7 @@ typedef NS_ENUM(NSInteger, btnEdit) {
 {
     popView;
 }
--(void)btnCancelClicked:(id)sender
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+
 -(void)setupEditableView
 {
     viewCity.txtName.placeholder = @"Enter City";
@@ -212,6 +202,48 @@ typedef NS_ENUM(NSInteger, btnEdit) {
         [textField resignFirstResponder];
     }
     return YES;
+}
+#pragma mark - Cancel Clicked
+-(void)btnCancelClicked:(id)sender
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* LeaveAction = [UIAlertAction actionWithTitle:@"Leave" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                      {
+                                          is_PostJob_Edit_update = @"no";
+                                          [self.navigationController popToRootViewControllerAnimated:YES];
+                                      }];
+        [alert addAction:LeaveAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Your job has not been posted yet. if you leave it will be lost. This can not be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Leave",nil];[alertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            
+            break;
+        case 1:
+            is_PostJob_Edit_update = @"no";
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            break;
+            
+        default:
+            break;
+    }
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

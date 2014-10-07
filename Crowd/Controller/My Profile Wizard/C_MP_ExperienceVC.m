@@ -37,14 +37,32 @@ typedef NS_ENUM(NSInteger, btnExperience)
         if ([btn isKindOfClass:[UIButton class]])
             [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self showSelectedButton];
+}
 -(void)back
 {
     popView;
 }
+-(void)showSelectedButton
+{
+    if (![_obj_ProfileUpdate.ExperienceLevel isEqualToString:@""])
+    {
+        for (UIButton *btn in scrlV.subviews)
+            if ([btn isKindOfClass:[UIButton class]])
+                [btn setBackgroundImage:[UIImage imageNamed:@"btnGreenBG-Big"] forState:UIControlStateNormal];
+        
+        UIButton *btnSel = (UIButton *)[scrlV viewWithTag:[_obj_ProfileUpdate.ExperienceLevel integerValue]];
+        [btnSel setBackgroundImage:[UIImage imageNamed:@"btnOrangeBG-Big"] forState:UIControlStateNormal];
+    }
+}
+
 -(IBAction)btnClicked:(UIButton *)btnExp
 {
     _obj_ProfileUpdate.ExperienceLevel = [NSString stringWithFormat:@"%ld",(long)btnExp.tag];
-    
+    [self showSelectedButton];
     C_MP_ProffesionalSummaryVC *obj = [[C_MP_ProffesionalSummaryVC alloc]initWithNibName:@"C_MP_ProffesionalSummaryVC" bundle:nil];
     obj.obj_ProfileUpdate = _obj_ProfileUpdate;
     [self.navigationController pushViewController:obj animated:YES];
