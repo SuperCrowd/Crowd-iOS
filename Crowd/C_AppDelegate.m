@@ -15,7 +15,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    /*--- com.symposium.crowd ---*/
     /*--- Create Initial Window ---*/
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     

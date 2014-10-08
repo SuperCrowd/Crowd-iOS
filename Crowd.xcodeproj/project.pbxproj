@@ -111,6 +111,7 @@
 		105ABB3C19BD9C9F00177C6A /* C_ViewEditableTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 105ABB3B19BD9C9F00177C6A /* C_ViewEditableTextField.m */; };
 		105ABB3E19BD9CB400177C6A /* C_ViewEditableTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105ABB3D19BD9CB400177C6A /* C_ViewEditableTextField.xib */; };
 		105ABB4619BDB8B400177C6A /* C_ScrollViewKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 105ABB4519BDB8B400177C6A /* C_ScrollViewKeyboard.m */; };
+		105CD2BE19E4F9FE00DF7E61 /* Update_PostJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 105CD2BD19E4F9FE00DF7E61 /* Update_PostJob.m */; };
 		105D46D919D15E2E00C09272 /* C_PostJob_UpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 105D46D719D15E2E00C09272 /* C_PostJob_UpdateVC.m */; };
 		105D46DA19D15E2E00C09272 /* C_PostJob_UpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105D46D819D15E2E00C09272 /* C_PostJob_UpdateVC.xib */; };
 		105D46E019D17F7F00C09272 /* C_PostJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 105D46DF19D17F7F00C09272 /* C_PostJobModel.m */; };
@@ -410,6 +411,8 @@
 		105ABB3D19BD9CB400177C6A /* C_ViewEditableTextField.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_ViewEditableTextField.xib; sourceTree = "<group>"; };
 		105ABB4419BDB8B400177C6A /* C_ScrollViewKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_ScrollViewKeyboard.h; sourceTree = "<group>"; };
 		105ABB4519BDB8B400177C6A /* C_ScrollViewKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_ScrollViewKeyboard.m; sourceTree = "<group>"; };
+		105CD2BC19E4F9FD00DF7E61 /* Update_PostJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Update_PostJob.h; sourceTree = "<group>"; };
+		105CD2BD19E4F9FE00DF7E61 /* Update_PostJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Update_PostJob.m; sourceTree = "<group>"; };
 		105D46D619D15E2E00C09272 /* C_PostJob_UpdateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_PostJob_UpdateVC.h; sourceTree = "<group>"; };
 		105D46D719D15E2E00C09272 /* C_PostJob_UpdateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_PostJob_UpdateVC.m; sourceTree = "<group>"; };
 		105D46D819D15E2E00C09272 /* C_PostJob_UpdateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_PostJob_UpdateVC.xib; sourceTree = "<group>"; };
@@ -683,6 +686,8 @@
 				102FC49B19CAABED007F37E9 /* UserHandler_LoggedIn.m */,
 				104CD66319D2A27E00E444F8 /* UpdateProfile.h */,
 				104CD66419D2A27E00E444F8 /* UpdateProfile.m */,
+				105CD2BC19E4F9FD00DF7E61 /* Update_PostJob.h */,
+				105CD2BD19E4F9FE00DF7E61 /* Update_PostJob.m */,
 			);
 			path = "Common Methods";
 			sourceTree = "<group>";
@@ -1675,6 +1680,7 @@
 				104CD63819D288F300E444F8 /* C_Education_Time.m in Sources */,
 				10AC82D719D1327F0090A039 /* C_PostJob_LinkVC.m in Sources */,
 				10A954C519B9919700EAAE4B /* UIButton+WebCache.m in Sources */,
+				105CD2BE19E4F9FE00DF7E61 /* Update_PostJob.m in Sources */,
 				1018251619D049F90099E8F5 /* C_PostJob_ExperienceVC.m in Sources */,
 				104CD66519D2A27E00E444F8 /* UpdateProfile.m in Sources */,
 				10D48AC519D2DBB700B93675 /* C_MP_EditTextVC.m in Sources */,
@@ -1795,7 +1801,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9e82e2ee-2a9a-4982-b0d6-135eef54820e";
+				PROVISIONING_PROFILE = "cd1b6e53-0bbc-45d3-8665-c1e40af017d4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1827,7 +1833,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "9e82e2ee-2a9a-4982-b0d6-135eef54820e";
+				PROVISIONING_PROFILE = "cd1b6e53-0bbc-45d3-8665-c1e40af017d4";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1844,7 +1850,7 @@
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9e82e2ee-2a9a-4982-b0d6-135eef54820e";
+				PROVISIONING_PROFILE = "cd1b6e53-0bbc-45d3-8665-c1e40af017d4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1860,7 +1866,7 @@
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9e82e2ee-2a9a-4982-b0d6-135eef54820e";
+				PROVISIONING_PROFILE = "cd1b6e53-0bbc-45d3-8665-c1e40af017d4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

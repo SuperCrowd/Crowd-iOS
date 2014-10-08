@@ -14,7 +14,7 @@
 #import "C_PostJob_IndustryVC.h"
 #import "C_PostJob_IndustryListingVC.h"
 #import "C_PostJobModel.h"
-
+#import "Update_PostJob.h"
 @interface C_PostJob_NameVC ()<UITextFieldDelegate>
 {
     __weak IBOutlet UITextFieldExtended *txtName;
@@ -25,7 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSArray *arr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IndustryList" ofType:@"plist"]];
     self.title = @"New Job Listing";
     self.navigationItem.hidesBackButton = YES;
     
@@ -49,8 +48,6 @@
         txtName.text = @"";
     }
 
-    /*--- Hide Center View Keyboard---*/
-    //[CommonMethods HideMyKeyboard:self.mm_drawerController];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -75,7 +72,24 @@
 {
     if ([self checkValidation])
     {
-        [self.navigationController popViewControllerAnimated:YES];
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        {
+            Update_PostJob *job = [[Update_PostJob alloc]init];
+            [job update_JobPost_with_withSuccessBlock:^{
+                
+                /*--- First update list model so fire notification then pop to update view---*/
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"updateJobListModel" object:nil];
+
+                [self back];
+            } withFailBlock:^(NSString *strError) {
+                [CommonMethods displayAlertwithTitle:strError withMessage:nil withViewController:self];
+            }];
+        }
+        else
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
     }
 }
 -(void)btnMenuClicked:(id)sender
@@ -103,7 +117,8 @@
 
     else
     {
-        if ([is_PostJob_Edit_update isEqualToString:@"update"]) {
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
+        {
             postJob_ModelClass.Company = [[NSString stringWithFormat:@"%@",txtName.text]isNull];
         }
         else

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -50,18 +51,15 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Nye-zA-xXY" secondAttribute="bottom" constant="-88" id="0PI-i8-x1a"/>
-                <constraint firstAttribute="trailing" secondItem="PNl-f0-UQU" secondAttribute="trailing" constant="94" id="2a6-hd-Ije"/>
-                <constraint firstAttribute="trailing" secondItem="fCl-jB-fVa" secondAttribute="trailing" constant="20" id="DMP-yw-bSE"/>
+                <constraint firstAttribute="centerX" secondItem="Tci-fK-u7Y" secondAttribute="centerX" id="ASi-US-9YW"/>
                 <constraint firstItem="Tci-fK-u7Y" firstAttribute="top" secondItem="fCl-jB-fVa" secondAttribute="bottom" constant="74" id="Dxu-co-tD5"/>
-                <constraint firstItem="PNl-f0-UQU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="95" id="SFC-ih-iqI"/>
+                <constraint firstAttribute="centerX" secondItem="PNl-f0-UQU" secondAttribute="centerX" id="TFc-WM-7AN"/>
+                <constraint firstAttribute="centerX" secondItem="fCl-jB-fVa" secondAttribute="centerX" id="UU3-Qb-Ogk"/>
                 <constraint firstItem="Nye-zA-xXY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="W5f-34-0nV"/>
                 <constraint firstItem="Nye-zA-xXY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WR5-fW-u5C"/>
                 <constraint firstAttribute="trailing" secondItem="Nye-zA-xXY" secondAttribute="trailing" id="eO8-Td-IvW"/>
-                <constraint firstItem="fCl-jB-fVa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="eS1-6b-uun"/>
                 <constraint firstItem="PNl-f0-UQU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="gsf-rH-QZS"/>
                 <constraint firstItem="fCl-jB-fVa" firstAttribute="top" secondItem="PNl-f0-UQU" secondAttribute="bottom" constant="155" id="uCL-X3-rNd"/>
-                <constraint firstAttribute="trailing" secondItem="Tci-fK-u7Y" secondAttribute="trailing" constant="52" id="yMZ-Tu-28v"/>
-                <constraint firstItem="Tci-fK-u7Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="52" id="zhY-HB-ZKY"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>

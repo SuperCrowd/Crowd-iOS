@@ -48,6 +48,8 @@
 @implementation C_PostJob_UpdateVC
 -(void)back
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"updateJobListModel" object:nil];
+
     popView;
 }
 - (void)viewDidLoad {
@@ -72,6 +74,14 @@
     }
     
     
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"updateJobListModel" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateModelList) name:@"updateJobListModel" object:nil];
+    
+    
+    
+    
+    
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;
     tblView.delegate = self;
@@ -91,20 +101,11 @@
         
     }
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (_shouldShowUpdateButton)
-    {
-        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Update" withSelector:@selector(updateJobNow)];
-        
-    }
-    else
-    {
-        self.navigationItem.rightBarButtonItem = nil;
-        _shouldShowUpdateButton = YES;
-    }
-
+    
     if ([_strComingFrom isEqualToString:FIND_A_JOB])
     {
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
@@ -432,8 +433,6 @@
             {
                 [self updateModelList];
             }
-            self.navigationItem.rightBarButtonItem = nil;
-            _shouldShowUpdateButton = YES;
             showHUD_with_Success(@"Job Updated Successfully");
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 hideHUD;

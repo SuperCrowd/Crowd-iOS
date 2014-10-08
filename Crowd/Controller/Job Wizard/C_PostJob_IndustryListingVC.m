@@ -12,6 +12,7 @@
 #import "C_PostJob_PreviewVC.h"
 #import "C_PostJob_UpdateVC.h"
 #import "C_PostJobModel.h"
+#import "Update_PostJob.h"
 @interface C_PostJob_IndustryListingVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -59,21 +60,32 @@
 }
 -(void)done
 {
-    Class mtyC = nil;;
-    if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
     {
-        mtyC = [C_PostJob_PreviewVC class];
+        Update_PostJob *job = [[Update_PostJob alloc]init];
+        [job update_JobPost_with_withSuccessBlock:^{
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"updateJobListModel" object:nil];
+            for (UIViewController *vc in self.navigationController.viewControllers)
+            {
+                if ([vc isKindOfClass:[C_PostJob_UpdateVC class]])
+                {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    break;
+                }
+            }
+        } withFailBlock:^(NSString *strError) {
+            [CommonMethods displayAlertwithTitle:strError withMessage:nil withViewController:self];
+        }];
     }
     else
     {
-        mtyC = [C_PostJob_UpdateVC class];
-    }
-    for (UIViewController *vc in self.navigationController.viewControllers)
-    {
-        if ([vc isKindOfClass:mtyC])
+        for (UIViewController *vc in self.navigationController.viewControllers)
         {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
+            if ([vc isKindOfClass:[C_PostJob_PreviewVC class]])
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
         }
     }
 }
@@ -154,7 +166,7 @@
     
     if (_isAdd_1)
     {
-        // add industry 1 push view
+        // add industry 1 push view no need to compare industry
         if ([is_PostJob_Edit_update isEqualToString:@"update"])
         {
             postJob_ModelClass.Industry = strText;
@@ -170,38 +182,61 @@
     }
     else if (_isAdd_2)
     {
-        if ([dictPostNewJob[@"Industry"] isEqualToString:strText])
+        // if add 2 then compare industry with 2
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
         {
-            [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
-                              withViewController:self];
-            
+            if ([postJob_ModelClass.Industry isEqualToString:strText])
+            {
+                [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                                  withViewController:self];
+                return;
+            }
         }
         else
         {
-            // add industry 2 and popview
-            if ([self.delegate respondsToSelector:@selector(addText:)])
-                [self.delegate addText:strText];
-            
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([dictPostNewJob[@"Industry"] isEqualToString:strText])
+            {
+                [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                                  withViewController:self];
+                return;
+            }
         }
+
+        // add industry 2 and popview
+        if ([self.delegate respondsToSelector:@selector(addText:)])
+            [self.delegate addText:strText];
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else
     {
-        if ([dictPostNewJob[@"Industry"] isEqualToString:strText] ||
-            [dictPostNewJob[@"Industry2"] isEqualToString:strText])
+        // if update any of industry then compare both 
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
         {
-            [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
-                              withViewController:self];
-            
+            if ([postJob_ModelClass.Industry isEqualToString:strText] ||
+                [postJob_ModelClass.Industry2 isEqualToString:strText])
+            {
+                [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                                  withViewController:self];
+                return;
+            }
         }
         else
         {
-            // update text with delegate and popview
-            if ([self.delegate respondsToSelector:@selector(updateText:)])
-                [self.delegate updateText:strText];
-            
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([dictPostNewJob[@"Industry"] isEqualToString:strText] ||
+                [dictPostNewJob[@"Industry2"] isEqualToString:strText])
+            {
+                [CommonMethods displayAlertwithTitle:@"Please choose different Industry" withMessage:nil
+                                  withViewController:self];
+                return;
+            }
         }
+
+        // update text with delegate and popview
+        if ([self.delegate respondsToSelector:@selector(updateText:)])
+            [self.delegate updateText:strText];
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 #pragma mark -

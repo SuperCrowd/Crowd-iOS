@@ -188,6 +188,7 @@
             }
             else
             {
+                isAllDataRetrieved = YES;
                 [CommonMethods displayAlertwithTitle:strR withMessage:nil withViewController:self];
             }
         }
@@ -403,25 +404,7 @@
     {
         //[CommonMethods displayAlertwithTitle:@"Under construction remove from server" withMessage:nil withViewController:self];
     }
-    
-    
-//    if ([myJob.UserId isEqualToString:userInfoGlobal.UserId])
-//    {
-//        //postJob_ModelClass = [C_PostJobModel addPostJobModel:[objResponse valueForKeyPath:@"AddEditJobResult.JobDetailsWithSkills"]];
-//        
-//        /*--- Send current object and get data then fill object after that if user press update then replace object so this will appear here ---*/
-//        C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
-//        objD.obj_JobListModel = myJob;
-//        objD.strComingFrom = @"FindAJob";
-//        [self.navigationController pushViewController:objD animated:YES];
-//        
-//    }
-//    else
-//    {
-//        C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
-//        obj.obj_myJob = myJob;
-//        [self.navigationController pushViewController:obj animated:YES];
-//    }
+
 }
 #pragma mark - Info + Edit
 -(void)btnInfoClicked:(UIButton *)btnInfo

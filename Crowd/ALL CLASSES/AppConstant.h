@@ -124,7 +124,7 @@
 #define kURLPost @"POST"
 #define kURLNormal @"NORMAL"
 #define kURLFail @"Fail"
-#define kTimeOutInterval 30
+#define kTimeOutInterval 60
 
 /*-----------------------------------------------------------------------------*/
 #pragma mark - Cell Identifier

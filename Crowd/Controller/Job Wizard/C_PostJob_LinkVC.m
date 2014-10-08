@@ -12,6 +12,8 @@
 #import "C_PostJob_PreviewVC.h"
 #import "C_PostJob_UpdateVC.h"
 #import "C_PostJobModel.h"
+
+#import "Update_PostJob.h"
 @interface C_PostJob_LinkVC ()<UITextFieldDelegate>
 {
     __weak IBOutlet UITextFieldExtended *txtLink;
@@ -44,25 +46,36 @@
 {
     if ([self checkValidation])
     {
-        Class mtyC = nil;;
-        if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+        if ([is_PostJob_Edit_update isEqualToString:@"update"])
         {
-            mtyC = [C_PostJob_PreviewVC class];
+            Update_PostJob *job = [[Update_PostJob alloc]init];
+            [job update_JobPost_with_withSuccessBlock:^{
+                /*--- First update list model so fire notification then pop to update view---*/
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"updateJobListModel" object:nil];
+                for (UIViewController *vc in self.navigationController.viewControllers)
+                {
+                    if ([vc isKindOfClass:[C_PostJob_UpdateVC class]])
+                    {
+                        [self.navigationController popToViewController:vc animated:YES];
+                        break;
+                    }
+                }
+            } withFailBlock:^(NSString *strError) {
+                [CommonMethods displayAlertwithTitle:strError withMessage:nil withViewController:self];
+            }];
         }
         else
         {
-            mtyC = [C_PostJob_UpdateVC class];
-        }
-        for (UIViewController *vc in self.navigationController.viewControllers)
-        {
-            if ([vc isKindOfClass:mtyC])
+            for (UIViewController *vc in self.navigationController.viewControllers)
             {
-                [self.navigationController popToViewController:vc animated:YES];
-                break;
+                if ([vc isKindOfClass:[C_PostJob_PreviewVC class]])
+                {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    break;
+                }
             }
         }
     }
-    
 }
 -(void)back
 {

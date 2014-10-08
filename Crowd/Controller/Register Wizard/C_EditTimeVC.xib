@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -90,26 +91,51 @@
                                 <action selector="btnEditClicked:" destination="-1" eventType="touchUpInside" id="nGd-9J-RsN"/>
                             </connections>
                         </button>
-                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BNO-uF-vkb">
-                            <rect key="frame" x="0.0" y="207" width="320" height="162"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20p-lf-Dfb">
+                            <rect key="frame" x="0.0" y="162" width="320" height="207"/>
+                            <subviews>
+                                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kxb-N8-GTF">
+                                    <rect key="frame" x="0.0" y="1" width="320" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="sIH-vE-heM"/>
+                                    </constraints>
+                                    <items>
+                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="3Xv-Cg-jd1"/>
+                                        <barButtonItem title="Item" id="R3j-zm-Kh3">
+                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </barButtonItem>
+                                        <barButtonItem style="plain" systemItem="flexibleSpace" id="9aW-xM-wDk"/>
+                                    </items>
+                                </toolbar>
+                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNO-uF-vkb">
+                                    <rect key="frame" x="0.0" y="45" width="320" height="162"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="sdm-tt-qXh"/>
+                                        <outlet property="delegate" destination="-1" id="B35-Sk-ns0"/>
+                                    </connections>
+                                </pickerView>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="sdm-tt-qXh"/>
-                                <outlet property="delegate" destination="-1" id="B35-Sk-ns0"/>
-                            </connections>
-                        </pickerView>
-                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kxb-N8-GTF">
-                            <rect key="frame" x="0.0" y="163" width="320" height="44"/>
-                            <items>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="3Xv-Cg-jd1"/>
-                                <barButtonItem title="Item" id="R3j-zm-Kh3">
-                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </barButtonItem>
-                                <barButtonItem style="plain" systemItem="flexibleSpace" id="9aW-xM-wDk"/>
-                            </items>
-                        </toolbar>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="207" id="4KS-en-gWC"/>
+                                <constraint firstItem="BNO-uF-vkb" firstAttribute="leading" secondItem="20p-lf-Dfb" secondAttribute="leading" id="4t8-MX-dFL"/>
+                                <constraint firstAttribute="centerX" secondItem="BNO-uF-vkb" secondAttribute="centerX" id="DtY-cV-wrQ"/>
+                                <constraint firstAttribute="trailing" secondItem="Kxb-N8-GTF" secondAttribute="trailing" id="NQB-r0-6ht"/>
+                                <constraint firstItem="BNO-uF-vkb" firstAttribute="top" secondItem="20p-lf-Dfb" secondAttribute="top" constant="45" id="PGF-gP-acN"/>
+                                <constraint firstAttribute="trailing" secondItem="BNO-uF-vkb" secondAttribute="trailing" id="UST-bO-AVt"/>
+                                <constraint firstAttribute="centerX" secondItem="Kxb-N8-GTF" secondAttribute="centerX" id="gBo-wb-AGW"/>
+                                <constraint firstItem="Kxb-N8-GTF" firstAttribute="top" secondItem="20p-lf-Dfb" secondAttribute="top" constant="1" id="n1R-CT-ouL"/>
+                                <constraint firstItem="Kxb-N8-GTF" firstAttribute="leading" secondItem="20p-lf-Dfb" secondAttribute="leading" id="olG-F8-IoF"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="20p-lf-Dfb" secondAttribute="trailing" id="Nxe-Uc-YEy"/>
+                        <constraint firstItem="20p-lf-Dfb" firstAttribute="top" secondItem="8Ap-SD-iAF" secondAttribute="top" constant="162" id="Xzj-fL-kOk"/>
+                        <constraint firstItem="20p-lf-Dfb" firstAttribute="leading" secondItem="8Ap-SD-iAF" secondAttribute="leading" id="oYN-Pe-PAY"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -482,19 +482,19 @@
     
     
    
-    [arrResults removeAllObjects];
-    for (id key in  [dictCriteria allKeys]) {
-        if ([key isEqualToString:arrViews[INDUSTRY]]) {
-            [[dictCriteria objectForKey:arrViews[INDUSTRY]] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                [arrResults addObject:obj];
-            }];
-        }
-        else{
-            if ([[dictCriteria objectForKey:key]count]>0) {
-                [arrResults addObject:[[dictCriteria objectForKey:key] objectAtIndex:0]];
-            }
-        }
-    }
+//    [arrResults removeAllObjects];
+//    for (id key in  [dictCriteria allKeys]) {
+//        if ([key isEqualToString:arrViews[INDUSTRY]]) {
+//            [[dictCriteria objectForKey:arrViews[INDUSTRY]] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//                [arrResults addObject:obj];
+//            }];
+//        }
+//        else{
+//            if ([[dictCriteria objectForKey:key]count]>0) {
+//                [arrResults addObject:[[dictCriteria objectForKey:key] objectAtIndex:0]];
+//            }
+//        }
+//    }
     isEditMode = YES;
 
     tblCategory.tableHeaderView = nil;
@@ -589,41 +589,71 @@
     }
     ContactModel *model = arrResults[indexPath.row];
     
-    switch (model.type) {
+    
+    NSString *strTextTemporary;
+    if (self.isForCandidate)
+    {
+        strTextTemporary = @"Search Crowd for";
+    }
+    else
+    {
+        strTextTemporary = @"Search Crowd for all jobs in the";
+    }
+    cell.lblSearch.adjustsFontSizeToFitWidth = YES;
+    switch (model.type)
+    {
         case INDUSTRY:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[INDUSTRY]];
+            cell.lblSearch.text = [NSString stringWithFormat:@"%@ %@",strTextTemporary,arrViews[INDUSTRY]];
             cell.lblCategoryName.text = model.name;
         }
             break;
         case POSITION:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[POSITION]];
+            cell.lblSearch.text = [NSString stringWithFormat:@"%@ %@",strTextTemporary,arrViews[POSITION]];
             cell.lblCategoryName.text = model.position;
 
         }
             break;
         case EXPERIENCE:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",self.isForCandidate?arrViews[EXPERIENCE-1]:arrViews[EXPERIENCE]];
-            cell.lblCategoryName.text = model.experience;
+            NSString *strExp = model.experience;
+            cell.lblSearch.text = [NSString stringWithFormat:@"%@ %@",strTextTemporary,self.isForCandidate?arrViews[EXPERIENCE-1]:arrViews[EXPERIENCE]];
+            if ([strExp isEqualToString:@"1"]) {
+                cell.lblCategoryName.text = @"0-1 year";
+            }
+            else if ([strExp isEqualToString:@"2"]) {
+                cell.lblCategoryName.text = @"1-3 year";
+            }
+            else if ([strExp isEqualToString:@"3"]) {
+                cell.lblCategoryName.text = @"3-5 year";
+            }
+            else if ([strExp isEqualToString:@"4"]) {
+                cell.lblCategoryName.text = @"5-8 year";
+            }
+            else if ([strExp isEqualToString:@"5"]) {
+                cell.lblCategoryName.text = @"8+ year";
+            }
+            else
+                cell.lblCategoryName.text = @"";
+            //cell.lblCategoryName.text = model.experience;
 
         }
             break;
         case COMPANY:
         {
             if (self.isForCandidate) {
-                cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[COMPANY-1]];
+                cell.lblSearch.text = [NSString stringWithFormat:@"%@ %@",strTextTemporary,arrViews[COMPANY-1]];
             }
             else{
-                cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",arrViews[COMPANY]];
+                cell.lblSearch.text = [NSString stringWithFormat:@"%@ %@",strTextTemporary,arrViews[COMPANY]];
             }
             cell.lblCategoryName.text = model.company;
         }
             break;
         case LOCATION:
         {
-            cell.lblSearch.text = [NSString stringWithFormat:@"Search Crowd for all jobs in the %@",self.isForCandidate?arrViews[LOCATION-1]:arrViews[LOCATION]];
+            cell.lblSearch.text = [NSString stringWithFormat:@"%@ %@",strTextTemporary,self.isForCandidate?arrViews[LOCATION-1]:arrViews[LOCATION]];
             if ([[model.state isNull]isEqualToString:@""])
             {
                 cell.lblCategoryName.text  = [NSString stringWithFormat:@"%@\n%@",model.city,model.country];
@@ -652,7 +682,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
-
+#pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

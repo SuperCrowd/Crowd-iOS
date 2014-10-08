@@ -178,6 +178,7 @@
             }
             else
             {
+                isAllDataRetrieved = YES;
                 [CommonMethods displayAlertwithTitle:strR withMessage:nil withViewController:self];
             }
         }
@@ -367,7 +368,7 @@
             cell.lblCity_State.text = [NSString stringWithFormat:@"%@, %@",myJob.LocationCity,myJob.LocationState];
         }
         cell.lblCountry.text = myJob.LocationCountry;
-        cell.lblTime.text = myJob.dateStr;
+        cell.lblTime.text = [NSString stringWithFormat:@"Posted: %@",myJob.dateStr];
         
         cell.btnInfo.tag = indexPath.row;
         [cell.btnInfo addTarget:self action:@selector(btnInfoClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -383,7 +384,6 @@
         
         /*--- Send current object and get data then fill object after that if user press update then replace object so this will appear here ---*/
         C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
-        objD.shouldShowUpdateButton = NO;
         objD.obj_JobListModel = myJob;
         objD.strComingFrom = @"FindAJob";
         [self.navigationController pushViewController:objD animated:YES];

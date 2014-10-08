@@ -425,7 +425,7 @@ NSString *DocumentsDirectoryPath() {NSArray *paths = NSSearchPathForDirectoriesI
     CALayer *bottomBorder = [CALayer layer];
     bottomBorder.borderColor = RGBCOLOR(164.0, 164.0, 167.0).CGColor;
     bottomBorder.borderWidth = 0.5;
-    bottomBorder.frame = CGRectMake(0, layer.frame.size.height-0.5, layer.frame.size.width, 1);
+    bottomBorder.frame = CGRectMake(0, layer.frame.size.height-0.5, screenSize.size.width, 1);
     [layer addSublayer:bottomBorder];
 }
 @end

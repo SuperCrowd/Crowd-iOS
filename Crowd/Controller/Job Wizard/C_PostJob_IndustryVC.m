@@ -16,6 +16,8 @@
 #import "C_PostJob_PreviewVC.h"
 #import "C_PostJob_UpdateVC.h"
 #import "C_PostJobModel.h"
+
+#import "Update_PostJob.h"
 @interface C_PostJob_IndustryVC ()<UITextFieldDelegate,textSelected_PostJob_Industry>
 {
     __weak IBOutlet UIScrollView *scrlV;
@@ -62,23 +64,36 @@
 }
 -(void)done
 {
-    Class mtyC = nil;;
-    if ([is_PostJob_Edit_update isEqualToString:@"edit"])
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
     {
-        mtyC = [C_PostJob_PreviewVC class];
+        Update_PostJob *job = [[Update_PostJob alloc]init];
+        [job update_JobPost_with_withSuccessBlock:^{
+            /*--- First update list model so fire notification then pop to update view---*/
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"updateJobListModel" object:nil];
+            for (UIViewController *vc in self.navigationController.viewControllers)
+            {
+                if ([vc isKindOfClass:[C_PostJob_UpdateVC class]])
+                {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    break;
+                }
+            }
+        } withFailBlock:^(NSString *strError) {
+            [CommonMethods displayAlertwithTitle:strError withMessage:nil withViewController:self];
+        }];
     }
     else
     {
-        mtyC = [C_PostJob_UpdateVC class];
-    }
-    for (UIViewController *vc in self.navigationController.viewControllers)
-    {
-        if ([vc isKindOfClass:mtyC])
+        for (UIViewController *vc in self.navigationController.viewControllers)
         {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
+            if ([vc isKindOfClass:[C_PostJob_PreviewVC class]])
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
         }
     }
+    
 }
 
 -(void)showData
@@ -127,7 +142,7 @@
     }
     if (showInd2)
     {
-        C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis+heightV+20.0, screenSize.size.width, 55.0)];
+        C_ViewEditableTextField *objT = [[C_ViewEditableTextField alloc]initWithFrame:CGRectMake(0, yAxis+heightV+20.0, screenSize.size.width, heightV)];
         objT.tag = 2;
         
         /*--- text field ---*/
@@ -198,14 +213,22 @@
 {
     C_ViewEditableTextField *objT = (C_ViewEditableTextField *)[scrlV viewWithTag:selectedView];
     objT.txtName.text = strText;
-    if (selectedView == 1)
+    if ([is_PostJob_Edit_update isEqualToString:@"update"])
     {
-        [dictPostNewJob setValue:strText forKey:@"Industry"];
+        if (selectedView == 1)
+            postJob_ModelClass.Industry = strText;
+        else
+            postJob_ModelClass.Industry2 = strText;
     }
+    
     else
     {
-        [dictPostNewJob setValue:strText forKey:@"Industry2"];
+        if (selectedView == 1)
+            [dictPostNewJob setValue:strText forKey:@"Industry"];
+        else
+            [dictPostNewJob setValue:strText forKey:@"Industry2"];
     }
+    
 }
 -(void)addText:(NSString *)strText
 {

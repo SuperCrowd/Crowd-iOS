@@ -11,5 +11,4 @@
 @interface C_PostJob_UpdateVC : UIViewController
 @property (nonatomic,strong)NSString *strComingFrom;
 @property(nonatomic,strong)C_JobListModel *obj_JobListModel;
-@property(nonatomic,readwrite)BOOL shouldShowUpdateButton;
 @end
