@@ -40,7 +40,7 @@
     
     if(![_obj_ProfileUpdate.PhotoURL isEqualToString:@""])
     {
-        [imgV sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,_obj_ProfileUpdate.PhotoURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imgV sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:_obj_ProfileUpdate.PhotoURL]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
     }

@@ -147,7 +147,7 @@
        lbl_School.text = @"";
     
  
-    [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,userInfoGlobal.PhotoURL]];
+    [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:userInfoGlobal.PhotoURL]]];
     
     /*--- Now show Table Data ---*/
     [self setupTableViewData];
@@ -341,6 +341,8 @@
             lblSummary.tag = 100;
             [cell.contentView addSubview:lblSummary];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         lblSummary = (UILabel *)[cell.contentView viewWithTag:100];
         rectLBL.size.height = [userInfoGlobal.Summary getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width-20.0];
         lblSummary.frame = rectLBL;
@@ -352,6 +354,7 @@
     {
         C_Model_Work *myWork = userInfoGlobal.arr_WorkALL[indexPath.row];
         C_Cell_PositionProfile *myEduCell = (C_Cell_PositionProfile *)[tblView dequeueReusableCellWithIdentifier:cellPositionProfilePreviewID];
+        myEduCell.selectionStyle = UITableViewCellSelectionStyleNone;
         /*--- setfonts ---*/
         myEduCell.lblJobTitle.font = kFONT_ITALIC_LIGHT(15.0);
         myEduCell.lblYear.font = kFONT_ITALIC_LIGHT(15.0);
@@ -371,7 +374,7 @@
     {
         C_Model_Recommendation *myRec = userInfoGlobal.arr_RecommendationALL[indexPath.row];
         C_Cell_RecommendationProfile *myRecCell = (C_Cell_RecommendationProfile *)[tblView dequeueReusableCellWithIdentifier:cellRecommendationProfilePreviewID];
-        
+        myRecCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         myRecCell.lblDescriptionText.font = kFONT_REGULAR(17.0);
         myRecCell.lblName.font = kFONT_ITALIC_LIGHT(14.0);
@@ -385,6 +388,7 @@
     {
         C_Model_Education *myEducation = userInfoGlobal.arr_EducationALL[indexPath.row];
         C_Cell_EducationProfile *myEduCell = (C_Cell_EducationProfile *)[tblView dequeueReusableCellWithIdentifier:cellEducationProfilePreviewID];
+        myEduCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         myEduCell.lblSchoolName.text = myEducation.Name;
         myEduCell.lblYear.text = [NSString stringWithFormat:@"%@ to %@",myEducation.StartYear,([myEducation.EndYear isEqualToString:@""]?@"Present":myEducation.EndYear)];
@@ -399,6 +403,7 @@
         NSArray *arrSkills = [userInfoGlobal.arr_SkillsALL valueForKey:@"Skills"];
         
         C_Cell_SkillsProfile *mySkillCell = (C_Cell_SkillsProfile *)[tblView dequeueReusableCellWithIdentifier:cellSkillsProfilePreviewID];
+        mySkillCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [mySkillCell.tagList setTags:arrSkills];
         mySkillCell.tagList.scrollEnabled = NO;

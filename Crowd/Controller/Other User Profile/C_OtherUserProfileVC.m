@@ -37,13 +37,14 @@
     
     __weak IBOutlet UIImageView *imgVUserPic;
     
-    
+    __weak IBOutlet UIButton *btnFollow_unFollow;
     /*--- Section Header Table ---*/
     NSMutableArray *arrSectionHeader;
     
     JSONParser *parser;
     
     C_MyUser *otherUserDetail;
+    BOOL isFollow;
 }
 
 
@@ -142,9 +143,17 @@
     {
         /*--- Save data here ---*/
         tblView.alpha = 1.0;
-        NSLog(@"%@",[[objResponse objectForKey:@"GetUserDetailsResult"]allKeys]);//2 key UserDetailResult,UserFollowStatus
-        NSLog(@"%@",[[[objResponse objectForKey:@"GetUserDetailsResult"] objectForKey:@"UserDetailResult"]allKeys]);
 
+        NSString *strFollow = [[NSString stringWithFormat:@"%@",[[objResponse objectForKey:@"GetUserDetailsResult"] objectForKey:@"UserFollowStatus"]] isNull];
+        if ([strFollow isEqualToString:@"True"])
+        {
+            isFollow = YES;
+        }
+        else
+        {
+            isFollow = NO;
+        }
+        [self showFollowUnFollow];
         BOOL isJobList = [[objResponse valueForKeyPath:@"GetUserDetailsResult.UserDetailResult.ResultStatus.Status"] boolValue];
         if (isJobList)
         {
@@ -175,21 +184,26 @@
 {
     /*--- Show Header Data ---*/
     lbl_Name.text = [[NSString stringWithFormat:@"%@ %@",otherUserDetail.FirstName,otherUserDetail.LastName] isNull];
-    C_Model_Work *myRecentWork = otherUserDetail.arr_WorkALL[0];
-    lbl_JobTitle.text = myRecentWork.Title;
-    lbl_Company.text = myRecentWork.EmployerName;
-    
-    
-    NSMutableArray *arrLoc = [[NSMutableArray alloc]init];
-    if (![[myRecentWork.LocationCity isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentWork.LocationCity isNull]];
-    if (![[myRecentWork.LocationState isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentWork.LocationState isNull]];
-    if (![[myRecentWork.LocationCountry isNull]isEqualToString:@""])
-        [arrLoc addObject:[myRecentWork.LocationCountry isNull]];
-    
-    NSString *strLoc = [arrLoc componentsJoinedByString:@","];
-    lbl_Location.text = [strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "];
+    if (otherUserDetail.arr_WorkALL.count > 0) {
+        C_Model_Work *myRecentWork = otherUserDetail.arr_WorkALL[0];
+        lbl_JobTitle.text = myRecentWork.Title;
+        lbl_Company.text = myRecentWork.EmployerName;
+        NSMutableArray *arrLoc = [[NSMutableArray alloc]init];
+        if (![[myRecentWork.LocationCity isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentWork.LocationCity isNull]];
+        if (![[myRecentWork.LocationState isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentWork.LocationState isNull]];
+        if (![[myRecentWork.LocationCountry isNull]isEqualToString:@""])
+            [arrLoc addObject:[myRecentWork.LocationCountry isNull]];
+        NSString *strLoc = [arrLoc componentsJoinedByString:@","];
+        lbl_Location.text = [strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "];
+    }
+    else
+    {
+        lbl_JobTitle.text = @"";
+        lbl_Company.text = @"";
+        lbl_Location.text = @"";
+    }
     
     if (otherUserDetail.arr_EducationALL.count > 0) {
         C_Model_Education *myRecentEducation = otherUserDetail.arr_EducationALL[0];
@@ -199,7 +213,7 @@
         lbl_School.text = @"";
     
     
-    [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,otherUserDetail.PhotoURL]];
+    [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:otherUserDetail.PhotoURL]]];
     
     /*--- Now show Table Data ---*/
     [self setupTableViewData];
@@ -284,7 +298,7 @@
     
     if ([sectionTitle isEqualToString:PROFFESSIONAL_SUMMARY])
     {
-        CGFloat heightSummary = [otherUserDetail.Summary getHeight_withFont:kFONT_LIGHT(15.0) widht:screenSize.size.width - 20.0];
+        CGFloat heightSummary = [otherUserDetail.Summary getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 20.0];
         heightFinal = 12.0 + heightSummary + 5.0;
         return heightFinal;
     }
@@ -355,6 +369,7 @@
             lblSummary.tag = 100;
             [cell.contentView addSubview:lblSummary];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         lblSummary = (UILabel *)[cell.contentView viewWithTag:100];
         rectLBL.size.height = [otherUserDetail.Summary getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width-20.0];
         lblSummary.frame = rectLBL;
@@ -366,6 +381,7 @@
     {
         C_Model_Work *myWork = otherUserDetail.arr_WorkALL[indexPath.row];
         C_Cell_PositionProfile *myEduCell = (C_Cell_PositionProfile *)[tblView dequeueReusableCellWithIdentifier:cellPositionProfilePreviewID];
+        myEduCell.selectionStyle = UITableViewCellSelectionStyleNone;
         /*--- setfonts ---*/
         myEduCell.lblJobTitle.font = kFONT_ITALIC_LIGHT(15.0);
         myEduCell.lblYear.font = kFONT_ITALIC_LIGHT(15.0);
@@ -384,8 +400,9 @@
     else if([sectionTitle isEqualToString:RECOMMENDATION])
     {
         C_Model_Recommendation *myRec = otherUserDetail.arr_RecommendationALL[indexPath.row];
-        C_Cell_RecommendationProfile *myRecCell = (C_Cell_RecommendationProfile *)[tblView dequeueReusableCellWithIdentifier:cellRecommendationProfilePreviewID];
         
+        C_Cell_RecommendationProfile *myRecCell = (C_Cell_RecommendationProfile *)[tblView dequeueReusableCellWithIdentifier:cellRecommendationProfilePreviewID];
+        myRecCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         myRecCell.lblDescriptionText.font = kFONT_REGULAR(17.0);
         myRecCell.lblName.font = kFONT_ITALIC_LIGHT(14.0);
@@ -398,6 +415,7 @@
     {
         C_Model_Education *myEducation = otherUserDetail.arr_EducationALL[indexPath.row];
         C_Cell_EducationProfile *myEduCell = (C_Cell_EducationProfile *)[tblView dequeueReusableCellWithIdentifier:cellEducationProfilePreviewID];
+        myEduCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         myEduCell.lblSchoolName.text = myEducation.Name;
         myEduCell.lblYear.text = [NSString stringWithFormat:@"%@ to %@",myEducation.StartYear,([myEducation.EndYear isEqualToString:@""]?@"Present":myEducation.EndYear)];
@@ -414,6 +432,7 @@
         }
         
         C_Cell_SkillsProfile *mySkillCell = (C_Cell_SkillsProfile *)[tblView dequeueReusableCellWithIdentifier:cellSkillsProfilePreviewID];
+        mySkillCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [mySkillCell.tagList setTags:arrSkills];
         mySkillCell.tagList.scrollEnabled = NO;
@@ -431,8 +450,92 @@
     return nil;
 }
 
-#pragma mark - IBAction
 
+
+
+#pragma mark - IBAction
+-(void)showFollowUnFollow
+{
+    if (isFollow)
+        [btnFollow_unFollow setImage:[UIImage imageNamed:@"unfollow-btn"] forState:UIControlStateNormal];
+    else
+        [btnFollow_unFollow setImage:[UIImage imageNamed:@"follow-btn"] forState:UIControlStateNormal];
+}
+-(IBAction)btn_Follow_unFollow_Clicked:(id)sender
+{
+    if (isFollow)
+        [self Follow_unFollow:@"0"];
+    else
+        [self Follow_unFollow:@"1"];
+}
+-(void)Follow_unFollow:(NSString *)followUnfollow
+{
+    @try
+    {
+        showHUD_with_Title(@"Please wait");
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token,
+                                    @"FollowUserID":_OtherUserID,
+                                    @"Status":followUnfollow};
+        parser = [[JSONParser alloc]initWith_withURL:Web_FOLLOW_UNFOLLOW withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(follow_unFollow_Successful:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+-(void)follow_unFollow_Successful:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
+    else if([objResponse objectForKey:@"FollowUnfollowUserResult"])
+    {
+        /*--- Save data here ---*/
+        BOOL isFollowRes = [[objResponse valueForKeyPath:@"FollowUnfollowUserResult.ResultStatus.Status"] boolValue];
+        if (isFollowRes)
+        {
+            @try
+            {
+                isFollow = !isFollow;
+                [self showFollowUnFollow];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+            hideHUD;
+        }
+        else
+        {
+            hideHUD;
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"FollowUnfollowUserResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+        }
+    }
+    else
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
+    
+}
+
+#pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -15,6 +15,8 @@
 
 #import "C_WebVC.h"
 
+#import "C_OtherUserProfileVC.h"
+
 #define MORE @"More Information"
 #define ROLES @"Roles and Responsibilities"
 #define SKILLS @"Skills Requirements"
@@ -141,7 +143,6 @@
             @try
             {
                 _obj_myJob = [C_JobListModel updateModel:_obj_myJob withDict:[objResponse objectForKey:@"GetJobDetailsResult"] ];
-                
             }
             @catch (NSException *exception) {
                 NSLog(@"%@",exception.description);
@@ -462,6 +463,7 @@
         BOOL isJobList = [[objResponse valueForKeyPath:@"ApplyToJobResult.ResultStatus.Status"] boolValue];
         if (isJobList)
         {
+            hideHUD;
             @try
             {
                 _obj_myJob.IsJobApplied = !_obj_myJob.IsJobApplied;
@@ -473,7 +475,7 @@
             }
             @finally {
             }
-            hideHUD;
+            
         }
         else
         {
@@ -488,7 +490,13 @@
     }
     
 }
-
+#pragma mark - Poster
+-(IBAction)btnPosterClicked:(id)sender
+{
+    C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+    obj.OtherUserID = _obj_myJob.UserId;
+    [self.navigationController pushViewController:obj animated:YES];
+}
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

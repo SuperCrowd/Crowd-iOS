@@ -359,7 +359,7 @@
         cell.btnCandidate.tag = indexPath.row;
         cell.btnLocation.tag = indexPath.row;
         
-        [cell.imgVCandidate sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,myCan.PhotoURL]];
+        [cell.imgVCandidate sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:myCan.PhotoURL]]];
 
         [cell.btnCandidate addTarget:self action:@selector(btnEdit_LocationClicked:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnLocation addTarget:self action:@selector(btnEdit_LocationClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -383,7 +383,7 @@
         }
         cell.lblCountry.text = myCan.LocationCountry;
         
-        [cell.imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,myCan.PhotoURL]];
+        [cell.imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:myCan.PhotoURL]]];
         
         cell.btnInfo.tag = indexPath.row;
         [cell.btnInfo addTarget:self action:@selector(btnInfoClicked:) forControlEvents:UIControlEventTouchUpInside];

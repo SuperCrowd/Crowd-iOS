@@ -63,6 +63,7 @@
         self.navigationController.navigationBarHidden = NO;
         C_ProfilePreviewVC *obj = [[C_ProfilePreviewVC alloc]initWithNibName:@"C_ProfilePreviewVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:NO];
+        return;
     }
     /*--- if user is already logged in ---*/
     else

@@ -35,25 +35,18 @@
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
-    // Fonts
-    
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
-    shadow.shadowOffset = CGSizeMake(0, 1);
-    
+    /*--- Navigationbar setup ---*/    
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:62.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
                                                            kFONT_THIN(20.0), NSFontAttributeName, nil]];
 
-    // Navigation Item Back Button Theme
-//    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back_icon"]];
-
-//    [UINavigationBar appearance].translucent = NO;
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:1.0]];
+    /*--- SVprogressHUD Setup ---*/
     [SVProgressHUD setBackgroundColor:[UIColor blackColor]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setFont:[UIFont fontWithName:@"HelveticaNueue-Thin" size:14.8f]];
-
+    
+    /*--- If user loggedin then get app user info
+     else if user login with linkedin but not register ---*/
     if ([UserDefaults objectForKey:APP_USER_INFO])
     {
         userInfoGlobal = [UserHandler_LoggedIn getMyUser_LoggedIN];

@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,userInfoGlobal.PhotoURL]];
+    [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:userInfoGlobal.PhotoURL ]]];
     
 //    [self.mm_drawerController.centerViewController.view endEditing:YES];
 }

@@ -123,6 +123,7 @@
 		108285B319D407A00001F124 /* ViewSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285B119D407A00001F124 /* ViewSelection.xib */; };
 		108285B719D40C820001F124 /* ViewFindType.m in Sources */ = {isa = PBXBuildFile; fileRef = 108285B519D40C820001F124 /* ViewFindType.m */; };
 		108285B819D40C820001F124 /* ViewFindType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285B619D40C820001F124 /* ViewFindType.xib */; };
+		1090EBBE19E671B200196AD5 /* DashBoardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1090EBBD19E671B200196AD5 /* DashBoardModel.m */; };
 		10A948CF19C948AA0042999F /* C_Header_ProfilePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A948CE19C948AA0042999F /* C_Header_ProfilePreview.m */; };
 		10A948D119C948BA0042999F /* C_Header_ProfilePreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10A948D019C948BA0042999F /* C_Header_ProfilePreview.xib */; };
 		10A948DA19C96ECE0042999F /* C_Cell_PositionProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A948D819C96ECE0042999F /* C_Cell_PositionProfile.m */; };
@@ -197,6 +198,8 @@
 		10AC82D819D1327F0090A039 /* C_PostJob_LinkVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10AC82D619D1327F0090A039 /* C_PostJob_LinkVC.xib */; };
 		10AC82DC19D138590090A039 /* C_PostJob_PreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AC82DA19D138590090A039 /* C_PostJob_PreviewVC.m */; };
 		10AC82DD19D138590090A039 /* C_PostJob_PreviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10AC82DB19D138590090A039 /* C_PostJob_PreviewVC.xib */; };
+		10AED95519E65A34009E3BE5 /* C_Cell_Dashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 10AED95319E65A33009E3BE5 /* C_Cell_Dashboard.m */; };
+		10AED95619E65A34009E3BE5 /* C_Cell_Dashboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10AED95419E65A33009E3BE5 /* C_Cell_Dashboard.xib */; };
 		10CAA74319DE9A940039FBFB /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CAA74219DE9A940039FBFB /* UIActionSheet+Blocks.m */; };
 		10CAA74619DE9AB40039FBFB /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CAA74519DE9AB40039FBFB /* ContactModel.m */; };
 		10CAA74A19DE9AC30039FBFB /* JobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CAA74819DE9AC30039FBFB /* JobCell.m */; };
@@ -430,6 +433,8 @@
 		108285B419D40C820001F124 /* ViewFindType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFindType.h; sourceTree = "<group>"; };
 		108285B519D40C820001F124 /* ViewFindType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFindType.m; sourceTree = "<group>"; };
 		108285B619D40C820001F124 /* ViewFindType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewFindType.xib; sourceTree = "<group>"; };
+		1090EBBC19E671B200196AD5 /* DashBoardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashBoardModel.h; sourceTree = "<group>"; };
+		1090EBBD19E671B200196AD5 /* DashBoardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardModel.m; sourceTree = "<group>"; };
 		10A948CD19C948AA0042999F /* C_Header_ProfilePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Header_ProfilePreview.h; sourceTree = "<group>"; };
 		10A948CE19C948AA0042999F /* C_Header_ProfilePreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Header_ProfilePreview.m; sourceTree = "<group>"; };
 		10A948D019C948BA0042999F /* C_Header_ProfilePreview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Header_ProfilePreview.xib; sourceTree = "<group>"; };
@@ -568,6 +573,9 @@
 		10AC82D919D138590090A039 /* C_PostJob_PreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_PostJob_PreviewVC.h; sourceTree = "<group>"; };
 		10AC82DA19D138590090A039 /* C_PostJob_PreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_PostJob_PreviewVC.m; sourceTree = "<group>"; };
 		10AC82DB19D138590090A039 /* C_PostJob_PreviewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_PostJob_PreviewVC.xib; sourceTree = "<group>"; };
+		10AED95219E65A33009E3BE5 /* C_Cell_Dashboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Cell_Dashboard.h; sourceTree = "<group>"; };
+		10AED95319E65A33009E3BE5 /* C_Cell_Dashboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Cell_Dashboard.m; sourceTree = "<group>"; };
+		10AED95419E65A33009E3BE5 /* C_Cell_Dashboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Cell_Dashboard.xib; sourceTree = "<group>"; };
 		10CAA74119DE9A940039FBFB /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		10CAA74219DE9A940039FBFB /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		10CAA74419DE9AB40039FBFB /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
@@ -732,6 +740,8 @@
 				1046DD9A19D985EB00644CFC /* C_JobListModel.m */,
 				10DDA7FD19DBD55E0075FA7A /* C_CandidateModel.h */,
 				10DDA7FE19DBD55E0075FA7A /* C_CandidateModel.m */,
+				1090EBBC19E671B200196AD5 /* DashBoardModel.h */,
+				1090EBBD19E671B200196AD5 /* DashBoardModel.m */,
 			);
 			path = "Model Class";
 			sourceTree = "<group>";
@@ -973,6 +983,7 @@
 		106485F119C017FF00BCD1EC /* ALL Cell */ = {
 			isa = PBXGroup;
 			children = (
+				10AED95119E65A1C009E3BE5 /* Cell Dashboard */,
 				10CAA74719DE9AC30039FBFB /* JobCell.h */,
 				10CAA74819DE9AC30039FBFB /* JobCell.m */,
 				10CAA74919DE9AC30039FBFB /* JobCell.xib */,
@@ -1342,6 +1353,16 @@
 			path = "View Class";
 			sourceTree = "<group>";
 		};
+		10AED95119E65A1C009E3BE5 /* Cell Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				10AED95219E65A33009E3BE5 /* C_Cell_Dashboard.h */,
+				10AED95319E65A33009E3BE5 /* C_Cell_Dashboard.m */,
+				10AED95419E65A33009E3BE5 /* C_Cell_Dashboard.xib */,
+			);
+			path = "Cell Dashboard";
+			sourceTree = "<group>";
+		};
 		10CAA75619DEAF080039FBFB /* TPKeyboardAvoiding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1534,6 +1555,7 @@
 				104CD65319D288F300E444F8 /* C_SkillsVC.xib in Resources */,
 				10A953FC19B9911200EAAE4B /* Images.xcassets in Resources */,
 				10588A6619CC2CD500DC5633 /* Oswald-Regular.ttf in Resources */,
+				10AED95619E65A34009E3BE5 /* C_Cell_Dashboard.xib in Resources */,
 				104CD68419D2D04E00E444F8 /* C_MP_EditTagVC.xib in Resources */,
 				10A953EE19B9911200EAAE4B /* InfoPlist.strings in Resources */,
 				1078C14019C3242800378CC4 /* C_Cell_Tags.xib in Resources */,
@@ -1693,6 +1715,7 @@
 				10459D0619DA92B2009EA011 /* C_JobViewVC.m in Sources */,
 				10A954CC19B9919700EAAE4B /* UIImageViewAligned.m in Sources */,
 				10CAA74619DE9AB40039FBFB /* ContactModel.m in Sources */,
+				1090EBBE19E671B200196AD5 /* DashBoardModel.m in Sources */,
 				10D48ACA19D2E12100B93675 /* C_MP_EditTimeVC.m in Sources */,
 				1024E8DA19DBC490005366B7 /* C_Find_CandidateListingVC.m in Sources */,
 				10D48AD419D2EB4100B93675 /* C_MP_EducationHistory.m in Sources */,
@@ -1701,6 +1724,7 @@
 				10D48ADE19D2FB0F00B93675 /* C_MP_ProffesionalSummaryVC.m in Sources */,
 				104CD64A19D288F300E444F8 /* C_LocationVC.m in Sources */,
 				10A954A219B9919700EAAE4B /* NSAttributedString+Validation.m in Sources */,
+				10AED95519E65A34009E3BE5 /* C_Cell_Dashboard.m in Sources */,
 				10A953F019B9911200EAAE4B /* main.m in Sources */,
 				10A954C619B9919700EAAE4B /* UIImage+GIF.m in Sources */,
 				10A954AC19B9919700EAAE4B /* UINavigationController+Rotation_IOS6.m in Sources */,

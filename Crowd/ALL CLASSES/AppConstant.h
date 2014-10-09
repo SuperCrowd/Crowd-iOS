@@ -141,6 +141,9 @@
 #define cellFindCandidate @"idcellFindCandidate"
 #define cellFindCandidate_INFO_ID @"idcellFindCandidate_Info"
 
+
+#define cellDashboardID @"idcellDashboard"
+
 /*-----------------------------------------------------------------------------*/
 
 #pragma mark - Keyboard Animation Declaration of values
@@ -155,7 +158,7 @@ CGFloat animatedDistance;
 #define showHUD [SVProgressHUD show];
 #define hideHUD [SVProgressHUD dismiss];
 
-#define showHUD_with_Title(status) [SVProgressHUD showWithStatus:status];
+#define showHUD_with_Title(status) [SVProgressHUD showWithStatus:status maskType:SVProgressHUDMaskTypeClear];
 #define showHUD_with_error(errorTitle) [SVProgressHUD showErrorWithStatus:errorTitle];
 #define showHUD_with_Success(successTitle) [SVProgressHUD showSuccessWithStatus:successTitle];
 /*-----------------------------------------------------------------------------*/

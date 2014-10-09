@@ -428,4 +428,23 @@ NSString *DocumentsDirectoryPath() {NSArray *paths = NSSearchPathForDirectoriesI
     bottomBorder.frame = CGRectMake(0, layer.frame.size.height-0.5, screenSize.size.width, 1);
     [layer addSublayer:bottomBorder];
 }
+
+
++ (NSString*)makeThumbFromOriginalImageString:(NSString*)strPhoto
+{
+    NSString *retVal = @"";
+    if (strPhoto.length > 0)
+    {
+        NSString *strFileExtension = [strPhoto pathExtension];
+        strPhoto = [strPhoto stringByDeletingPathExtension];
+        strPhoto = [strPhoto stringByAppendingString:@"_Thumb."];
+        retVal = [strPhoto stringByAppendingString:strFileExtension];
+    }
+    else
+    {
+        retVal = strPhoto;
+    }
+    
+    return retVal;
+}
 @end

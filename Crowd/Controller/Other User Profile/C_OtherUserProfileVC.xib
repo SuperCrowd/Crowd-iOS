@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_OtherUserProfileVC">
             <connections>
+                <outlet property="btnFollow_unFollow" destination="tkb-ui-j1w" id="phJ-j1-Wch"/>
                 <outlet property="imgVUserPic" destination="J0a-ys-dNa" id="7Ck-OH-yAV"/>
                 <outlet property="lbl_Company" destination="aNN-vE-8r0" id="xyy-bs-JzY"/>
                 <outlet property="lbl_JobTitle" destination="xaS-69-HiS" id="7Du-TN-IA7"/>
@@ -97,6 +98,9 @@
                                     <state key="normal" image="follow-btn">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="btn_Follow_unFollow_Clicked:" destination="-1" eventType="touchUpInside" id="4O7-wC-Xqo"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BrY-3H-cec">
                                     <rect key="frame" x="71" y="2" width="51" height="51"/>

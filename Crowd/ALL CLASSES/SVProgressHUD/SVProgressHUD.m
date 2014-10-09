@@ -465,8 +465,11 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 6;
 
 #pragma mark - Master show/dismiss methods
 
-- (void)showProgress:(float)progress status:(NSString*)string maskType:(SVProgressHUDMaskType)hudMaskType {
-    appDel.window.userInteractionEnabled = NO;
+- (void)showProgress:(float)progress status:(NSString*)string maskType:(SVProgressHUDMaskType)hudMaskType
+{
+    //appDel.window.userInteractionEnabled = NO;
+    //NSLog(@"%@",self.superview);
+    //self.userInteractionEnabled = YES;
     if(!self.overlayView.superview){
         NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication]windows]reverseObjectEnumerator];
         
@@ -481,6 +484,7 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 6;
     {
         [self.overlayView addSubview:self];
     }
+    
     
     self.fadeOutTimer = nil;
     self.imageView.hidden = YES;
@@ -580,7 +584,8 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 6;
 
 - (void)dismiss {
     
-    appDel.window.userInteractionEnabled = YES;
+    //appDel.window.userInteractionEnabled = YES;
+    //self.userInteractionEnabled = YES;
     
     self.activityCount = 0;
     [UIView animateWithDuration:0.15

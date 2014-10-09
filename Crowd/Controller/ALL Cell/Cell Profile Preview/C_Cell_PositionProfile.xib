@@ -17,7 +17,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Job Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="186" translatesAutoresizingMaskIntoConstraints="NO" id="TkQ-5a-enQ">
                         <rect key="frame" x="10" y="12" width="186" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="174" id="4xf-K2-aGD"/>
+                            <constraint firstAttribute="width" priority="250" constant="174" id="4xf-K2-aGD"/>
                             <constraint firstAttribute="height" constant="18" id="qn6-4e-adQ"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
