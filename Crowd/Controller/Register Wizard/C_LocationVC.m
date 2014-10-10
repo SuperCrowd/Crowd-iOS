@@ -47,6 +47,11 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     }
     else
     {
+        viewCity.txtName.text = myUserModel.location_city;
+        viewState.txtName.text = myUserModel.location_state;
+        viewCountry.txtName.text = myUserModel.location_country;
+        
+        /*
         NSArray *arr = [myUserModel.location_city componentsSeparatedByString:@","];
         if (arr.count == 1)
         {
@@ -80,6 +85,7 @@ typedef NS_ENUM(NSInteger, btnEdit) {
                 }
             }
         }
+         */
     }
     [self setupEditableView];
     constraint_scrollHeight.constant = 0.0;

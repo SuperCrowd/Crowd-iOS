@@ -244,26 +244,38 @@
     [dictR setValue:myModel.Summary forKey:@"Summary"];
     if (imgProfilePictureToUpdate!=nil)
     {
-        NSString *strBase64Image = [Base64 encode:UIImagePNGRepresentation(imgProfilePictureToUpdate)];
-        [dictR setValue:strBase64Image forKey:@"PhotoData"];
-    }
-    else
-    {
         @try
         {
-            UIImage *img = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,myModel.PhotoURL]];
-            if (img) {
-                NSString *strBase64Image = [Base64 encode:UIImagePNGRepresentation(img)];
-                [dictR setValue:strBase64Image forKey:@"PhotoData"];
-            }
-            else
-                [dictR setValue:@"" forKey:@"PhotoData"];
+            NSString *strBase64Image = [Base64 encode:UIImagePNGRepresentation(imgProfilePictureToUpdate)];
+            [dictR setValue:strBase64Image forKey:@"PhotoData"];
         }
         @catch (NSException *exception) {
             NSLog(@"%@",exception.description);
         }
         @finally {
         }
+        
+    }
+    else
+    {
+        [dictR setValue:@"" forKey:@"PhotoData"];
+
+        
+//        @try
+//        {
+//            UIImage *img = [[SDImageCache sharedImageCache]imageFromDiskCacheForKey:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,myModel.PhotoURL]];
+//            if (img) {
+//                NSString *strBase64Image = [Base64 encode:UIImagePNGRepresentation(img)];
+//                [dictR setValue:strBase64Image forKey:@"PhotoData"];
+//            }
+//            else
+//                [dictR setValue:@"" forKey:@"PhotoData"];
+//        }
+//        @catch (NSException *exception) {
+//            NSLog(@"%@",exception.description);
+//        }
+//        @finally {
+//        }
     }
     
     [dictR setValue:myModel.LinkedInId forKey:@"LinkedInId"];

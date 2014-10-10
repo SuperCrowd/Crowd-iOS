@@ -19,6 +19,8 @@
 
 #import "C_MyUser.h"
 
+#import "C_JobsOther.h"
+
 #define PROFFESSIONAL_SUMMARY @"Professional Summary"
 #define WORK_EXPERIENCE @"Work Experience"
 #define RECOMMENDATION @"Recommendations"
@@ -89,7 +91,11 @@
         [self getData];
     });
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+}
 -(void)setFonts
 {
     lbl_Name.font = kFONT_LIGHT(14.0);
@@ -453,7 +459,7 @@
 
 
 
-#pragma mark - IBAction
+#pragma mark - FOLLOW
 -(void)showFollowUnFollow
 {
     if (isFollow)
@@ -534,7 +540,19 @@
     }
     
 }
-
+#pragma mark - JOBS
+-(IBAction)btnJobClicked:(id)sender
+{
+    C_JobsOther *objP = [[C_JobsOther alloc]initWithNibName:@"C_JobsOther" bundle:nil];
+    objP.title = [NSString stringWithFormat:@"%@'s job",otherUserDetail.FirstName];
+    objP.OtherUserID= otherUserDetail.UserId;
+    [self.navigationController pushViewController:objP animated:YES];
+//    UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objP];
+//    navvv.navigationBar.translucent = NO;
+//    [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+//                        
+//                    }];
+}
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -38,7 +38,16 @@
     arrSkills = [[NSMutableArray alloc]init];
     for (Skills *mySkills in myUserModel.arrSkillsUser)
     {
-        [arrSkills addObject:mySkills.name];
+        @try
+        {
+            [arrSkills addObject:mySkills.name];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        
     }
     
     [self showData];
@@ -109,7 +118,16 @@
         for (NSString *strSkill in arrSkills)
         {
             Skills *mySkills = [[Skills alloc]init];
-            mySkills.name = [strSkill isNull];
+            @try
+            {
+                mySkills.name = [strSkill isNull];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+            
             [arrTemp addObject:mySkills];
         }
         

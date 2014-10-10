@@ -35,7 +35,16 @@
     arrSkills = [[NSMutableArray alloc]init];
     for (C_Model_Skills *mySkills in _obj_ProfileUpdate.arr_SkillsALL)
     {
-        [arrSkills addObject:mySkills.Skills];
+        @try
+        {
+            [arrSkills addObject:mySkills.Skills];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        
     }
     
     if (arrSkills.count > 0)
@@ -113,7 +122,16 @@
         for (NSString *strSkill in arrSkills)
         {
             C_Model_Skills *mySkills = [[C_Model_Skills alloc]init];
-            mySkills.Skills = [strSkill isNull];
+            @try
+            {
+                mySkills.Skills = [strSkill isNull];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+            
             [arrTemp addObject:mySkills];
         }
         _obj_ProfileUpdate.arr_SkillsALL = arrTemp;

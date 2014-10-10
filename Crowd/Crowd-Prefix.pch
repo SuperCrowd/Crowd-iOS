@@ -16,6 +16,6 @@
 #endif
 
 #warning - UNCOMMENT THIS LINE TO HIDE LOG WHEN UPLOAD TO APPSTORE
-//#ifndef _DEBUG
-//#define NSLog(format, ...)
-//#endif
+#ifndef _DEBUG
+#define NSLog(format, ...)
+#endif

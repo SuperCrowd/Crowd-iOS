@@ -94,8 +94,18 @@
         if (arrTemp.count > 0)
         {
             NSMutableArray *trimmedStrings = [NSMutableArray array];
+            
             for (NSString *string in arrTemp) {
-                [trimmedStrings addObject:[string isNull]];
+                @try
+                {
+                    [trimmedStrings addObject:[string isNull]];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
+                
             }
             arrTemp = trimmedStrings;
             
@@ -127,7 +137,16 @@
     for (int i = 0; i<arrC.count; i++)
     {
         C_Model_Courses *myCourse = [[C_Model_Courses alloc]init];
-        myCourse.Course = [[NSString stringWithFormat:@"%@",arrC[i]]isNull];
+        @try
+        {
+            myCourse.Course = [[NSString stringWithFormat:@"%@",arrC[i]]isNull];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        
         [arrT addObject:myCourse];
     }
     myEducation.arrCourses = arrT;

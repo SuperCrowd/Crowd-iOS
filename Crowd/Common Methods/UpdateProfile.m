@@ -66,10 +66,20 @@
         if (isRegisterSuccess)
         {
             // save user now
+            
             userInfoGlobal = nil;
             userInfoGlobal = [C_MyUser addNewUser:[objResponse objectForKey:@"AddEditUserDetailsResult"]];
             [UserHandler_LoggedIn saveMyUser_LoggedIN:userInfoGlobal];
             userInfoGlobal = [UserHandler_LoggedIn getMyUser_LoggedIN];
+            
+            
+            imgProfilePictureToUpdate = nil;
+//            [[SDWebImageDownloader sharedDownloader]downloadImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,userInfoGlobal.PhotoURL]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                
+//            } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//                NSLog(@"Image Downloaded : %@",userInfoGlobal.PhotoURL);
+//            }];
+            
             hideHUD;
             mySuccessblock();
             

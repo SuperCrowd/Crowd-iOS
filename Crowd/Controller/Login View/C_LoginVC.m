@@ -124,12 +124,21 @@
              failure:^(NSError *error) {
                  
                 NSLog(@"Quering accessToken failed %@", error);
+                 showHUD_with_error(error.localizedDescription);
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                     hideHUD;
+                 });
             }];
         }
         cancel:^{
             NSLog(@"Authorization was cancelled by user");
         }
         failure:^(NSError *error) {
+            showHUD_with_error(error.localizedDescription);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                hideHUD;
+            });
+
             NSLog(@"Authorization failed %@", error);
         }];
         
@@ -169,11 +178,30 @@
 
 - (LIALinkedInHttpClient *)client
 {
-    LIALinkedInApplication *application = [LIALinkedInApplication applicationWithRedirectURL:@"http://www.google.com"//http://www.ancientprogramming.com/liaexample
-                                                                                    clientId:@"75ol7koq0lf0ed"
-                                                                                clientSecret:@"dGeJeziMKJutfZhv"
-                                                                                       state:@"DCEEFWF45453sdffef424"
-                                                                               grantedAccess:@[@"r_fullprofile", @"r_network",@"r_emailaddress",@"r_contactinfo"]];
+    
+    /*
+     OLD
+     AppID: 3441733
+     clientId: 75ol7koq0lf0ed
+     Secret Key: dGeJeziMKJutfZhv
+     State : DCEEFWF45453sdffef424
+     OAuth User Token: b283c81a-b450-49d6-a5b3-4ac226a092aa
+     OAuth User Secret: 8d5b552d-5d0f-49d7-b4f7-acc95d05c578
+     
+     NEW
+     AppID: 3441733
+     clientId: 7768an8of1mpmy
+     Secret Key: DEGVtGbM47Lv4OJ8
+     State : DCEEFWFCROWDsdffef424
+     OAuth User Token: 4e4f5ab2-e0f2-405f-b243-3e83449d5104
+     OAuth User Secret: 4af31f8a-4068-47b8-82af-5678776bef17
+     */
+    LIALinkedInApplication *application = [LIALinkedInApplication
+                                           applicationWithRedirectURL:@"http://www.google.com"
+                                           clientId:@"75ol7koq0lf0ed"
+                                           clientSecret:@"dGeJeziMKJutfZhv"
+                                           state:@"DCEEFWFCROWDsdffef424"
+                                           grantedAccess:@[@"r_fullprofile", @"r_network",@"r_emailaddress",@"r_contactinfo"]];
     return [LIALinkedInHttpClient clientForApplication:application presentingViewController:nil];
 }
 

@@ -10,4 +10,5 @@
 
 @interface C_PostJob_NameVC : UIViewController
 @property (nonatomic,readwrite)BOOL isComeFromTutorial;
+@property (nonatomic,readwrite)BOOL isComeFromRegularView;
 @end

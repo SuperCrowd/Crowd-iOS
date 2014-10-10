@@ -13,6 +13,8 @@
 #import "C_DashBoardVC.h"
 #import "C_PostJob_NameVC.h"
 #import "C_MyProfileVC.h"
+#import "C_MyCrowdVC.h"
+#import "C_MyJobsVC.h"
 
 //#import "C_FindAJobVC.h"
 //#import "C_Find_CandidateVC.h"
@@ -31,7 +33,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     MY_CROWD = 5,
     MY_JOBS = 6
 };
-@interface C_LeftMenuVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface C_LeftMenuVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
     __weak IBOutlet UIImageView *imgVUserPic;
     __weak IBOutlet UITableView *tblView;
@@ -114,10 +116,26 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 }
 -(IBAction)btnLogoutClicked:(id)sender
 {
-    [UserDefaults removeObjectForKey:PROFILE_PREVIEW];
-    [UserDefaults removeObjectForKey:USER_INFO];
-    [UserDefaults removeObjectForKey:APP_USER_INFO];
-    [appDel.navC popToRootViewControllerAnimated:YES];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure you want to logout?" delegate:self cancelButtonTitle:@"No" destructiveButtonTitle:@"Logout" otherButtonTitles:nil ,nil];
+    [actionSheet showInView:self.view];
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"YES");
+            [UserDefaults removeObjectForKey:PROFILE_PREVIEW];
+            [UserDefaults removeObjectForKey:USER_INFO];
+            [UserDefaults removeObjectForKey:APP_USER_INFO];
+            [appDel.navC popToRootViewControllerAnimated:YES];
+            break;
+        case 1:
+            NSLog(@"NO");
+            
+            break;
+        default:
+            break;
+    }
 }
 #pragma mark - Table Delegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -243,10 +261,24 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
         }
             break;
         case MY_CROWD:
-            
+        {
+            C_MyCrowdVC *objC = [[C_MyCrowdVC alloc]initWithNibName:@"C_MyCrowdVC" bundle:nil];
+            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
+            navvv.navigationBar.translucent = NO;
+            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                
+            }];
+        }
             break;
         case MY_JOBS:
-            
+        {
+            C_MyJobsVC *objJ = [[C_MyJobsVC alloc]initWithNibName:@"C_MyJobsVC" bundle:nil];
+            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objJ];
+            navvv.navigationBar.translucent = NO;
+            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                
+            }];
+        }
             break;
         default:
             break;

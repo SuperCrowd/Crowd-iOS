@@ -35,6 +35,12 @@
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(back)];
         txtName.text = @"";
     }
+    else if(_isComeFromRegularView)
+    {
+        dictPostNewJob = [[NSMutableDictionary alloc]init];
+        self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+        txtName.text = @"";
+    }
     else if([is_PostJob_Edit_update isEqualToString:@"edit"]||[is_PostJob_Edit_update isEqualToString:@"update"])
     {
         self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
@@ -52,11 +58,16 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     if (![is_PostJob_Edit_update isEqualToString:@"edit"] && ![is_PostJob_Edit_update isEqualToString:@"update"])
     {
         [dictPostNewJob removeAllObjects];
         txtName.text = @"";
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    }
+    if (_isComeFromRegularView)
+    {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     }
 }
 -(void)viewDidAppear:(BOOL)animated

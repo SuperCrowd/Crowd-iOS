@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_JobsOther">
+            <connections>
+                <outlet property="tblView" destination="HFI-xR-ymG" id="itc-ey-Pq8"/>
+                <outlet property="view" destination="Lee-vz-DGS" id="z5P-ao-jjS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Lee-vz-DGS">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HFI-xR-ymG">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="gZK-1j-1Ne"/>
+                        <outlet property="delegate" destination="-1" id="6Ny-rw-UDU"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="HFI-xR-ymG" secondAttribute="bottom" id="1lg-kY-3lc"/>
+                <constraint firstItem="HFI-xR-ymG" firstAttribute="top" secondItem="Lee-vz-DGS" secondAttribute="top" id="4hB-Fn-7Hg"/>
+                <constraint firstItem="HFI-xR-ymG" firstAttribute="leading" secondItem="Lee-vz-DGS" secondAttribute="leading" id="A9q-bT-JCJ"/>
+                <constraint firstAttribute="trailing" secondItem="HFI-xR-ymG" secondAttribute="trailing" id="ebH-EU-yL7"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="367" y="219"/>
+        </view>
+    </objects>
+</document>

@@ -41,7 +41,7 @@
     
     /*--- Add code to setup refresh control ---*/
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refreshControlRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(refreshControlRefresh:) forControlEvents:UIControlEventValueChanged];
     [tblView addSubview:self.refreshControl];
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;
@@ -56,14 +56,22 @@
     /*--- Code to Show Default Refresh when view appear ---*/
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [tblView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:YES];
-        [self refreshControlRefresh];
+        if (_isGointToJobPostVC)
+        {
+            [self refreshControlRefresh:NO];
+        }
+        else
+            [self refreshControlRefresh:YES];
+        
     });
    
-    
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+
     
     if (_isGointToJobPostVC)
     {
         C_PostJob_NameVC *obj = [[C_PostJob_NameVC alloc]initWithNibName:@"C_PostJob_NameVC" bundle:nil];
+        is_PostJob_Edit_update = @"no";
         obj.isComeFromTutorial = YES;
         [self.navigationController pushViewController:obj animated:NO];
         return;
@@ -71,7 +79,11 @@
     
     
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+}
 
 -(void)btnMenuClicked:(id)sender
 {
@@ -83,14 +95,14 @@
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 #pragma mark - Get Data
--(void)refreshControlRefresh
+-(void)refreshControlRefresh:(BOOL)isShowHUd
 {
     pageNum = 1;
     isAllDataRetrieved = NO;
     [self.refreshControl beginRefreshing];
-    [self getData];
+    [self getData:isShowHUd];
 }
--(void)getData
+-(void)getData:(BOOL)isShowHUd
 {
     /*
      {
@@ -166,7 +178,10 @@
             if ([strR isEqualToString:@"No feeds!"])
             {
                 isAllDataRetrieved = YES;
-                [self showAlert_OneButton:@"No Records found"];
+                if (!_isGointToJobPostVC) {
+                    [self showAlert_OneButton:@"No Records found"];
+                }
+                
             }
             else if ([strR isEqualToString:@"No feeds on this Page Number!"])
             {
@@ -223,7 +238,7 @@
             if (offsetY > contentHeight - scrollView.frame.size.height)
             {
                 pageNum = pageNum + 1;
-                [self getData];
+                [self getData:YES];
             }
         }
     }
@@ -241,7 +256,7 @@
         
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
                                    {
-                                       [self getData];
+                                       [self getData:YES];
                                    }];
         [alert addAction:okAction];
         
@@ -282,7 +297,7 @@
 
                 break;
             case 1:
-                [self getData];
+                [self getData:YES];
                 break;
                 
             default:

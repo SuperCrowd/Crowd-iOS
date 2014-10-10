@@ -113,6 +113,9 @@
                                     <state key="normal" image="jobs-btn">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="btnJobClicked:" destination="-1" eventType="touchUpInside" id="zJd-eM-5ct"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KP-NW-yG0">
                                     <rect key="frame" x="193" y="2" width="51" height="51"/>

@@ -141,7 +141,7 @@
 #define cellFindCandidate @"idcellFindCandidate"
 #define cellFindCandidate_INFO_ID @"idcellFindCandidate_Info"
 
-
+#define cellFollowerID @"idcellFollower"
 #define cellDashboardID @"idcellDashboard"
 
 /*-----------------------------------------------------------------------------*/

@@ -195,7 +195,7 @@
     
     myModel.location_city = [[NSString stringWithFormat:@"%@",dictLinkedIn[@"location"][@"name"]]isNull];
     myModel.location_state = @"";;
-    myModel.location_country = @"";
+    myModel.location_country = [[NSString stringWithFormat:@"%@",dictLinkedIn[@"location"][@"country"][@"code"]]isNull];
     myModel.location_countrycode = [[NSString stringWithFormat:@"%@",dictLinkedIn[@"location"][@"country"][@"code"]]isNull];
 
     myModel.imgUserPic = nil;
@@ -365,7 +365,17 @@
         {
             NSDictionary *dictT = arrSkills[i];
             Skills *mySkills = [[Skills alloc]init];
-            mySkills.name = [[NSString stringWithFormat:@"%@",dictT[@"skill"][@"name"]]isNull];
+            @try
+            {
+                mySkills.name = [[NSString stringWithFormat:@"%@",dictT[@"skill"][@"name"]]isNull];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+            
+            
             [arrSkillsTemp addObject:mySkills];
         }
     }

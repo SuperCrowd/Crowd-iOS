@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CustomBtn.h"
 @interface C_Cell_FindAJobList_Info : UITableViewCell
 
-@property(nonatomic,strong)IBOutlet UIButton *btnLocation;
-@property(nonatomic,strong)IBOutlet UIButton *btnEditJob;
+@property(nonatomic,strong)IBOutlet CustomBtn *btnLocation;
+@property(nonatomic,strong)IBOutlet CustomBtn *btnEditJob;
 @property(nonatomic,strong)IBOutlet UILabel *lblDescription;
 @end

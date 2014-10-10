@@ -38,4 +38,6 @@
 
 #define Web_FOLLOW_UNFOLLOW BASE_URL@"FollowUnfollowUser"
 
+#define Web_MY_CROWD BASE_URL@"GetMyCrowd"
+#define Web_MY_JOBS BASE_URL@"GetUserJobs"
 #endif
