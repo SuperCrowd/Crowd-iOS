@@ -25,7 +25,7 @@
 #define FAVORITE @"Favorites"
 #define POSTED @"Posted By Me"
 
-@interface C_MyJobsVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface C_MyJobsVC ()<UITableViewDataSource,UITableViewDelegate,postJobProtocol>
 {
     __weak IBOutlet UITableView *tblView;
     JSONParser *parser;
@@ -168,8 +168,8 @@
             NSDictionary *dictResult = [objResponse objectForKey:@"GetUserJobsResult"];
             //got
             //user’s name, Current Job Title, Current Employer, and Location (City and State only)
-            NSLog(@"%@",[dictResult objectForKey:@"FollowingMeUser"]);// Following users
-            NSLog(@"%@",[dictResult objectForKey:@"IAmFollowingUser"]);// Followed users
+            //NSLog(@"%@",[dictResult objectForKey:@"FollowingMeUser"]);// Following users
+            //NSLog(@"%@",[dictResult objectForKey:@"IAmFollowingUser"]);// Followed users
             if (pageNum==1)
             {
                 [arrPosted removeAllObjects];
@@ -180,20 +180,17 @@
 
            NSArray *arrPost= [dictResult objectForKey:@"PostedByMe"];
            [arrPost enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-               C_JobListModel *user = [C_JobListModel addJobListModel:obj];
-               [arrPosted addObject:user];
+               [arrPosted addObject:[C_JobListModel addJobListModel:obj]];
            }];
            
            NSArray *arrFav = [dictResult objectForKey:@"JobFavorited"];
            [arrFav enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-               C_JobListModel *user = [C_JobListModel addJobListModel:obj];
-               [arrFavorites addObject:user];
+               [arrFavorites addObject:[C_JobListModel addJobListModel:obj]];
            }];
             
             NSArray *arrAppl = [dictResult objectForKey:@"JobApplied"];
             [arrAppl enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                C_JobListModel *user = [C_JobListModel addJobListModel:obj];
-                [arrApplied addObject:user];
+                [arrApplied addObject:[C_JobListModel addJobListModel:obj]];
             }];
 
             if (arrPosted.count>0) {
@@ -362,6 +359,7 @@
         
         /*--- Send current object and get data then fill object after that if user press update then replace object so this will appear here ---*/
         C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+        objD.delegate = self;
         objD.obj_JobListModel = myJob;
         objD.strComingFrom = @"FindAJob";
         [self.navigationController pushViewController:objD animated:YES];
@@ -396,7 +394,25 @@
         [tblView reloadData];
     }
 }
-
+#pragma mark - Custom Protocol
+-(void)deletedJobProtocol_with_JobID:(NSString *)jobID
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.JobID == %@", jobID];
+    NSUInteger indexFromMainArray = [arrPosted indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL *stop) {
+        return [predicate evaluateWithObject:obj];
+    }];
+    
+    @try
+    {
+        [arrPosted removeObjectAtIndex:indexFromMainArray];
+        [tblView reloadData];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+}
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

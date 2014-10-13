@@ -17,7 +17,7 @@
 #import "C_PostJobModel.h"
 
 #import "C_PostJob_UpdateVC.h"
-@interface C_FindAJobListingVC ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@interface C_FindAJobListingVC ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,postJobProtocol>
 {
     __weak IBOutlet UITableView *tblView;
     NSMutableArray *arrContent;
@@ -42,7 +42,7 @@
     self.title = @"Search Results";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(back)];
-    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    
     
     
     /*--- Add code to setup refresh control ---*/
@@ -74,7 +74,9 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
+    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     if (arrContent.count > 0)
     {
         [tblView reloadData];
@@ -93,8 +95,6 @@
 
     @try
     {
-        NSLog(@"%@",_dictInfoJob);
-        NSLog(@"page Num : %ld",(long)pageNum);
         isCallingService = YES;
         showHUD_with_Title(@"Getting Job List");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
@@ -384,6 +384,7 @@
         
         /*--- Send current object and get data then fill object after that if user press update then replace object so this will appear here ---*/
         C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+        objD.delegate = self;
         objD.obj_JobListModel = myJob;
         objD.strComingFrom = @"FindAJob";
         [self.navigationController pushViewController:objD animated:YES];
@@ -408,6 +409,25 @@
     C_JobListModel *myJob = (C_JobListModel *)arrContent[btnInfo.tag];
     myJob.isShowDescription = NO;
     [tblView reloadData];
+}
+#pragma mark - Custom Protocol
+-(void)deletedJobProtocol_with_JobID:(NSString *)jobID
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.JobID == %@", jobID];
+    NSUInteger indexFromMainArray = [arrContent indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL *stop) {
+        return [predicate evaluateWithObject:obj];
+    }];
+    
+    @try
+    {
+        [arrContent removeObjectAtIndex:indexFromMainArray];
+        [tblView reloadData];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

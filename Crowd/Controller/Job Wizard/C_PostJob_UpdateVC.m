@@ -36,16 +36,21 @@
     __weak IBOutlet UILabel *lbl_City_State;
     __weak IBOutlet UILabel *lbl_Country;
     
+    __weak IBOutlet UIButton *btn_Fill_ReOpen;
+
+    
     /*--- Section Header Table ---*/
     NSArray *arrSectionHeader;
     
     JSONParser *parser;
     
     BOOL isCallingService;
+    
 }
 @end
 
 @implementation C_PostJob_UpdateVC
+@synthesize delegate;
 -(void)back
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"updateJobListModel" object:nil];
@@ -78,10 +83,7 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"updateJobListModel" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateModelList) name:@"updateJobListModel" object:nil];
     
-    
-    
-    
-    
+
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;
     tblView.delegate = self;
@@ -160,6 +162,15 @@
         lbl_City_State.text = [NSString stringWithFormat:@"%@, %@",strCity,strState];
     
     lbl_Country.text = [[NSString stringWithFormat:@"%@",postJob_ModelClass.LocationCountry] isNull];
+    
+    if (postJob_ModelClass.State)
+    {
+        [btn_Fill_ReOpen setImage:[UIImage imageNamed:@"reopen-btn"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [btn_Fill_ReOpen setImage:[UIImage imageNamed:@"fill-btn"] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Get Data
@@ -379,6 +390,208 @@
         return mySkillCell;
     }
     return nil;
+}
+
+#pragma mark - UIAlert Delegate
+-(void)showAlert_withTitle:(NSString *)title
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                   {
+                                       [self deleteJOB];
+                                   }];
+        [alert addAction:okAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        alertView.tag = 101;
+        [alertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 101) {
+        switch (buttonIndex) {
+            case 0:
+                
+                break;
+            case 1:
+                [self deleteJOB];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+#pragma mark - Delete JOB
+-(IBAction)btnDeleteJobClicked:(id)sender
+{
+    [self showAlert_withTitle:@"Would you like to delete this job? if you delete it will be lost. This can not be undone."];
+}
+-(void)deleteJOB
+{
+    @try
+    {
+        /*
+         <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="JobID" nillable="true" type="xs:string"/>
+         */
+        showHUD_with_Title(@"Delete Job");
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token,
+                                    @"JobID":postJob_ModelClass.JobID};
+        parser = [[JSONParser alloc]initWith_withURL:Web_MY_JOBS_DELETE withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(deleteJobSuccessfull:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+
+-(void)deleteJobSuccessfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
+    else if([objResponse objectForKey:@"DeleteJobResult"])
+    {
+        BOOL isJobDelete = [[objResponse valueForKeyPath:@"DeleteJobResult.ResultStatus.Status"] boolValue];
+        if (isJobDelete)
+        {
+            hideHUD;
+            if ([_strComingFrom isEqualToString:FIND_A_JOB])
+            {
+                if ([self.delegate respondsToSelector:@selector(deletedJobProtocol_with_JobID:)])
+                {
+                    [self.delegate deletedJobProtocol_with_JobID:postJob_ModelClass.JobID];
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                is_PostJob_Edit_update = @"no";
+                C_PostJob_NameVC *objP = [[C_PostJob_NameVC alloc]initWithNibName:@"C_PostJob_NameVC" bundle:nil];
+                UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objP];
+                navvv.navigationBar.translucent = NO;
+                objP.isComeFromTutorial = NO;
+                [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                    
+                }];
+            }
+        }
+        else
+        {
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"DeleteJobResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+
+        }
+    }
+    else
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
+    
+}
+
+#pragma mark - FILL & REOPEN
+-(IBAction)btnFill_ReOpenClicked:(id)sender
+{
+    if (postJob_ModelClass.State)
+        [self fill_reopen_job:@"0"];
+    else
+        [self fill_reopen_job:@"1"];
+}
+-(void)fill_reopen_job:(NSString *)status
+{
+    @try
+    {
+        /*
+         <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="JobID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string"/>
+         */
+        showHUD_with_Title(@"Please wait");
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token,
+                                    @"JobID":postJob_ModelClass.JobID,
+                                    @"Status":status};
+        parser = [[JSONParser alloc]initWith_withURL:Web_MY_JOBS_FILL_REOPEN withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(fill_reopen_successfull:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+
+-(void)fill_reopen_successfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
+    else if([objResponse objectForKey:@"FillReopenJobResult"])
+    {
+        BOOL isFillReopen = [[objResponse valueForKeyPath:@"FillReopenJobResult.ResultStatus.Status"] boolValue];
+        if (isFillReopen)
+        {
+            hideHUD;
+            postJob_ModelClass.State = !postJob_ModelClass.State;
+            [self showData];
+        }
+        else
+        {
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"FillReopenJobResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+            
+        }
+    }
+    else
+    {
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+    }
+    
 }
 
 

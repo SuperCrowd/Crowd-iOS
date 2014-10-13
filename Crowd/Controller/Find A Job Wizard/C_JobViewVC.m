@@ -124,14 +124,14 @@
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
-        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+        [self showAlert_withTitle:@"Please Try Again"];
         return;
     }
     
     if ([objResponse objectForKey:kURLFail])
     {
         hideHUD;
-        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
     }
     else if([objResponse objectForKey:@"GetJobDetailsResult"])
     {
@@ -163,7 +163,7 @@
     else
     {
         hideHUD;
-        [CommonMethods displayAlertwithTitle:[objResponse objectForKey:kURLFail] withMessage:nil withViewController:self];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
     }
 }
 
@@ -223,8 +223,14 @@
 }
 -(IBAction)btnApplyClicked:(id)sender
 {
+    if (!_obj_myJob.IsJobApplied)
+    {
+        [self showApplyJobTitle:@"Would you like to apply for this job?"];
+    }
+
     //ApplyToJob
-    [self applyNow];
+    //[self applyNow];
+    
 }
 
 #pragma mark - Table Delegate
@@ -463,11 +469,17 @@
         BOOL isJobList = [[objResponse valueForKeyPath:@"ApplyToJobResult.ResultStatus.Status"] boolValue];
         if (isJobList)
         {
-            hideHUD;
+            //hideHUD;
             @try
             {
                 _obj_myJob.IsJobApplied = !_obj_myJob.IsJobApplied;
                 [self showViewContainer];;
+                
+                NSString *strT = [NSString stringWithFormat:@"Your information has been sent to %@ %@",_obj_myJob.FirstName,_obj_myJob.LastName];
+                showHUD_with_Success(strT);
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    hideHUD;
+                });
                 
             }
             @catch (NSException *exception) {
@@ -497,6 +509,94 @@
     obj.OtherUserID = _obj_myJob.UserId;
     [self.navigationController pushViewController:obj animated:YES];
 }
+#pragma mark - UIAlert Delegate
+-(void)showAlert_withTitle:(NSString *)title
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                   {
+                                       [self applyNow];
+                                   }];
+        [alert addAction:okAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        alertView.tag = 102;
+        [alertView show];
+    }
+}
+
+
+-(void)showApplyJobTitle:(NSString *)title
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Apply for this job" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                   {
+                                       [self applyNow];
+                                   }];
+        [alert addAction:okAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Apply for this job",nil];
+        alertView.tag = 101;
+        [alertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 101) {
+        switch (buttonIndex) {
+            case 0:
+                
+                break;
+            case 1:
+                [self applyNow];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else
+    {
+        switch (buttonIndex) {
+            case 0:
+                
+                break;
+            case 1:
+                [self getData];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

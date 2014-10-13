@@ -35,6 +35,8 @@
     {
         myJob.JobID = [[NSString stringWithFormat:@"%@",dictT[@"ID"]] isNull];
         myJob.UserId = [[NSString stringWithFormat:@"%@",dictT[@"UserId"]] isNull];
+        myJob.FirstName = [[NSString stringWithFormat:@"%@",dictT[@"FirstName"]] isNull];
+        myJob.LastName = [[NSString stringWithFormat:@"%@",dictT[@"LastName"]] isNull];
         
         myJob.Title = [[NSString stringWithFormat:@"%@",dictT[@"Title"]] isNull];
         
@@ -51,6 +53,12 @@
         myJob.arrSkills = [NSMutableArray array];
         myJob.IsJobApplied = NO;
         myJob.IsJobFavorite = NO;
+        
+        if ([dictT[@"State"] isEqualToString:@"True"])
+            myJob.State = YES;
+        else
+            myJob.State = NO;
+        
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);
@@ -87,6 +95,9 @@
     myJob.IsJobApplied = [dictT[@"IsJobApplied"] boolValue];
     myJob.IsJobFavorite = [dictT[@"IsJobFavorite"] boolValue];
 
+    myJob.FirstName = [[NSString stringWithFormat:@"%@",dictT[@"FirstName"]] isNull];
+    myJob.LastName = [[NSString stringWithFormat:@"%@",dictT[@"LastName"]] isNull];
+    
     if ([dictT[@"JobDetailsWithSkills"][@"JobSkills"] isKindOfClass:[NSArray class]])
     {
         NSMutableArray *arr = [[NSMutableArray alloc]init];

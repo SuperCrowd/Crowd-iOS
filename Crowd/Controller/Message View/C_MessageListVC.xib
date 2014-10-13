@@ -4,32 +4,32 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_DashBoardVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_MessageListVC">
             <connections>
-                <outlet property="tblView" destination="cWT-GC-IJ8" id="bzf-LJ-u4Y"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="tblView" destination="4ln-ov-lC4" id="yIt-EI-Y7J"/>
+                <outlet property="view" destination="LsS-ez-UrA" id="OuZ-UR-e5t"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="LsS-ez-UrA">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cWT-GC-IJ8">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4ln-ov-lC4">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="vzF-mt-gfS"/>
-                        <outlet property="delegate" destination="-1" id="Bdj-sR-F1C"/>
+                        <outlet property="dataSource" destination="-1" id="YO8-E9-Bdw"/>
+                        <outlet property="delegate" destination="-1" id="5gx-d4-cnW"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="cWT-GC-IJ8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3hb-Kv-Wj7"/>
-                <constraint firstItem="cWT-GC-IJ8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Fcz-TT-cvK"/>
-                <constraint firstAttribute="bottom" secondItem="cWT-GC-IJ8" secondAttribute="bottom" id="gUA-0U-57Y"/>
-                <constraint firstAttribute="trailing" secondItem="cWT-GC-IJ8" secondAttribute="trailing" id="y3T-bf-eiQ"/>
+                <constraint firstItem="4ln-ov-lC4" firstAttribute="top" secondItem="LsS-ez-UrA" secondAttribute="top" id="6AB-ja-Ita"/>
+                <constraint firstAttribute="trailing" secondItem="4ln-ov-lC4" secondAttribute="trailing" id="HBn-uK-kqY"/>
+                <constraint firstItem="4ln-ov-lC4" firstAttribute="leading" secondItem="LsS-ez-UrA" secondAttribute="leading" id="q6x-Nc-TKC"/>
+                <constraint firstAttribute="bottom" secondItem="4ln-ov-lC4" secondAttribute="bottom" id="q84-p2-LYw"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>

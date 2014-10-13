@@ -25,6 +25,8 @@
 @property NSString *ExperienceLevel;
 @property NSString *Responsibilities;
 @property NSString *URL;
+@property BOOL State;
+
 
 @property NSMutableArray *arrSkills;
 

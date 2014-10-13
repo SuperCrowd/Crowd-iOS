@@ -144,6 +144,8 @@
 #define cellFollowerID @"idcellFollower"
 #define cellDashboardID @"idcellDashboard"
 
+#define cellMessageSimpleID @"idcellMessageSimple"
+#define cellMessageJOBID @"idcellMessageJob"
 /*-----------------------------------------------------------------------------*/
 
 #pragma mark - Keyboard Animation Declaration of values

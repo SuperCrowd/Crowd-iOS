@@ -153,8 +153,7 @@
             
             NSArray *arrPost= [dictResult objectForKey:@"PostedByMe"];
             [arrPost enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                C_JobListModel *user = [C_JobListModel addJobListModel:obj];
-                [arrPosted addObject:user];
+                [arrPosted addObject:[C_JobListModel addJobListModel:obj]];
             }];
             
             

@@ -10,6 +10,7 @@
 #import "AppConstant.h"
 #import "M13BadgeView.h"
 
+#import "C_MessageListVC.h"
 #import "C_DashBoardVC.h"
 #import "C_PostJob_NameVC.h"
 #import "C_MyProfileVC.h"
@@ -79,11 +80,12 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     [imgVUserPic setClipsToBounds:YES];
     
 
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUnreadCount) name:@"updateUnreadMessageCount" object:nil];
     /*--- Badge setup ---*/
     badgeView = [[M13BadgeView alloc] initWithFrame:CGRectMake(0, 0, 24.0, 24.0)];
     [badgeSuperView addSubview:badgeView];
 
-    badgeView.text = @"99";
+    badgeView.text = userInfoGlobal.NumberOfUnreadMessage;
     badgeView.textColor = [UIColor whiteColor];
     badgeView.badgeBackgroundColor = [UIColor purpleColor];
     badgeView.borderColor = nil;
@@ -111,8 +113,20 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 {
     [super viewWillAppear:animated];
     [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:userInfoGlobal.PhotoURL ]]];
-    
-//    [self.mm_drawerController.centerViewController.view endEditing:YES];
+}
+-(void)updateUnreadCount
+{
+    badgeView.text = @"99";
+}
+
+-(IBAction)btnMessageClicked:(id)sender
+{
+    C_MessageListVC *objM = [[C_MessageListVC alloc]initWithNibName:@"C_MessageListVC" bundle:nil];
+    UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objM];
+    navvv.navigationBar.translucent = NO;
+    [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+        
+    }];
 }
 -(IBAction)btnLogoutClicked:(id)sender
 {

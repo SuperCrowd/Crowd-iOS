@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_PostJob_UpdateVC">
             <connections>
+                <outlet property="btn_Fill_ReOpen" destination="W6p-I4-ITN" id="pQb-No-CwU"/>
                 <outlet property="lbl_City_State" destination="ocg-L9-mnu" id="zbT-Ky-WiA"/>
                 <outlet property="lbl_Company" destination="jQz-MF-WLx" id="lbF-nE-7Ei"/>
                 <outlet property="lbl_Country" destination="CDM-gu-9Ay" id="Zby-rg-UFa"/>
@@ -79,6 +80,9 @@
                             <state key="normal" image="fill-btn">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="btnFill_ReOpenClicked:" destination="-1" eventType="touchUpInside" id="WTA-73-FD3"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nco-Sa-Ihn">
                             <rect key="frame" x="135" y="104" width="51" height="51"/>
@@ -91,6 +95,9 @@
                             <state key="normal" image="delete-btn">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="btnDeleteJobClicked:" destination="-1" eventType="touchUpInside" id="5bs-vA-K1a"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

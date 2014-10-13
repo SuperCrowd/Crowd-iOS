@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface C_JobListModel : NSObject
+@property NSString *FirstName;
+@property NSString *LastName;
+
 @property NSString *JobID;
 @property NSString *UserId;
 @property NSString *Title;
@@ -34,7 +37,7 @@
 @property NSMutableArray *arrSkills;
 @property BOOL IsJobApplied;
 @property BOOL IsJobFavorite;
-
+@property BOOL State;
 @property BOOL isShowDescription;
 +(C_JobListModel *)updateModel:(C_JobListModel *)myJob withDict:(NSDictionary *)dictT;
 

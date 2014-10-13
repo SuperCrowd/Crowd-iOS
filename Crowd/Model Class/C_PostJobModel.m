@@ -24,7 +24,13 @@
     myJob.LocationCountry = [[NSString stringWithFormat:@"%@",dictT[@"LocationCountry"]] isNull];
     myJob.ExperienceLevel = [[NSString stringWithFormat:@"%@",dictT[@"ExperienceLevel"]] isNull];
     myJob.Responsibilities = [[NSString stringWithFormat:@"%@",dictT[@"Responsibilities"]] isNull];
+    
     myJob.URL = [[NSString stringWithFormat:@"%@",dictT[@"URL"]] isNull];
+    
+    if ([dictT[@"State"] isEqualToString:@"True"])
+        myJob.State = YES;
+    else
+        myJob.State = NO;
     
     if ([dictT[@"JobSkills"] isKindOfClass:[NSArray class]])
     {
