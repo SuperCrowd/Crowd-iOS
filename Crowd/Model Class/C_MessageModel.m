@@ -31,10 +31,17 @@
     
     myMessage.msgID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"ID"]] isNull];
 
-    if ([[dictMessageInfo[@"ID"] isNull] isEqualToString:@"True"])
+    if ([[dictMessageInfo[@"IsUnreadMessages"] isNull] isEqualToString:@"True"])
         myMessage.IsUnreadMessages = YES;
     else
         myMessage.IsUnreadMessages = NO;
+    
+    
+    if ([[dictMessageInfo[@"State"] isNull] isEqualToString:@"True"])
+        myMessage.State = YES;
+    else
+        myMessage.State = NO;
+    
     
     myMessage.Message = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"Message"]] isNull];
     myMessage.Type = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"Type"]] isNull];
@@ -58,18 +65,27 @@
         myMessage.strDisplayText = [NSString stringWithFormat:@"%@ from %@ %@",myMessage.Message,myMessage.FirstName,myMessage.LastName];
     }
     
-    NSDate *dateS = [myMessage.DateCreated dateFromStringDateFormate:@"MM/dd/yyyy h:mm:ss a" Type:0];
+    @try
+    {
+        NSDate *dateS = [myMessage.DateCreated dateFromStringDateFormate:@"MM/dd/yyyy h:mm:ss a" Type:0];
+        
+        NSCalendar *c = [[NSCalendar alloc ] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [c components:NSHourCalendarUnit fromDate:dateS toDate:[NSDate date] options:0];
+        NSInteger diff = components.hour;
+        
+        if (diff < 24)
+            myMessage.strDisplayDate = [dateS convertDateinFormat:@"h:mm a"];
+        else if(diff < 48)
+            myMessage.strDisplayDate = @"Yesterday";
+        else
+            myMessage.strDisplayDate = [dateS convertDateinFormat:@"MM/dd/yyyy"];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
     
-    NSCalendar *c = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *components = [c components:NSHourCalendarUnit fromDate:dateS toDate:[NSDate date] options:0];
-    NSInteger diff = components.hour;
-
-    if (diff < 24)
-        myMessage.strDisplayDate = [dateS convertDateinFormat:@"h:mm a"];
-    else if(diff < 48)
-        myMessage.strDisplayDate = @"Yesterday";
-    else
-        myMessage.strDisplayDate = [dateS convertDateinFormat:@"MM/dd/yyyy"];
     
     return myMessage;
 }

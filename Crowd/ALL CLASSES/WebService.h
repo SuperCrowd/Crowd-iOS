@@ -33,22 +33,36 @@
 
 #define Web_POST_JOB BASE_URL@"AddEditJob"
 
+
+//section 
 #define Web_JOB_LIST BASE_URL@"SearchJob"
 #define Web_CANDIDATE_LIST BASE_URL@"SearchCandidates"
 
-#define Web_JOB_DETAIL BASE_URL@"GetJobDetails"
 
+
+
+//section 1
 #define Web_DASHBOARD BASE_URL@"GetActivityFeeds"
 
+// my jobs + other user jobs
 #define Web_JOB_FAVOURITE BASE_URL@"FavoriteJob"
 #define Web_JOB_APPLY BASE_URL@"ApplyToJob"
 #define Web_MY_JOBS_DELETE BASE_URL@"DeleteJob"
 #define Web_MY_JOBS_FILL_REOPEN BASE_URL@"FillReopenJob"
 
-#define Web_GET_MESSAGES_LIST BASE_URL@"GetMessageList"
+// get own or other user job details
+#define Web_JOB_DETAIL BASE_URL@"GetJobDetails"
 
+//message
+#define Web_GET_MESSAGES_LIST BASE_URL@"GetMessageList"
+#define Web_GET_MESSAGES_RECENT BASE_URL@"GetMessageThread"
+#define Web_GET_MESSAGES_PAST BASE_URL@"GetMessageList"
+
+//follow unfollow
 #define Web_FOLLOW_UNFOLLOW BASE_URL@"FollowUnfollowUser"
 
+
+//section 6-7
 #define Web_MY_CROWD BASE_URL@"GetMyCrowd"
 #define Web_MY_JOBS BASE_URL@"GetUserJobs"
 #endif

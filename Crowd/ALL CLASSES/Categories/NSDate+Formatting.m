@@ -59,6 +59,33 @@
     [df setTimeZone:[NSTimeZone systemTimeZone]];
     [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     return [df dateFromString:strNewDate];
+}
+//get st/th/nd/rd
+-(NSString *)getPostFixString
+{
+    @try
+    {
+        NSDateFormatter *prefixDateFormatter = [[NSDateFormatter alloc] init];
+        [prefixDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [prefixDateFormatter setDateFormat:@"dd"];
+        NSString *prefixDateString = [prefixDateFormatter stringFromDate:self];
+        NSDateFormatter *monthDayFormatter = [[NSDateFormatter alloc] init];
+        [monthDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [monthDayFormatter setDateFormat:@"d"];
+        int date_day = [[monthDayFormatter stringFromDate:self] intValue];
+        NSString *suffix_string = @"|st|nd|rd|th|th|th|th|th|th|th|th|th|th|th|th|th|th|th|th|th|st|nd|rd|th|th|th|th|th|th|th|st";
+        NSArray *suffixes = [suffix_string componentsSeparatedByString: @"|"];
+        
+        NSString *suffix = [suffixes objectAtIndex:date_day];
+        NSString *dateString = [prefixDateString stringByAppendingString:suffix];
+        return dateString;
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        return @"st";
+    }
+    @finally {
+    }
     
 }
 @end

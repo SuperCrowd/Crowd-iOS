@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class C_MessageModel;
 @interface C_MessageView : UIViewController
-
+@property (nonatomic,strong)C_MessageModel *message_UserInfo;
 @end

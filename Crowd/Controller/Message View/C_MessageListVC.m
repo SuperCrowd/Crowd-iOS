@@ -14,6 +14,7 @@
 #import "C_MessageModel.h"
 
 #import "C_OtherUserProfileVC.h"
+#import "C_MessageView.h"
 @interface C_MessageListVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -119,6 +120,7 @@
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
+        isCallingService = NO;
         [self showAlert_withTitle:@"Please Try Again"];
         return;
     }
@@ -126,6 +128,7 @@
     if ([objResponse objectForKey:kURLFail])
     {
         hideHUD;
+        isCallingService = NO;
         [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
     }
     else if([objResponse objectForKey:@"GetMessageListResult"])
@@ -359,7 +362,7 @@
         cell.imgVUserPic.layer.borderColor = RGBCOLOR_GREEN.CGColor;
         [cell.imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:myMessage.PhotoURL ]]];
 
-        if (myMessage.IsUnreadMessages)
+        if (!myMessage.State)
             cell.imgVUnreadMSG.alpha = 1.0;
         else
             cell.imgVUnreadMSG.alpha = 0.0;
@@ -411,8 +414,14 @@
     C_MessageModel *myMessage = (C_MessageModel *)arrContent[indexPath.row];
     if ([myMessage.Type isEqualToString:@"1"]) {
         NSLog(@"Single Message");
+        C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
+        obj.message_UserInfo = myMessage;
+        [self.navigationController pushViewController:obj animated:YES];
+        
     }
 }
+
+#pragma mark - Accept - Decline - View profile
 -(void)btnAcceptClicked:(UIButton *)btnAccept
 {
     C_MessageModel *myMessage = (C_MessageModel *)arrContent[btnAccept.tag];

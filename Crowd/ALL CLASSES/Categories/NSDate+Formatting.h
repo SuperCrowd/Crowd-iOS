@@ -16,4 +16,6 @@
 
 -(NSDate *)changeTime:(NSString *)strTime;
 
+//get st/th/nd/rd
+-(NSString *)getPostFixString;
 @end

@@ -130,6 +130,8 @@
 		105D46D919D15E2E00C09272 /* C_PostJob_UpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 105D46D719D15E2E00C09272 /* C_PostJob_UpdateVC.m */; };
 		105D46DA19D15E2E00C09272 /* C_PostJob_UpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105D46D819D15E2E00C09272 /* C_PostJob_UpdateVC.xib */; };
 		105D46E019D17F7F00C09272 /* C_PostJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 105D46DF19D17F7F00C09272 /* C_PostJobModel.m */; };
+		105F8EE719ECEC4D0061C494 /* MessageDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 105F8EE619ECEC4D0061C494 /* MessageDetailModel.m */; };
+		105F8F3519ED52900061C494 /* MDMultilineTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 105F8F3419ED52900061C494 /* MDMultilineTextView.m */; };
 		106485F519C0182400BCD1EC /* C_Cell_History.m in Sources */ = {isa = PBXBuildFile; fileRef = 106485F319C0182400BCD1EC /* C_Cell_History.m */; };
 		106485F619C0182400BCD1EC /* C_Cell_History.xib in Resources */ = {isa = PBXBuildFile; fileRef = 106485F419C0182400BCD1EC /* C_Cell_History.xib */; };
 		1078C13F19C3242800378CC4 /* C_Cell_Tags.m in Sources */ = {isa = PBXBuildFile; fileRef = 1078C13D19C3242800378CC4 /* C_Cell_Tags.m */; };
@@ -464,6 +466,10 @@
 		105D46D819D15E2E00C09272 /* C_PostJob_UpdateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_PostJob_UpdateVC.xib; sourceTree = "<group>"; };
 		105D46DE19D17F7F00C09272 /* C_PostJobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_PostJobModel.h; sourceTree = "<group>"; };
 		105D46DF19D17F7F00C09272 /* C_PostJobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_PostJobModel.m; sourceTree = "<group>"; };
+		105F8EE519ECEC4D0061C494 /* MessageDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailModel.h; sourceTree = "<group>"; };
+		105F8EE619ECEC4D0061C494 /* MessageDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailModel.m; sourceTree = "<group>"; };
+		105F8F3319ED52900061C494 /* MDMultilineTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMultilineTextView.h; sourceTree = "<group>"; };
+		105F8F3419ED52900061C494 /* MDMultilineTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMultilineTextView.m; sourceTree = "<group>"; };
 		106485F219C0182400BCD1EC /* C_Cell_History.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Cell_History.h; sourceTree = "<group>"; };
 		106485F319C0182400BCD1EC /* C_Cell_History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Cell_History.m; sourceTree = "<group>"; };
 		106485F419C0182400BCD1EC /* C_Cell_History.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Cell_History.xib; sourceTree = "<group>"; };
@@ -795,6 +801,8 @@
 				1049E38619E7B98500D10C2B /* C_FollowUser.m */,
 				1050CE8219EBC032003B1D00 /* C_MessageModel.h */,
 				1050CE8319EBC032003B1D00 /* C_MessageModel.m */,
+				105F8EE519ECEC4D0061C494 /* MessageDetailModel.h */,
+				105F8EE619ECEC4D0061C494 /* MessageDetailModel.m */,
 			);
 			path = "Model Class";
 			sourceTree = "<group>";
@@ -1450,6 +1458,8 @@
 		10A954CF19B991A000EAAE4B /* View Class */ = {
 			isa = PBXGroup;
 			children = (
+				105F8F3319ED52900061C494 /* MDMultilineTextView.h */,
+				105F8F3419ED52900061C494 /* MDMultilineTextView.m */,
 				1049E38819E7B9B900D10C2B /* CustomBtn.h */,
 				1049E38919E7B9B900D10C2B /* CustomBtn.m */,
 				10DA4BEC19C1CDBE001F132D /* UITextFieldExtended.h */,
@@ -1814,6 +1824,7 @@
 				10A954C819B9919700EAAE4B /* UIImage+WebP.m in Sources */,
 				1018251119D046EB0099E8F5 /* C_PostJob_LocationVC.m in Sources */,
 				10A954C119B9919700EAAE4B /* SDWebImageDownloader.m in Sources */,
+				105F8EE719ECEC4D0061C494 /* MessageDetailModel.m in Sources */,
 				105D46D919D15E2E00C09272 /* C_PostJob_UpdateVC.m in Sources */,
 				109CE71B19EBAEB400DADF56 /* C_MessageListVC.m in Sources */,
 				106485F519C0182400BCD1EC /* C_Cell_History.m in Sources */,
@@ -1861,6 +1872,7 @@
 				10D48ADE19D2FB0F00B93675 /* C_MP_ProffesionalSummaryVC.m in Sources */,
 				104CD64A19D288F300E444F8 /* C_LocationVC.m in Sources */,
 				10A954A219B9919700EAAE4B /* NSAttributedString+Validation.m in Sources */,
+				105F8F3519ED52900061C494 /* MDMultilineTextView.m in Sources */,
 				10AED95519E65A34009E3BE5 /* C_Cell_Dashboard.m in Sources */,
 				10A953F019B9911200EAAE4B /* main.m in Sources */,
 				10A954C619B9919700EAAE4B /* UIImage+GIF.m in Sources */,

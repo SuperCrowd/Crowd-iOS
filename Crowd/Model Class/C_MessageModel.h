@@ -12,6 +12,7 @@
 
 @property NSString *msgID;
 @property BOOL IsUnreadMessages;
+@property BOOL State;
 @property NSString *Message;
 @property NSString *Type;
 
