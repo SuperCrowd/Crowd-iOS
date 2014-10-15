@@ -57,6 +57,7 @@
 #define Web_GET_MESSAGES_LIST BASE_URL@"GetMessageList"
 #define Web_GET_MESSAGES_RECENT BASE_URL@"GetMessageThread"
 #define Web_GET_MESSAGES_PAST BASE_URL@"GetMessageList"
+#define Web_MESSAGES_SEND BASE_URL@"SendMessage"
 
 //follow unfollow
 #define Web_FOLLOW_UNFOLLOW BASE_URL@"FollowUnfollowUser"

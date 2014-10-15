@@ -21,11 +21,28 @@
     MessageDetailModel *myMessage = [[MessageDetailModel alloc]init];
     
     myMessage.msgID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"ID"]] isNull];
+    myMessage.SenderID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"SenderID"]] isNull];
+    
     myMessage.Message = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"Message"]] isNull];
     
     myMessage.LincURL = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincURL"]] isNull];
+    myMessage.LincJobID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincJobID"]] isNull];
+    myMessage.LincUserID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincUserID"]] isNull];
     myMessage.DateCreated = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"DateCreated"]] isNull];
 
+//    CGFloat getWidth = [myMessage.Message getWidth_withFont:kFONT_LIGHT(14.0) height:16.0];
+//    if (getWidth > screenSize.size.width - 70.0)
+//    {
+        CGFloat getHeight = [myMessage.Message getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 70.0];
+        myMessage.heightText = getHeight + 2.0;
+        myMessage.widthText = screenSize.size.width - 70.0;
+//    }
+//    else
+//    {
+//        myMessage.heightText = 16.0;
+//        myMessage.widthText = getWidth;
+//    }
+    
     @try
     {
         NSDate *dateS = [myMessage.DateCreated dateFromStringDateFormate:@"MM/dd/yyyy h:mm:ss a" Type:0];

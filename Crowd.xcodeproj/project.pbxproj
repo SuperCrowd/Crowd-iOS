@@ -259,6 +259,10 @@
 		10DDA81B19DBEC070075FA7A /* C_OtherUserProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10DDA81919DBEC070075FA7A /* C_OtherUserProfileVC.xib */; };
 		10DDA82019DC007F0075FA7A /* C_WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10DDA81E19DC007F0075FA7A /* C_WebVC.m */; };
 		10DDA82119DC007F0075FA7A /* C_WebVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10DDA81F19DC007F0075FA7A /* C_WebVC.xib */; };
+		10ECE9C019EE32F500FAE431 /* C_Cell_Chat_Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 10ECE9BE19EE32F500FAE431 /* C_Cell_Chat_Me.m */; };
+		10ECE9C119EE32F500FAE431 /* C_Cell_Chat_Me.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10ECE9BF19EE32F500FAE431 /* C_Cell_Chat_Me.xib */; };
+		10ECE9C519EE331500FAE431 /* C_Cell_Chat_Other.m in Sources */ = {isa = PBXBuildFile; fileRef = 10ECE9C319EE331500FAE431 /* C_Cell_Chat_Other.m */; };
+		10ECE9C619EE331500FAE431 /* C_Cell_Chat_Other.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10ECE9C419EE331500FAE431 /* C_Cell_Chat_Other.xib */; };
 		10FD69FB19EBFFF200B248F3 /* C_MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FD69F919EBFFF200B248F3 /* C_MessageView.m */; };
 		10FD69FC19EBFFF200B248F3 /* C_MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10FD69FA19EBFFF200B248F3 /* C_MessageView.xib */; };
 /* End PBXBuildFile section */
@@ -692,6 +696,12 @@
 		10DDA81D19DC007F0075FA7A /* C_WebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_WebVC.h; sourceTree = "<group>"; };
 		10DDA81E19DC007F0075FA7A /* C_WebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_WebVC.m; sourceTree = "<group>"; };
 		10DDA81F19DC007F0075FA7A /* C_WebVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_WebVC.xib; sourceTree = "<group>"; };
+		10ECE9BD19EE32F500FAE431 /* C_Cell_Chat_Me.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Cell_Chat_Me.h; sourceTree = "<group>"; };
+		10ECE9BE19EE32F500FAE431 /* C_Cell_Chat_Me.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Cell_Chat_Me.m; sourceTree = "<group>"; };
+		10ECE9BF19EE32F500FAE431 /* C_Cell_Chat_Me.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Cell_Chat_Me.xib; sourceTree = "<group>"; };
+		10ECE9C219EE331500FAE431 /* C_Cell_Chat_Other.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Cell_Chat_Other.h; sourceTree = "<group>"; };
+		10ECE9C319EE331500FAE431 /* C_Cell_Chat_Other.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Cell_Chat_Other.m; sourceTree = "<group>"; };
+		10ECE9C419EE331500FAE431 /* C_Cell_Chat_Other.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Cell_Chat_Other.xib; sourceTree = "<group>"; };
 		10FD69F819EBFFF200B248F3 /* C_MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_MessageView.h; sourceTree = "<group>"; };
 		10FD69F919EBFFF200B248F3 /* C_MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_MessageView.m; sourceTree = "<group>"; };
 		10FD69FA19EBFFF200B248F3 /* C_MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_MessageView.xib; sourceTree = "<group>"; };
@@ -1021,6 +1031,12 @@
 				1050CE8B19EBC4F9003B1D00 /* C_Cell_Message_Job.h */,
 				1050CE8C19EBC4F9003B1D00 /* C_Cell_Message_Job.m */,
 				1050CE8D19EBC4F9003B1D00 /* C_Cell_Message_Job.xib */,
+				10ECE9BD19EE32F500FAE431 /* C_Cell_Chat_Me.h */,
+				10ECE9BE19EE32F500FAE431 /* C_Cell_Chat_Me.m */,
+				10ECE9BF19EE32F500FAE431 /* C_Cell_Chat_Me.xib */,
+				10ECE9C219EE331500FAE431 /* C_Cell_Chat_Other.h */,
+				10ECE9C319EE331500FAE431 /* C_Cell_Chat_Other.m */,
+				10ECE9C419EE331500FAE431 /* C_Cell_Chat_Other.xib */,
 			);
 			path = "Cell Message";
 			sourceTree = "<group>";
@@ -1438,9 +1454,9 @@
 		10A954CD19B991A000EAAE4B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				109CE71719EBAE9C00DADF56 /* Message View */,
 				106485F119C017FF00BCD1EC /* ALL Cell */,
 				10DDA81C19DC006C0075FA7A /* General Controllers */,
+				109CE71719EBAE9C00DADF56 /* Message View */,
 				100ABD9A19B99232009C1372 /* Login View */,
 				104CD5F719D288F300E444F8 /* Register Wizard */,
 				10DDA81619DBEBEF0075FA7A /* Other User Profile */,
@@ -1636,6 +1652,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10ECE9C619EE331500FAE431 /* C_Cell_Chat_Other.xib in Resources */,
 				104CD66A19D2BA7B00E444F8 /* C_MP_ChooseImageVC.xib in Resources */,
 				10454A6D19CBE4C8009FCFF7 /* C_TutorialVC.xib in Resources */,
 				10DDA80819DBDA430075FA7A /* C_Cell_FindAJobList.xib in Resources */,
@@ -1690,6 +1707,7 @@
 				10A953FC19B9911200EAAE4B /* Images.xcassets in Resources */,
 				10588A6619CC2CD500DC5633 /* Oswald-Regular.ttf in Resources */,
 				1049E39419E7B9E300D10C2B /* C_MyCrowdVC.xib in Resources */,
+				10ECE9C119EE32F500FAE431 /* C_Cell_Chat_Me.xib in Resources */,
 				10AED95619E65A34009E3BE5 /* C_Cell_Dashboard.xib in Resources */,
 				104CD68419D2D04E00E444F8 /* C_MP_EditTagVC.xib in Resources */,
 				10A953EE19B9911200EAAE4B /* InfoPlist.strings in Resources */,
@@ -1799,6 +1817,7 @@
 				10DDA7FF19DBD55E0075FA7A /* C_CandidateModel.m in Sources */,
 				10CAA75419DE9AD00039FBFB /* MainViewController.m in Sources */,
 				10A954BA19B9919700EAAE4B /* UIViewController+MMDrawerController.m in Sources */,
+				10ECE9C019EE32F500FAE431 /* C_Cell_Chat_Me.m in Sources */,
 				1050CE8E19EBC4F9003B1D00 /* C_Cell_Message_Job.m in Sources */,
 				10A954B119B9919700EAAE4B /* LocationHelper.m in Sources */,
 				10A954AD19B9919700EAAE4B /* DACircularProgressView.m in Sources */,
@@ -1845,6 +1864,7 @@
 				1018251B19D04DF10099E8F5 /* C_PostJob_RolesVC.m in Sources */,
 				10A954A019B9919700EAAE4B /* AFURLSessionManager.m in Sources */,
 				100ABD9E19B99232009C1372 /* C_LoginVC.m in Sources */,
+				10ECE9C519EE331500FAE431 /* C_Cell_Chat_Other.m in Sources */,
 				10A954B719B9919700EAAE4B /* MMDrawerController.m in Sources */,
 				102FC4A419CB0156007F37E9 /* C_LeftMenuVC.m in Sources */,
 				104CD63819D288F300E444F8 /* C_Education_Time.m in Sources */,

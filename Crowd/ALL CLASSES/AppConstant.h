@@ -65,6 +65,7 @@
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0f]
 #define RGBCOLOR_DARK_BROWN [UIColor colorWithRed:239.0/255.0f green:157.0/255.0f blue:137.0/255.0f alpha:1.0f]
 #define RGBCOLOR_GREEN [UIColor colorWithRed:73.0/255.0f green:191.0/255.0f blue:135.0/255.0f alpha:1.0f]
+#define RGBCOLOR_GREY [UIColor colorWithRed:38.0/255.0f green:38.0/255.0f blue:38.0/255.0f alpha:1.0f]
 
 /*-----------------------------------------------------------------------------*/
 
@@ -146,6 +147,9 @@
 
 #define cellMessageSimpleID @"idcellMessageSimple"
 #define cellMessageJOBID @"idcellMessageJob"
+
+#define cellChatMEID @"idcellChatMe"
+#define cellChatOtherID @"idcellChatOther"
 /*-----------------------------------------------------------------------------*/
 
 #pragma mark - Keyboard Animation Declaration of values

@@ -21,6 +21,9 @@
 
 #import "C_JobsOther.h"
 
+#import "C_MessageView.h"
+#import "C_MessageModel.h"
+
 #define PROFFESSIONAL_SUMMARY @"Professional Summary"
 #define WORK_EXPERIENCE @"Work Experience"
 #define RECOMMENDATION @"Recommendations"
@@ -552,6 +555,19 @@
 //    [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
 //                        
 //                    }];
+}
+
+
+#pragma mark - Message
+-(IBAction)btnMessageClicked:(id)sender
+{
+    
+    NSDictionary *dictTemp = @{@"UserId":otherUserDetail.UserId,@"PhotoURL":otherUserDetail.PhotoURL};
+    NSDictionary *dictSender = @{@"SenderDetail":dictTemp};
+    C_MessageModel *model = [C_MessageModel addMessageList:dictSender];
+    C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
+    obj.message_UserInfo = model;
+    [self.navigationController pushViewController:obj animated:YES];
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
