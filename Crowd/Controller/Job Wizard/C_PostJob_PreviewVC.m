@@ -12,6 +12,7 @@
 #import "C_PostJob_NameVC.h"
 #import "C_PostJob_RolesVC.h"
 #import "C_PostJob_SkillsVC.h"
+#import "C_PostJob_ExperienceVC.h"
 
 #import "C_Header_ProfilePreview.h"
 #import "C_Cell_SkillsProfile.h"
@@ -23,6 +24,7 @@
 
 #define ROLES @"Roles and Responsibilities"
 #define SKILLS @"Skills Requirements"
+#define EXPERIENCE @"Required Experience"
 @interface C_PostJob_PreviewVC ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -49,7 +51,7 @@
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(btnCancelClicked:)];
     
-    arrSectionHeader = @[ROLES,SKILLS];
+    arrSectionHeader = @[ROLES,SKILLS,EXPERIENCE];
     /*--- Register Cell ---*/
     tblView.delegate = self;
     tblView.dataSource = self;
@@ -149,6 +151,11 @@
         C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:YES];
     }
+    else if ([sectionTitle isEqualToString:EXPERIENCE])
+    {
+        C_PostJob_ExperienceVC *obj = [[C_PostJob_ExperienceVC alloc]initWithNibName:@"C_PostJob_ExperienceVC" bundle:nil];
+        [self.navigationController pushViewController:obj animated:YES];
+    }
     else
     {
         C_PostJob_SkillsVC *obj = [[C_PostJob_SkillsVC alloc]initWithNibName:@"C_PostJob_SkillsVC" bundle:nil];
@@ -193,6 +200,10 @@
         heightFinal = 5.0 + heightSummary + 5.0;
         return heightFinal;
     }
+    else if ([sectionTitle isEqualToString:EXPERIENCE])
+    {
+        return 45.0;
+    }
     else
     {
 //        NSMutableArray *arrSkills = [NSMutableArray array];
@@ -236,6 +247,46 @@
         rectLBL.size.height = [dictPostNewJob[@"Responsibilities"] getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width-20.0];
         lblSummary.frame = rectLBL;
         lblSummary.text = dictPostNewJob[@"Responsibilities"];
+        return cell;
+    }
+    else if ([sectionTitle isEqualToString:EXPERIENCE])
+    {
+        static NSString *cellID = @"Cell";
+        UITableViewCell *cell = [tblView dequeueReusableCellWithIdentifier:cellID];
+        UILabel *lblExperience ;
+        CGRect rectLBL = CGRectMake(10.0, 5.0, screenSize.size.width-20.0,35.0);
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            
+            lblExperience = [[UILabel alloc]initWithFrame:rectLBL];
+            lblExperience.font = kFONT_LIGHT(14.0);
+            lblExperience.numberOfLines = 0.0;
+            lblExperience.tag = 100;
+            [cell.contentView addSubview:lblExperience];
+        }
+        lblExperience = (UILabel *)[cell.contentView viewWithTag:100];
+        switch ([dictPostNewJob[@"ExperienceLevel"] integerValue]) {
+            case 1:
+                lblExperience.text = @"0-1 years";
+                break;
+            case 2:
+                lblExperience.text = @"1-3 years";
+                break;
+            case 3:
+                lblExperience.text = @"3-5 years";
+                break;
+            case 4:
+                lblExperience.text = @"5-8 years";
+                break;
+            case 5:
+                lblExperience.text = @"8+ years";
+                break;
+                
+            default:
+                break;
+        }
+        
         return cell;
     }
     else

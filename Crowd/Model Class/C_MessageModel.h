@@ -18,6 +18,11 @@
 
 @property NSString *DateCreated;
 
+
+@property NSString *LincJobID;
+@property NSString *LincURL;
+@property NSString *LincUserID;
+
 //sender details
 @property NSString *SenderID;
 @property NSString *PhotoURL;

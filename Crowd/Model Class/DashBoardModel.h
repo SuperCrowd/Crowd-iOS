@@ -48,8 +48,10 @@
 @property NSString *Job_Qualifications;
 
 
-@property NSMutableString *strDisplayText;
+//@property NSMutableString *strDisplayText;
 
+@property NSMutableAttributedString *attribS;
+@property NSString *strClickable;
 
 +(DashBoardModel *)addDashBoardListModel:(NSDictionary *)dictT;
 

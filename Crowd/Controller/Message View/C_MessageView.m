@@ -38,7 +38,7 @@
     
     
     UIPanGestureRecognizer *panGest;
-
+    
 }
 @property (assign, nonatomic) CGFloat originalKeyboardY;
 
@@ -66,6 +66,7 @@
     /*--- Add code to setup refresh control ---*/
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlRefresh) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Load Earlier"];
     [tblView addSubview:self.refreshControl];
     
     //[self addGrowingTextView];
@@ -125,8 +126,7 @@
 {
     isAllDataRetrieved = NO;
     [self.refreshControl beginRefreshing];
-    [self.refreshControl endRefreshing];
-    //[self getRecentMessages];
+    [self getEarlier];
 }
 
 -(void)getRecentMessages
@@ -187,7 +187,7 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     hideHUD;
                 });
-            }];
+            } isRecent:YES];
             isCallingService = NO;
             
         }
@@ -207,30 +207,42 @@
     }
     
 }
--(void)setData:(NSMutableArray *)arrTemp withHandler:(void(^)())compilation
+-(void)setData:(NSMutableArray *)arrTemp withHandler:(void(^)())compilation isRecent:(BOOL)isRecent
 {
     @try
     {
-        arrTemp = [[[arrTemp reverseObjectEnumerator] allObjects] mutableCopy];
-        for (NSDictionary *dict in arrTemp)
-        //for (NSInteger i = arrTemp.count-1; i==0; i--)
+        /*--- First reverse array then add in main array ---*/
+        if (isRecent)
         {
-           // NSLog(@"Loop : %ld",(long)i);
-            //NSDictionary *dict = arrTemp[i];
-            @try
+            arrTemp = [[[arrTemp reverseObjectEnumerator] allObjects] mutableCopy];
+            for (NSDictionary *dict in arrTemp)
             {
-                [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"%@",exception.description);
-            }
-            @finally {
+                @try
+                {
+                    [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
             }
         }
-
-            
-        
-        
+        else
+        {
+            for (NSDictionary *dict in arrTemp)
+            {
+                @try
+                {
+                    [arrContent insertObject:[MessageDetailModel addMessageDetail:dict] atIndex:0];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
+            }
+        }
         compilation();
     }
     @catch (NSException *exception) {
@@ -303,6 +315,102 @@
         }
     }
 }
+#pragma mark -
+#pragma mark - Get Earlier Message
+-(void)getEarlier
+{
+    @try
+    {
+        /*
+         <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="SenderID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="MessageID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="Message_Count" nillable="true" type="xs:string"/>
+         */
+        if (arrContent.count>0)
+        {
+            MessageDetailModel *myMessage = arrContent[0];
+            NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                        @"UserToken":userInfoGlobal.Token,
+                                        @"SenderID":_message_UserInfo.SenderID,
+                                        @"MessageCount":MESSAGE_COUNT,
+                                        @"MessageID":myMessage.msgID};
+            parser = [[JSONParser alloc]initWith_withURL:Web_GET_MESSAGES_PAST withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getEarlierSuccessfull:) withObject:self];
+        }
+        else
+        {
+            [self.refreshControl endRefreshing];
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+-(void)getEarlierSuccessfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        [self.refreshControl endRefreshing];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        [self.refreshControl endRefreshing];
+    }
+    else if([objResponse objectForKey:@"GetPastMessagesResult"])
+    {
+        /*--- Save data here ---*/
+        BOOL isMessageList = [[objResponse valueForKeyPath:@"GetPastMessagesResult.ResultStatus.Status"] boolValue];
+        if (isMessageList)
+        {
+            //got
+            __weak UITableView *weaktbl = (UITableView *)tblView;
+            UIRefreshControl *weakRef = self.refreshControl;
+            
+            /*--- Get array count and reload that index after table reload ---*/
+            NSInteger last = [NSArray arrayWithArray:[objResponse valueForKeyPath:@"GetPastMessagesResult.MesssageList"]].count;
+            if (last > 0)
+            {
+                last = last - 1;
+            }
+            
+            [self setData:[objResponse valueForKeyPath:@"GetPastMessagesResult.MesssageList"] withHandler:^{
+                @try
+                {
+                    [weakRef endRefreshing];
+                    [weaktbl reloadData];
+                    /*--- Now scroll to that index ---*/
+                    [weaktbl scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:last inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                    
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
+                
+            } isRecent:NO];
+            
+        }
+        else
+            [self.refreshControl endRefreshing];
+    }
+    else
+    {
+        [self.refreshControl endRefreshing];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    
+}
+
 
 #pragma mark - Table Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -358,6 +466,7 @@
     {
         C_Cell_Chat_Me *cell = (C_Cell_Chat_Me *)[tblView dequeueReusableCellWithIdentifier:cellChatMEID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.lblText_Me.font = kFONT_LIGHT(14.0);
         cell.lblText_Me.text = myMessage.Message;
         cell.lblTime_Me.text = myMessage.strDisplayDate;
         
@@ -376,6 +485,7 @@
         C_Cell_Chat_Other *cell = (C_Cell_Chat_Other *)[tblView dequeueReusableCellWithIdentifier:cellChatOtherID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        cell.lblText_Other.font = kFONT_LIGHT(14.0);
         cell.lblText_Other.text = myMessage.Message;
         cell.lblTime_Other.text = myMessage.strDisplayDate;
         
@@ -465,14 +575,15 @@
              LincUserID
              DateCreated
              */
-#warning - SET DATE HERE
+            //10/13/2014 9:42:48 AM
+            NSString *strDateGMT = [[NSDate date] getGMTDateString:@"MM/dd/yyyy h:mm:ss a"];
             NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
                                       @"SenderID":userInfoGlobal.UserId,
                                       @"Message":multiTextView.text,
                                       @"LincURL":@"",
                                       @"LincJobID":@"",
                                        @"LincUserID":@"",
-                                       @"DateCreated":@""};
+                                       @"DateCreated":strDateGMT};
             @try
             {
                 [arrContent addObject:[MessageDetailModel addMessageDetail:dictTemp]];

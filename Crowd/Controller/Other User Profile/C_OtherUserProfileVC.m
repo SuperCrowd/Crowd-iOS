@@ -43,6 +43,8 @@
     __weak IBOutlet UIImageView *imgVUserPic;
     
     __weak IBOutlet UIButton *btnFollow_unFollow;
+    __weak IBOutlet UIImageView *imgVFavourite;
+    
     /*--- Section Header Table ---*/
     NSMutableArray *arrSectionHeader;
     
@@ -88,7 +90,7 @@
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_EducationProfile" bundle:nil] forCellReuseIdentifier:cellEducationProfilePreviewID];
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_SkillsProfile" bundle:nil] forCellReuseIdentifier:cellSkillsProfilePreviewID];
     
-    
+    imgVFavourite.hidden = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //getdata
         [self getData];
@@ -161,6 +163,7 @@
         else
         {
             isFollow = NO;
+            
         }
         [self showFollowUnFollow];
         BOOL isJobList = [[objResponse valueForKeyPath:@"GetUserDetailsResult.UserDetailResult.ResultStatus.Status"] boolValue];
@@ -466,9 +469,15 @@
 -(void)showFollowUnFollow
 {
     if (isFollow)
+    {
+        imgVFavourite.hidden = NO;
         [btnFollow_unFollow setImage:[UIImage imageNamed:@"unfollow-btn"] forState:UIControlStateNormal];
+    }
     else
+    {
+        imgVFavourite.hidden = YES;
         [btnFollow_unFollow setImage:[UIImage imageNamed:@"follow-btn"] forState:UIControlStateNormal];
+    }
 }
 -(IBAction)btn_Follow_unFollow_Clicked:(id)sender
 {

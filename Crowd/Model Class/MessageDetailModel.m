@@ -33,9 +33,21 @@
 //    CGFloat getWidth = [myMessage.Message getWidth_withFont:kFONT_LIGHT(14.0) height:16.0];
 //    if (getWidth > screenSize.size.width - 70.0)
 //    {
+    if ([myMessage.SenderID isEqualToString:userInfoGlobal.UserId])
+    {
+        CGFloat getHeight = [myMessage.Message getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 83.0];
+        myMessage.heightText = getHeight + 2.0;
+        myMessage.widthText = screenSize.size.width - 83.0;
+    }
+    else
+    {
         CGFloat getHeight = [myMessage.Message getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 70.0];
         myMessage.heightText = getHeight + 2.0;
         myMessage.widthText = screenSize.size.width - 70.0;
+    }
+    
+    
+    
 //    }
 //    else
 //    {

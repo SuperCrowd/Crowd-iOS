@@ -159,16 +159,32 @@ UserId = 61;
     
     if([myDashBoard.Type isEqualToString:@"1"])
     {
-        myDashBoard.strDisplayText = [NSMutableString stringWithFormat:@"%@ %@ has followed you.",myDashBoard.FirstName,myDashBoard.LastName];
+        NSString *StrM = [NSString stringWithFormat:@"%@ %@ has followed you.",myDashBoard.FirstName,myDashBoard.LastName];
+        /*--- Set full strig same font ---*/
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:StrM];
+        NSRange fullString = [[attrib string] rangeOfString:StrM];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:fullString];
+
+        myDashBoard.strClickable = @"";
+        myDashBoard.attribS = attrib;
         
     }
     else if([myDashBoard.Type isEqualToString:@"2"])
     {
-        myDashBoard.strDisplayText = [NSMutableString stringWithFormat:@"%@ %@ has sent you a message.",myDashBoard.FirstName,myDashBoard.LastName];
+        
+        NSString *StrM = [NSString stringWithFormat:@"%@ %@ has sent you a message.",myDashBoard.FirstName,myDashBoard.LastName];
+        /*--- Set full strig same font ---*/
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:StrM];
+        NSRange fullString = [[attrib string] rangeOfString:StrM];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:fullString];
+        
+        myDashBoard.strClickable = @"";
+        myDashBoard.attribS = attrib;
 
     }
     else if([myDashBoard.Type isEqualToString:@"3"])
     {
+        
         NSMutableString *StrM = [[NSMutableString alloc]init];
         [StrM appendFormat:@"%@ %@ has applied for a job you posted:",myDashBoard.FirstName,myDashBoard.LastName];
         [StrM appendFormat:@" "];
@@ -187,7 +203,26 @@ UserId = 61;
         
         [StrM appendString:[strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "]];
 
-        myDashBoard.strDisplayText = StrM;
+        
+        //myDashBoard.strDisplayText = StrM;
+        
+        /*--- Only attributed when Apply ---*/
+        NSString *strT = [NSString stringWithFormat:@"%@ at %@",myDashBoard.Job_Title,myDashBoard.Job_Company];
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:StrM];
+        NSRange fullString = [[attrib string] rangeOfString:StrM];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:fullString];
+
+        /*--- Now apply link on specific ---*/
+        NSRange goRange = [[attrib string] rangeOfString:strT];
+        [attrib addAttributes:@{NSLinkAttributeName: @"www.google.com"} range:goRange];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:goRange];
+        [attrib addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:goRange];
+//        [attrib addAttribute:NSUnderlineColorAttributeName value:[UIColor blackColor] range:goRange];
+//        [attrib addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:goRange];
+
+        
+        myDashBoard.strClickable = strT;
+        myDashBoard.attribS = attrib;
     }
     else if([myDashBoard.Type isEqualToString:@"4"])
     {
@@ -209,7 +244,23 @@ UserId = 61;
         
         [StrM appendString:[strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "]];
         
-        myDashBoard.strDisplayText = StrM;
+        
+        NSString *strT = [NSString stringWithFormat:@"%@ at %@",myDashBoard.Job_Title,myDashBoard.Job_Company];
+        /*--- Now apply link on specific ---*/
+        
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:StrM];
+        
+        /*--- Set full strig same font ---*/
+        NSRange fullString = [[attrib string] rangeOfString:StrM];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:fullString];
+        
+        NSRange goRange = [[attrib string] rangeOfString:strT];
+        [attrib addAttributes:@{NSLinkAttributeName: @"www.google.com"} range:goRange];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:goRange];
+        [attrib addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:goRange];
+        
+        myDashBoard.strClickable = strT;
+        myDashBoard.attribS = attrib;
     }
     else if([myDashBoard.Type isEqualToString:@"5"])
     {
@@ -231,12 +282,32 @@ UserId = 61;
         
         [StrM appendString:[strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "]];
         
-        myDashBoard.strDisplayText = StrM;
+        /*--- Set full strig same font ---*/
+        NSString *strT = [NSString stringWithFormat:@"%@ at %@",myDashBoard.Job_Title,myDashBoard.Job_Company];
+        
+        
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:StrM];
+        NSRange fullString = [[attrib string] rangeOfString:StrM];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:fullString];
+        
+        NSRange goRange = [[attrib string] rangeOfString:strT];
+        [attrib addAttributes:@{NSLinkAttributeName: @"www.google.com"} range:goRange];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:goRange];
+        [attrib addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:goRange];
+        
+        myDashBoard.strClickable = strT;
+        myDashBoard.attribS = attrib;
 
     }
     else
     {
-        myDashBoard.strDisplayText = [NSMutableString stringWithFormat:@""];
+//        myDashBoard.strDisplayText = [NSMutableString stringWithFormat:@""];
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:@""];
+
+        
+        myDashBoard.strClickable = @"";
+        myDashBoard.attribS = attrib;
+
     }
     
     return myDashBoard;

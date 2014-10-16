@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_OtherUserProfileVC">
             <connections>
                 <outlet property="btnFollow_unFollow" destination="tkb-ui-j1w" id="phJ-j1-Wch"/>
+                <outlet property="imgVFavourite" destination="sMB-rr-E6z" id="JOA-LT-WcB"/>
                 <outlet property="imgVUserPic" destination="J0a-ys-dNa" id="7Ck-OH-yAV"/>
                 <outlet property="lbl_Company" destination="aNN-vE-8r0" id="xyy-bs-JzY"/>
                 <outlet property="lbl_JobTitle" destination="xaS-69-HiS" id="7Du-TN-IA7"/>
@@ -35,6 +36,9 @@
                                 <constraint firstAttribute="width" constant="105" id="bIh-Ta-asO"/>
                                 <constraint firstAttribute="height" constant="105" id="rVI-6v-XgQ"/>
                             </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="sMB-rr-E6z">
+                            <rect key="frame" x="5" y="0.0" width="11" height="25"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHz-4U-7ac" userLabel="Profile Container">
                             <rect key="frame" x="10" y="10" width="105" height="105"/>
@@ -198,6 +202,7 @@
         <image name="msg-btn" width="51" height="51"/>
         <image name="profile_round" width="144" height="144"/>
         <image name="share-btn" width="51" height="51"/>
+        <image name="tag" width="11" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

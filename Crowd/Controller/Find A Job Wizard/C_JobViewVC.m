@@ -20,7 +20,7 @@
 #define MORE @"More Information"
 #define ROLES @"Roles and Responsibilities"
 #define SKILLS @"Skills Requirements"
-
+#define EXPERIENCE @"Required Experience"
 @interface C_JobViewVC ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -60,11 +60,11 @@
     
     if ([_obj_myJob.URL isEqualToString:@""])
     {
-        arrSectionHeader = @[ROLES,SKILLS];
+        arrSectionHeader = @[ROLES,SKILLS,EXPERIENCE];
     }
     else
     {
-        arrSectionHeader = @[MORE,ROLES,SKILLS];
+        arrSectionHeader = @[MORE,ROLES,SKILLS,EXPERIENCE];
     }
 
     /*--- Register Cell ---*/
@@ -88,6 +88,7 @@
     else
     {
         viewBtnContainer.alpha = 0.0;
+        tblView.alpha = 0.0;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self getData];
         });
@@ -142,7 +143,11 @@
         {
             @try
             {
+                NSLog(@"%@",[objResponse valueForKeyPath:@"GetJobDetailsResult.JobDetailsWithSkills"]);
+                _obj_myJob = [C_JobListModel addJobListModel:[objResponse valueForKeyPath:@"GetJobDetailsResult.JobDetailsWithSkills"]];//[C_JobListModel updateModel:_obj_myJob withDict:[objResponse objectForKey:@"GetJobDetailsResult"] ];
+                
                 _obj_myJob = [C_JobListModel updateModel:_obj_myJob withDict:[objResponse objectForKey:@"GetJobDetailsResult"] ];
+                tblView.alpha = 1.0;
             }
             @catch (NSException *exception) {
                 NSLog(@"%@",exception.description);
@@ -284,6 +289,10 @@
         heightFinal = 5.0 + heightSummary + 5.0;
         return heightFinal;
     }
+    else if ([sectionTitle isEqualToString:EXPERIENCE])
+    {
+        return 45.0;
+    }
     else
     {
         NSArray *arrSkills = [_obj_myJob.arrSkills valueForKey:@"Skill"];
@@ -321,6 +330,46 @@
         rectLBL.size.height = [_obj_myJob.Responsibilities getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width-20.0];
         lblSummary.frame = rectLBL;
         lblSummary.text = _obj_myJob.Responsibilities;
+        return cell;
+    }
+    else if ([sectionTitle isEqualToString:EXPERIENCE])
+    {
+        static NSString *cellID = @"Cell";
+        UITableViewCell *cell = [tblView dequeueReusableCellWithIdentifier:cellID];
+        UILabel *lblExperience ;
+        CGRect rectLBL = CGRectMake(10.0, 5.0, screenSize.size.width-20.0,35.0);
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            
+            lblExperience = [[UILabel alloc]initWithFrame:rectLBL];
+            lblExperience.font = kFONT_LIGHT(14.0);
+            lblExperience.numberOfLines = 0.0;
+            lblExperience.tag = 100;
+            [cell.contentView addSubview:lblExperience];
+        }
+        lblExperience = (UILabel *)[cell.contentView viewWithTag:100];
+        switch ([_obj_myJob.ExperienceLevel integerValue]) {
+            case 1:
+                lblExperience.text = @"0-1 years";
+                break;
+            case 2:
+                lblExperience.text = @"1-3 years";
+                break;
+            case 3:
+                lblExperience.text = @"3-5 years";
+                break;
+            case 4:
+                lblExperience.text = @"5-8 years";
+                break;
+            case 5:
+                lblExperience.text = @"8+ years";
+                break;
+                
+            default:
+                break;
+        }
+        
         return cell;
     }
     else

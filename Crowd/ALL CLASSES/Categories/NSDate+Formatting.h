@@ -18,4 +18,5 @@
 
 //get st/th/nd/rd
 -(NSString *)getPostFixString;
+-(NSString *)getGMTDateString:(NSString*)format;
 @end
