@@ -12,6 +12,10 @@
 #import "C_Cell_Dashboard.h"
 #import "DashBoardModel.h"
 
+#import "C_JobListModel.h"
+#import "C_PostJob_UpdateVC.h"
+#import "C_JobViewVC.h"
+
 #import "C_OtherUserProfileVC.h"
 @interface C_DashBoardVC ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -22,6 +26,8 @@
     /*--- To check if service is calling or not ---*/
     BOOL isCallingService;
     BOOL isAllDataRetrieved;
+    
+    UITextView *calculationView;
 }
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
 @end
@@ -318,10 +324,22 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DashBoardModel *myDash = (DashBoardModel *)arrContent[indexPath.row];
-
-//        //13+49+13
     CGFloat heightCell = 0;
-    CGFloat txtH = [myDash.strDisplayText getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 75.0];
+    CGFloat txtH = 0;
+
+    if ([myDash.Type isEqualToString:@"3"] ||
+        [myDash.Type isEqualToString:@"4"] ||
+        [myDash.Type isEqualToString:@"5"])
+    {
+        txtH = [self textViewHeightForText:myDash.attribS andWidth:screenSize.size.width - 75.0];
+    }
+    else
+    {
+        txtH = [myDash.attribS getHeight_with_width:screenSize.size.width - 75.0];
+    }
+    
+//        //13+49+13
+    
     heightCell = 13.0 + txtH + 13.0;
     return MAX(76.0, heightCell);
     
@@ -333,15 +351,34 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.lblDesc.font = kFONT_LIGHT(14.0);
-    cell.lblDesc.text = myDash.strDisplayText;
-
+    if ([myDash.Type isEqualToString:@"3"] ||
+        [myDash.Type isEqualToString:@"4"] ||
+        [myDash.Type isEqualToString:@"5"])
+    {
+        cell.lblDescription.alpha = 0.0;
+        cell.txtDesc.alpha = 1.0;
+        cell.txtDesc.font = kFONT_LIGHT(14.0);
+        cell.txtDesc.attributedText = myDash.attribS;
+        cell.txtDesc.textContainerInset = UIEdgeInsetsZero;
+        cell.txtDesc.scrollEnabled = NO;
+        [cell.txtDesc setContentInset:UIEdgeInsetsZero];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textTapped:)];
+        cell.txtDesc.tag = indexPath.row;
+        [cell.txtDesc addGestureRecognizer:tap];
+    }
+    else
+    {
+        cell.txtDesc.alpha = 0.0;
+        cell.lblDescription.alpha = 1.0;
+        cell.lblDescription.font = kFONT_LIGHT(14.0);
+        cell.lblDescription.attributedText = myDash.attribS;
+    }
     cell.imgVOtherUser.layer.borderColor = RGBCOLOR_GREEN.CGColor;
     [cell.imgVOtherUser sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:myDash.PhotoURL ]]];
 
     return cell;
 }
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DashBoardModel *myDash = (DashBoardModel *)arrContent[indexPath.row];
@@ -349,6 +386,67 @@
     C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
     obj.OtherUserID = myDash.OtherUserID;
     [self.navigationController pushViewController:obj animated:YES];
+}
+
+#pragma mark - Get TextView height
+- (CGFloat)textViewHeightForText:(NSMutableAttributedString *)text andWidth:(CGFloat)width
+{
+    if (!calculationView) {
+        calculationView = [[UITextView alloc] init];
+    }
+    [calculationView setAttributedText:text];
+    calculationView.font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
+    calculationView.textContainerInset = UIEdgeInsetsZero;
+    calculationView.scrollEnabled = NO;
+    [calculationView setContentInset:UIEdgeInsetsZero];
+    calculationView.textAlignment = NSTextAlignmentLeft;
+    CGSize newSize = [calculationView sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+    return newSize.height;
+}
+#pragma mark - detect email id on tap
+- (void)textTapped:(UITapGestureRecognizer *)recognizer
+{
+    UITextView *textView = (UITextView *)recognizer.view;
+    DashBoardModel *myDashboard = arrContent[textView.tag];
+
+    NSRange range = [textView.text rangeOfString:myDashboard.strClickable];
+    
+    NSLayoutManager *layoutManager = textView.layoutManager;
+    CGPoint location = [recognizer locationInView:textView];
+    NSUInteger characterIndex;
+    characterIndex = [layoutManager characterIndexForPoint:location inTextContainer:textView.textContainer fractionOfDistanceBetweenInsertionPoints:NULL];
+    
+    if (characterIndex >= range.location && characterIndex < range.location + range.length - 1)
+    {
+        NSLog(@"Push Now: %@",myDashboard.Job_Company);
+        if ([myDashboard.Type isEqualToString:@"3"])//my own job
+        {
+            C_JobListModel *myJob = [[C_JobListModel alloc]init];
+            myJob.JobID = myDashboard.JobID;
+            C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+            objD.obj_JobListModel = myJob;
+            objD.strComingFrom = @"FindAJob";
+            [self.navigationController pushViewController:objD animated:YES];
+        }
+        else
+        {
+            C_JobListModel *myJob = [[C_JobListModel alloc]init];
+            myJob.JobID = myDashboard.JobID;
+            C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
+            obj.obj_myJob = myJob;
+            [self.navigationController pushViewController:obj animated:YES];
+
+           //other user job
+        }
+    }
+    else
+    {
+        NSLog(@"Push Did Select");
+        C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+        obj.OtherUserID = myDashboard.OtherUserID;
+        [self.navigationController pushViewController:obj animated:YES];
+    }
+
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

@@ -21,6 +21,9 @@
 
 #import "C_JobsOther.h"
 
+#import "C_MessageView.h"
+#import "C_MessageModel.h"
+
 #define PROFFESSIONAL_SUMMARY @"Professional Summary"
 #define WORK_EXPERIENCE @"Work Experience"
 #define RECOMMENDATION @"Recommendations"
@@ -40,6 +43,8 @@
     __weak IBOutlet UIImageView *imgVUserPic;
     
     __weak IBOutlet UIButton *btnFollow_unFollow;
+    __weak IBOutlet UIImageView *imgVFavourite;
+    
     /*--- Section Header Table ---*/
     NSMutableArray *arrSectionHeader;
     
@@ -85,7 +90,7 @@
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_EducationProfile" bundle:nil] forCellReuseIdentifier:cellEducationProfilePreviewID];
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_SkillsProfile" bundle:nil] forCellReuseIdentifier:cellSkillsProfilePreviewID];
     
-    
+    imgVFavourite.hidden = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //getdata
         [self getData];
@@ -158,6 +163,7 @@
         else
         {
             isFollow = NO;
+            
         }
         [self showFollowUnFollow];
         BOOL isJobList = [[objResponse valueForKeyPath:@"GetUserDetailsResult.UserDetailResult.ResultStatus.Status"] boolValue];
@@ -463,9 +469,15 @@
 -(void)showFollowUnFollow
 {
     if (isFollow)
+    {
+        imgVFavourite.hidden = NO;
         [btnFollow_unFollow setImage:[UIImage imageNamed:@"unfollow-btn"] forState:UIControlStateNormal];
+    }
     else
+    {
+        imgVFavourite.hidden = YES;
         [btnFollow_unFollow setImage:[UIImage imageNamed:@"follow-btn"] forState:UIControlStateNormal];
+    }
 }
 -(IBAction)btn_Follow_unFollow_Clicked:(id)sender
 {
@@ -552,6 +564,19 @@
 //    [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
 //                        
 //                    }];
+}
+
+
+#pragma mark - Message
+-(IBAction)btnMessageClicked:(id)sender
+{
+    
+    NSDictionary *dictTemp = @{@"UserId":otherUserDetail.UserId,@"PhotoURL":otherUserDetail.PhotoURL};
+    NSDictionary *dictSender = @{@"SenderDetail":dictTemp};
+    C_MessageModel *model = [C_MessageModel addMessageList:dictSender];
+    C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
+    obj.message_UserInfo = model;
+    [self.navigationController pushViewController:obj animated:YES];
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

@@ -61,6 +61,9 @@ NSString *DocumentsDirectoryPath() ;
 
 + (BOOL) isValidateUrl: (NSString *)url;
 +(void)addBottomLine_to_Label:(UILabel *)lbl;
++(void)addTOPLine_to_View:(UIView *)view;
+
+
 +(void)scrollToCaretInTextView:(UITextView *)textView animated:(BOOL)animated;
 + (NSString*)makeThumbFromOriginalImageString:(NSString*)strPhoto;
 @end

@@ -220,7 +220,29 @@
         return FALSE;
     }
 }
-
+-(CGFloat)getWidth_withFont:(UIFont *)myFont height:(CGFloat)myHeight
+{
+    CGRect frame;
+    CGSize textSize;
+    if ([self respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+    {
+        NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                              myFont, NSFontAttributeName,
+                                              nil];
+        
+        frame = [self boundingRectWithSize:CGSizeMake(CGFLOAT_MAX,myHeight)
+                                   options:NSStringDrawingTruncatesLastVisibleLine
+                                attributes:attributesDictionary
+                                   context:nil];
+        textSize = frame.size;
+    }
+    else
+    {
+        //textSize = [self sizeWithFont:myFont constrainedToSize:CGSizeMake(myWidth, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    }
+    
+    return ceilf(textSize.width);
+}
 -(CGFloat)getHeight_withFont:(UIFont *)myFont widht:(CGFloat)myWidth
 {
     CGRect frame;

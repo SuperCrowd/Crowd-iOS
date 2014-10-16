@@ -12,7 +12,7 @@
 
 #define POSITION @"Position"
 #define EDUCATION @"Education"
-#define SUMMARY @"Summary"
+#define ROLES @"Roles and Responsibilities"
 
 //for position
 #define JOB_TITLE @"Job Title"
@@ -110,7 +110,7 @@
     {
         if ([_strTitle isEqualToString:JOB_TITLE] ||
             [_strTitle isEqualToString:EMPLOYER] ||
-            [_strTitle isEqualToString:SUMMARY])
+            [_strTitle isEqualToString:ROLES])
         {
             Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
             if ([_strTitle isEqualToString:JOB_TITLE])
@@ -198,7 +198,7 @@
     {
         if ([_strTitle isEqualToString:JOB_TITLE] ||
             [_strTitle isEqualToString:EMPLOYER] ||
-            [_strTitle isEqualToString:SUMMARY])
+            [_strTitle isEqualToString:ROLES])
         {
             Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
             if ([_strTitle isEqualToString:JOB_TITLE])

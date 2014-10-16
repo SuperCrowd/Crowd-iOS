@@ -62,6 +62,15 @@ typedef NS_ENUM(NSInteger, btnTapped){
 }
 -(void)showData
 {
+    viewFirstName.txtName.userInteractionEnabled = NO;
+    viewLastName.txtName.userInteractionEnabled = NO;
+    
+    viewFirstName.btnEdit.userInteractionEnabled = NO;
+    viewLastName.btnEdit.userInteractionEnabled = NO;
+
+    viewFirstName.btnTextField.userInteractionEnabled = NO;
+    viewLastName.btnTextField.userInteractionEnabled = NO;
+    
     viewFirstName.lblName.adjustsFontSizeToFitWidth = YES;
     viewLastName.lblName.adjustsFontSizeToFitWidth = YES;
     
@@ -104,25 +113,25 @@ typedef NS_ENUM(NSInteger, btnTapped){
 }
 -(BOOL)checkValidation
 {
-    if ([[viewFirstName.txtName.text isNull]isEqualToString:@""])
-    {
-        [CommonMethods displayAlertwithTitle:@"Please enter first name" withMessage:nil withViewController:self];
-        return NO;
-    }
-    else if([[viewLastName.txtName.text isNull]isEqualToString:@""])
-    {
-        [CommonMethods displayAlertwithTitle:@"Please enter last name" withMessage:nil withViewController:self];
-        return NO;
-
-    }
-    else
-    {
+//    if ([[viewFirstName.txtName.text isNull]isEqualToString:@""])
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please enter first name" withMessage:nil withViewController:self];
+//        return NO;
+//    }
+//    else if([[viewLastName.txtName.text isNull]isEqualToString:@""])
+//    {
+//        [CommonMethods displayAlertwithTitle:@"Please enter last name" withMessage:nil withViewController:self];
+//        return NO;
+//
+//    }
+//    else
+//    {
         myUserModel.firstName = viewFirstName.txtName.text;
         myUserModel.lastName = viewLastName.txtName.text;
         [CommonMethods saveMyUser:myUserModel];
         myUserModel = [CommonMethods getMyUser];
         return YES;
-    }
+//    }
 }
 
 -(IBAction)btnNextClicked:(id)sender

@@ -88,4 +88,17 @@
     }
     
 }
+
+
+-(NSString *)getGMTDateString:(NSString*)format{
+    
+    // Set up an NSDateFormatter for UTC time zone
+    NSDateFormatter* formatterUtc = [[NSDateFormatter alloc] init];
+    [formatterUtc setDateFormat:format];
+    [formatterUtc setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    
+    // Cast the input string to NSDate
+    NSString* strUTCDate = [formatterUtc stringFromDate:self];
+    return strUTCDate;
+}
 @end

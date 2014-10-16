@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Cell_Chat_Me"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idcellChatMe" rowHeight="64" id="ERi-y2-lov" customClass="C_Cell_Chat_Me">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ERi-y2-lov" id="VrS-q0-R7P">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="243" translatesAutoresizingMaskIntoConstraints="NO" id="Lsd-5N-zEt" userLabel="Time">
+                        <rect key="frame" x="10" y="5" width="300" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="efn-68-Jpi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="9"/>
+                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHv-i6-AgV" userLabel="User Pic">
+                        <rect key="frame" x="277" y="20" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="EO6-o6-gtr"/>
+                            <constraint firstAttribute="height" constant="35" id="dmZ-tk-9yx"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="17.5"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_black_cell" translatesAutoresizingMaskIntoConstraints="NO" id="uRh-zA-3nP">
+                        <rect key="frame" x="238" y="26" width="36" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="26" id="tad-cx-vda"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="237" translatesAutoresizingMaskIntoConstraints="NO" id="p1p-rM-vZB" userLabel="Text Me">
+                        <rect key="frame" x="247" y="32" width="10" height="14"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="aes-Nr-d0i"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="p1p-rM-vZB" firstAttribute="width" secondItem="uRh-zA-3nP" secondAttribute="width" constant="-26" id="1ZM-eL-fpD"/>
+                    <constraint firstItem="Lsd-5N-zEt" firstAttribute="leading" secondItem="VrS-q0-R7P" secondAttribute="leading" constant="10" id="3lQ-kk-Ii2"/>
+                    <constraint firstItem="DHv-i6-AgV" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="20" id="71v-FO-e1V"/>
+                    <constraint firstItem="Lsd-5N-zEt" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="5" id="7QS-no-VoG"/>
+                    <constraint firstItem="p1p-rM-vZB" firstAttribute="leading" secondItem="VrS-q0-R7P" secondAttribute="leading" priority="250" constant="227" id="9Pj-nd-Vir"/>
+                    <constraint firstAttribute="trailing" secondItem="p1p-rM-vZB" secondAttribute="trailing" constant="63" id="9hJ-ya-LF0"/>
+                    <constraint firstAttribute="bottom" secondItem="p1p-rM-vZB" secondAttribute="bottom" constant="17" id="IYF-73-gZQ"/>
+                    <constraint firstAttribute="trailing" secondItem="DHv-i6-AgV" secondAttribute="trailing" constant="8" id="JWR-Hn-UwY"/>
+                    <constraint firstItem="uRh-zA-3nP" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="26" id="Lbr-EE-ITS"/>
+                    <constraint firstAttribute="bottom" secondItem="uRh-zA-3nP" secondAttribute="bottom" constant="11" id="NHW-O6-uQd"/>
+                    <constraint firstAttribute="trailing" secondItem="Lsd-5N-zEt" secondAttribute="trailing" constant="10" id="NKP-hV-Ut1"/>
+                    <constraint firstAttribute="trailing" secondItem="uRh-zA-3nP" secondAttribute="trailing" constant="46" id="NTh-WK-CT9"/>
+                    <constraint firstItem="p1p-rM-vZB" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="32" id="UL3-xC-4ek"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imgV_Me" destination="uRh-zA-3nP" id="PAb-43-0kb"/>
+                <outlet property="imgV_MeProfilePic" destination="DHv-i6-AgV" id="iES-xd-aAN"/>
+                <outlet property="lblText_Me" destination="p1p-rM-vZB" id="5iu-8E-yiG"/>
+                <outlet property="lblTime_Me" destination="Lsd-5N-zEt" id="Kv7-1W-LOU"/>
+            </connections>
+            <point key="canvasLocation" x="116" y="233"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chat_black_cell" width="36" height="27"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

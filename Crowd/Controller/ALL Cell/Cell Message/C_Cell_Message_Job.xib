@@ -52,7 +52,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z6h-vS-JYl">
-                        <rect key="frame" x="65" y="39" width="214" height="33"/>
+                        <rect key="frame" x="65" y="35" width="214" height="33"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Declined" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="42" translatesAutoresizingMaskIntoConstraints="NO" id="P5j-JD-nFE">
                                 <rect key="frame" x="0.0" y="8" width="83" height="21"/>
@@ -99,7 +99,7 @@
                     <constraint firstItem="QUs-Kb-Gr1" firstAttribute="leading" secondItem="0nd-5j-Fv5" secondAttribute="trailing" constant="15" id="UL0-aT-ymZ"/>
                     <constraint firstItem="tOy-ed-eTh" firstAttribute="leading" secondItem="9uQ-jr-joT" secondAttribute="leading" constant="8" id="UQ4-bc-pzq"/>
                     <constraint firstAttribute="trailing" secondItem="z6h-vS-JYl" secondAttribute="trailing" constant="41" id="VhW-ZY-hwW"/>
-                    <constraint firstItem="z6h-vS-JYl" firstAttribute="top" secondItem="0nd-5j-Fv5" secondAttribute="bottom" constant="9" id="o0T-s2-RYh"/>
+                    <constraint firstItem="z6h-vS-JYl" firstAttribute="top" secondItem="0nd-5j-Fv5" secondAttribute="bottom" constant="5" id="o0T-s2-RYh"/>
                     <constraint firstItem="QUs-Kb-Gr1" firstAttribute="top" secondItem="9uQ-jr-joT" secondAttribute="top" constant="34" id="o7s-VQ-Sdq"/>
                 </constraints>
             </tableViewCellContentView>

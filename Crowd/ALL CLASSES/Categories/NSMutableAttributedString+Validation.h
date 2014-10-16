@@ -12,4 +12,6 @@
 -(NSMutableAttributedString *)replaceFonts;
 
 -(NSMutableAttributedString *)replaceFonts_Quicksand;
+
+-(float)getHeight_with_width:(float)myWidth;
 @end

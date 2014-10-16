@@ -39,7 +39,7 @@
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     }
     
-    NSArray *arrT = @[@"Job Title",@"Employer",@"Time Period",@"Location",@"Summary"];
+    NSArray *arrT = @[@"Job Title",@"Employer",@"Time Period",@"Location",@"Roles and Responsibilities"];
     arrSectionHeader = [[NSMutableArray alloc]init];
     for (int i = 0; i<myUserModel.arrPositionUser.count; i++)
     {

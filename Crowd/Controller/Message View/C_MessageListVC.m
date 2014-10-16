@@ -24,6 +24,9 @@
     /*--- To check if service is calling or not ---*/
     BOOL isCallingService;
     BOOL isAllDataRetrieved;
+    
+    NSInteger index_accept_decline;
+    BOOL isAccept;
 }
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
 @end
@@ -424,15 +427,17 @@
 #pragma mark - Accept - Decline - View profile
 -(void)btnAcceptClicked:(UIButton *)btnAccept
 {
+    index_accept_decline = btnAccept.tag;
+    isAccept = YES;
     C_MessageModel *myMessage = (C_MessageModel *)arrContent[btnAccept.tag];
-    myMessage.Type = @"3";
-    [tblView reloadData];
+    [self accept_or_decline:myMessage withStatus:@"1"];
 }
 -(void)btnDeclinedClicked:(UIButton *)btnDecline
 {
+    index_accept_decline = btnDecline.tag;
+    isAccept = NO;
     C_MessageModel *myMessage = (C_MessageModel *)arrContent[btnDecline.tag];
-    myMessage.Type = @"4";
-    [tblView reloadData];
+    [self accept_or_decline:myMessage withStatus:@"0"];
 }
 -(void)btnViewProfileClicked:(UIButton *)btnViewProfile
 {
@@ -441,6 +446,85 @@
     obj.OtherUserID = myMessage.SenderID;
     [self.navigationController pushViewController:obj animated:YES];
 }
+
+#pragma mark - Accept - Decline
+-(void)accept_or_decline:(C_MessageModel *)myMessage withStatus:(NSString *)status
+{
+
+    /*
+     {
+     <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
+     <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
+     <xs:element minOccurs="0" name="MessageID" nillable="true" type="xs:string"/>
+     <xs:element minOccurs="0" name="JobID" nillable="true" type="xs:string"/>
+     <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string"/>
+     }
+     */
+    @try
+    {
+        showHUD_with_Title(@"Please wait");
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token,
+                                    @"MessageID":myMessage.msgID,
+                                    @"JobID":myMessage.LincJobID,
+                                    @"Status":status};
+        parser = [[JSONParser alloc]initWith_withURL:Web_JOB_ACCEPT_DECLINE withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(accept_decline_Successfull:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+-(void)accept_decline_Successfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        hideHUD;
+        [self showAlert_withTitle:@"Please Try Again"];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        hideHUD;
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    else if([objResponse objectForKey:@"AcceptDeclineJobApplicationResult"])
+    {
+        /*--- Save data here ---*/
+        BOOL isAcceptDeclineSuccess = [[objResponse valueForKeyPath:@"AcceptDeclineJobApplicationResult.ResultStatus.Status"] boolValue];
+        if (isAcceptDeclineSuccess)
+        {
+            //got
+            C_MessageModel *myMessage = (C_MessageModel *)arrContent[index_accept_decline];
+            if (isAccept)
+                myMessage.Type = @"3";
+            else
+                myMessage.Type = @"4";
+            
+            hideHUD;
+            [tblView reloadData];
+        }
+        else
+        {
+            hideHUD;
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"AcceptDeclineJobApplicationResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+        }
+    }
+    else
+    {
+        hideHUD;
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    
+}
+
+
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

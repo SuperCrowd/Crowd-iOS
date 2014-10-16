@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     [imgVUserPic setClipsToBounds:YES];
     
 
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUnreadCount) name:@"updateUnreadMessageCount" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUnreadCount:) name:@"updateUnreadMessageCount" object:nil];
     /*--- Badge setup ---*/
     badgeView = [[M13BadgeView alloc] initWithFrame:CGRectMake(0, 0, 24.0, 24.0)];
     [badgeSuperView addSubview:badgeView];
@@ -114,9 +114,10 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     [super viewWillAppear:animated];
     [imgVUserPic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:userInfoGlobal.PhotoURL ]]];
 }
--(void)updateUnreadCount
+-(void)updateUnreadCount:(NSNotification *)notif
 {
-    badgeView.text = @"99";
+    NSLog(@"%@",notif.object);
+    badgeView.text = notif.object;
 }
 
 -(IBAction)btnMessageClicked:(id)sender

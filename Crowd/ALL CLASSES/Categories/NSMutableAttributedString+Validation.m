@@ -80,4 +80,22 @@
     }
     
 }
+
+
+-(float)getHeight_with_width:(float)myWidth
+{
+    CGSize textSize;
+    if ([self respondsToSelector:@selector(boundingRectWithSize:options:context:)])
+    {
+        CGRect newSize = [self boundingRectWithSize:CGSizeMake(myWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+        
+        textSize = newSize.size;
+    }
+    else
+    {
+        //textSize = [self sizeWithFont:myFont constrainedToSize:CGSizeMake(myWidth, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    }
+    
+    return textSize.height;
+}
 @end

@@ -60,6 +60,7 @@
 //Strong Password
 -(BOOL)StringWithStrongPassword:(int)minimumLength;
 
+-(CGFloat)getWidth_withFont:(UIFont *)myFont height:(CGFloat)myHeight;
 -(CGFloat)getHeight_withFont:(UIFont *)myFont widht:(CGFloat)myWidth;
 
 //Formate Date

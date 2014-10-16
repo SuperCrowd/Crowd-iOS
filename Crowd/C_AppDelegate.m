@@ -11,6 +11,11 @@
 #import "C_LoginVC.h"
 #import "Reachability.h"
 
+@interface C_AppDelegate()
+{
+    JSONParser *parser;
+}
+@end
 @implementation C_AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -171,8 +176,65 @@
         }
     }
 }
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([UserDefaults objectForKey:APP_USER_INFO]) {
+        [self getMessageUnreadCount];
+    }
+}
+-(void)getMessageUnreadCount
+{
+    @try
+    {
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token};
+        parser = [[JSONParser alloc]initWith_withURL:Web_GET_UNREAD_MESSAGE_COUNT withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getDataSuccessfull:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+    
+}
+-(void)getDataSuccessfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+    }
+    else if([objResponse objectForKey:@"GetUnreadMessageCountResult"])
+    {
+        /*--- Save data here ---*/
+        BOOL isUnreadMessage = [[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.ResultStatus.Status"] boolValue];
+        if (isUnreadMessage)
+        {
+            //got
+            @try
+            {
+                NSString *strNotifCount = [NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.NumberOfUnreadMessage"]];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"updateUnreadMessageCount" object:strNotifCount];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+            
+        }
 
-
+    }
+    else
+    {
+    }
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -191,10 +253,7 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {

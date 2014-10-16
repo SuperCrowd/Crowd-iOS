@@ -11,7 +11,7 @@
 
 #define POSITION @"Position"
 #define EDUCATION @"Education"
-#define SUMMARY @"Summary"
+#define ROLES @"Roles and Responsibilities"
 
 //for position
 #define JOB_TITLE @"Job Title"
@@ -59,7 +59,7 @@
         constraint_lblHeight.constant = 0.0;
         strText = [_obj_ProfileUpdate.Summary isNull];
     }
-    //@[@"Job Title",@"Employer",@"Time Period",@"Location",@"Summary",@"Recommendations"]
+    //@[@"Job Title",@"Employer",@"Time Period",@"Location",@"Roles and Responsibilities",@"Recommendations"]
     txtV.text = strText;
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -114,7 +114,7 @@
     {
         if ([_strTitle isEqualToString:JOB_TITLE] ||
             [_strTitle isEqualToString:EMPLOYER] ||
-            [_strTitle isEqualToString:SUMMARY])
+            [_strTitle isEqualToString:ROLES])
         {
             C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];//
             if ([_strTitle isEqualToString:JOB_TITLE])
@@ -193,7 +193,7 @@
     {
         if ([_strTitle isEqualToString:JOB_TITLE] ||
             [_strTitle isEqualToString:EMPLOYER] ||
-            [_strTitle isEqualToString:SUMMARY])
+            [_strTitle isEqualToString:ROLES])
         {
             C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];//
             if ([_strTitle isEqualToString:JOB_TITLE])

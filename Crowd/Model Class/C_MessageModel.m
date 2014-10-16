@@ -47,6 +47,10 @@
     myMessage.Type = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"Type"]] isNull];
     myMessage.DateCreated = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"DateCreated"]] isNull];
 
+    myMessage.LincJobID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincJobID"]] isNull];
+    myMessage.LincURL = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincURL"]] isNull];;
+    myMessage.LincUserID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincUserID"]] isNull];;
+    
     /*--- Sender Details ---*/
     NSDictionary *dictSender = dictMessageInfo[@"SenderDetail"];
     myMessage.FirstName = [[NSString stringWithFormat:@"%@",dictSender[@"FirstName"]] isNull];

@@ -31,6 +31,10 @@
 
 #define Web_GET_USER_DETAILS BASE_URL@"GetUserDetails"
 
+
+#define Web_GET_UNREAD_MESSAGE_COUNT BASE_URL@"GetUnreadMessageCount"
+
+
 #define Web_POST_JOB BASE_URL@"AddEditJob"
 
 
@@ -56,7 +60,9 @@
 //message
 #define Web_GET_MESSAGES_LIST BASE_URL@"GetMessageList"
 #define Web_GET_MESSAGES_RECENT BASE_URL@"GetMessageThread"
-#define Web_GET_MESSAGES_PAST BASE_URL@"GetMessageList"
+#define Web_GET_MESSAGES_PAST BASE_URL@"GetPastMessages"
+#define Web_MESSAGES_SEND BASE_URL@"SendMessage"
+#define Web_JOB_ACCEPT_DECLINE BASE_URL@"AcceptDeclineJobApplication"
 
 //follow unfollow
 #define Web_FOLLOW_UNFOLLOW BASE_URL@"FollowUnfollowUser"

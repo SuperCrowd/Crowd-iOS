@@ -36,7 +36,7 @@
     self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(doneClicked)];
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    NSArray *arrT = @[@"Job Title",@"Employer",@"Time Period",@"Location",@"Summary"];
+    NSArray *arrT = @[@"Job Title",@"Employer",@"Time Period",@"Location",@"Roles and Responsibilities"];
     arrSectionHeader = [[NSMutableArray alloc]init];
     for (int i = 0; i<_obj_ProfileUpdate.arr_WorkALL.count; i++)
     {

@@ -12,6 +12,10 @@
 #import "MessageDetailModel.h"
 
 #import "MDMultilineTextView.h"
+
+#import "C_Cell_Chat_Me.h"
+#import "C_Cell_Chat_Other.h"
+
 #define MESSAGE_COUNT @"30"
 @interface C_MessageView ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
@@ -30,15 +34,16 @@
     
     id keyboardShowObserver;
     id keyboardHideObserver;
-    IBOutlet MDMultilineTextView *multiTextView;
-        
+    __weak IBOutlet MDMultilineTextView *multiTextView;
+    
+    
+    UIPanGestureRecognizer *panGest;
+    
 }
-@property (nonatomic) IBOutlet NSLayoutConstraint *bottomLayoutConstraint;
+@property (assign, nonatomic) CGFloat originalKeyboardY;
 
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
-@property(nonatomic,strong)UITextView *textView;;
-@property(nonatomic,strong)UITextView *tempTextView;;
-@property (nonatomic, assign) float			previousTextFieldHeight;
+
 
 @end
 
@@ -61,16 +66,18 @@
     /*--- Add code to setup refresh control ---*/
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlRefresh) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Load Earlier"];
     [tblView addSubview:self.refreshControl];
     
     //[self addGrowingTextView];
     //[self adddddddddddd];
     
-    
     multiTextView.layer.cornerRadius = 5.0;
     multiTextView.layer.borderWidth = 0.25;
     multiTextView.layer.borderColor = RGBCOLOR(38, 38, 38).CGColor;
     [multiTextView setClipsToBounds:YES];
+    
+    [CommonMethods addTOPLine_to_View:viewChat];
     
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;
@@ -79,15 +86,19 @@
     tblView.backgroundColor = [UIColor clearColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     tblView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    //[tblView registerNib:[UINib nibWithNibName:@"C_Cell_Message_Simple" bundle:nil] forCellReuseIdentifier:cellMessageSimpleID];
     
-    //[tblView registerNib:[UINib nibWithNibName:@"C_Cell_Message_Job" bundle:nil] forCellReuseIdentifier:cellMessageJOBID];
+    [tblView registerNib:[UINib nibWithNibName:@"C_Cell_Chat_Me" bundle:nil] forCellReuseIdentifier:cellChatMEID];
+    
+    [tblView registerNib:[UINib nibWithNibName:@"C_Cell_Chat_Other" bundle:nil] forCellReuseIdentifier:cellChatOtherID];
     
     /*--- Code to Show Default Refresh when view appear ---*/
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getRecentMessages];
     });
     
+    btnSend.enabled = NO;
+    panGest = tblView.panGestureRecognizer;
+    [panGest addTarget:self action:@selector(handlePanGesture:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -115,8 +126,7 @@
 {
     isAllDataRetrieved = NO;
     [self.refreshControl beginRefreshing];
-    [self.refreshControl endRefreshing];
-    //[self getRecentMessages];
+    [self getEarlier];
 }
 
 -(void)getRecentMessages
@@ -168,14 +178,16 @@
 
             [arrContent removeAllObjects];
             __weak UITableView *weaktbl = (UITableView *)tblView;
+            __weak C_MessageView *selfweak = self;
             [self setData:[objResponse valueForKeyPath:@"GetMessageThreadResult.MesssageList"] withHandler:^{
                 
                 weaktbl.alpha = 1.0;
                 [weaktbl reloadData];
+                [selfweak scrolltoBottomTable];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     hideHUD;
                 });
-            }];
+            } isRecent:YES];
             isCallingService = NO;
             
         }
@@ -195,23 +207,42 @@
     }
     
 }
--(void)setData:(NSMutableArray *)arrTemp withHandler:(void(^)())compilation
+-(void)setData:(NSMutableArray *)arrTemp withHandler:(void(^)())compilation isRecent:(BOOL)isRecent
 {
     @try
     {
-        for (NSDictionary *dict in arrTemp)
+        /*--- First reverse array then add in main array ---*/
+        if (isRecent)
         {
-            @try
+            arrTemp = [[[arrTemp reverseObjectEnumerator] allObjects] mutableCopy];
+            for (NSDictionary *dict in arrTemp)
             {
-                [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"%@",exception.description);
-            }
-            @finally {
+                @try
+                {
+                    [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
             }
         }
-        
+        else
+        {
+            for (NSDictionary *dict in arrTemp)
+            {
+                @try
+                {
+                    [arrContent insertObject:[MessageDetailModel addMessageDetail:dict] atIndex:0];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
+            }
+        }
         compilation();
     }
     @catch (NSException *exception) {
@@ -284,6 +315,102 @@
         }
     }
 }
+#pragma mark -
+#pragma mark - Get Earlier Message
+-(void)getEarlier
+{
+    @try
+    {
+        /*
+         <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="SenderID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="MessageID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="Message_Count" nillable="true" type="xs:string"/>
+         */
+        if (arrContent.count>0)
+        {
+            MessageDetailModel *myMessage = arrContent[0];
+            NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                        @"UserToken":userInfoGlobal.Token,
+                                        @"SenderID":_message_UserInfo.SenderID,
+                                        @"MessageCount":MESSAGE_COUNT,
+                                        @"MessageID":myMessage.msgID};
+            parser = [[JSONParser alloc]initWith_withURL:Web_GET_MESSAGES_PAST withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getEarlierSuccessfull:) withObject:self];
+        }
+        else
+        {
+            [self.refreshControl endRefreshing];
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+-(void)getEarlierSuccessfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        [self.refreshControl endRefreshing];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        [self.refreshControl endRefreshing];
+    }
+    else if([objResponse objectForKey:@"GetPastMessagesResult"])
+    {
+        /*--- Save data here ---*/
+        BOOL isMessageList = [[objResponse valueForKeyPath:@"GetPastMessagesResult.ResultStatus.Status"] boolValue];
+        if (isMessageList)
+        {
+            //got
+            __weak UITableView *weaktbl = (UITableView *)tblView;
+            UIRefreshControl *weakRef = self.refreshControl;
+            
+            /*--- Get array count and reload that index after table reload ---*/
+            NSInteger last = [NSArray arrayWithArray:[objResponse valueForKeyPath:@"GetPastMessagesResult.MesssageList"]].count;
+            if (last > 0)
+            {
+                last = last - 1;
+            }
+            
+            [self setData:[objResponse valueForKeyPath:@"GetPastMessagesResult.MesssageList"] withHandler:^{
+                @try
+                {
+                    [weakRef endRefreshing];
+                    [weaktbl reloadData];
+                    /*--- Now scroll to that index ---*/
+                    [weaktbl scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:last inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                    
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                }
+                @finally {
+                }
+                
+            } isRecent:NO];
+            
+        }
+        else
+            [self.refreshControl endRefreshing];
+    }
+    else
+    {
+        [self.refreshControl endRefreshing];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    
+}
+
 
 #pragma mark - Table Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -292,7 +419,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;//arrContent.count;
+    return arrContent.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -311,42 +438,308 @@
 //        heightCell = 13.0 + txtH + 60.0;
 //        return MAX(90.0, heightCell);
 //    }
-    return 90.0;
+    
+    MessageDetailModel *myMessage = (MessageDetailModel *)arrContent[indexPath.row];
+    
+    if ([myMessage.SenderID isEqualToString:userInfoGlobal.UserId])
+    {
+        CGFloat heightCell = 0;
+        heightCell = 32.0 + myMessage.heightText + 17.0;
+        return MAX(64.0, heightCell);
+    }
+    else
+    {
+        CGFloat heightCell = 0;
+        heightCell = 31.0 + myMessage.heightText + 16.0;
+        return MAX(64.0, heightCell);
+
+    }
+    
+    return 64.0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //MessageDetailModel *myMessage = (MessageDetailModel *)arrContent[indexPath.row];
-    static NSString *cellID = @"Cell";
-    UITableViewCell *cell = [tblView dequeueReusableCellWithIdentifier:cellID];
-    if (cell == nil)
+    MessageDetailModel *myMessage = (MessageDetailModel *)arrContent[indexPath.row];
+
+    if ([myMessage.SenderID isEqualToString:userInfoGlobal.UserId])
     {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        /*--- For Custom Cell ---*/
-        //[[NSBundle mainBundle]loadNibNamed:@"" owner:self options:nil];
-        //cell = myCell;
+        C_Cell_Chat_Me *cell = (C_Cell_Chat_Me *)[tblView dequeueReusableCellWithIdentifier:cellChatMEID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.lblText_Me.font = kFONT_LIGHT(14.0);
+        cell.lblText_Me.text = myMessage.Message;
+        cell.lblTime_Me.text = myMessage.strDisplayDate;
+        
+        cell.imgV_MeProfilePic.layer.borderColor = RGBCOLOR_GREY.CGColor;
+        [cell.imgV_MeProfilePic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:userInfoGlobal.PhotoURL ]]];
+        
+        UIImage *bubble = [UIImage imageNamed:@"chat_black_cell"];//t/l/b/r
+        bubble = [bubble resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 3.0, 3.0, 14.0)];
+        cell.imgV_Me.image = bubble;
+        
+        return cell;
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];//[NSString stringWithFormat:@"%@ - at %@",myMessage.Message,myMessage.strDisplayDate];
-    return cell;
+    else
+    {
+        //change here
+        C_Cell_Chat_Other *cell = (C_Cell_Chat_Other *)[tblView dequeueReusableCellWithIdentifier:cellChatOtherID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.lblText_Other.font = kFONT_LIGHT(14.0);
+        cell.lblText_Other.text = myMessage.Message;
+        cell.lblTime_Other.text = myMessage.strDisplayDate;
+        
+        cell.imgV_OtherProfilePic.layer.borderColor = RGBCOLOR_GREEN.CGColor;
+        [cell.imgV_OtherProfilePic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:_message_UserInfo.PhotoURL]]];
+        
+        //cell.const_imgV_Width.constant = cell.lblText_Other.frame.size.width + 11.0;
+        UIImage *bubble = [UIImage imageNamed:@"chat_green_cell"];
+        bubble = [bubble resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 14.0, 3.0, 3.0)];
+        cell.imgV_Other.image = bubble;
+        
+        //[cell.imgV_Other.image resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 14.0, 3.0, 3.0)];
+        return cell;
+    }
+    return nil;
 
 }
 
+#pragma mark - Send
 -(IBAction)btnSendClicked:(id)sender
 {
-    multiTextView.text = @"";
-    [self textViewDidChange:multiTextView];
-    [multiTextView resignFirstResponder];
-    [multiTextView layoutIfNeeded];
-    [viewChat layoutIfNeeded];
+
+    [self sendNow];
 }
 
-#pragma mark - 
-#pragma mark - MultilineText
+-(void)sendNow
+{
+    @try
+    {
+        /*
+         <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="ReceiverID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="LinkURL" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="LinkUserID" nillable="true" type="xs:string"/>
+         <xs:element minOccurs="0" name="LinkJobID" nillable="true" type="xs:string"/>
+         */
+        showHUD_with_Title(@"Sending Message");
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token,
+                                    @"ReceiverID":_message_UserInfo.SenderID,
+                                    @"Message":multiTextView.text,
+                                    @"LinkURL":@"",
+                                    @"LinkUserID":@"",
+                                    @"LinkJobID":@""};
+        parser = [[JSONParser alloc]initWith_withURL:Web_MESSAGES_SEND withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(sendMessagesSuccessfull:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+-(void)sendMessagesSuccessfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        hideHUD;
+        [self showAlert_withTitle:@"Please Try Again"];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        hideHUD;
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    else if([objResponse objectForKey:@"SendMessageResult"])
+    {
+        /*--- Save data here ---*/
+        BOOL isMessageList = [[objResponse valueForKeyPath:@"SendMessageResult.ResultStatus.Status"] boolValue];
+        if (isMessageList)
+        {
+            //got
+            
+            /*
+             ID
+             SenderID
+             Message
+             LincURL
+             LincJobID
+             LincUserID
+             DateCreated
+             */
+            //10/13/2014 9:42:48 AM
+            NSString *strDateGMT = [[NSDate date] getGMTDateString:@"MM/dd/yyyy h:mm:ss a"];
+            NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
+                                      @"SenderID":userInfoGlobal.UserId,
+                                      @"Message":multiTextView.text,
+                                      @"LincURL":@"",
+                                      @"LincJobID":@"",
+                                       @"LincUserID":@"",
+                                       @"DateCreated":strDateGMT};
+            @try
+            {
+                [arrContent addObject:[MessageDetailModel addMessageDetail:dictTemp]];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+                [self getRecentMessages];
+            }
+            @finally {
+            }
+            
+            
+            
+            multiTextView.text = @"";
+            [self textViewDidChange:multiTextView];
+            //[multiTextView resignFirstResponder];
+            [multiTextView layoutIfNeeded];
+            [viewChat layoutIfNeeded];
+            
+            [tblView reloadData];
+            [self scrolltoBottomTable];
+            
+            hideHUD;
+        }
+        else
+        {
+            
+            hideHUD;
+            
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"SendMessageResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+        }
+    }
+    else
+    {
+        hideHUD;
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    
+}
+-(void)scrolltoBottomTable
+{
+    @try
+    {
+        if (arrContent.count > 0) {
+            [tblView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[tblView numberOfRowsInSection:0]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+}
+#pragma mark -
+#pragma mark - MultilineText + Hide Text ON Drag
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)pan
+{
+    if (!viewChat)
+    {
+        return;
+    }
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    
+    UIWindow *panWindow = [[UIApplication sharedApplication] keyWindow];
+    CGPoint location = [pan locationInView:panWindow];
+    CGPoint velocity = [pan velocityInView:panWindow];
+    
+    switch (pan.state) {
+        case UIGestureRecognizerStateBegan:
+            
+            self.originalKeyboardY = screenSize.size.height - const_hpgrowing.constant;
+            break;
+        case UIGestureRecognizerStateEnded:
+            if(velocity.y > 0 && viewChat.frame.origin.y > self.originalKeyboardY) {
+                
+                [UIView animateWithDuration:0.3
+                                      delay:0
+                                    options:UIViewAnimationOptionCurveEaseOut
+                                 animations:^{
+                                         [self keyboardWillBeDismissed];
+                                 }
+                                 completion:^(BOOL finished) {
+
+                                 }];
+            }
+            else { // gesture ended with no flick or a flick upwards, snap keyboard back to original position
+                [UIView animateWithDuration:0.2
+                                      delay:0
+                                    options:UIViewAnimationOptionCurveEaseOut
+                                 animations:^{
+                                         [self keyboardWillSnapBackToPoint:CGPointMake(0.0f, self.originalKeyboardY)];
+                                     
+                                 }
+                                 completion:^(BOOL finished){
+                                 }];
+            }
+            break;
+            
+            // gesture is currently panning, match keyboard y to touch y
+        default:
+           
+            if(location.y > viewChat.frame.origin.y || viewChat.frame.origin.y != self.originalKeyboardY) {
+                
+                CGFloat newKeyboardY = self.originalKeyboardY + (location.y - self.originalKeyboardY);
+                newKeyboardY = newKeyboardY < self.originalKeyboardY ? self.originalKeyboardY : newKeyboardY;
+                newKeyboardY = newKeyboardY > screenHeight ? screenHeight : newKeyboardY;
+                
+                viewChat.frame = CGRectMake(0.0f,
+                                                 newKeyboardY,
+                                                 viewChat.frame.size.width,
+                                                 viewChat.frame.size.height);
+                
+                    [self keyboardDidScrollToPoint:CGPointMake(0.0f, newKeyboardY)];
+            }
+            break;
+    }
+}
+
+- (void)keyboardWillBeDismissed
+{
+//    CGRect inputViewFrame = viewChat.frame;
+//    inputViewFrame.origin.y = self.view.bounds.size.height - inputViewFrame.size.height;
+//    viewChat.frame = inputViewFrame;
+    //const_hpgrowing.constant = self.view.bounds.size.height - inputViewFrame.size.height;
+    const_hpgrowing.constant = 0.0;
+}
+
+- (void)keyboardWillSnapBackToPoint:(CGPoint)pt
+{
+    CGRect inputViewFrame = viewChat.frame;
+    CGPoint keyboardOrigin = [self.view convertPoint:pt fromView:nil];
+    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
+    //const_hpgrowing.constant = keyboardOrigin.y - inputViewFrame.size.height;
+    viewChat.frame = inputViewFrame;
+}
+- (void)keyboardDidScrollToPoint:(CGPoint)pt
+{
+    CGRect inputViewFrame = viewChat.frame;
+    CGPoint keyboardOrigin = [self.view convertPoint:pt fromView:nil];
+    inputViewFrame.origin.y = keyboardOrigin.y - inputViewFrame.size.height;
+    viewChat.frame = inputViewFrame;
+}
 - (void)keyboardHandling
 {
+//    keyboardChangeFrameObserver = [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidChangeFrameNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+//        NSLog(@"Called");
+//        NSDictionary *info = [note userInfo];
+//        CGSize kbSize = [info[UIKeyboardBoundsUserInfoKey] CGRectValue].size;
+//        const_hpgrowing.constant = kbSize.height;
+//    }];
+    
     keyboardShowObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification object:nil queue:nil usingBlock:^(NSNotification *note)
     {
-        
         NSDictionary *info = [note userInfo];
         CGSize kbSize = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
         //self.bottomLayoutConstraint.constant += kbSize.height;
@@ -369,22 +762,13 @@
         
         [UIView commitAnimations];
         
-        @try
-        {
-            [tblView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[tblView numberOfRowsInSection:0]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"%@",exception.description);
-        }
-        @finally {
-        }
+        [self scrolltoBottomTable];
         
         
     }];
     
     keyboardHideObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *note)
     {
-        
         //NSDictionary *info = [note userInfo];
         //CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
         //self.bottomLayoutConstraint.constant -= kbSize.height;
@@ -396,7 +780,6 @@
             UIEdgeInsets edgeInsets = UIEdgeInsetsZero;
             [tblView setContentInset:edgeInsets];
             [tblView setScrollIndicatorInsets:edgeInsets];
-            
         }];
         
         [UIView beginAnimations:nil context:NULL];
@@ -416,6 +799,11 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     // Tell layout system that size changed
+    if (textView.text.length == 0)
+        btnSend.enabled = NO;
+    else
+        btnSend.enabled = YES;
+    
     if (textView.contentSize.height < multiTextView.maxHeight || textView.text.length == 0)
     {
         [textView invalidateIntrinsicContentSize];

@@ -11,10 +11,18 @@
 @interface MessageDetailModel : NSObject
 //sender details
 @property NSString *msgID;
+@property NSString *SenderID;
 @property NSString *Message;
+
 @property NSString *LincURL;
+@property NSString *LincJobID;
+@property NSString *LincUserID;
+
 @property NSString *DateCreated;
 @property NSString *strDisplayDate;
+
+@property CGFloat heightText;
+@property CGFloat widthText;
 
 +(MessageDetailModel *)addMessageDetail:(NSDictionary *)dictMessageInfo;
 @end

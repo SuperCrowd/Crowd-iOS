@@ -10,5 +10,6 @@
 
 @interface C_Cell_Dashboard : UITableViewCell
 @property(nonatomic,strong)IBOutlet UIImageView *imgVOtherUser;
-@property(nonatomic,strong)IBOutlet UILabel *lblDesc;
+@property(nonatomic,strong)IBOutlet UITextView *txtDesc;
+@property(nonatomic,strong)IBOutlet UILabel *lblDescription;
 @end
