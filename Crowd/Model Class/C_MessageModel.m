@@ -71,18 +71,24 @@
     
     @try
     {
-        NSDate *dateS = [myMessage.DateCreated dateFromStringDateFormate:@"MM/dd/yyyy h:mm:ss a" Type:0];
-        
-        NSCalendar *c = [[NSCalendar alloc ] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
-        NSDateComponents *components = [c components:NSHourCalendarUnit fromDate:dateS toDate:[NSDate date] options:0];
-        NSInteger diff = components.hour;
-        
-        if (diff < 24)
-            myMessage.strDisplayDate = [dateS convertDateinFormat:@"h:mm a"];
-        else if(diff < 48)
-            myMessage.strDisplayDate = @"Yesterday";
+        if (![myMessage.DateCreated isEqualToString:@""]) {
+            NSDate *dateS = [myMessage.DateCreated dateFromStringDateFormate:@"MM/dd/yyyy h:mm:ss a" Type:0];
+            
+            NSCalendar *c = [[NSCalendar alloc ] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+            NSDateComponents *components = [c components:NSHourCalendarUnit fromDate:dateS toDate:[NSDate date] options:0];
+            NSInteger diff = components.hour;
+            
+            if (diff < 24)
+                myMessage.strDisplayDate = [dateS convertDateinFormat:@"h:mm a"];
+            else if(diff < 48)
+                myMessage.strDisplayDate = @"Yesterday";
+            else
+                myMessage.strDisplayDate = [dateS convertDateinFormat:@"MM/dd/yyyy"];
+        }
         else
-            myMessage.strDisplayDate = [dateS convertDateinFormat:@"MM/dd/yyyy"];
+        {
+            myMessage.strDisplayDate = @"";
+        }
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);

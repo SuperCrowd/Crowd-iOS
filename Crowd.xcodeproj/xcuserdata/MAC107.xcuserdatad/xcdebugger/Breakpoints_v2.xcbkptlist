@@ -57,13 +57,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Crowd/Controller/Message View/C_MessageListVC.m"
-            timestampString = "435147796.166144"
+            filePath = "Crowd/Controller/Message View/C_MessageView.m"
+            timestampString = "435241871.735322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "451"
-            endingLineNumber = "451"
-            landmarkName = "-accept_or_decline:withStatus:"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
+            landmarkName = "-sendMessagesSuccessfull:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crowd/Controller/Message View/C_MessageView.m"
+            timestampString = "435241871.735322"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "535"
+            endingLineNumber = "535"
+            landmarkName = "-sendNow"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

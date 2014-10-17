@@ -17,7 +17,7 @@
 #import "C_Cell_Chat_Other.h"
 
 #define MESSAGE_COUNT @"30"
-@interface C_MessageView ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
+@interface C_MessageView ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIActionSheetDelegate>
 {
     __weak IBOutlet UITableView *tblView;
     IBOutlet UIView *viewChat;
@@ -38,6 +38,11 @@
     
     
     UIPanGestureRecognizer *panGest;
+    
+    NSString *strLink_JobID;
+    NSString *strLink_UserID;
+    NSString *strLink_Website;
+    
     
 }
 @property (assign, nonatomic) CGFloat originalKeyboardY;
@@ -78,6 +83,10 @@
     [multiTextView setClipsToBounds:YES];
     
     [CommonMethods addTOPLine_to_View:viewChat];
+    
+    strLink_Website = @"";
+    strLink_JobID = @"";
+    strLink_UserID = @"";
     
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;
@@ -156,7 +165,7 @@
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
-        [self showAlert_withTitle:@"Please Try Again"];
+        [self showAlert_withTitle:@"Please Try Again" withTag:101];
         isCallingService = NO;
         return;
     }
@@ -164,7 +173,7 @@
     if ([objResponse objectForKey:kURLFail])
     {
         hideHUD;
-        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail] withTag:101];
         isCallingService = NO;
     }
     else if([objResponse objectForKey:@"GetMessageThreadResult"])
@@ -179,15 +188,16 @@
             [arrContent removeAllObjects];
             __weak UITableView *weaktbl = (UITableView *)tblView;
             __weak C_MessageView *selfweak = self;
-            [self setData:[objResponse valueForKeyPath:@"GetMessageThreadResult.MesssageList"] withHandler:^{
-                
+            [self setData:[objResponse valueForKeyPath:@"GetMessageThreadResult.MesssageList"]
+                 isRecent:YES
+              withHandler:^{
                 weaktbl.alpha = 1.0;
                 [weaktbl reloadData];
                 [selfweak scrolltoBottomTable];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     hideHUD;
                 });
-            } isRecent:YES];
+            } ];
             isCallingService = NO;
             
         }
@@ -195,19 +205,27 @@
         {
             
             hideHUD;
+            NSString *strR = [objResponse valueForKeyPath:@"GetMessageThreadResult.ResultStatus.StatusMessage"];
+            if ([strR isEqualToString:@"No Records"])
+            {
+            }
+            else
+            {
+                [CommonMethods displayAlertwithTitle:strR withMessage:nil withViewController:self];
+            }
             
-            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"GetMessageThreadResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+            
             isCallingService = NO;
         }
     }
     else
     {
         hideHUD;
-        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail] withTag:101];
     }
     
 }
--(void)setData:(NSMutableArray *)arrTemp withHandler:(void(^)())compilation isRecent:(BOOL)isRecent
+-(void)setData:(NSMutableArray *)arrTemp isRecent:(BOOL)isRecent withHandler:(void(^)())compilation
 {
     @try
     {
@@ -254,7 +272,7 @@
 }
 
 
--(void)showAlert_withTitle:(NSString *)title
+-(void)showAlert_withTitle:(NSString *)title withTag:(NSInteger)tagAlert
 {
     if (ios8)
     {
@@ -267,7 +285,13 @@
         
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
                                    {
-                                       [self getRecentMessages];
+                                       if (tagAlert == 101) {
+                                          [self getRecentMessages];
+                                       }
+                                       else if(tagAlert == 102)
+                                       {
+                                           [self sendNow];
+                                       }
                                    }];
         [alert addAction:okAction];
         
@@ -277,7 +301,7 @@
     else
     {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
-        alertView.tag = 101;
+        alertView.tag = tagAlert;
         [alertView show];
     }
 }
@@ -308,6 +332,20 @@
                 break;
             case 1:
                 [self getRecentMessages];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else if(alertView.tag == 102)
+    {
+        switch (buttonIndex) {
+            case 0:
+                
+                break;
+            case 1:
+                [self sendNow];
                 break;
                 
             default:
@@ -382,7 +420,9 @@
                 last = last - 1;
             }
             
-            [self setData:[objResponse valueForKeyPath:@"GetPastMessagesResult.MesssageList"] withHandler:^{
+            [self setData:[objResponse valueForKeyPath:@"GetPastMessagesResult.MesssageList"]
+                 isRecent:NO
+              withHandler:^{
                 @try
                 {
                     [weakRef endRefreshing];
@@ -397,7 +437,7 @@
                 @finally {
                 }
                 
-            } isRecent:NO];
+            }];
             
         }
         else
@@ -406,7 +446,7 @@
     else
     {
         [self.refreshControl endRefreshing];
-        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail] withTag:103];
     }
     
 }
@@ -423,24 +463,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    C_MessageModel *myMessage = (C_MessageModel *)arrContent[indexPath.row];
-//    if ([myMessage.Type isEqualToString:@"1"])
-//    {
-//        CGFloat heightCell = 0;
-//        CGFloat txtH = [myMessage.strDisplayText getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 95.0];
-//        heightCell = 13.0 + txtH + 26.0;
-//        return MAX(90.0, heightCell);
-//    }
-//    else
-//    {
-//        CGFloat heightCell = 0;
-//        CGFloat txtH = [myMessage.strDisplayText getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 95.0];
-//        heightCell = 13.0 + txtH + 60.0;
-//        return MAX(90.0, heightCell);
-//    }
-    
     MessageDetailModel *myMessage = (MessageDetailModel *)arrContent[indexPath.row];
-    
     if ([myMessage.SenderID isEqualToString:userInfoGlobal.UserId])
     {
         CGFloat heightCell = 0;
@@ -450,9 +473,8 @@
     else
     {
         CGFloat heightCell = 0;
-        heightCell = 31.0 + myMessage.heightText + 16.0;
+        heightCell = 32.0 + myMessage.heightText + 17.0;
         return MAX(64.0, heightCell);
-
     }
     
     return 64.0;
@@ -507,7 +529,6 @@
 #pragma mark - Send
 -(IBAction)btnSendClicked:(id)sender
 {
-
     [self sendNow];
 }
 
@@ -515,23 +536,14 @@
 {
     @try
     {
-        /*
-         <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="ReceiverID" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="LinkURL" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="LinkUserID" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="LinkJobID" nillable="true" type="xs:string"/>
-         */
         showHUD_with_Title(@"Sending Message");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
                                     @"ReceiverID":_message_UserInfo.SenderID,
-                                    @"Message":multiTextView.text,
-                                    @"LinkURL":@"",
-                                    @"LinkUserID":@"",
-                                    @"LinkJobID":@""};
+                                    @"Message":[multiTextView.text isNull],
+                                    @"LinkURL":[strLink_Website isNull],
+                                    @"LinkUserID":[strLink_UserID isNull],
+                                    @"LinkJobID":[strLink_JobID isNull]};
         parser = [[JSONParser alloc]initWith_withURL:Web_MESSAGES_SEND withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(sendMessagesSuccessfull:) withObject:self];
     }
     @catch (NSException *exception) {
@@ -549,14 +561,14 @@
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
-        [self showAlert_withTitle:@"Please Try Again"];
+        [self showAlert_withTitle:@"Please Try Again" withTag:102];
         return;
     }
     
     if ([objResponse objectForKey:kURLFail])
     {
         hideHUD;
-        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail] withTag:102];
     }
     else if([objResponse objectForKey:@"SendMessageResult"])
     {
@@ -579,10 +591,10 @@
             NSString *strDateGMT = [[NSDate date] getGMTDateString:@"MM/dd/yyyy h:mm:ss a"];
             NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
                                       @"SenderID":userInfoGlobal.UserId,
-                                      @"Message":multiTextView.text,
-                                      @"LincURL":@"",
-                                      @"LincJobID":@"",
-                                       @"LincUserID":@"",
+                                      @"Message":[multiTextView.text isNull],
+                                      @"LincURL":[strLink_Website isNull],
+                                      @"LincJobID":[strLink_JobID isNull],
+                                       @"LincUserID":[strLink_UserID isNull],
                                        @"DateCreated":strDateGMT};
             @try
             {
@@ -590,12 +602,14 @@
             }
             @catch (NSException *exception) {
                 NSLog(@"%@",exception.description);
-                [self getRecentMessages];
+                //[self getRecentMessages];
             }
             @finally {
             }
             
-            
+            strLink_JobID = @"";
+            strLink_UserID = @"";
+            strLink_Website = @"";
             
             multiTextView.text = @"";
             [self textViewDidChange:multiTextView];
@@ -619,7 +633,7 @@
     else
     {
         hideHUD;
-        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail] withTag:102];
     }
     
 }
@@ -811,6 +825,88 @@
     [textView scrollRectToVisible:CGRectMake(0.0, textView.contentSize.height - 1.0f, 1.0, 1.0) animated:NO];
 }
 
+
+#pragma mark - Button (+) clicked
+
+-(IBAction)btnPlusClicked:(id)sender
+{
+    NSString *strAddLink_Job = @"Add a Link to a Job";
+    NSString *strAddLink_User = @"Add a Link to a User";
+    NSString *strAddLink_Website = @"Add a Link to a Website";
+//    UIActionSheet *actSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:strAddLink_Job,strAddLink_User,strAddLink_Website, nil];
+//    
+//    [actSheet showInView:self.view];
+    
+    
+    
+    UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *act_Job_1 = [UIAlertAction actionWithTitle:strAddLink_Job style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 [self link_Job_1];
+                             }];
+    
+    UIAlertAction *act_User_2 = [UIAlertAction actionWithTitle:strAddLink_User style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                {
+                                    [self link_User_2];
+                                }];
+    
+    UIAlertAction *act_Website_3 = [UIAlertAction actionWithTitle:strAddLink_Website style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                {
+                                    [self link_Website_3];
+                                }];
+    
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
+                             {
+                                 [actionSheetController dismissViewControllerAnimated:YES completion:nil];
+                             }];
+    
+    [actionSheetController addAction:act_Job_1];
+    [actionSheetController addAction:act_User_2];
+    [actionSheetController addAction:act_Website_3];
+    [actionSheetController addAction:cancel];
+    
+    //******** THIS IS THE IMPORTANT PART!!!  ***********
+    actionSheetController.view.tintColor = RGBCOLOR_GREEN;
+    
+    [self presentViewController:actionSheetController animated:YES completion:nil];
+}
+
+-(void)link_Job_1
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+-(void)link_User_2
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+-(void)link_Website_3
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"Add Link" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action)
+                                {
+                                    [alertC dismissViewControllerAnimated:YES completion:nil];
+                                }];
+    UIAlertAction *AddWebsite = [UIAlertAction actionWithTitle:@"Add Website" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 UITextField *txt = alertC.textFields[0];
+                                 NSLog(@"%@",txt.text);
+                                 strLink_Website = txt.text;
+                             }];
+    
+    [alertC addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+       
+        textField.text = @"";
+        textField.placeholder = @"add Text";
+        textField.font = kFONT_LIGHT(14.0);
+    }];
+    
+    [alertC addAction:cancel];
+    [alertC addAction:AddWebsite];
+    [self presentViewController:alertC animated:YES completion:nil];
+}
 /*
  -(void)adddddddddddd
  {

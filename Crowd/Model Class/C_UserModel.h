@@ -47,18 +47,18 @@
  recommendationsReceived =     {
  "_total" = 1;
  values =         (
- {
- id = 552464351;
- recommendationText = Reccomenddddddd;
- recommendationType =                 {
- code = colleague;
- };
- recommender =                 {
- firstName = test;
- id = FjBQAqtLDs;
- lastName = soft;
- };
- }
+     {
+         id = 552464351;
+         recommendationText = Reccomenddddddd;
+         recommendationType =                 {
+         code = colleague;
+         };
+         recommender =                 {
+         firstName = test;
+         id = FjBQAqtLDs;
+         lastName = soft;
+         };
+     }
  );
  };
  */
@@ -79,23 +79,25 @@
 /*
  positions =     {
 values = (
- {
- company =                 {
- id = 128592;
- 
- industry = "Computer Software";
- name = TatvaSoft;
- size = "201-500 employees";
- type = Partnership;
- };
- id = 579319681;
- isCurrent = 1;
- startDate =                 {
- month = 6;
- year = 2014;
- };
- title = "Project Manager";
- })}
+     {
+         company =                 {
+         id = 128592;
+         
+         industry = "Computer Software";
+         name = TatvaSoft;
+         size = "201-500 employees";
+         type = Partnership;
+         };
+         id = 579319681;
+         isCurrent = 1;
+         startDate =                 {
+         month = 6;
+         year = 2014;
+         };
+         title = "Project Manager";
+     }
+ )
+ }
  */
 #pragma mark - Position
 

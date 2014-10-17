@@ -17,6 +17,9 @@
 #import "C_JobViewVC.h"
 
 #import "C_OtherUserProfileVC.h"
+
+#import "C_MessageView.h"
+#import "C_MessageModel.h"
 @interface C_DashBoardVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -383,23 +386,35 @@
 {
     DashBoardModel *myDash = (DashBoardModel *)arrContent[indexPath.row];
 
-    C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
-    obj.OtherUserID = myDash.OtherUserID;
-    [self.navigationController pushViewController:obj animated:YES];
+    if ([myDash.Type isEqualToString:@"1"])
+    {
+        C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+        obj.OtherUserID = myDash.OtherUserID;
+        [self.navigationController pushViewController:obj animated:YES];
+    }
+    else
+    {
+        NSDictionary *dictTemp = @{@"UserId":myDash.OtherUserID,@"PhotoURL":myDash.PhotoURL};
+        NSDictionary *dictSender = @{@"SenderDetail":dictTemp};
+        C_MessageModel *model = [C_MessageModel addMessageList:dictSender];
+        C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
+        obj.message_UserInfo = model;
+        [self.navigationController pushViewController:obj animated:YES];
+    }
 }
 
 #pragma mark - Get TextView height
 - (CGFloat)textViewHeightForText:(NSMutableAttributedString *)text andWidth:(CGFloat)width
 {
+    /*--- Get textview height as per text ---*/
     if (!calculationView) {
         calculationView = [[UITextView alloc] init];
+        calculationView.textContainerInset = UIEdgeInsetsZero;
+        calculationView.scrollEnabled = NO;
+        [calculationView setContentInset:UIEdgeInsetsZero];
+        calculationView.textAlignment = NSTextAlignmentLeft;
     }
     [calculationView setAttributedText:text];
-    calculationView.font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
-    calculationView.textContainerInset = UIEdgeInsetsZero;
-    calculationView.scrollEnabled = NO;
-    [calculationView setContentInset:UIEdgeInsetsZero];
-    calculationView.textAlignment = NSTextAlignmentLeft;
     CGSize newSize = [calculationView sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
     return newSize.height;
 }
@@ -409,6 +424,7 @@
     UITextView *textView = (UITextView *)recognizer.view;
     DashBoardModel *myDashboard = arrContent[textView.tag];
 
+    /*--- Get range of string which is clickable ---*/
     NSRange range = [textView.text rangeOfString:myDashboard.strClickable];
     
     NSLayoutManager *layoutManager = textView.layoutManager;
@@ -430,13 +446,12 @@
         }
         else
         {
+            //other user job
             C_JobListModel *myJob = [[C_JobListModel alloc]init];
             myJob.JobID = myDashboard.JobID;
             C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
             obj.obj_myJob = myJob;
             [self.navigationController pushViewController:obj animated:YES];
-
-           //other user job
         }
     }
     else

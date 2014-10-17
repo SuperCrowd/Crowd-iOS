@@ -162,9 +162,10 @@
         else
         {
             
+            
             hideHUD;
             NSString *strR = [objResponse valueForKeyPath:@"GetMessageListResult.ResultStatus.StatusMessage"];
-            if ([strR isEqualToString:@"No feeds!"])
+            if ([strR isEqualToString:@"No Records"])
             {
                 isAllDataRetrieved = YES;
                 [self showAlert_OneButton:@"No more records!"];
@@ -188,6 +189,9 @@
     }
     
 }
+
+
+
 -(void)setData:(NSMutableArray *)arrTemp withHandler:(void(^)())compilation
 {
     @try
