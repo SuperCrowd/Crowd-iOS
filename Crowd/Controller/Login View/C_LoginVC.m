@@ -216,7 +216,7 @@
     //[C_UserModel addLinkedInProfile:dict];
     
     showHUD_with_Title(@"Let us check if you already exist on Crowd");
-    parser = [[JSONParser alloc]initWith_withURL:Web_IS_USER_EXIST withParam:@{@"LinkedInID":strUserid} withData:nil withType:kURLPost withSelector:@selector(checkIfUserAlreadyExistSuccessful:) withObject:self];
+    parser = [[JSONParser alloc]initWith_withURL:Web_IS_USER_EXIST withParam:@{@"LinkedInID":strUserid,@"DeviceToken":[[UserDefaults valueForKey:DEVICE_TOKEN] isNull]} withData:nil withType:kURLPost withSelector:@selector(checkIfUserAlreadyExistSuccessful:) withObject:self];
 }
 -(void)checkIfUserAlreadyExistSuccessful:(id)objResponse
 {

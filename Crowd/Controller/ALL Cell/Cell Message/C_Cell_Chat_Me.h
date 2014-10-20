@@ -10,8 +10,13 @@
 
 @interface C_Cell_Chat_Me : UITableViewCell
 @property(nonatomic,strong)IBOutlet UIImageView *imgV_MeProfilePic;
+
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint *const_lblText_Me;
+
 @property(nonatomic,strong)IBOutlet UILabel *lblText_Me;
 @property(nonatomic,strong)IBOutlet UILabel *lblTime_Me;
 
 @property(nonatomic,strong)IBOutlet UIImageView *imgV_Me;
+
+@property(nonatomic,strong)IBOutlet UIButton *btnLink;
 @end

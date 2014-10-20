@@ -170,7 +170,7 @@
                 isAllDataRetrieved = YES;
                 [self showAlert_OneButton:@"No more records!"];
             }
-            else if ([strR isEqualToString:@"No more records!"])
+            else if ([strR isEqualToString:@"No Records on this Page Number!"])
             {
                 isAllDataRetrieved = YES;
             }
@@ -511,6 +511,7 @@
             else
                 myMessage.Type = @"4";
             
+            myMessage.State = YES;
             hideHUD;
             [tblView reloadData];
         }

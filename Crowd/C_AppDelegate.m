@@ -141,6 +141,7 @@
     // push some specific view when notification received
     [self SetUpActionWhenPushNotiClicked:userInfo application:application PushPop:NO];
 }
+#pragma mark - PUSH NOTIFICATION MANAGER
 -(void)SetUpActionWhenPushNotiClicked:(NSDictionary*)userInfo application:(UIApplication *)application PushPop:(BOOL)pushpop
 {
     NSLog(@"UserInfo : %@",userInfo);
@@ -183,6 +184,8 @@
         [self getMessageUnreadCount];
     }
 }
+
+#pragma mark - GET Unread Message Count
 -(void)getMessageUnreadCount
 {
     @try
@@ -235,7 +238,7 @@
     }
     
 }
-
+#pragma mark - Extra
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

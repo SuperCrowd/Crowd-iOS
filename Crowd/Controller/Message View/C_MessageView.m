@@ -359,20 +359,14 @@
 {
     @try
     {
-        /*
-         <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="SenderID" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="MessageID" nillable="true" type="xs:string"/>
-         <xs:element minOccurs="0" name="Message_Count" nillable="true" type="xs:string"/>
-         */
+
         if (arrContent.count>0)
         {
             MessageDetailModel *myMessage = arrContent[0];
             NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                         @"UserToken":userInfoGlobal.Token,
                                         @"SenderID":_message_UserInfo.SenderID,
-                                        @"MessageCount":MESSAGE_COUNT,
+                                        @"Message_Count":MESSAGE_COUNT,
                                         @"MessageID":myMessage.msgID};
             parser = [[JSONParser alloc]initWith_withURL:Web_GET_MESSAGES_PAST withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getEarlierSuccessfull:) withObject:self];
         }
@@ -467,14 +461,48 @@
     if ([myMessage.SenderID isEqualToString:userInfoGlobal.UserId])
     {
         CGFloat heightCell = 0;
-        heightCell = 32.0 + myMessage.heightText + 17.0;
+        
+        if (![myMessage.Message isEqualToString:@""]) {
+            heightCell = 32.0 + myMessage.heightText;
+        }
+        if (![myMessage.LincJobID isEqualToString:@""] ||
+            ![myMessage.LincURL isEqualToString:@""] ||
+            ![myMessage.LincUserID isEqualToString:@""])
+        {
+            
+            heightCell = 7.0 + heightCell + 17.0 + 10.0;
+        }
+        else
+        {
+            heightCell =  heightCell + 17.0;
+        }
         return MAX(64.0, heightCell);
     }
     else
     {
+//        CGFloat heightCell = 0;
+//        heightCell = 32.0 + myMessage.heightText + 17.0;
+//        return MAX(64.0, heightCell);
+        
+        
         CGFloat heightCell = 0;
-        heightCell = 32.0 + myMessage.heightText + 17.0;
+        
+        if (![myMessage.Message isEqualToString:@""]) {
+            heightCell = 32.0 + myMessage.heightText;
+        }
+        if (![myMessage.LincJobID isEqualToString:@""] ||
+            ![myMessage.LincURL isEqualToString:@""] ||
+            ![myMessage.LincUserID isEqualToString:@""])
+        {
+            
+            heightCell = 7.0 + heightCell + 17.0 + 10.0;
+        }
+        else
+        {
+            heightCell =  heightCell + 17.0;
+        }
         return MAX(64.0, heightCell);
+        
     }
     
     return 64.0;
@@ -488,6 +516,30 @@
     {
         C_Cell_Chat_Me *cell = (C_Cell_Chat_Me *)[tblView dequeueReusableCellWithIdentifier:cellChatMEID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if ([myMessage.Message isEqualToString:@""])
+        {
+            cell.lblText_Me.hidden = YES;
+        }
+        else
+        {
+            cell.lblText_Me.hidden = NO;
+        }
+        if (![myMessage.LincJobID isEqualToString:@""] ||
+            ![myMessage.LincURL isEqualToString:@""] ||
+            ![myMessage.LincUserID isEqualToString:@""])
+        {
+            cell.btnLink.hidden = NO;
+            cell.const_lblText_Me.constant = 10.0;
+            cell.btnLink.tag = indexPath.row;
+            [cell.btnLink addTarget:self action:@selector(btnLinkClicked:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
+            cell.btnLink.hidden = YES;
+            cell.const_lblText_Me.constant = 238.0;
+        }
+        
         cell.lblText_Me.font = kFONT_LIGHT(14.0);
         cell.lblText_Me.text = myMessage.Message;
         cell.lblTime_Me.text = myMessage.strDisplayDate;
@@ -499,6 +551,7 @@
         bubble = [bubble resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 3.0, 3.0, 14.0)];
         cell.imgV_Me.image = bubble;
         
+        
         return cell;
     }
     else
@@ -506,6 +559,29 @@
         //change here
         C_Cell_Chat_Other *cell = (C_Cell_Chat_Other *)[tblView dequeueReusableCellWithIdentifier:cellChatOtherID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if ([myMessage.Message isEqualToString:@""])
+        {
+            cell.lblText_Other.hidden = YES;
+        }
+        else
+        {
+            cell.lblText_Other.hidden = NO;
+        }
+        if (![myMessage.LincJobID isEqualToString:@""] ||
+            ![myMessage.LincURL isEqualToString:@""] ||
+            ![myMessage.LincUserID isEqualToString:@""])
+        {
+            cell.btnLink.hidden = NO;
+            cell.const_imgV_Other.constant = 10.0;
+            cell.btnLink.tag = indexPath.row;
+            [cell.btnLink addTarget:self action:@selector(btnLinkClicked:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
+            cell.btnLink.hidden = YES;
+            cell.const_imgV_Other.constant = 238.0;
+        }
         
         cell.lblText_Other.font = kFONT_LIGHT(14.0);
         cell.lblText_Other.text = myMessage.Message;
@@ -519,13 +595,20 @@
         bubble = [bubble resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 14.0, 3.0, 3.0)];
         cell.imgV_Other.image = bubble;
         
+
+        
         //[cell.imgV_Other.image resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 14.0, 3.0, 3.0)];
         return cell;
     }
     return nil;
 
 }
-
+#pragma mark - LINK CLICKED
+-(void)btnLinkClicked:(UIButton *)btnLink
+{
+    MessageDetailModel *myMessage = (MessageDetailModel *)arrContent[btnLink.tag];
+    NSLog(@"Message : %@",myMessage.Message);
+}
 #pragma mark - Send
 -(IBAction)btnSendClicked:(id)sender
 {
@@ -894,6 +977,7 @@
                                  UITextField *txt = alertC.textFields[0];
                                  NSLog(@"%@",txt.text);
                                  strLink_Website = txt.text;
+                                 [self sendNow];
                              }];
     
     [alertC addTextFieldWithConfigurationHandler:^(UITextField *textField) {
@@ -905,8 +989,14 @@
     
     [alertC addAction:cancel];
     [alertC addAction:AddWebsite];
+    alertC.view.tintColor = RGBCOLOR_GREEN;
     [self presentViewController:alertC animated:YES completion:nil];
 }
+
+
+
+
+
 /*
  -(void)adddddddddddd
  {
@@ -1084,6 +1174,9 @@
                               atScrollPosition:UITableViewScrollPositionBottom animated:animated];
     }
 }*/
+
+
+
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
