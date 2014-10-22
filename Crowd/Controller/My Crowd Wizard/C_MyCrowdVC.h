@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol selectUserProtocol<NSObject>
+-(void)userSelected:(NSString *)strUserID;
+@end
 
 @interface C_MyCrowdVC : UIViewController
-
+@property(nonatomic,readwrite)BOOL isPresented;
+@property(nonatomic,strong)NSString *strReceiverID;
+@property(nonatomic,strong)id <selectUserProtocol> delegate;
 @end

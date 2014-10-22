@@ -32,7 +32,7 @@
 @end
 
 @implementation C_MessageListVC
-
+#pragma mark - View Did Load
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Messages";
@@ -47,6 +47,7 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlRefresh) forControlEvents:UIControlEventValueChanged];
     [tblView addSubview:self.refreshControl];
+    
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;
     tblView.delegate = self;
@@ -55,9 +56,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     tblView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_Message_Simple" bundle:nil] forCellReuseIdentifier:cellMessageSimpleID];
-
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_Message_Job" bundle:nil] forCellReuseIdentifier:cellMessageJOBID];
-    
     
     /*--- Code to Show Default Refresh when view appear ---*/
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -91,13 +90,6 @@
      2 = accept
      3 = decline
      */
-    /*
-     {
-     <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
-     <xs:element minOccurs="0" name="UserToken" nillable="true" type="xs:string"/>
-     <xs:element minOccurs="0" name="PageNumber" nillable="true" type="xs:string"/>
-     }
-     */
     @try
     {
         isCallingService = YES;
@@ -114,8 +106,8 @@
     }
     @finally {
     }
-    
 }
+
 -(void)getDataSuccessfull:(id)objResponse
 {
     [self.refreshControl endRefreshing];
@@ -161,8 +153,6 @@
         }
         else
         {
-            
-            
             hideHUD;
             NSString *strR = [objResponse valueForKeyPath:@"GetMessageListResult.ResultStatus.StatusMessage"];
             if ([strR isEqualToString:@"No Records"])
@@ -424,7 +414,6 @@
         C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
         obj.message_UserInfo = myMessage;
         [self.navigationController pushViewController:obj animated:YES];
-        
     }
 }
 
@@ -454,7 +443,6 @@
 #pragma mark - Accept - Decline
 -(void)accept_or_decline:(C_MessageModel *)myMessage withStatus:(NSString *)status
 {
-
     /*
      {
      <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string"/>
@@ -514,6 +502,9 @@
             myMessage.State = YES;
             hideHUD;
             [tblView reloadData];
+            
+            /*--- when get response get unread count ---*/
+            [appDel getMessageUnreadCount];
         }
         else
         {

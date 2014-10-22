@@ -50,16 +50,16 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufa-jM-GZQ">
-                        <rect key="frame" x="10" y="49" width="115" height="17"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufa-jM-GZQ">
+                        <rect key="frame" x="15" y="49" width="90" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="1RT-1l-573"/>
-                            <constraint firstAttribute="width" constant="115" id="MGX-Z5-H1F"/>
+                            <constraint firstAttribute="width" constant="90" id="MGX-Z5-H1F"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="11"/>
-                        <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <inset key="imageEdgeInsets" minX="90" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="Link To Content" image="reply">
+                        <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Link To User" image="reply">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -80,7 +80,7 @@
                     <constraint firstAttribute="trailing" secondItem="Lsd-5N-zEt" secondAttribute="trailing" constant="10" id="NKP-hV-Ut1"/>
                     <constraint firstAttribute="trailing" secondItem="uRh-zA-3nP" secondAttribute="trailing" constant="46" id="NTh-WK-CT9"/>
                     <constraint firstItem="p1p-rM-vZB" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="32" id="UL3-xC-4ek"/>
-                    <constraint firstItem="Ufa-jM-GZQ" firstAttribute="leading" secondItem="VrS-q0-R7P" secondAttribute="leading" constant="10" id="yFo-ga-TRi"/>
+                    <constraint firstItem="Ufa-jM-GZQ" firstAttribute="leading" secondItem="VrS-q0-R7P" secondAttribute="leading" constant="15" id="yFo-ga-TRi"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

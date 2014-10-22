@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol selectJobProtocol<NSObject>
+-(void)jobSelected:(NSString *)strJobID;
+@end
+
 
 @interface C_MyJobsVC : UIViewController
-
+@property(nonatomic,readwrite)BOOL isPresented;
+@property(nonatomic,strong)id <selectJobProtocol> delegate;
 @end

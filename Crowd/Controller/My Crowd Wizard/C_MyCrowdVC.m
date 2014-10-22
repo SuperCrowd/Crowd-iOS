@@ -28,11 +28,25 @@
 @end
 
 @implementation C_MyCrowdVC
-
+-(void)dismissME
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"My Crowd";
-    self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+    if (_isPresented)
+    {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem =  [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(dismissME)];
+    }
+    else
+    {
+        self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+    }
+    
     
     arrSectionHeader = @[@"I Am Following",@"Following Me"];
     arrFollwing = [[NSMutableArray alloc]init];
@@ -65,7 +79,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    if (_isPresented)
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    else
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
 }
 
 -(void)btnMenuClicked:(id)sender
@@ -357,9 +374,33 @@
         C_FollowUser *followerUser = arrFollowers[indexPath.row];
         strOtherUserID = followerUser.UserId;
     }
-    C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
-    obj.OtherUserID = strOtherUserID;
-    [self.navigationController pushViewController:obj animated:YES];
+    if (_isPresented)
+    {
+        /*--- Dismiss view with delegate ---*/
+        if ([_strReceiverID isEqualToString:strOtherUserID])
+        {
+            showHUD_with_error(@"You can not select user with whom you are chatting.");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                hideHUD;
+            });
+        }
+        else
+        {
+            if ([self.delegate respondsToSelector:@selector(userSelected:)])
+            {
+                [self.delegate userSelected:strOtherUserID];
+                [self dismissME];
+            }
+        }
+        
+    }
+    else
+    {
+        C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+        obj.OtherUserID = strOtherUserID;
+        [self.navigationController pushViewController:obj animated:YES];
+    }
+    
     
 }
 

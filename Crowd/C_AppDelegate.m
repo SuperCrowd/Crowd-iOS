@@ -10,7 +10,12 @@
 #import "AppConstant.h"
 #import "C_LoginVC.h"
 #import "Reachability.h"
+#import "MMDrawerController.h"
 
+#import "C_OtherUserProfileVC.h"
+#import "C_MessageListVC.h"
+#import "C_JobListModel.h"
+#import "C_JobViewVC.h"
 @interface C_AppDelegate()
 {
     JSONParser *parser;
@@ -98,6 +103,13 @@
     return networkStatus != NotReachable;
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    /*--- get unread message count when app come from bg ---*/
+    if ([UserDefaults objectForKey:APP_USER_INFO]) {
+        [self getMessageUnreadCount];
+    }
+}
 
 #pragma mark - Notification
 #pragma mark - For Remote Notification
@@ -148,42 +160,162 @@
     application.applicationIconBadgeNumber = 0;
     /*
      {
+     1. Message
      aps =     {
-     alert =         {
-     "action-loc-key" = Answer;
-     body = xzczxczxcxcxc;
-     };
-     badge = 5;
-     destination = 2;
-     match = 1;
-     messageType = 2;
-     sound = default;
-     };
-     }
+         alert =         
+         {
+         body = xzczxczxcxcxc;
+        "loc-args" = (NewMessage,61);
+         };
+    };
      
+     
+     2. Follow
+     aps =     {
+     alert =
+         {
+         body = xzczxczxcxcxc;
+         "loc-args" = (FollowUser,61);
+         };
+     };
+     
+     3. Job Application
+     aps =     {
+     alert =
+         {
+         body = xzczxczxcxcxc;
+         "loc-args" = (JobApplication,61,118);
+         };
+     };
+     
+     
+     4. Approve Job
+     aps =     {
+     alert =
+         {
+         body = xzczxczxcxcxc;
+         "loc-args" = (ApproveJobApplication,61,118);
+         };
+     };
+     
+     5. Decline Job
+     aps =     {
+     alert =
+         {
+         body = xzczxczxcxcxc;
+         "loc-args" = (DeclineJobApplication,61,118);
+         };
+     };
+     t
+     6. Fill Job
+     aps =     {
+     alert =
+         {
+         body = xzczxczxcxcxc;
+         "loc-args" = (FillJob,61,118);
+         };
+     };
+
+     7. A job you posted has gone unfilled for 30 days.*
      */
     //Get User Data
     if (userInfo)
     {
+        //NSString *data =  [NSString stringWithFormat:@"%@", userInfo];
+        //NSLog(@"%@",data);
         if (application.applicationState == UIApplicationStateActive )
         {
             //NSLog(@"app is already open");
-            
         }
         else if (application.applicationState == UIApplicationStateBackground ||
                  application.applicationState == UIApplicationStateInactive)
         {
             //NSLog(@"app is coming from bg");
+            
+            for (UIViewController *navC in appDel.navC.viewControllers)
+            {
+                if ([navC isKindOfClass:[MMDrawerController class]])
+                {
+                    MMDrawerController *draw = (MMDrawerController *)navC;
+                    UINavigationController *navvvv =  (UINavigationController *)draw.centerViewController;
+                    [self pushViewUsingNav:navvvv withDict:userInfo withMMDraw:draw];
+                }
+            }
         }
     }
 }
-- (void)applicationDidBecomeActive:(UIApplication *)application
+
+-(void)pushViewUsingNav:(UINavigationController *)navC withDict:(NSDictionary *)userInfo withMMDraw:(MMDrawerController *)drawer
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    if ([UserDefaults objectForKey:APP_USER_INFO]) {
-        [self getMessageUnreadCount];
-    }
+    //lblNotificationTemp.text = [NSString stringWithFormat:@"%@",notif.object];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        @try
+        {
+            if ([[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"])
+            {
+                if ([[[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"] isKindOfClass:[NSArray class]])
+                {
+                    NSArray *arr = [[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"];
+                    if (arr.count>1)
+                    {
+                        NSString *strType = arr[0];
+                        NSString *otherUserid = arr[1];
+                        //lblNotificationTemp.text = [NSString stringWithFormat:@"%@",strType];
+                        if ([strType isEqualToString:@"NewMessage"])
+                        {
+                            //go to message
+                        }
+                        else if ([strType isEqualToString:@"FollowUser"])
+                        {
+                            //goto user
+                            C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+                            obj.OtherUserID = otherUserid;
+                            [navC pushViewController:obj animated:YES];
+                        }
+                        else if([strType isEqualToString:@"JobApplication"])
+                        {
+                            //go to messagelist view
+                            C_MessageListVC *objM = [[C_MessageListVC alloc]initWithNibName:@"C_MessageListVC" bundle:nil];
+                            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objM];
+                            navvv.navigationBar.translucent = NO;
+                            [drawer setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                                
+                            }];
+                        }
+                        else if ([strType isEqualToString:@"ApproveJobApplication"] ||
+                                 [strType isEqualToString:@"DeclineJobApplication"] ||
+                                 [strType isEqualToString:@"FillJob"] )
+                        {
+                            @try
+                            {
+                                //go to other user job
+                                NSString *jobID = arr[2];
+                                C_JobListModel *myJob = [[C_JobListModel alloc]init];
+                                myJob.JobID = jobID;
+                                C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
+                                obj.obj_myJob = myJob;
+                                [navC pushViewController:obj animated:YES];
+                            }
+                            @catch (NSException *exception) {
+                                NSLog(@"%@",exception.description);
+                            }
+                            @finally {
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        
+    });
 }
+
+
 
 #pragma mark - GET Unread Message Count
 -(void)getMessageUnreadCount
@@ -229,9 +361,7 @@
             }
             @finally {
             }
-            
         }
-
     }
     else
     {
