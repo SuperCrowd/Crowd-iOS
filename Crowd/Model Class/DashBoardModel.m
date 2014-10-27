@@ -202,7 +202,7 @@ UserId = 61;
         NSString *strLoc = [arrLoc componentsJoinedByString:@","];
         
         [StrM appendString:[strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "]];
-
+        [StrM appendFormat:@"."];
         
         //myDashBoard.strDisplayText = StrM;
         
@@ -243,7 +243,7 @@ UserId = 61;
         NSString *strLoc = [arrLoc componentsJoinedByString:@","];
         
         [StrM appendString:[strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "]];
-        
+        [StrM appendFormat:@"."];
         
         NSString *strT = [NSString stringWithFormat:@"%@ at %@",myDashBoard.Job_Title,myDashBoard.Job_Company];
         /*--- Now apply link on specific ---*/
@@ -281,6 +281,7 @@ UserId = 61;
         NSString *strLoc = [arrLoc componentsJoinedByString:@","];
         
         [StrM appendString:[strLoc stringByReplacingOccurrencesOfString:@"," withString:@", "]];
+        [StrM appendFormat:@"."];
         
         /*--- Set full strig same font ---*/
         NSString *strT = [NSString stringWithFormat:@"%@ at %@",myDashBoard.Job_Title,myDashBoard.Job_Company];

@@ -84,6 +84,8 @@
     self.navC = [[UINavigationController alloc]initWithRootViewController:self.objLoginVC];
     self.window.rootViewController = self.navC;
     self.navC.navigationBar.translucent = NO;
+    [self.window makeKeyAndVisible];
+    
     
     /*--- open Specific notification ---*/
     NSDictionary* notifInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -92,7 +94,7 @@
         [self SetUpActionWhenPushNotiClicked:notifInfo application:application PushPop:NO];
     }
     
-    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 -(BOOL)isConnected
@@ -226,21 +228,43 @@
         if (application.applicationState == UIApplicationStateActive )
         {
             //NSLog(@"app is already open");
+
+            if ([[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"])
+            {
+                if ([[[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"] isKindOfClass:[NSArray class]])
+                {
+                    NSArray *arr = [[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"];
+                    if (arr.count>1)
+                    {
+                        NSString *strType = arr[0];
+                        //NSString *otherUserid = arr[1];
+                        //lblNotificationTemp.text = [NSString stringWithFormat:@"%@",strType];
+                        if ([strType isEqualToString:@"NewMessage"])
+                        {
+                            //go to message
+                            [[NSNotificationCenter defaultCenter]postNotificationName:@"getMessageNotification" object:nil];
+
+                        }
+                    }
+                }
+            }
         }
         else if (application.applicationState == UIApplicationStateBackground ||
                  application.applicationState == UIApplicationStateInactive)
         {
             //NSLog(@"app is coming from bg");
-            
-            for (UIViewController *navC in appDel.navC.viewControllers)
-            {
-                if ([navC isKindOfClass:[MMDrawerController class]])
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                for (UIViewController *navC in appDel.navC.viewControllers)
                 {
-                    MMDrawerController *draw = (MMDrawerController *)navC;
-                    UINavigationController *navvvv =  (UINavigationController *)draw.centerViewController;
-                    [self pushViewUsingNav:navvvv withDict:userInfo withMMDraw:draw];
+                    if ([navC isKindOfClass:[MMDrawerController class]])
+                    {
+                        MMDrawerController *draw = (MMDrawerController *)navC;
+                        UINavigationController *navvvv =  (UINavigationController *)draw.centerViewController;
+                        [self pushViewUsingNav:navvvv withDict:userInfo withMMDraw:draw];
+                    }
                 }
-            }
+            });
+            
         }
     }
 }
@@ -268,9 +292,14 @@
                         else if ([strType isEqualToString:@"FollowUser"])
                         {
                             //goto user
-                            C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
-                            obj.OtherUserID = otherUserid;
-                            [navC pushViewController:obj animated:YES];
+                            UIViewController *vc = [[navC viewControllers]objectAtIndex:0];
+                            if (![vc isKindOfClass:[C_OtherUserProfileVC class]])
+                            {
+                                C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+                                obj.OtherUserID = otherUserid;
+                                [navC pushViewController:obj animated:YES];
+                            }
+                            
                         }
                         else if([strType isEqualToString:@"JobApplication"])
                         {
@@ -288,13 +317,18 @@
                         {
                             @try
                             {
-                                //go to other user job
-                                NSString *jobID = arr[2];
-                                C_JobListModel *myJob = [[C_JobListModel alloc]init];
-                                myJob.JobID = jobID;
-                                C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
-                                obj.obj_myJob = myJob;
-                                [navC pushViewController:obj animated:YES];
+                                UIViewController *vc = [[navC viewControllers]objectAtIndex:0];
+                                if (![vc isKindOfClass:[C_JobViewVC class]])
+                                {
+                                    //go to other user job
+                                    NSString *jobID = arr[2];
+                                    C_JobListModel *myJob = [[C_JobListModel alloc]init];
+                                    myJob.JobID = jobID;
+                                    C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
+                                    obj.obj_myJob = myJob;
+                                    [navC pushViewController:obj animated:YES];
+                                }
+                                
                             }
                             @catch (NSException *exception) {
                                 NSLog(@"%@",exception.description);

@@ -390,7 +390,7 @@
         obj.OtherUserID = myDash.OtherUserID;
         [self.navigationController pushViewController:obj animated:YES];
     }
-    else
+    else if([myDash.Type isEqualToString:@"2"])
     {
         NSDictionary *dictTemp = @{@"UserId":myDash.OtherUserID,@"PhotoURL":myDash.PhotoURL};
         NSDictionary *dictSender = @{@"SenderDetail":dictTemp};

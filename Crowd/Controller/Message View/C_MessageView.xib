@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_MessageView">
             <connections>
+                <outlet property="btnPlus" destination="gVJ-57-JCR" id="7vf-6z-NH3"/>
                 <outlet property="btnSend" destination="ASW-5f-Wm2" id="EQx-SH-9Gn"/>
                 <outlet property="const_hpgrowing" destination="nAg-hL-lBW" id="BDD-yB-Mol"/>
                 <outlet property="multiTextView" destination="cWf-7H-nKo" id="sh0-1b-6kE"/>

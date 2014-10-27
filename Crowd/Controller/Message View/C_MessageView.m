@@ -38,6 +38,7 @@
     __weak IBOutlet UITableView *tblView;
     IBOutlet UIView *viewChat;
     IBOutlet NSLayoutConstraint *const_hpgrowing;//bottom layout
+    __weak IBOutlet UIButton *btnPlus;
     
     NSMutableArray *arrContent;
     JSONParser *parser;
@@ -69,6 +70,7 @@
 @implementation C_MessageView
 -(void)back
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getMessageNotification" object:nil];
     popView;
 }
 - (void)viewDidLoad {
@@ -115,15 +117,22 @@
     
     /*--- Code to Show Default Refresh when view appear ---*/
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self getRecentMessages];
+        [self getRecentMessages_withHUD:YES];
     });
     
     btnSend.enabled = NO;
     btnSend.alpha = 0.5;
     panGest = tblView.panGestureRecognizer;
     [panGest addTarget:self action:@selector(handlePanGesture:)];
+    
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getMessageNotification" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMessageNotification) name:@"getMessageNotification" object:nil];
 }
-
+-(void)getMessageNotification
+{
+    [self getRecentMessages_withHUD:NO];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -152,12 +161,15 @@
     [self getEarlier];
 }
 
--(void)getRecentMessages
+-(void)getRecentMessages_withHUD:(BOOL)isShowHUd
 {
     @try
     {
         isCallingService = YES;
-        showHUD_with_Title(@"Getting Messages");
+        if (isShowHUd) {
+            showHUD_with_Title(@"Getting Messages");
+        }
+        
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
                                     @"SenderID":_message_UserInfo.SenderID,
@@ -198,7 +210,7 @@
         if (isMessageList)
         {
             //got
-            [arrContent removeAllObjects];
+            //[arrContent removeAllObjects];
             __weak UITableView *weaktbl = (UITableView *)tblView;
             __weak C_MessageView *selfweak = self;
             [self setData:[objResponse valueForKeyPath:@"GetMessageThreadResult.MesssageList"]
@@ -221,15 +233,10 @@
             
             hideHUD;
             NSString *strR = [objResponse valueForKeyPath:@"GetMessageThreadResult.ResultStatus.StatusMessage"];
-            if ([strR isEqualToString:@"No Records"])
-            {
-            }
-            else
+            if (![strR isEqualToString:@"No Records"])
             {
                 [CommonMethods displayAlertwithTitle:strR withMessage:nil withViewController:self];
             }
-            
-            
             isCallingService = NO;
         }
     }
@@ -252,7 +259,11 @@
             {
                 @try
                 {
-                    [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
+                    NSString *msgID = [[NSString stringWithFormat:@"%@",dict[@"ID"]] isNull];
+                    if (![[arrContent valueForKey:@"msgID"] containsObject:msgID]) {
+                        [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
+                    }
+                    
                 }
                 @catch (NSException *exception) {
                     NSLog(@"%@",exception.description);
@@ -301,7 +312,7 @@
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
                                    {
                                        if (tagAlert == 101) {
-                                          [self getRecentMessages];
+                                          [self getRecentMessages_withHUD:YES];
                                        }
                                        else if(tagAlert == 102)
                                        {
@@ -346,7 +357,7 @@
                 
                 break;
             case 1:
-                [self getRecentMessages];
+                [self getRecentMessages_withHUD:YES];
                 break;
                 
             default:
@@ -378,6 +389,31 @@
                 [self checkURLValidation_and_send];
                 break;
                 
+            default:
+                break;
+        }
+    }
+    else if(alertView.tag == 104)
+    {
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+                strLink_JobID = @"";
+                strLink_UserID = @"";
+                strLink_Website = @"";
+                [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
+                if (![multiTextView.text isEqualToString:@""])
+                {
+                    btnSend.enabled = YES;
+                    btnSend.alpha = 1.0;
+                }
+                else
+                {
+                    btnSend.enabled = NO;
+                    btnSend.alpha = 0.5;
+                }
+                break;
             default:
                 break;
         }
@@ -659,7 +695,6 @@
         if ([myMessage.SenderID isEqualToString:userInfoGlobal.UserId])
         {
             //my own job
-            NSLog(@"my own job");
             C_JobListModel *myJob = [[C_JobListModel alloc]init];
             myJob.JobID = myMessage.LincJobID;
             C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
@@ -670,13 +705,11 @@
         else
         {
             //other user job
-            NSLog(@"Other User job");
             C_JobListModel *myJob = [[C_JobListModel alloc]init];
             myJob.JobID = myMessage.LincJobID;
             C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
             obj.obj_myJob = myJob;
             [self.navigationController pushViewController:obj animated:YES];
-
         }
     }
     else if([btnLink.accessibilityHint isEqualToString:@"LincURL"])
@@ -687,28 +720,38 @@
     }
     else
     {
-        //LincUserID
-
-        /*--- If other user share link of my id so compare linkuserid with my id ---*/
-//        if ([myMessage.LincUserID isEqualToString:userInfoGlobal.UserId])
-//        {
-//            //its my profile
-//            C_MyProfileVC *objD = [[C_MyProfileVC alloc]initWithNibName:@"C_MyProfileVC" bundle:nil];
-//            [self.navigationController pushViewController:objD animated:YES];
-//        }
-//        else
-//        {
-            //open other user's profile
-            C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
-            obj.OtherUserID = myMessage.LincUserID;
-            [self.navigationController pushViewController:obj animated:YES];
-//        }
+        //open other user's profile
+        C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+        obj.OtherUserID = myMessage.LincUserID;
+        [self.navigationController pushViewController:obj animated:YES];
     }
 }
 #pragma mark - Send
 -(IBAction)btnSendClicked:(id)sender
 {
-    [self sendNow];
+    if (![strLink_JobID isEqualToString:@""] ||
+        ![strLink_UserID isEqualToString:@""] ||
+        ![strLink_Website isEqualToString:@""])
+    {
+        [self sendNow];
+    }
+    else
+    {
+        /*--- if no attachment fount then check text is not null ---*/
+        if (![[multiTextView.text isNull] isEqualToString:@""]) {
+            [self sendNow];
+        }
+        else
+        {
+            showHUD_with_error(@"Please add text");
+            multiTextView.text = @"";
+            btnSend.enabled = NO;
+            btnSend.alpha = 0.5;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                hideHUD;
+            });
+        }
+    }
 }
 
 -(void)sendNow
@@ -789,6 +832,11 @@
             strLink_JobID = @"";
             strLink_UserID = @"";
             strLink_Website = @"";
+            
+            [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
+            btnSend.enabled = NO;
+            btnSend.alpha = 0.5;
+            
             
             multiTextView.text = @"";
             [self textViewDidChange:multiTextView];
@@ -924,7 +972,6 @@
 }
 - (void)keyboardHandling
 {
-    
     keyboardShowObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification object:nil queue:nil usingBlock:^(NSNotification *note)
     {
         NSDictionary *info = [note userInfo];
@@ -986,8 +1033,18 @@
     // Tell layout system that size changed
     if (textView.text.length == 0)
     {
-        btnSend.enabled = NO;
-        btnSend.alpha = 0.5;
+        if (![strLink_JobID isEqualToString:@""] ||
+            ![strLink_UserID isEqualToString:@""] ||
+            ![strLink_Website isEqualToString:@""])
+        {
+            btnSend.enabled = YES;
+            btnSend.alpha = 1.0;
+        }
+        else
+        {
+            btnSend.enabled = NO;
+            btnSend.alpha = 0.5;
+        }
     }
     else
     {
@@ -1003,50 +1060,95 @@
 
 
 #pragma mark - Button (+) clicked
-
--(IBAction)btnPlusClicked:(id)sender
+-(void)removeAttachment
 {
-    strLink_JobID = @"";
-    strLink_UserID = @"";
-    strLink_Website = @"";
     if (ios8)
     {
-        UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction *act_Job_1 = [UIAlertAction actionWithTitle:@"Add a Link to a Job" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                                    {
-                                        [self link_Job_1];
-                                    }];
-        
-        UIAlertAction *act_User_2 = [UIAlertAction actionWithTitle:@"Add a Link to a User" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+        UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"Would you like to remove attachment?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action)
+                                 {
+                                     [alertC dismissViewControllerAnimated:YES completion:nil];
+                                 }];
+        UIAlertAction *btnYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                                      {
-                                         [self link_User_2];
+                                         strLink_JobID = @"";
+                                         strLink_UserID = @"";
+                                         strLink_Website = @"";
+                                         [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
+                                         if (![multiTextView.text isEqualToString:@""])
+                                         {
+                                             btnSend.enabled = YES;
+                                             btnSend.alpha = 1.0;
+                                         }
+                                         else
+                                         {
+                                             btnSend.enabled = NO;
+                                             btnSend.alpha = 0.5;
+                                         }
                                      }];
         
-        UIAlertAction *act_Website_3 = [UIAlertAction actionWithTitle:@"Add a Link to a Website" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                                        {
-                                            [self link_Website_3];
-                                        }];
-        
-        
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
-                                 {
-                                     [actionSheetController dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-        
-        [actionSheetController addAction:act_Job_1];
-        [actionSheetController addAction:act_User_2];
-        [actionSheetController addAction:act_Website_3];
-        [actionSheetController addAction:cancel];
-        
-        actionSheetController.view.tintColor = RGBCOLOR_GREEN;
-        
-        [self presentViewController:actionSheetController animated:YES completion:nil];
+        [alertC addAction:cancel];
+        [alertC addAction:btnYes];
+        [self presentViewController:alertC animated:YES completion:nil];
     }
     else
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Add a Link to a Job",@"Add a Link to a User",@"Add a Link to a Website",nil];
-        [actionSheet showInView:self.view];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Would you like to remove attachment?" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        alert.tag = 104;
+        [alert show];
+    }
+}
+-(IBAction)btnPlusClicked:(id)sender
+{
+    if (![strLink_JobID isEqualToString:@""] ||
+        ![strLink_UserID isEqualToString:@""] ||
+        ![strLink_Website isEqualToString:@""])
+    {
+        /*--- remove attachment when press (-) ---*/
+        [self removeAttachment];
+    }
+    else
+    {
+        /*--- Add Attachment ---*/
+        if (ios8)
+        {
+            UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            
+            UIAlertAction *act_Job_1 = [UIAlertAction actionWithTitle:@"Add a Link to a Job" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                        {
+                                            [self link_Job_1];
+                                        }];
+            
+            UIAlertAction *act_User_2 = [UIAlertAction actionWithTitle:@"Add a Link to a User" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                         {
+                                             [self link_User_2];
+                                         }];
+            
+            UIAlertAction *act_Website_3 = [UIAlertAction actionWithTitle:@"Add a Link to a Website" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                            {
+                                                [self link_Website_3];
+                                            }];
+            
+            
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
+                                     {
+                                         [actionSheetController dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+            
+            [actionSheetController addAction:act_Job_1];
+            [actionSheetController addAction:act_User_2];
+            [actionSheetController addAction:act_Website_3];
+            [actionSheetController addAction:cancel];
+            
+            actionSheetController.view.tintColor = RGBCOLOR_GREEN;
+            
+            [self presentViewController:actionSheetController animated:YES completion:nil];
+        }
+        else
+        {
+            UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Add a Link to a Job",@"Add a Link to a User",@"Add a Link to a Website",nil];
+            [actionSheet showInView:self.view];
+        }
     }
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1134,18 +1236,18 @@
 {
     /*--- Get Job id send now ---*/
     strLink_JobID = strJobID;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self sendNow];
-    });
-    
+    [btnPlus setImage:[UIImage imageNamed:@"btnMinusGreen"] forState:UIControlStateNormal];
+    btnSend.enabled = YES;
+    btnSend.alpha = 1.0;
+
 }
 -(void)userSelected:(NSString *)strUserID
 {
     /*--- Get User id send now ---*/
     strLink_UserID = strUserID;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self sendNow];
-    });
+    [btnPlus setImage:[UIImage imageNamed:@"btnMinusGreen"] forState:UIControlStateNormal];
+    btnSend.enabled = YES;
+    btnSend.alpha = 1.0;
 }
 -(void)checkURLValidation_and_send
 {
@@ -1162,7 +1264,12 @@
             });
         }
         else
-            [self sendNow];
+        {
+            [btnPlus setImage:[UIImage imageNamed:@"btnMinusGreen"] forState:UIControlStateNormal];
+            btnSend.enabled = YES;
+            btnSend.alpha = 1.0;
+        }
+        
     }
     else
     {
