@@ -16,6 +16,12 @@
 #import "C_MessageListVC.h"
 #import "C_JobListModel.h"
 #import "C_JobViewVC.h"
+#import "C_PostJob_UpdateVC.h"
+
+#import "C_MessageModel.h"
+
+#import "C_MessageView.h"
+
 @interface C_AppDelegate()
 {
     JSONParser *parser;
@@ -155,6 +161,10 @@
     // push some specific view when notification received
     [self SetUpActionWhenPushNotiClicked:userInfo application:application PushPop:NO];
 }
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    //[self SetUpActionWhenPushNotiClicked:notification.userInfo application:application PushPop:NO];
+}
 #pragma mark - PUSH NOTIFICATION MANAGER
 -(void)SetUpActionWhenPushNotiClicked:(NSDictionary*)userInfo application:(UIApplication *)application PushPop:(BOOL)pushpop
 {
@@ -219,6 +229,13 @@
      };
 
      7. A job you posted has gone unfilled for 30 days.*
+     aps =     {
+     alert =
+         {
+         body = xzczxczxcxcxc;
+         "loc-args" = (Unfilled30days,61,118);
+         };
+     };
      */
     //Get User Data
     if (userInfo)
@@ -241,9 +258,9 @@
                         //lblNotificationTemp.text = [NSString stringWithFormat:@"%@",strType];
                         if ([strType isEqualToString:@"NewMessage"])
                         {
-                            //go to message
-                            [[NSNotificationCenter defaultCenter]postNotificationName:@"getMessageNotification" object:nil];
-
+                            //go to message + get notification count
+                            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMessage object:nil];
+                            [self getMessageUnreadCount];
                         }
                     }
                 }
@@ -272,35 +289,54 @@
 -(void)pushViewUsingNav:(UINavigationController *)navC withDict:(NSDictionary *)userInfo withMMDraw:(MMDrawerController *)drawer
 {
     //lblNotificationTemp.text = [NSString stringWithFormat:@"%@",notif.object];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @try
         {
             if ([[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"])
             {
                 if ([[[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"] isKindOfClass:[NSArray class]])
                 {
+                    
                     NSArray *arr = [[[userInfo objectForKey:@"aps"]objectForKey:@"alert"] objectForKey:@"loc-args"];
                     if (arr.count>1)
                     {
+                        [self getMessageUnreadCount];
                         NSString *strType = arr[0];
                         NSString *otherUserid = arr[1];
                         //lblNotificationTemp.text = [NSString stringWithFormat:@"%@",strType];
+                        //1
                         if ([strType isEqualToString:@"NewMessage"])
                         {
                             //go to message
+                            UIViewController *vc = [[navC viewControllers]lastObject];
+                            if (![vc isKindOfClass:[C_MessageView class]])
+                            {
+                                NSDictionary *dictTemp = @{@"UserId":otherUserid};
+                                NSDictionary *dictSender = @{@"SenderDetail":dictTemp};
+                                C_MessageModel *model = [C_MessageModel addMessageList:dictSender];
+                                C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
+                                obj.message_UserInfo = model;
+                                [navC pushViewController:obj animated:YES];
+                            }
+                            else
+                            {
+                                [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMessage object:nil];
+                            }
                         }
+                        //2
                         else if ([strType isEqualToString:@"FollowUser"])
                         {
                             //goto user
-                            UIViewController *vc = [[navC viewControllers]objectAtIndex:0];
-                            if (![vc isKindOfClass:[C_OtherUserProfileVC class]])
-                            {
+//                            UIViewController *vc = [[navC viewControllers]lastObject];
+//                            if (![vc isKindOfClass:[C_OtherUserProfileVC class]])
+//                            {
                                 C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
                                 obj.OtherUserID = otherUserid;
                                 [navC pushViewController:obj animated:YES];
-                            }
+//                            }
                             
                         }
+                        //3
                         else if([strType isEqualToString:@"JobApplication"])
                         {
                             //go to messagelist view
@@ -311,15 +347,16 @@
                                 
                             }];
                         }
+                        // 4 ,5 ,6
                         else if ([strType isEqualToString:@"ApproveJobApplication"] ||
                                  [strType isEqualToString:@"DeclineJobApplication"] ||
                                  [strType isEqualToString:@"FillJob"] )
                         {
                             @try
                             {
-                                UIViewController *vc = [[navC viewControllers]objectAtIndex:0];
-                                if (![vc isKindOfClass:[C_JobViewVC class]])
-                                {
+//                                UIViewController *vc = [[navC viewControllers]lastObject];
+//                                if (![vc isKindOfClass:[C_JobViewVC class]])
+//                                {
                                     //go to other user job
                                     NSString *jobID = arr[2];
                                     C_JobListModel *myJob = [[C_JobListModel alloc]init];
@@ -327,6 +364,31 @@
                                     C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
                                     obj.obj_myJob = myJob;
                                     [navC pushViewController:obj animated:YES];
+//                                }
+                                
+                            }
+                            @catch (NSException *exception) {
+                                NSLog(@"%@",exception.description);
+                            }
+                            @finally {
+                            }
+                        }
+                        // unfilled job = 7
+                        else if ([strType isEqualToString:@"Unfilled30days"])
+                        {
+                            @try
+                            {
+                                UIViewController *vc = [[navC viewControllers]lastObject];
+                                if (![vc isKindOfClass:[C_PostJob_UpdateVC class]])
+                                {
+                                    //go to other user job
+                                    NSString *jobID = arr[2];
+                                    C_JobListModel *myJob = [[C_JobListModel alloc]init];
+                                    myJob.JobID = jobID;
+                                    C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+                                    objD.obj_JobListModel = myJob;
+                                    objD.strComingFrom = @"FindAJob";
+                                    [navC pushViewController:objD animated:YES];
                                 }
                                 
                             }
@@ -346,7 +408,7 @@
         @finally {
         }
         
-    });
+//    });
 }
 
 
@@ -411,6 +473,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }

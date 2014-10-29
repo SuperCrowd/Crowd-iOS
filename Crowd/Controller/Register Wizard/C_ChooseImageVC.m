@@ -51,7 +51,7 @@
 -(void)btnDoneClicked:(id)sender
 {
     [self saveImage];
-#warning - SAVE IMAGE HERE
+//#warning - SAVE IMAGE HERE
     for (UIViewController *vc in self.navigationController.viewControllers)
     {
         if ([vc isKindOfClass:[C_ProfilePreviewVC class]])

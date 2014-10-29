@@ -27,6 +27,7 @@
     
     myMessage.LincURL = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincURL"]] isNull];
     myMessage.LincJobID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincJobID"]] isNull];
+    myMessage.LinkJobCreatorID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LinkJobCreatorID"]] isNull];
     myMessage.LincUserID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincUserID"]] isNull];
     myMessage.DateCreated = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"DateCreated"]] isNull];
 

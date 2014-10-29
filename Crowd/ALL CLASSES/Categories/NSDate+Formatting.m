@@ -11,12 +11,15 @@
 @implementation NSDate (Formatting)
 -(NSString *)convertDateinFormat:(NSString *)strFormat
 {
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     NSCalendar *sysCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
     // set your NSDateFormatter with calendar.
     NSDateFormatter *df = [[NSDateFormatter alloc]init];
     df.calendar = sysCalendar;
     [df setTimeZone:[NSTimeZone systemTimeZone]];
     [df setDateFormat:strFormat];
+    [df setLocale:enUSPOSIXLocale];
+
     return [df stringFromDate:self];
 }
 -(NSDate *)addDay:(int)day
@@ -49,9 +52,12 @@
 -(NSDate *)changeTime:(NSString *)strTime
 {
     NSCalendar *sysCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     // set your NSDateFormatter with calendar.
     NSDateFormatter *df = [[NSDateFormatter alloc]init];
     df.calendar = sysCalendar;
+    [df setLocale:enUSPOSIXLocale];
+
     [df setTimeZone:[NSTimeZone systemTimeZone]];
     [df setDateFormat:@"yyyy-MM-dd"];
     NSString *strNewDate = [df stringFromDate:self];
@@ -65,11 +71,16 @@
 {
     @try
     {
+        NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
         NSDateFormatter *prefixDateFormatter = [[NSDateFormatter alloc] init];
+        [prefixDateFormatter setLocale:enUSPOSIXLocale];
+
         [prefixDateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
         [prefixDateFormatter setDateFormat:@"dd"];
         NSString *prefixDateString = [prefixDateFormatter stringFromDate:self];
         NSDateFormatter *monthDayFormatter = [[NSDateFormatter alloc] init];
+        [monthDayFormatter setLocale:enUSPOSIXLocale];
+
         [monthDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
         [monthDayFormatter setDateFormat:@"d"];
         int date_day = [[monthDayFormatter stringFromDate:self] intValue];
@@ -93,10 +104,12 @@
 -(NSString *)getGMTDateString:(NSString*)format{
     
     // Set up an NSDateFormatter for UTC time zone
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     NSDateFormatter* formatterUtc = [[NSDateFormatter alloc] init];
     [formatterUtc setDateFormat:format];
     [formatterUtc setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-    
+    [formatterUtc setLocale:enUSPOSIXLocale];
+
     // Cast the input string to NSDate
     NSString* strUTCDate = [formatterUtc stringFromDate:self];
     return strUTCDate;

@@ -23,7 +23,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHv-i6-AgV" userLabel="User Pic">
-                        <rect key="frame" x="277" y="20" width="35" height="35"/>
+                        <rect key="frame" x="275" y="20" width="35" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="EO6-o6-gtr"/>
                             <constraint firstAttribute="height" constant="35" id="dmZ-tk-9yx"/>
@@ -74,7 +74,7 @@
                     <constraint firstItem="uRh-zA-3nP" firstAttribute="leading" relation="lessThanOrEqual" secondItem="VrS-q0-R7P" secondAttribute="leading" priority="750" constant="238" id="93L-kh-spC"/>
                     <constraint firstItem="p1p-rM-vZB" firstAttribute="leading" secondItem="VrS-q0-R7P" secondAttribute="leading" priority="250" constant="227" id="9Pj-nd-Vir"/>
                     <constraint firstAttribute="trailing" secondItem="p1p-rM-vZB" secondAttribute="trailing" constant="63" id="9hJ-ya-LF0"/>
-                    <constraint firstAttribute="trailing" secondItem="DHv-i6-AgV" secondAttribute="trailing" constant="8" id="JWR-Hn-UwY"/>
+                    <constraint firstAttribute="trailing" secondItem="DHv-i6-AgV" secondAttribute="trailing" constant="10" id="JWR-Hn-UwY"/>
                     <constraint firstItem="uRh-zA-3nP" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="26" id="Lbr-EE-ITS"/>
                     <constraint firstAttribute="bottom" secondItem="uRh-zA-3nP" secondAttribute="bottom" constant="11" id="NHW-O6-uQd"/>
                     <constraint firstAttribute="trailing" secondItem="Lsd-5N-zEt" secondAttribute="trailing" constant="10" id="NKP-hV-Ut1"/>

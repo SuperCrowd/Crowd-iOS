@@ -41,6 +41,7 @@
 		103B3C6C19D009870022FA33 /* IndustryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 103B3C6B19D009870022FA33 /* IndustryList.plist */; };
 		103B852819C997610021DA9E /* C_Cell_SkillsProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 103B852619C997610021DA9E /* C_Cell_SkillsProfile.m */; };
 		103B852919C997610021DA9E /* C_Cell_SkillsProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 103B852719C997610021DA9E /* C_Cell_SkillsProfile.xib */; };
+		1041B7CD1A00AE0700AB4111 /* notification.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1041B7CC1A00AE0700AB4111 /* notification.wav */; };
 		10454A6C19CBE4C8009FCFF7 /* C_TutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10454A6A19CBE4C8009FCFF7 /* C_TutorialVC.m */; };
 		10454A6D19CBE4C8009FCFF7 /* C_TutorialVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10454A6B19CBE4C8009FCFF7 /* C_TutorialVC.xib */; };
 		10459D0619DA92B2009EA011 /* C_JobViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 10459D0419DA92B2009EA011 /* C_JobViewVC.m */; };
@@ -333,6 +334,7 @@
 		103B852519C997610021DA9E /* C_Cell_SkillsProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Cell_SkillsProfile.h; sourceTree = "<group>"; };
 		103B852619C997610021DA9E /* C_Cell_SkillsProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Cell_SkillsProfile.m; sourceTree = "<group>"; };
 		103B852719C997610021DA9E /* C_Cell_SkillsProfile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Cell_SkillsProfile.xib; sourceTree = "<group>"; };
+		1041B7CC1A00AE0700AB4111 /* notification.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification.wav; sourceTree = "<group>"; };
 		10454A6919CBE4C8009FCFF7 /* C_TutorialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_TutorialVC.h; sourceTree = "<group>"; };
 		10454A6A19CBE4C8009FCFF7 /* C_TutorialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_TutorialVC.m; sourceTree = "<group>"; };
 		10454A6B19CBE4C8009FCFF7 /* C_TutorialVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_TutorialVC.xib; sourceTree = "<group>"; };
@@ -852,6 +854,15 @@
 			path = "Crowd/All plist";
 			sourceTree = "<group>";
 		};
+		1041B7CB1A00AE0700AB4111 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				1041B7CC1A00AE0700AB4111 /* notification.wav */,
+			);
+			name = Sounds;
+			path = Crowd/Sounds;
+			sourceTree = "<group>";
+		};
 		1049E37F19E7B96200D10C2B /* Cell Follower */ = {
 			isa = PBXGroup;
 			children = (
@@ -1173,6 +1184,7 @@
 		10A953D719B9911200EAAE4B = {
 			isa = PBXGroup;
 			children = (
+				1041B7CB1A00AE0700AB4111 /* Sounds */,
 				103B3C6A19D009870022FA33 /* All plist */,
 				10588A6219CC2CD500DC5633 /* Fonts ALL */,
 				10A9541819B9919700EAAE4B /* ALL CLASSES */,
@@ -1655,6 +1667,7 @@
 				10ECE9C619EE331500FAE431 /* C_Cell_Chat_Other.xib in Resources */,
 				104CD66A19D2BA7B00E444F8 /* C_MP_ChooseImageVC.xib in Resources */,
 				10454A6D19CBE4C8009FCFF7 /* C_TutorialVC.xib in Resources */,
+				1041B7CD1A00AE0700AB4111 /* notification.wav in Resources */,
 				10DDA80819DBDA430075FA7A /* C_Cell_FindAJobList.xib in Resources */,
 				104CD64519D288F300E444F8 /* C_EducationHistory.xib in Resources */,
 				104CD64319D288F300E444F8 /* C_EditTimeVC.xib in Resources */,

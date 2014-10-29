@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @protocol selectJobProtocol<NSObject>
--(void)jobSelected:(NSString *)strJobID;
+-(void)jobSelected:(NSString *)strJobID withJobCreaterID:(NSString *)strJobCreaterID;
 @end
 
 

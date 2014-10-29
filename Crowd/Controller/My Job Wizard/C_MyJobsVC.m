@@ -390,9 +390,9 @@
     if (_isPresented)
     {
         /*--- Dismiss view with delegate ---*/
-        if ([self.delegate respondsToSelector:@selector(jobSelected:)])
+        if ([self.delegate respondsToSelector:@selector(jobSelected:withJobCreaterID:)])
         {
-            [self.delegate jobSelected:myJob.JobID];
+            [self.delegate jobSelected:myJob.JobID withJobCreaterID:myJob.UserId];
             [self dismissME];
         }
     }

@@ -409,6 +409,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     C_MessageModel *myMessage = (C_MessageModel *)arrContent[indexPath.row];
+    if ([myMessage.Type isEqualToString:@"1"])
+    {
+        myMessage.IsUnreadMessages = NO;
+        NSArray *arr = @[indexPath];
+        [tblView reloadRowsAtIndexPaths:arr withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
     if ([myMessage.Type isEqualToString:@"1"]) {
         NSLog(@"Single Message");
         C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];

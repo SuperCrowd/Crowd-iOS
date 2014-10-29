@@ -14,7 +14,7 @@
 #warning - Live server use - 54 (192 for local)
 
 //#if TARGET_IPHONE_SIMULATOR
-////Simulator
+//Simulator
 //#define IMG_BASE_URL @"http://192.168.0.4/crowdwcf/ImageUpload/"
 //#define BASE_URL @"http://192.168.0.4/crowdwcf/Service1.svc/"
 //#else

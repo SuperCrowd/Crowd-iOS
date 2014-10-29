@@ -325,9 +325,9 @@
         if (JobModel.LocationState.length>0) {
             [arrLoc addObject:JobModel.LocationState];
         }
-        myFollowCell.lblLocation.text = [arrLoc componentsJoinedByString:@","] ;
+        myFollowCell.lblLocation.text = [arrLoc componentsJoinedByString:@", "] ;
         myFollowCell.lblCompanyName.text = [JobModel.EmployerName isNull];
-        myFollowCell.lblName.text = [NSString stringWithFormat:@"%@,%@",followerUser.FirstName,followerUser.LastName];
+        myFollowCell.lblName.text = [NSString stringWithFormat:@"%@ %@",followerUser.FirstName ,followerUser.LastName];
         [myFollowCell.ivPhoto sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:followerUser.PhotoURL]]];
         return myFollowCell;
     }
@@ -353,9 +353,9 @@
         if (JobModel.LocationState.length>0) {
             [arrLoc addObject:JobModel.LocationState];
         }
-        myFollowCell.lblLocation.text = [arrLoc componentsJoinedByString:@","] ;
+        myFollowCell.lblLocation.text = [arrLoc componentsJoinedByString:@", "] ;
         myFollowCell.lblCompanyName.text = [JobModel.EmployerName isNull];
-        myFollowCell.lblName.text = [NSString stringWithFormat:@"%@,%@",followerUser.FirstName,followerUser.LastName];
+        myFollowCell.lblName.text = [NSString stringWithFormat:@"%@ %@",followerUser.FirstName,followerUser.LastName];
         [myFollowCell.ivPhoto sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:followerUser.PhotoURL]]];
         return myFollowCell;
     }
@@ -392,7 +392,6 @@
                 [self dismissME];
             }
         }
-        
     }
     else
     {

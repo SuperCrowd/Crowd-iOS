@@ -71,8 +71,8 @@
     else
     {
         //Stay here
-#warning - PLEASE CHECK WHOLE APP FOR BLANK USER WHO DIDN'T FILL ANY INFO
-#warning - PLEASE CHECK HERE ALL CONDITION
+//#warning - PLEASE CHECK WHOLE APP FOR BLANK USER WHO DIDN'T FILL ANY INFO
+//#warning - PLEASE CHECK HERE ALL CONDITION
         self.navigationController.navigationBarHidden = NO;
         C_WelcomeVC *obj = [[C_WelcomeVC alloc]initWithNibName:@"C_WelcomeVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:NO];
@@ -106,7 +106,7 @@
         return;
     }
     
-#warning - PLEASE SET NIL TO ADD NEW ACCOUNT EVERY TIME
+//#warning - PLEASE SET NIL TO ADD NEW ACCOUNT EVERY TIME
     NSString *storedToken = nil;//[UserDefaults objectForKey:@"access_token"];
     if (storedToken == nil || storedToken == (NSString*)[NSNull null]) {
         

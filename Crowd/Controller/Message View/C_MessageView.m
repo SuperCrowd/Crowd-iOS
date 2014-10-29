@@ -36,41 +36,40 @@
 @interface C_MessageView ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIActionSheetDelegate,selectJobProtocol,selectUserProtocol,UIAlertViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
-    IBOutlet UIView *viewChat;
+    IBOutlet UIView *viewChat;// chat view
     IBOutlet NSLayoutConstraint *const_hpgrowing;//bottom layout
     __weak IBOutlet UIButton *btnPlus;
+    __weak IBOutlet UIButton *btnSend;
+    __weak IBOutlet MDMultilineTextView *multiTextView;
     
     NSMutableArray *arrContent;
     JSONParser *parser;
+    
     /*--- To check if service is calling or not ---*/
     BOOL isCallingService;
     BOOL isAllDataRetrieved;
     
-    
-    __weak IBOutlet UIButton *btnSend;
-    
+    /*--- Pangesture is used to drag view when drag table ---*/
     id keyboardShowObserver;
     id keyboardHideObserver;
-    __weak IBOutlet MDMultilineTextView *multiTextView;
-    
-    
     UIPanGestureRecognizer *panGest;
     
+    /*--- used when add button link ---*/
     NSString *strLink_JobID;
+    NSString *strLink_JobCreaterID;
     NSString *strLink_UserID;
     NSString *strLink_Website;
+    
+    NSString *OtherUserPhotoURL;
 }
-@property (assign, nonatomic) CGFloat originalKeyboardY;
-
+@property (assign, nonatomic) CGFloat originalKeyboardY;//keyboard Y Axis
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
-
-
 @end
 
 @implementation C_MessageView
 -(void)back
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getMessageNotification" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kNotification_GetMessage object:nil];
     popView;
 }
 - (void)viewDidLoad {
@@ -90,19 +89,19 @@
     self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"Load Earlier"];
     [tblView addSubview:self.refreshControl];
     
-    //[self addGrowingTextView];
-    //[self adddddddddddd];
-    
+    /*--- multi line text view ---*/
     multiTextView.layer.cornerRadius = 5.0;
     multiTextView.layer.borderWidth = 0.25;
     multiTextView.layer.borderColor = RGBCOLOR(38, 38, 38).CGColor;
     [multiTextView setClipsToBounds:YES];
     
+    /*--- add line on top ---*/
     [CommonMethods addTOPLine_to_View:viewChat];
     
     strLink_Website = @"";
     strLink_JobID = @"";
     strLink_UserID = @"";
+    strLink_JobCreaterID = @"";
     
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;
@@ -120,14 +119,15 @@
         [self getRecentMessages_withHUD:YES];
     });
     
+    /*--- set defaults ---*/
     btnSend.enabled = NO;
     btnSend.alpha = 0.5;
     panGest = tblView.panGestureRecognizer;
     [panGest addTarget:self action:@selector(handlePanGesture:)];
     
-    
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getMessageNotification" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMessageNotification) name:@"getMessageNotification" object:nil];
+    /*--- notification when send new message ---*/
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kNotification_GetMessage object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMessageNotification) name:kNotification_GetMessage object:nil];
 }
 -(void)getMessageNotification
 {
@@ -136,15 +136,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     
+    /*--- set notification for keyboard open/close ---*/
     [self keyboardHandling];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
 
+    /*--- remove notification ---*/
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:keyboardShowObserver];
     [center removeObserver:keyboardHideObserver];
@@ -183,7 +184,6 @@
     }
     @finally {
     }
-    
 }
 -(void)getRecentMessagesSuccessfull:(id)objResponse
 {
@@ -211,6 +211,13 @@
         {
             //got
             //[arrContent removeAllObjects];
+            
+            /*
+             OtherUserFirstName = Tatva;
+             OtherUserLastName = Third;
+             OtherUserPhotoURL = "Profilee781e95a-aa73-43a7-a172-b4cfdcfffe43.PNG";
+             */
+            OtherUserPhotoURL = [[NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"GetMessageThreadResult.OtherUserPhotoURL"]] isNull];
             __weak UITableView *weaktbl = (UITableView *)tblView;
             __weak C_MessageView *selfweak = self;
             [self setData:[objResponse valueForKeyPath:@"GetMessageThreadResult.MesssageList"]
@@ -230,7 +237,6 @@
         }
         else
         {
-            
             hideHUD;
             NSString *strR = [objResponse valueForKeyPath:@"GetMessageThreadResult.ResultStatus.StatusMessage"];
             if (![strR isEqualToString:@"No Records"])
@@ -402,6 +408,7 @@
                 strLink_JobID = @"";
                 strLink_UserID = @"";
                 strLink_Website = @"";
+                strLink_JobCreaterID = @"";
                 [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
                 if (![multiTextView.text isEqualToString:@""])
                 {
@@ -672,7 +679,7 @@
         cell.lblTime_Other.text = myMessage.strDisplayDate;
         
         cell.imgV_OtherProfilePic.layer.borderColor = RGBCOLOR_GREEN.CGColor;
-        [cell.imgV_OtherProfilePic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:_message_UserInfo.PhotoURL]]];
+        [cell.imgV_OtherProfilePic sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:OtherUserPhotoURL]]];
         
         //cell.const_imgV_Width.constant = cell.lblText_Other.frame.size.width + 11.0;
         UIImage *bubble = [UIImage imageNamed:@"chat_green_cell"];
@@ -688,11 +695,10 @@
 -(void)btnLinkClicked:(UIButton *)btnLink
 {
     MessageDetailModel *myMessage = (MessageDetailModel *)arrContent[btnLink.tag];
-    NSLog(@"%@ : %@",btnLink.accessibilityHint,myMessage.Message);
+    //NSLog(@"%@ : %@",btnLink.accessibilityHint,myMessage.Message);
     if ([btnLink.accessibilityHint isEqualToString:@"LincJobID"])
     {
-#warning - NEED JOB Creater id to know who create this job
-        if ([myMessage.SenderID isEqualToString:userInfoGlobal.UserId])
+        if ([myMessage.LinkJobCreatorID isEqualToString:userInfoGlobal.UserId])
         {
             //my own job
             C_JobListModel *myJob = [[C_JobListModel alloc]init];
@@ -807,15 +813,19 @@
              LincURL
              LincJobID
              LincUserID
+             LinkJobCreatorID
              DateCreated
              */
             //10/13/2014 9:42:48 AM
+            NSString *strMSGID = [[NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"SendMessageResult.MessageID"]]isNull];
             NSString *strDateGMT = [[NSDate date] getGMTDateString:@"MM/dd/yyyy h:mm:ss a"];
             NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
                                       @"SenderID":userInfoGlobal.UserId,
+                                       @"ID":strMSGID,
                                       @"Message":[multiTextView.text isNull],
                                       @"LincURL":[strLink_Website isNull],
                                       @"LincJobID":[strLink_JobID isNull],
+                                       @"LinkJobCreatorID":[strLink_JobCreaterID isNull],
                                        @"LincUserID":[strLink_UserID isNull],
                                        @"DateCreated":strDateGMT};
             @try
@@ -830,6 +840,7 @@
             }
             
             strLink_JobID = @"";
+            strLink_JobCreaterID = @"";
             strLink_UserID = @"";
             strLink_Website = @"";
             
@@ -1074,6 +1085,7 @@
                                          strLink_JobID = @"";
                                          strLink_UserID = @"";
                                          strLink_Website = @"";
+                                         strLink_JobCreaterID = @"";
                                          [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
                                          if (![multiTextView.text isEqualToString:@""])
                                          {
@@ -1232,10 +1244,11 @@
 }
 
 #pragma mark - Validation + Custom Protocol
--(void)jobSelected:(NSString *)strJobID
+-(void)jobSelected:(NSString *)strJobID withJobCreaterID:(NSString *)strJobCreaterID
 {
     /*--- Get Job id send now ---*/
     strLink_JobID = strJobID;
+    strLink_JobCreaterID = strJobCreaterID;
     [btnPlus setImage:[UIImage imageNamed:@"btnMinusGreen"] forState:UIControlStateNormal];
     btnSend.enabled = YES;
     btnSend.alpha = 1.0;

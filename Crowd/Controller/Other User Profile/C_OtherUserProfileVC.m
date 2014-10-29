@@ -577,7 +577,6 @@
 #pragma mark - Message
 -(IBAction)btnMessageClicked:(id)sender
 {
-    
     NSDictionary *dictTemp = @{@"UserId":otherUserDetail.UserId,@"PhotoURL":otherUserDetail.PhotoURL};
     NSDictionary *dictSender = @{@"SenderDetail":dictTemp};
     C_MessageModel *model = [C_MessageModel addMessageList:dictSender];
