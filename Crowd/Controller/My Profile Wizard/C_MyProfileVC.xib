@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -35,16 +34,6 @@
                                 <constraint firstAttribute="width" constant="105" id="WbV-Qt-3X0"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRq-xX-gvg" userLabel="Profile Container">
-                            <rect key="frame" x="10" y="10" width="105" height="105"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="105" id="3Zn-uY-OZi"/>
-                                <constraint firstAttribute="height" constant="105" id="DdB-Zj-3Ca"/>
-                            </constraints>
-                            <state key="normal" image="profile_round">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KoR-YP-a6b">
                             <rect key="frame" x="290" y="0.0" width="30" height="30"/>
                             <constraints>
@@ -115,7 +104,6 @@
                         <constraint firstItem="832-HA-Qp1" firstAttribute="top" secondItem="8no-71-GbJ" secondAttribute="top" id="IaU-WT-4hl"/>
                         <constraint firstItem="xTK-Yq-y51" firstAttribute="top" secondItem="8no-71-GbJ" secondAttribute="top" constant="10" id="KF7-Qn-wTU"/>
                         <constraint firstItem="xTK-Yq-y51" firstAttribute="leading" secondItem="8no-71-GbJ" secondAttribute="leading" constant="10" id="PKO-jy-AXK"/>
-                        <constraint firstItem="RRq-xX-gvg" firstAttribute="leading" secondItem="8no-71-GbJ" secondAttribute="leading" constant="10" id="RkN-fO-ePN"/>
                         <constraint firstItem="KoR-YP-a6b" firstAttribute="top" secondItem="8no-71-GbJ" secondAttribute="top" id="Sfh-bP-7FY"/>
                         <constraint firstItem="TPa-kf-t9F" firstAttribute="top" secondItem="iBO-og-2V6" secondAttribute="bottom" constant="3" id="ayF-yL-Gek"/>
                         <constraint firstAttribute="trailing" secondItem="KoR-YP-a6b" secondAttribute="trailing" id="b6m-rj-0lA"/>
@@ -129,7 +117,6 @@
                         <constraint firstItem="QDl-a2-XF6" firstAttribute="leading" secondItem="8no-71-GbJ" secondAttribute="leading" constant="123" id="pQS-a8-t9x"/>
                         <constraint firstAttribute="trailing" secondItem="imc-eF-24z" secondAttribute="trailing" constant="10" id="qzb-ry-XK8"/>
                         <constraint firstAttribute="bottom" secondItem="832-HA-Qp1" secondAttribute="bottom" id="vZd-d9-AFn"/>
-                        <constraint firstItem="RRq-xX-gvg" firstAttribute="top" secondItem="8no-71-GbJ" secondAttribute="top" constant="10" id="wc7-oy-EEw"/>
                         <constraint firstItem="QDl-a2-XF6" firstAttribute="top" secondItem="tZv-1m-9zA" secondAttribute="bottom" constant="3" id="x03-gc-xKw"/>
                         <constraint firstItem="tZv-1m-9zA" firstAttribute="top" secondItem="8no-71-GbJ" secondAttribute="top" constant="11" id="yJ1-Rk-MK0"/>
                     </constraints>
@@ -163,7 +150,6 @@
     <resources>
         <image name="BG_half_Profile" width="320" height="125"/>
         <image name="edit_white_white" width="22" height="22"/>
-        <image name="profile_round" width="144" height="144"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

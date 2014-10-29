@@ -15,5 +15,9 @@
 @property(nonatomic,strong)IBOutlet UILabel *lblText_Other;
 @property(nonatomic,strong)IBOutlet UIImageView *imgV_Other;
 
+@property(nonatomic,strong)IBOutlet NSLayoutConstraint *const_imgV_Other;
+
+@property(nonatomic,strong)IBOutlet UIButton *btnLink;
+
 //@property(nonatomic,strong)IBOutlet NSLayoutConstraint *const_imgV_Height;
 @end

@@ -23,13 +23,14 @@
 
 #import "C_MessageView.h"
 #import "C_MessageModel.h"
+#import "MHFacebookImageViewer.h"
 
 #define PROFFESSIONAL_SUMMARY @"Professional Summary"
 #define WORK_EXPERIENCE @"Work Experience"
 #define RECOMMENDATION @"Recommendations"
 #define EDUCATION @"Education"
 #define SKILLS @"Skills"
-@interface C_OtherUserProfileVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface C_OtherUserProfileVC ()<UITableViewDataSource,UITableViewDelegate,MHFacebookImageViewerDatasource>
 {
     __weak IBOutlet UITableView *tblView;
     
@@ -70,11 +71,16 @@
 
     /*--- Round Imageview and load---*/
     imgVUserPic.layer.cornerRadius = (imgVUserPic.bounds.size.width)/2.0;
-    imgVUserPic.layer.borderWidth = 0.25;
-    imgVUserPic.layer.borderColor = [UIColor clearColor].CGColor;
+    imgVUserPic.layer.borderWidth = 1.25;
+    imgVUserPic.layer.borderColor = RGBCOLOR_GREEN.CGColor;
     [imgVUserPic setContentMode:UIViewContentModeScaleAspectFill];
     [imgVUserPic setClipsToBounds:YES];
-
+    [imgVUserPic setupImageViewerWithDatasource:self onOpen:^{
+        
+    } onClose:^{
+        
+    }];
+    
     /*--- Set fonts for all label and show data ---*/
     [self setFonts];
 
@@ -109,6 +115,7 @@
     lbl_Company.font = kFONT_LIGHT(14.0);
     lbl_School.font = kFONT_LIGHT(14.0);
 }
+
 
 #pragma mark - Get data
 -(void)getData
@@ -570,13 +577,35 @@
 #pragma mark - Message
 -(IBAction)btnMessageClicked:(id)sender
 {
-    
     NSDictionary *dictTemp = @{@"UserId":otherUserDetail.UserId,@"PhotoURL":otherUserDetail.PhotoURL};
     NSDictionary *dictSender = @{@"SenderDetail":dictTemp};
     C_MessageModel *model = [C_MessageModel addMessageList:dictSender];
     C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
     obj.message_UserInfo = model;
     [self.navigationController pushViewController:obj animated:YES];
+}
+#pragma mark - MHFacebookImageViewer Delegate
+- (NSInteger) numberImagesForImageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    return 1;
+}
+- (NSString*) copyRightAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    return @"";
+}
+- (NSString*) textAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer*) imageViewer;
+{
+    return @"";
+}
+-  (NSURL*) imageURLAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    return [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,otherUserDetail.PhotoURL] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+}
+
+- (UIImage*) imageDefaultAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    //NSLog(@"Index :: %ld",(long)index);
+    return nil;
 }
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {

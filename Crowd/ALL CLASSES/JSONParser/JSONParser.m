@@ -139,7 +139,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
     self.connection = nil;
     NSError *err;
-    id objectChecker = [NSJSONSerialization JSONObjectWithData:self.webData options:NSJSONReadingMutableLeaves error:&err];
+    id objectChecker = [NSJSONSerialization JSONObjectWithData:self.webData options:NSJSONReadingMutableContainers error:&err];
 
     if ([objectChecker isKindOfClass:[NSArray class]])
     {

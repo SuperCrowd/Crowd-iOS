@@ -16,7 +16,11 @@
 #import "C_PostJob_UpdateVC.h"
 #import "C_JobViewVC.h"
 
+#import "C_MessageListVC.h"
 #import "C_OtherUserProfileVC.h"
+
+#import "C_MessageView.h"
+#import "C_MessageModel.h"
 @interface C_DashBoardVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -28,12 +32,16 @@
     BOOL isAllDataRetrieved;
     
     UITextView *calculationView;
+    
 }
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
 @end
 
 @implementation C_DashBoardVC
+#pragma mark - Notification Receive Push View
 
+
+#pragma mark - View Did Load
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Dashboard";
@@ -50,22 +58,20 @@
     [self.refreshControl addTarget:self action:@selector(refreshControlRefresh:) forControlEvents:UIControlEventValueChanged];
     [tblView addSubview:self.refreshControl];
     /*--- Register Cell ---*/
-    tblView.alpha = 0.0;
+    
     tblView.delegate = self;
     tblView.dataSource = self;
     tblView.backgroundColor = [UIColor clearColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     tblView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_Dashboard" bundle:nil] forCellReuseIdentifier:cellDashboardID];
-    
-    
+        
     /*--- Code to Show Default Refresh when view appear ---*/
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [tblView setContentOffset:CGPointMake(0, -self.refreshControl.frame.size.height) animated:YES];
+        
         if (_isGointToJobPostVC)
-        {
             [self refreshControlRefresh:NO];
-        }
         else
             [self refreshControlRefresh:YES];
         
@@ -82,9 +88,9 @@
         [self.navigationController pushViewController:obj animated:NO];
         return;
     }
-    
-    
+ 
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -106,21 +112,17 @@
     pageNum = 1;
     isAllDataRetrieved = NO;
     [self.refreshControl beginRefreshing];
-    [self getData:isShowHUd];
+    [self getData:NO];
 }
 -(void)getData:(BOOL)isShowHUd
 {
-    /*
-     {
-       "UserID": "3",
-       "UserToken": "Dbr/k5trWmO3XRTk3AWfX90E9jwpoh59w/EaiU9df/OkFa6bxluaKsQmBtKDNDHbBpplmFe2Zo06m6TOpxxDc0mhb1DzDq0EzXjBFsfQRVTewDXwdZZ5mxNdEp4HEdrIlx43DPPRh+5uQzOzP8bob7ckkNvE7yB9HbeZVS5I1BhjHA3/8Ac2Qf0+sjkHb8mKk/bSO1NammUBSEHHCQ0u3MNYOiR1PU+Uc1gRIkGm4CmEcYZVEdD1D1i9i26QwQSqMSs/hBy6V9wgcbrApOiKrRXOcQDv7r93",
-       "PageNumber": "1",
-     }
-     */
     @try
     {
         isCallingService = YES;
-        showHUD_with_Title(@"Getting Feeds");
+        if (isShowHUd) {
+            showHUD_with_Title(@"Getting Feeds");
+        }
+        
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
                                     @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum]};
@@ -187,7 +189,6 @@
                 if (!_isGointToJobPostVC) {
                     [self showAlert_OneButton:@"No Records found"];
                 }
-                
             }
             else if ([strR isEqualToString:@"No feeds on this Page Number!"])
             {
@@ -383,23 +384,35 @@
 {
     DashBoardModel *myDash = (DashBoardModel *)arrContent[indexPath.row];
 
-    C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
-    obj.OtherUserID = myDash.OtherUserID;
-    [self.navigationController pushViewController:obj animated:YES];
+    if ([myDash.Type isEqualToString:@"1"])
+    {
+        C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+        obj.OtherUserID = myDash.OtherUserID;
+        [self.navigationController pushViewController:obj animated:YES];
+    }
+    else if([myDash.Type isEqualToString:@"2"])
+    {
+        NSDictionary *dictTemp = @{@"UserId":myDash.OtherUserID,@"PhotoURL":myDash.PhotoURL};
+        NSDictionary *dictSender = @{@"SenderDetail":dictTemp};
+        C_MessageModel *model = [C_MessageModel addMessageList:dictSender];
+        C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
+        obj.message_UserInfo = model;
+        [self.navigationController pushViewController:obj animated:YES];
+    }
 }
 
 #pragma mark - Get TextView height
 - (CGFloat)textViewHeightForText:(NSMutableAttributedString *)text andWidth:(CGFloat)width
 {
+    /*--- Get textview height as per text ---*/
     if (!calculationView) {
         calculationView = [[UITextView alloc] init];
+        calculationView.textContainerInset = UIEdgeInsetsZero;
+        calculationView.scrollEnabled = NO;
+        [calculationView setContentInset:UIEdgeInsetsZero];
+        calculationView.textAlignment = NSTextAlignmentLeft;
     }
     [calculationView setAttributedText:text];
-    calculationView.font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
-    calculationView.textContainerInset = UIEdgeInsetsZero;
-    calculationView.scrollEnabled = NO;
-    [calculationView setContentInset:UIEdgeInsetsZero];
-    calculationView.textAlignment = NSTextAlignmentLeft;
     CGSize newSize = [calculationView sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
     return newSize.height;
 }
@@ -409,6 +422,7 @@
     UITextView *textView = (UITextView *)recognizer.view;
     DashBoardModel *myDashboard = arrContent[textView.tag];
 
+    /*--- Get range of string which is clickable ---*/
     NSRange range = [textView.text rangeOfString:myDashboard.strClickable];
     
     NSLayoutManager *layoutManager = textView.layoutManager;
@@ -430,13 +444,12 @@
         }
         else
         {
+            //other user job
             C_JobListModel *myJob = [[C_JobListModel alloc]init];
             myJob.JobID = myDashboard.JobID;
             C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
             obj.obj_myJob = myJob;
             [self.navigationController pushViewController:obj animated:YES];
-
-           //other user job
         }
     }
     else

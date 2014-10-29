@@ -220,6 +220,8 @@
         return FALSE;
     }
 }
+
+#pragma mark - Get height + Width
 -(CGFloat)getWidth_withFont:(UIFont *)myFont height:(CGFloat)myHeight
 {
     CGRect frame;
@@ -266,12 +268,16 @@
     
     return ceilf(textSize.height);
 }
+
+#pragma mark - Formatting Date
 -(NSString *)FormateDate_withCurrentFormate:(NSString *)currentFormate newFormate:(NSString *)dateFormatter
 {
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     NSCalendar *sysCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
     // set your NSDateFormatter with calendar.
     NSDateFormatter *df = [[NSDateFormatter alloc]init];
     df.calendar = sysCalendar;
+    [df setLocale:enUSPOSIXLocale];
 
     [df setTimeZone:[NSTimeZone systemTimeZone]];
     [df setDateFormat:currentFormate];
@@ -284,10 +290,12 @@
 -(NSDate *)dateFromStringDateFormate:(NSString*)format Type:(int)type{
     
     // Set up an NSDateFormatter for UTC time zone
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     NSDateFormatter* formatterUtc = [[NSDateFormatter alloc] init];
     [formatterUtc setDateFormat:format];
     [formatterUtc setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    
+    [formatterUtc setLocale:enUSPOSIXLocale];
+
     // Cast the input string to NSDate
     NSDate* utcDate = [formatterUtc dateFromString:self];
     
@@ -295,7 +303,8 @@
     NSDateFormatter* formatterLocal = [[NSDateFormatter alloc] init];
     [formatterLocal setDateFormat:format];
     [formatterLocal setTimeZone:[NSTimeZone localTimeZone]];
-    
+    [formatterLocal setLocale:enUSPOSIXLocale];
+
     // Create local NSDate with time zone difference
     NSDate* localDate = [formatterUtc dateFromString:[formatterLocal stringFromDate:utcDate]];
     
@@ -318,16 +327,18 @@
 }
 -(NSDate *)getDate_withCurrentFormate:(NSString *)currentFormate
 {
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     NSCalendar *sysCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
     // set your NSDateFormatter with calendar.
     NSDateFormatter *df = [[NSDateFormatter alloc]init];
     df.calendar = sysCalendar;
-    
+    [df setLocale:enUSPOSIXLocale];
+
     [df setTimeZone:[NSTimeZone systemTimeZone]];
     [df setDateFormat:currentFormate];
     return [df dateFromString:self];
 }
-
+#pragma mark - Check File Already Exist
 - (BOOL)fileAlreadyExist
 {
     NSString *FinalPath = [DocumentsDirectoryPath() stringByAppendingPathComponent:self];
@@ -340,6 +351,7 @@
     return NO;
 }
 
+#pragma mark - Check Contains String
 - (BOOL)containsString: (NSString*) substring
 {
     NSRange range = [self rangeOfString:substring options:NSCaseInsensitiveSearch];

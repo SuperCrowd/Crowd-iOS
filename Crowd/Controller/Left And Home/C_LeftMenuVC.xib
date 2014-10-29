@@ -37,16 +37,6 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qLr-0P-uRK" userLabel="User Profile pic">
                     <rect key="frame" x="64" y="44" width="144" height="144"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Gx-64-0WM">
-                    <rect key="frame" x="64" y="44" width="144" height="144"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="144" id="Nnq-ff-Whn"/>
-                        <constraint firstAttribute="width" constant="144" id="abw-s4-1bH"/>
-                    </constraints>
-                    <state key="normal" image="profile_round">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1vS-mI-tjG">
                     <rect key="frame" x="0.0" y="206" width="320" height="231"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -77,8 +67,6 @@
                 <constraint firstAttribute="trailing" secondItem="OJs-1c-4RQ" secondAttribute="trailing" id="AdB-4y-3dt"/>
                 <constraint firstAttribute="bottom" secondItem="1vS-mI-tjG" secondAttribute="bottom" constant="43" id="B8E-Fu-fAy"/>
                 <constraint firstAttribute="trailing" secondItem="1vS-mI-tjG" secondAttribute="trailing" id="FAd-Ai-8In"/>
-                <constraint firstItem="9Gx-64-0WM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="Oed-Da-Kzi"/>
-                <constraint firstItem="9Gx-64-0WM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="64" id="TcA-TU-3Ne"/>
                 <constraint firstItem="1vS-mI-tjG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="206" id="URg-S8-PHP"/>
                 <constraint firstAttribute="bottom" secondItem="ObH-Qz-0Er" secondAttribute="bottom" constant="5" id="YUz-A7-RPa"/>
                 <constraint firstItem="La1-mW-d9L" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Z0C-PC-4bW"/>
@@ -97,7 +85,6 @@
     <resources>
         <image name="login_bg" width="320" height="568"/>
         <image name="mail-icon" width="25" height="18"/>
-        <image name="profile_round" width="144" height="144"/>
         <image name="profile_settings" width="32" height="33"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

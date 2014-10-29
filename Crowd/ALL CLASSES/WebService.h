@@ -11,18 +11,18 @@
 
 #pragma mark - Web Service Section
 
-#warning - Live server use - 183 (192 for local)
+#warning - Live server use - 54 (192 for local)
 
-#if TARGET_IPHONE_SIMULATOR
+//#if TARGET_IPHONE_SIMULATOR
 //Simulator
-#define IMG_BASE_URL @"http://192.168.0.4/crowdwcf/ImageUpload/"
-#define BASE_URL @"http://192.168.0.4/crowdwcf/Service1.svc/"
-#else
+//#define IMG_BASE_URL @"http://192.168.0.4/crowdwcf/ImageUpload/"
+//#define BASE_URL @"http://192.168.0.4/crowdwcf/Service1.svc/"
+//#else
 // Device
-#define IMG_BASE_URL @"http://183.182.91.146/crowdwcf/ImageUpload/"
-#define BASE_URL @"http://183.182.91.146/crowdwcf/Service1.svc/"
+#define IMG_BASE_URL @"http://54.172.176.28/crowd/ImageUpload/"
+#define BASE_URL @"http://54.172.176.28/crowd/Service1.svc/"
 
-#endif
+//#endif
 
 
 
@@ -71,4 +71,8 @@
 //section 6-7
 #define Web_MY_CROWD BASE_URL@"GetMyCrowd"
 #define Web_MY_JOBS BASE_URL@"GetUserJobs"
+
+
+#define Web_LOGOUT BASE_URL@"LogoutUser"
+
 #endif

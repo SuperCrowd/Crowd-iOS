@@ -15,4 +15,5 @@
 @property (strong, nonatomic) C_LoginVC *objLoginVC;
 
 -(BOOL)isConnected;
+-(void)getMessageUnreadCount;
 @end

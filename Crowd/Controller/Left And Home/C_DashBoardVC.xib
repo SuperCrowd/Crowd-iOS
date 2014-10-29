@@ -34,7 +34,7 @@
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="455" y="491"/>
+            <point key="canvasLocation" x="242" y="432"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

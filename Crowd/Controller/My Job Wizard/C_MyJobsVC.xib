@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_MyJobsVC">
             <connections>
+                <outlet property="btnNewJobListing" destination="DMt-xY-cmJ" id="Mdi-xy-xea"/>
+                <outlet property="constraing_table_bottom" destination="6zi-N5-FwD" id="S7O-W1-48e"/>
                 <outlet property="tblView" destination="D77-vr-6ye" id="LtP-fs-NeS"/>
                 <outlet property="view" destination="BgY-36-OXs" id="Dsy-at-HFr"/>
             </connections>

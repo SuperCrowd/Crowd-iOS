@@ -15,6 +15,7 @@
 @property NSString *Message;
 
 @property NSString *LincURL;
+@property NSString *LinkJobCreatorID;
 @property NSString *LincJobID;
 @property NSString *LincUserID;
 

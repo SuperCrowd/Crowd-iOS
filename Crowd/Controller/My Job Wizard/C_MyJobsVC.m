@@ -34,16 +34,33 @@
     BOOL isCallingService;
     BOOL isAllDataRetrieved;
     NSInteger pageNum;
+    
+    __weak IBOutlet NSLayoutConstraint *constraing_table_bottom;
+    __weak IBOutlet UIButton *btnNewJobListing;
 }
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
 @end
 
 @implementation C_MyJobsVC
-
+-(void)dismissME
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"My Jobs";
-    self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+    if (_isPresented)
+    {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem =  [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(dismissME)];
+    }
+    else
+    {
+        self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+    }
+    
     arrSectionHeader = [[NSMutableArray alloc]init];
     arrApplied = [[NSMutableArray alloc]init];
     arrPosted = [[NSMutableArray alloc]init];
@@ -76,7 +93,19 @@
 {
     [super viewWillAppear:animated];
     [tblView reloadData];
-    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    if (_isPresented)
+    {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+        constraing_table_bottom.constant = 0.0;
+        btnNewJobListing.hidden = YES;
+    }
+    else
+    {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+        constraing_table_bottom.constant = 105.0;
+        btnNewJobListing.hidden = NO;
+    }
+    
 }
 -(void)btnMenuClicked:(id)sender
 {
@@ -188,10 +217,15 @@
                [arrFavorites addObject:[C_JobListModel addJobListModel:obj]];
            }];
             
-            NSArray *arrAppl = [dictResult objectForKey:@"JobApplied"];
-            [arrAppl enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                [arrApplied addObject:[C_JobListModel addJobListModel:obj]];
-            }];
+            /*--- If this flag is YES do not show job applied ---*/
+            if (!_isPresented)
+            {
+                NSArray *arrAppl = [dictResult objectForKey:@"JobApplied"];
+                [arrAppl enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    [arrApplied addObject:[C_JobListModel addJobListModel:obj]];
+                }];
+            }
+            
 
             if (arrPosted.count>0) {
                 [arrSectionHeader addObject:POSTED];
@@ -353,23 +387,35 @@
     NSArray *arrList = [self getArrayForIndexPath:indexPath];
     C_JobListModel *myJob = (C_JobListModel *)arrList[indexPath.row];
     
-    if ([myJob.UserId isEqualToString:userInfoGlobal.UserId])
+    if (_isPresented)
     {
-        //postJob_ModelClass = [C_PostJobModel addPostJobModel:[objResponse valueForKeyPath:@"AddEditJobResult.JobDetailsWithSkills"]];
-        
-        /*--- Send current object and get data then fill object after that if user press update then replace object so this will appear here ---*/
-        C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
-        objD.delegate = self;
-        objD.obj_JobListModel = myJob;
-        objD.strComingFrom = @"FindAJob";
-        [self.navigationController pushViewController:objD animated:YES];
-        
+        /*--- Dismiss view with delegate ---*/
+        if ([self.delegate respondsToSelector:@selector(jobSelected:withJobCreaterID:)])
+        {
+            [self.delegate jobSelected:myJob.JobID withJobCreaterID:myJob.UserId];
+            [self dismissME];
+        }
     }
     else
     {
-        C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
-        obj.obj_myJob = myJob;
-        [self.navigationController pushViewController:obj animated:YES];
+        if ([myJob.UserId isEqualToString:userInfoGlobal.UserId])
+        {
+            //postJob_ModelClass = [C_PostJobModel addPostJobModel:[objResponse valueForKeyPath:@"AddEditJobResult.JobDetailsWithSkills"]];
+            
+            /*--- Send current object and get data then fill object after that if user press update then replace object so this will appear here ---*/
+            C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+            objD.delegate = self;
+            objD.obj_JobListModel = myJob;
+            objD.strComingFrom = @"FindAJob";
+            [self.navigationController pushViewController:objD animated:YES];
+            
+        }
+        else
+        {
+            C_JobViewVC *obj = [[C_JobViewVC alloc]initWithNibName:@"C_JobViewVC" bundle:nil];
+            obj.obj_myJob = myJob;
+            [self.navigationController pushViewController:obj animated:YES];
+        }
     }
 }
 #pragma mark - Info + Edit

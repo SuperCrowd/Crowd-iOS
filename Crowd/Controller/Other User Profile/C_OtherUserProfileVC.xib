@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -40,16 +39,6 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tag" translatesAutoresizingMaskIntoConstraints="NO" id="sMB-rr-E6z">
                             <rect key="frame" x="5" y="0.0" width="11" height="25"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHz-4U-7ac" userLabel="Profile Container">
-                            <rect key="frame" x="10" y="10" width="105" height="105"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="105" id="QmA-5a-IoN"/>
-                                <constraint firstAttribute="width" constant="105" id="WhF-P5-xuN"/>
-                            </constraints>
-                            <state key="normal" image="profile_round">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhb-Ur-uHx">
                             <rect key="frame" x="123" y="11" width="187" height="18"/>
                             <constraints>
@@ -143,7 +132,6 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="fwi-VS-O7g" secondAttribute="trailing" id="2aa-yU-QlN"/>
                         <constraint firstItem="fwi-VS-O7g" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" id="35c-OE-sPt"/>
-                        <constraint firstItem="zHz-4U-7ac" firstAttribute="top" secondItem="068-LY-cgi" secondAttribute="top" constant="10" id="5qf-rj-sBL"/>
                         <constraint firstItem="cT1-aK-Dpx" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="A7k-Ta-5lb"/>
                         <constraint firstItem="bWw-Pd-gXO" firstAttribute="top" secondItem="068-LY-cgi" secondAttribute="top" constant="118" id="FIe-YT-0Ac"/>
                         <constraint firstItem="J0a-ys-dNa" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="10" id="FW0-KX-hUU"/>
@@ -165,7 +153,6 @@
                         <constraint firstAttribute="centerX" secondItem="bWw-Pd-gXO" secondAttribute="centerX" id="sa1-Ep-Cfw"/>
                         <constraint firstItem="xaS-69-HiS" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="vGq-3M-Q97"/>
                         <constraint firstAttribute="trailing" secondItem="aNN-vE-8r0" secondAttribute="trailing" constant="10" id="wmM-U4-tik"/>
-                        <constraint firstItem="zHz-4U-7ac" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="10" id="x7P-4j-MCW"/>
                         <constraint firstItem="fwi-VS-O7g" firstAttribute="top" secondItem="068-LY-cgi" secondAttribute="top" id="yyB-fs-XwB"/>
                     </constraints>
                 </view>
@@ -200,7 +187,6 @@
         <image name="follow-btn" width="51" height="51"/>
         <image name="jobs-btn" width="51" height="51"/>
         <image name="msg-btn" width="51" height="51"/>
-        <image name="profile_round" width="144" height="144"/>
         <image name="share-btn" width="51" height="51"/>
         <image name="tag" width="11" height="25"/>
     </resources>

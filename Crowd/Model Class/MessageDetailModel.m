@@ -27,6 +27,7 @@
     
     myMessage.LincURL = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincURL"]] isNull];
     myMessage.LincJobID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincJobID"]] isNull];
+    myMessage.LinkJobCreatorID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LinkJobCreatorID"]] isNull];
     myMessage.LincUserID = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"LincUserID"]] isNull];
     myMessage.DateCreated = [[NSString stringWithFormat:@"%@",dictMessageInfo[@"DateCreated"]] isNull];
 
@@ -41,9 +42,9 @@
     }
     else
     {
-        CGFloat getHeight = [myMessage.Message getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 70.0];
+        CGFloat getHeight = [myMessage.Message getHeight_withFont:kFONT_LIGHT(14.0) widht:screenSize.size.width - 83.0];
         myMessage.heightText = getHeight + 2.0;
-        myMessage.widthText = screenSize.size.width - 70.0;
+        myMessage.widthText = screenSize.size.width - 83.0;
     }
     
     

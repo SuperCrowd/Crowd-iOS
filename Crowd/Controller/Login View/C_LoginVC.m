@@ -25,6 +25,8 @@
 #import "C_DashBoardVC.h"
 
 #import "C_TutorialVC.h"
+
+
 @interface C_LoginVC ()
 {
     LIALinkedInHttpClient *_client;
@@ -69,8 +71,8 @@
     else
     {
         //Stay here
-#warning - PLEASE CHECK WHOLE APP FOR BLANK USER WHO DIDN'T FILL ANY INFO
-#warning - PLEASE CHECK HERE ALL CONDITION
+//#warning - PLEASE CHECK WHOLE APP FOR BLANK USER WHO DIDN'T FILL ANY INFO
+//#warning - PLEASE CHECK HERE ALL CONDITION
         self.navigationController.navigationBarHidden = NO;
         C_WelcomeVC *obj = [[C_WelcomeVC alloc]initWithNibName:@"C_WelcomeVC" bundle:nil];
         [self.navigationController pushViewController:obj animated:NO];
@@ -104,7 +106,7 @@
         return;
     }
     
-#warning - PLEASE SET NIL TO ADD NEW ACCOUNT EVERY TIME
+//#warning - PLEASE SET NIL TO ADD NEW ACCOUNT EVERY TIME
     NSString *storedToken = nil;//[UserDefaults objectForKey:@"access_token"];
     if (storedToken == nil || storedToken == (NSString*)[NSNull null]) {
         
@@ -214,7 +216,7 @@
     //[C_UserModel addLinkedInProfile:dict];
     
     showHUD_with_Title(@"Let us check if you already exist on Crowd");
-    parser = [[JSONParser alloc]initWith_withURL:Web_IS_USER_EXIST withParam:@{@"LinkedInID":strUserid} withData:nil withType:kURLPost withSelector:@selector(checkIfUserAlreadyExistSuccessful:) withObject:self];
+    parser = [[JSONParser alloc]initWith_withURL:Web_IS_USER_EXIST withParam:@{@"LinkedInID":strUserid,@"DeviceToken":[[UserDefaults valueForKey:DEVICE_TOKEN] isNull]} withData:nil withType:kURLPost withSelector:@selector(checkIfUserAlreadyExistSuccessful:) withObject:self];
 }
 -(void)checkIfUserAlreadyExistSuccessful:(id)objResponse
 {

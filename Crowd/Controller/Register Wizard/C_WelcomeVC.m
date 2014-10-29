@@ -62,14 +62,28 @@ typedef NS_ENUM(NSInteger, btnTapped){
 }
 -(void)showData
 {
-    viewFirstName.txtName.userInteractionEnabled = NO;
-    viewLastName.txtName.userInteractionEnabled = NO;
-    
-    viewFirstName.btnEdit.userInteractionEnabled = NO;
-    viewLastName.btnEdit.userInteractionEnabled = NO;
-
-    viewFirstName.btnTextField.userInteractionEnabled = NO;
-    viewLastName.btnTextField.userInteractionEnabled = NO;
+    if ([[UserDefaults objectForKey:PROFILE_PREVIEW]isEqualToString:@"yes"])
+    {
+        viewFirstName.txtName.userInteractionEnabled = YES;
+        viewLastName.txtName.userInteractionEnabled = YES;
+        
+        viewFirstName.btnEdit.hidden = NO;
+        viewLastName.btnEdit.hidden = NO;
+        
+        viewFirstName.btnTextField.userInteractionEnabled = YES;
+        viewLastName.btnTextField.userInteractionEnabled = YES;
+    }
+    else
+    {
+        viewFirstName.txtName.userInteractionEnabled = NO;
+        viewLastName.txtName.userInteractionEnabled = NO;
+        
+        viewFirstName.btnEdit.hidden = YES;
+        viewLastName.btnEdit.hidden = YES;
+        
+        viewFirstName.btnTextField.userInteractionEnabled = NO;
+        viewLastName.btnTextField.userInteractionEnabled = NO;
+    }
     
     viewFirstName.lblName.adjustsFontSizeToFitWidth = YES;
     viewLastName.lblName.adjustsFontSizeToFitWidth = YES;

@@ -15,7 +15,6 @@
 @interface C_ChooseImageVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 {
     __weak IBOutlet UIImageView *imgV;
-    
 }
 @end
 
@@ -31,7 +30,6 @@
     {
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     }
-    
     
     imgV.layer.cornerRadius = (imgV.bounds.size.width)/2.0;
     imgV.layer.borderWidth = 0.25;
@@ -53,7 +51,7 @@
 -(void)btnDoneClicked:(id)sender
 {
     [self saveImage];
-#warning - SAVE IMAGE HERE
+//#warning - SAVE IMAGE HERE
     for (UIViewController *vc in self.navigationController.viewControllers)
     {
         if ([vc isKindOfClass:[C_ProfilePreviewVC class]])

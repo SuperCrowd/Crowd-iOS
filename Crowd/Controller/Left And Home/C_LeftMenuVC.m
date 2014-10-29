@@ -49,6 +49,8 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     
     CGRect rectBtn;
     CGRect rectLbl;
+    
+    JSONParser *parser;
 }
 @end
 
@@ -74,8 +76,8 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     
     /*--- Round Imageview and load---*/
     imgVUserPic.layer.cornerRadius = (imgVUserPic.bounds.size.width)/2.0;
-    imgVUserPic.layer.borderWidth = 0.25;
-    imgVUserPic.layer.borderColor = [UIColor clearColor].CGColor;
+    imgVUserPic.layer.borderWidth = 1.25;
+    imgVUserPic.layer.borderColor = RGBCOLOR_GREEN.CGColor;
     [imgVUserPic setContentMode:UIViewContentModeScaleAspectFill];
     [imgVUserPic setClipsToBounds:YES];
     
@@ -139,10 +141,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     switch (buttonIndex) {
         case 0:
             NSLog(@"YES");
-            [UserDefaults removeObjectForKey:PROFILE_PREVIEW];
-            [UserDefaults removeObjectForKey:USER_INFO];
-            [UserDefaults removeObjectForKey:APP_USER_INFO];
-            [appDel.navC popToRootViewControllerAnimated:YES];
+            [self logOutNow];
             break;
         case 1:
             NSLog(@"NO");
@@ -150,6 +149,112 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
             break;
         default:
             break;
+    }
+}
+-(void)logOutNow
+{
+    @try
+    {
+        showHUD_with_Title(@"Please Wait");
+        
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token};
+        parser = [[JSONParser alloc]initWith_withURL:Web_LOGOUT withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(logOutSuccessfull:) withObject:self];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+        hideHUD;
+        [CommonMethods displayAlertwithTitle:@"Please Try Again" withMessage:nil withViewController:self];
+    }
+    @finally {
+    }
+    
+}
+-(void)logOutSuccessfull:(id)objResponse
+{
+    NSLog(@"Response > %@",objResponse);
+    if (![objResponse isKindOfClass:[NSDictionary class]])
+    {
+        hideHUD;
+        [self showAlert_withTitle:@"Please Try Again"];
+        return;
+    }
+    
+    if ([objResponse objectForKey:kURLFail])
+    {
+        hideHUD;
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    else if([objResponse objectForKey:@"LogoutUserResult"])
+    {
+        /*--- Save data here ---*/
+        hideHUD;
+        BOOL isJobList = [[objResponse valueForKeyPath:@"LogoutUserResult.Status"] boolValue];
+        if (isJobList)
+        {
+
+            /*--- Remove all Defaults + Image Cache ---*/
+            [UserDefaults removeObjectForKey:PROFILE_PREVIEW];
+            [UserDefaults removeObjectForKey:USER_INFO];
+            [UserDefaults removeObjectForKey:APP_USER_INFO];
+            [SDWebImageManager.sharedManager.imageCache clearMemory];
+            [SDWebImageManager.sharedManager.imageCache clearDisk];
+            [appDel.navC popToRootViewControllerAnimated:YES];
+        }
+        else
+        {
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"LogoutUserResult.StatusMessage"] withMessage:nil withViewController:self];
+        }
+    }
+    else
+    {
+        hideHUD;
+        [self showAlert_withTitle:[objResponse objectForKey:kURLFail]];
+    }
+    
+}
+
+-(void)showAlert_withTitle:(NSString *)title
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                   {
+                                       [self logOutNow];
+                                   }];
+        [alert addAction:okAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+        alertView.tag = 101;
+        [alertView show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 101) {
+        switch (buttonIndex) {
+            case 0:
+                
+                break;
+            case 1:
+                [self logOutNow];
+                break;
+                
+            default:
+                break;
+        }
     }
 }
 #pragma mark - Table Delegate

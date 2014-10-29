@@ -169,6 +169,10 @@ CGFloat animatedDistance;
 #define showHUD_with_Success(successTitle) [SVProgressHUD showSuccessWithStatus:successTitle];
 /*-----------------------------------------------------------------------------*/
 
+
+#define kNotification_GetMessage @"getMessageNotification"
+/*-----------------------------------------------------------------------------*/
+
 #define text_InternetCheck @"Please check your internet connection"
 
 #define placeHolderAvtar [UIImage imageNamed:@"placeholder-avtar"]

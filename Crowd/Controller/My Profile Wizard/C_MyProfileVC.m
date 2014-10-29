@@ -27,12 +27,14 @@
 #import "C_MP_EducationHistory.h"
 #import "C_MP_ProffesionalSummaryVC.h"
 
+#import "MHFacebookImageViewer.h"
+
 #define PROFFESSIONAL_SUMMARY @"Professional Summary"
 #define WORK_EXPERIENCE @"Work Experience"
 #define RECOMMENDATION @"Recommendations"
 #define EDUCATION @"Education"
 #define SKILLS @"Skills"
-@interface C_MyProfileVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface C_MyProfileVC ()<UITableViewDataSource,UITableViewDelegate,MHFacebookImageViewerDatasource>
 {
     __weak IBOutlet UITableView *tblView;
     
@@ -67,10 +69,15 @@
     
     /*--- Round Imageview and load---*/
     imgVUserPic.layer.cornerRadius = (imgVUserPic.bounds.size.width)/2.0;
-    imgVUserPic.layer.borderWidth = 0.25;
-    imgVUserPic.layer.borderColor = [UIColor clearColor].CGColor;
+    imgVUserPic.layer.borderWidth = 1.25;
+    imgVUserPic.layer.borderColor = RGBCOLOR_GREEN.CGColor;
     [imgVUserPic setContentMode:UIViewContentModeScaleAspectFill];
     [imgVUserPic setClipsToBounds:YES];
+    [imgVUserPic setupImageViewerWithDatasource:self onOpen:^{
+        
+    } onClose:^{
+        
+    }];
     
     /*--- Set fonts for all label and show data ---*/
     [self setFonts];
@@ -420,7 +427,29 @@
     return nil;
 }
 
+#pragma mark - MHFacebookImageViewer Delegate
+- (NSInteger) numberImagesForImageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    return 1;
+}
+- (NSString*) copyRightAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    return @"";
+}
+- (NSString*) textAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer*) imageViewer;
+{
+    return @"";
+}
+-  (NSURL*) imageURLAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    return [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,userInfoGlobal.PhotoURL] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+}
 
+- (UIImage*) imageDefaultAtIndex:(NSInteger)index imageViewer:(MHFacebookImageViewer *)imageViewer
+{
+    //NSLog(@"Index :: %ld",(long)index);
+    return nil;
+}
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -194,7 +194,7 @@ static const CGFloat kMinImageScale = 1.0f;
             float progress = receivedSize / (float)expectedSize;
             if (progress > 0)
             {
-                NSLog(@"%f",progress);
+                //NSLog(@"%f",progress);
                 [pie setProgress:MAX(MIN(1, progress), 0) animated:YES];
             }
             
@@ -662,7 +662,7 @@ static const CGFloat kMinImageScale = 1.0f;
     
     _doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_doneButton setImageEdgeInsets:UIEdgeInsetsMake(-10, -10, -10, -10)];  // make click area bigger
-   [_doneButton setImage:[UIImage imageNamed:@"btnBack-white"] forState:UIControlStateNormal];
+   [_doneButton setImage:[UIImage imageNamed:@"back-icon-white"] forState:UIControlStateNormal];
     _doneButton.frame = CGRectMake(0.0f,20.0f, 44.0f, 44.0f);
 
 }
