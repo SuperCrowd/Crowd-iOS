@@ -99,10 +99,15 @@
             return NO;
         }
     }
+    
+    if (![strURL hasPrefix:@"http".uppercaseString])
+    {
+        strURL = [NSString stringWithFormat:@"http://%@",strURL];
+    }
     if ([is_PostJob_Edit_update isEqualToString:@"update"])
-        postJob_ModelClass.URL = [[NSString stringWithFormat:@"%@",txtLink.text]isNull];
+        postJob_ModelClass.URL = [[NSString stringWithFormat:@"%@",strURL]isNull];
     else
-        [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",txtLink.text]isNull] forKey:@"JobURL"];
+        [dictPostNewJob setValue:[[NSString stringWithFormat:@"%@",strURL]isNull] forKey:@"JobURL"];
     return YES;
 }
 -(IBAction)btnNextClicked:(id)sender

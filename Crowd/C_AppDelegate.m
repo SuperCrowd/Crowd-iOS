@@ -431,7 +431,7 @@
 }
 -(void)getDataSuccessfull:(id)objResponse
 {
-    NSLog(@"Response > %@",objResponse);
+    //NSLog(@"Response > %@",objResponse);
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         return;

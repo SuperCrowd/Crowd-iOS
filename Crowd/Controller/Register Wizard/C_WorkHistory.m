@@ -105,7 +105,7 @@
     NSArray *arrFilterLocation = [myUserModel.arrPositionUser filteredArrayUsingPredicate:predLocation];
     if (arrFilterLocation.count>0)
     {
-        [CommonMethods displayAlertwithTitle:@"Please add all Location" withMessage:nil withViewController:self];
+        [CommonMethods displayAlertwithTitle:@"Please fill in all locations" withMessage:nil withViewController:self];
         return;
     }
     

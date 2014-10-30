@@ -187,7 +187,7 @@
             {
                 isAllDataRetrieved = YES;
                 if (!_isGointToJobPostVC) {
-                    [self showAlert_OneButton:@"No Records found"];
+                    [self showAlert_OneButton:@"Follow candidates to see updates about job postings."];
                 }
             }
             else if ([strR isEqualToString:@"No feeds on this Page Number!"])

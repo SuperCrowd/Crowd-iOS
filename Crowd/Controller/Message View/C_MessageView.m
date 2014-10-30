@@ -61,6 +61,9 @@
     NSString *strLink_Website;
     
     NSString *OtherUserPhotoURL;
+    
+    
+    BOOL isNotificationReceived;
 }
 @property (assign, nonatomic) CGFloat originalKeyboardY;//keyboard Y Axis
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
@@ -82,6 +85,7 @@
     arrContent = [[NSMutableArray alloc]init];
     isCallingService = YES;
     isAllDataRetrieved = NO;
+    isNotificationReceived = NO;
     
     /*--- Add code to setup refresh control ---*/
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -131,6 +135,7 @@
 }
 -(void)getMessageNotification
 {
+    isNotificationReceived = YES;
     [self getRecentMessages_withHUD:NO];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -187,7 +192,7 @@
 }
 -(void)getRecentMessagesSuccessfull:(id)objResponse
 {
-    NSLog(@"Response > %@",objResponse);
+    //NSLog(@"Response > %@",objResponse);
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
@@ -226,9 +231,7 @@
                 weaktbl.alpha = 1.0;
                 [weaktbl reloadData];
                 [selfweak scrolltoBottomTable];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    hideHUD;
-                });
+
             } ];
             isCallingService = NO;
             
@@ -266,9 +269,17 @@
                 @try
                 {
                     NSString *msgID = [[NSString stringWithFormat:@"%@",dict[@"ID"]] isNull];
-                    if (![[arrContent valueForKey:@"msgID"] containsObject:msgID]) {
+                    NSPredicate *pred = [NSPredicate predicateWithFormat:@"self.msgID == %@",msgID];
+                    NSArray *arr = [arrContent filteredArrayUsingPredicate:pred];
+                    if (arr.count == 0)
+                    {
+                        NSLog(@"Recent Message : %@    : %@",dict[@"Message"],msgID);
                         [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
+
                     }
+//                    if (![[arrContent valueForKey:@"msgID"] containsObject:msgID]) {
+//                        [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
+//                    }
                     
                 }
                 @catch (NSException *exception) {
@@ -292,6 +303,13 @@
                 @finally {
                 }
             }
+        }
+        
+        if (!isNotificationReceived)
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    hideHUD;
+            });
         }
         compilation();
     }
@@ -764,6 +782,10 @@
 {
     @try
     {
+        if (![strLink_Website isEqualToString:@""] && ![strLink_Website hasPrefix:@"http".uppercaseString])
+        {
+            strLink_Website = [NSString stringWithFormat:@"http://%@",strLink_Website];
+        }
         showHUD_with_Title(@"Sending Message");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
@@ -785,7 +807,7 @@
 }
 -(void)sendMessagesSuccessfull:(id)objResponse
 {
-    NSLog(@"Response > %@",objResponse);
+    //NSLog(@"Response > %@",objResponse);
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         hideHUD;
@@ -818,25 +840,45 @@
              */
             //10/13/2014 9:42:48 AM
             NSString *strMSGID = [[NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"SendMessageResult.MessageID"]]isNull];
-            NSString *strDateGMT = [[NSDate date] getGMTDateString:@"MM/dd/yyyy h:mm:ss a"];
-            NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
-                                      @"SenderID":userInfoGlobal.UserId,
-                                       @"ID":strMSGID,
-                                      @"Message":[multiTextView.text isNull],
-                                      @"LincURL":[strLink_Website isNull],
-                                      @"LincJobID":[strLink_JobID isNull],
-                                       @"LinkJobCreatorID":[strLink_JobCreaterID isNull],
-                                       @"LincUserID":[strLink_UserID isNull],
-                                       @"DateCreated":strDateGMT};
-            @try
+
+            NSPredicate *pred = [NSPredicate predicateWithFormat:@"self.msgID == %@",strMSGID];
+            NSArray *arr = [arrContent filteredArrayUsingPredicate:pred];
+            //            if (![[arrContent valueForKey:@"msgID"] containsObject:strMSGID])
+            
+            
+            NSString *strTextSended = [NSString stringWithFormat:@"%@",[multiTextView.text isNull]];
+            multiTextView.text = @"";
+            [self textViewDidChange:multiTextView];
+            //[multiTextView resignFirstResponder];
+            [multiTextView layoutIfNeeded];
+            [viewChat layoutIfNeeded];
+            
+            
+            
+            if (arr.count == 0)
             {
-                [arrContent addObject:[MessageDetailModel addMessageDetail:dictTemp]];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"%@",exception.description);
-                //[self getRecentMessages];
-            }
-            @finally {
+                NSLog(@"SEND Message : %@    : %@",multiTextView.text,strMSGID);
+
+                NSString *strDateGMT = [[NSDate date] getGMTDateString:@"MM/dd/yyyy h:mm:ss a"];
+                NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
+                                           @"SenderID":userInfoGlobal.UserId,
+                                           @"ID":strMSGID,
+                                           @"Message":[strTextSended isNull],
+                                           @"LincURL":[strLink_Website isNull],
+                                           @"LincJobID":[strLink_JobID isNull],
+                                           @"LinkJobCreatorID":[strLink_JobCreaterID isNull],
+                                           @"LincUserID":[strLink_UserID isNull],
+                                           @"DateCreated":strDateGMT};
+                @try
+                {
+                    [arrContent addObject:[MessageDetailModel addMessageDetail:dictTemp]];
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"%@",exception.description);
+                    //[self getRecentMessages];
+                }
+                @finally {
+                }
             }
             
             strLink_JobID = @"";
@@ -848,15 +890,9 @@
             btnSend.enabled = NO;
             btnSend.alpha = 0.5;
             
-            
-            multiTextView.text = @"";
-            [self textViewDidChange:multiTextView];
-            //[multiTextView resignFirstResponder];
-            [multiTextView layoutIfNeeded];
-            [viewChat layoutIfNeeded];
-            
             [tblView reloadData];
             [self scrolltoBottomTable];
+            
             
             hideHUD;
         }
@@ -1044,6 +1080,7 @@
     // Tell layout system that size changed
     if (textView.text.length == 0)
     {
+        multiTextView.placeholder = @"Type Message Here";
         if (![strLink_JobID isEqualToString:@""] ||
             ![strLink_UserID isEqualToString:@""] ||
             ![strLink_Website isEqualToString:@""])
@@ -1059,6 +1096,7 @@
     }
     else
     {
+        multiTextView.placeholder = @"";
         btnSend.enabled = YES;
         btnSend.alpha = 1.0;
     }

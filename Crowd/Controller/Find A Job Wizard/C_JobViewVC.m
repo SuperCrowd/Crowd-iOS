@@ -524,7 +524,7 @@
                 _obj_myJob.IsJobApplied = !_obj_myJob.IsJobApplied;
                 [self showViewContainer];;
                 
-                NSString *strT = [NSString stringWithFormat:@"Your information has been sent to %@ %@",_obj_myJob.FirstName,_obj_myJob.LastName];
+                NSString *strT = [NSString stringWithFormat:@"Your application has been submitted to %@ %@",_obj_myJob.FirstName,_obj_myJob.LastName];
                 showHUD_with_Success(strT);
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     hideHUD;

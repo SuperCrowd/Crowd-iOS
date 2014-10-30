@@ -158,7 +158,7 @@
             if ([strR isEqualToString:@"No Records"])
             {
                 isAllDataRetrieved = YES;
-                [self showAlert_OneButton:@"No more records!"];
+                [self showAlert_OneButton:@"Your inbox is empty, search for jobs and candidates to make new connections."];
             }
             else if ([strR isEqualToString:@"No Records on this Page Number!"])
             {
@@ -417,7 +417,6 @@
     }
     
     if ([myMessage.Type isEqualToString:@"1"]) {
-        NSLog(@"Single Message");
         C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
         obj.message_UserInfo = myMessage;
         [self.navigationController pushViewController:obj animated:YES];
