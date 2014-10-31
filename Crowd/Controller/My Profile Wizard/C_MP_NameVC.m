@@ -63,8 +63,8 @@ typedef NS_ENUM(NSInteger, btnTapped){
     viewFirstName.txtName.userInteractionEnabled = NO;
     viewLastName.txtName.userInteractionEnabled = NO;
     
-    viewFirstName.btnEdit.userInteractionEnabled = NO;
-    viewLastName.btnEdit.userInteractionEnabled = NO;
+    viewFirstName.btnEdit.hidden = YES;
+    viewLastName.btnEdit.hidden = YES;
     
     viewFirstName.btnTextField.userInteractionEnabled = NO;
     viewLastName.btnTextField.userInteractionEnabled = NO;

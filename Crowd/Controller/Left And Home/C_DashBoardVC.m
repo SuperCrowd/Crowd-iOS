@@ -189,6 +189,10 @@
                 if (!_isGointToJobPostVC) {
                     [self showAlert_OneButton:@"Follow candidates to see updates about job postings."];
                 }
+                else
+                {
+                    _isGointToJobPostVC = NO;
+                }
             }
             else if ([strR isEqualToString:@"No feeds on this Page Number!"])
             {

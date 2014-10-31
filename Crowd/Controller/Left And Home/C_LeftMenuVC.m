@@ -120,7 +120,6 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 }
 -(void)updateUnreadCount:(NSNotification *)notif
 {
-    NSLog(@"%@",notif.object);
     badgeView.text = notif.object;
 }
 
