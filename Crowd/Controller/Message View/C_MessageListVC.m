@@ -32,6 +32,40 @@
 @end
 
 @implementation C_MessageListVC
+#pragma mark - NOTIFICATION
+-(void)updateMessageListNotification:(NSNotification *)notif
+{
+    if ([notif.object isKindOfClass:[NSString class]])
+    {
+        NSString *strMSGID = [NSString stringWithFormat:@"%@",notif.object];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SenderID == %@ AND (Type == '1')", strMSGID];
+        NSArray *arr = [arrContent filteredArrayUsingPredicate:predicate];
+        if (arr.count>0)
+        {
+            NSUInteger indexFromArr= [arrContent indexOfObjectPassingTest:^(id obj, NSUInteger idx, BOOL *stop) {
+                return [predicate evaluateWithObject:obj];
+            }];
+            
+            @try
+            {
+                if (indexFromArr < arrContent.count) {
+                    C_MessageModel *myMessage = (C_MessageModel *)arrContent[indexFromArr];
+                    myMessage.IsUnreadMessages = YES;
+                    [tblView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexFromArr inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                }
+                
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%@",exception.description);
+            }
+            @finally {
+            }
+        }
+    }
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kNotification_Update_MessageList object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateMessageListNotification:) name:kNotification_Update_MessageList object:nil];
+}
 #pragma mark - View Did Load
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,6 +81,10 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshControlRefresh) forControlEvents:UIControlEventValueChanged];
     [tblView addSubview:self.refreshControl];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kNotification_Update_MessageList object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateMessageListNotification:) name:kNotification_Update_MessageList object:nil];
+    
     
     /*--- Register Cell ---*/
     tblView.alpha = 0.0;

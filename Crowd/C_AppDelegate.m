@@ -240,7 +240,7 @@
     //Get User Data
     if (userInfo)
     {
-        //NSString *data =  [NSString stringWithFormat:@"%@", userInfo];
+        //NSString *data =  [NSString stringWithFormat:@"%@", userInfo];0
         //NSLog(@"%@",data);
         if (application.applicationState == UIApplicationStateActive )
         {
@@ -259,8 +259,21 @@
                         if ([strType isEqualToString:@"NewMessage"])
                         {
                             //go to message + get notification count
-                            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMessage object:nil];
+                            @try
+                            {
+                                NSString *otherUserid = arr[1];
+                                [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMessage object:nil];
+                                [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_Update_MessageList object:otherUserid];
+                                                            }
+                            @catch (NSException *exception) {
+                                NSLog(@"%@",exception.description);
+                            }
+                            @finally {
+                            }
+                            
                             [self getMessageUnreadCount];
+
+                            
                         }
                     }
                 }
