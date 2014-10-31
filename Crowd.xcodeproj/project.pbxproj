@@ -141,6 +141,8 @@
 		108285B319D407A00001F124 /* ViewSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285B119D407A00001F124 /* ViewSelection.xib */; };
 		108285B719D40C820001F124 /* ViewFindType.m in Sources */ = {isa = PBXBuildFile; fileRef = 108285B519D40C820001F124 /* ViewFindType.m */; };
 		108285B819D40C820001F124 /* ViewFindType.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108285B619D40C820001F124 /* ViewFindType.xib */; };
+		1088D17A1A03A92600F8A2C4 /* C_PostJob_QualificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1088D1781A03A92600F8A2C4 /* C_PostJob_QualificationVC.m */; };
+		1088D17B1A03A92600F8A2C4 /* C_PostJob_QualificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1088D1791A03A92600F8A2C4 /* C_PostJob_QualificationVC.xib */; };
 		1090EBBE19E671B200196AD5 /* DashBoardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1090EBBD19E671B200196AD5 /* DashBoardModel.m */; };
 		109CE71B19EBAEB400DADF56 /* C_MessageListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 109CE71919EBAEB400DADF56 /* C_MessageListVC.m */; };
 		109CE71C19EBAEB400DADF56 /* C_MessageListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 109CE71A19EBAEB400DADF56 /* C_MessageListVC.xib */; };
@@ -488,6 +490,9 @@
 		108285B419D40C820001F124 /* ViewFindType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFindType.h; sourceTree = "<group>"; };
 		108285B519D40C820001F124 /* ViewFindType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewFindType.m; sourceTree = "<group>"; };
 		108285B619D40C820001F124 /* ViewFindType.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewFindType.xib; sourceTree = "<group>"; };
+		1088D1771A03A92500F8A2C4 /* C_PostJob_QualificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_PostJob_QualificationVC.h; sourceTree = "<group>"; };
+		1088D1781A03A92600F8A2C4 /* C_PostJob_QualificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_PostJob_QualificationVC.m; sourceTree = "<group>"; };
+		1088D1791A03A92600F8A2C4 /* C_PostJob_QualificationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_PostJob_QualificationVC.xib; sourceTree = "<group>"; };
 		1090EBBC19E671B200196AD5 /* DashBoardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashBoardModel.h; sourceTree = "<group>"; };
 		1090EBBD19E671B200196AD5 /* DashBoardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardModel.m; sourceTree = "<group>"; };
 		109CE71819EBAEB400DADF56 /* C_MessageListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_MessageListVC.h; sourceTree = "<group>"; };
@@ -1083,6 +1088,9 @@
 				1018251319D049F90099E8F5 /* C_PostJob_ExperienceVC.h */,
 				1018251419D049F90099E8F5 /* C_PostJob_ExperienceVC.m */,
 				1018251519D049F90099E8F5 /* C_PostJob_ExperienceVC.xib */,
+				1088D1771A03A92500F8A2C4 /* C_PostJob_QualificationVC.h */,
+				1088D1781A03A92600F8A2C4 /* C_PostJob_QualificationVC.m */,
+				1088D1791A03A92600F8A2C4 /* C_PostJob_QualificationVC.xib */,
 				1018251819D04DF10099E8F5 /* C_PostJob_RolesVC.h */,
 				1018251919D04DF10099E8F5 /* C_PostJob_RolesVC.m */,
 				1018251A19D04DF10099E8F5 /* C_PostJob_RolesVC.xib */,
@@ -1700,6 +1708,7 @@
 				1018251C19D04DF10099E8F5 /* C_PostJob_RolesVC.xib in Resources */,
 				10588A6C19CC4C6100DC5633 /* C_PostJob_NameVC.xib in Resources */,
 				10D48AC119D2D61900B93675 /* C_MP_WorkHistoryVC.xib in Resources */,
+				1088D17B1A03A92600F8A2C4 /* C_PostJob_QualificationVC.xib in Resources */,
 				104CD64D19D288F300E444F8 /* C_ProffessionalSummaryVC.xib in Resources */,
 				104CD65D19D28BC400E444F8 /* C_MyProfileVC.xib in Resources */,
 				104CD65119D288F300E444F8 /* C_SearchVC.xib in Resources */,
@@ -1920,6 +1929,7 @@
 				1078C13F19C3242800378CC4 /* C_Cell_Tags.m in Sources */,
 				10CAA75219DE9AD00039FBFB /* ContactsViewController.m in Sources */,
 				101824FF19D022670099E8F5 /* C_PostJob_IndustryListingVC.m in Sources */,
+				1088D17A1A03A92600F8A2C4 /* C_PostJob_QualificationVC.m in Sources */,
 				104CD68319D2D04E00E444F8 /* C_MP_EditTagVC.m in Sources */,
 				104CD64219D288F300E444F8 /* C_EditTimeVC.m in Sources */,
 				10DDA80F19DBDA8A0075FA7A /* C_Cell_Find_CandidateList.m in Sources */,

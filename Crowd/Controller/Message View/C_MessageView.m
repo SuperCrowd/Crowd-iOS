@@ -55,6 +55,7 @@
     UIPanGestureRecognizer *panGest;
     
     /*--- used when add button link ---*/
+    NSString *strTextMessage;
     NSString *strLink_JobID;
     NSString *strLink_JobCreaterID;
     NSString *strLink_UserID;
@@ -786,11 +787,12 @@
         {
             strLink_Website = [NSString stringWithFormat:@"http://%@",strLink_Website];
         }
+        strTextMessage = [[NSString stringWithFormat:@"%@",multiTextView.text] isNull];
         showHUD_with_Title(@"Sending Message");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
                                     @"ReceiverID":_message_UserInfo.SenderID,
-                                    @"Message":[multiTextView.text isNull],
+                                    @"Message":strTextMessage,
                                     @"LinkURL":[strLink_Website isNull],
                                     @"LinkUserID":[strLink_UserID isNull],
                                     @"LinkJobID":[strLink_JobID isNull]};
@@ -846,7 +848,6 @@
             //            if (![[arrContent valueForKey:@"msgID"] containsObject:strMSGID])
             
             
-            NSString *strTextSended = [NSString stringWithFormat:@"%@",[multiTextView.text isNull]];
             multiTextView.text = @"";
             [self textViewDidChange:multiTextView];
             //[multiTextView resignFirstResponder];
@@ -863,7 +864,7 @@
                 NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
                                            @"SenderID":userInfoGlobal.UserId,
                                            @"ID":strMSGID,
-                                           @"Message":[strTextSended isNull],
+                                           @"Message":[strTextMessage isNull],
                                            @"LincURL":[strLink_Website isNull],
                                            @"LincJobID":[strLink_JobID isNull],
                                            @"LinkJobCreatorID":[strLink_JobCreaterID isNull],
@@ -885,7 +886,7 @@
             strLink_JobCreaterID = @"";
             strLink_UserID = @"";
             strLink_Website = @"";
-            
+            strTextMessage = @"";
             [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
             btnSend.enabled = NO;
             btnSend.alpha = 0.5;

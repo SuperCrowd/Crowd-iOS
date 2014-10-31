@@ -323,7 +323,6 @@
             [dictPostNewJob setValue:userInfoGlobal.Token forKey:@"UserToken"];
 
             [dictPostNewJob setValue:@"0" forKey:@"JobID"];
-            [dictPostNewJob setValue:@"" forKey:@"Qualifications"];
             [dictPostNewJob setValue:@"" forKey:@"EmployerIntroduction"];
 
             parser = [[JSONParser alloc]initWith_withURL:Web_POST_JOB withParam:dictPostNewJob withData:nil withType:kURLPost withSelector:@selector(getDataDone:) withObject:self];

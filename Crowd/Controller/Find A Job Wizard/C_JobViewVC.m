@@ -35,8 +35,8 @@
 
     __weak IBOutlet UIImageView *imgVFavourite;
     __weak IBOutlet UIButton *btnFavourite;
-    __weak IBOutlet NSLayoutConstraint *con_viewContainerWidth;
-    __weak IBOutlet NSLayoutConstraint *con_btnFavourite;
+    //__weak IBOutlet NSLayoutConstraint *con_viewContainerWidth;
+    //__weak IBOutlet NSLayoutConstraint *con_btnFavourite;
     
     __weak IBOutlet UIButton *btnApply;
     
@@ -191,20 +191,24 @@
 }
 -(void)showViewContainer
 {
+#warning - ADD UNFavourite Image
     if (_obj_myJob.IsJobFavorite)
     {
         imgVFavourite.hidden = NO;
-        con_btnFavourite.constant = 10.0;
-        con_viewContainerWidth.constant = 193.0;
-        btnFavourite.hidden = YES;
+        //con_btnFavourite.constant = 10.0;
+        //con_viewContainerWidth.constant = 193.0;
+        
+        //Unfavoutire image
+        [btnFavourite setTitle:@"NO" forState:UIControlStateNormal];
+        [btnFavourite setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     }
     else
     {
-        con_btnFavourite.constant = 71.0;
-        con_viewContainerWidth.constant = 254.0;
+        //con_btnFavourite.constant = 71.0;
+        //con_viewContainerWidth.constant = 254.0;
         
         imgVFavourite.hidden = YES;;
-        btnFavourite.hidden = NO;
+        [btnFavourite setImage:[UIImage imageNamed:@"favorite-btn"] forState:UIControlStateNormal];
     }
     
     if (_obj_myJob.IsJobApplied)
