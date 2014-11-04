@@ -1643,6 +1643,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = tatva;
 				TargetAttributes = {
+					10A953DF19B9911200EAAE4B = {
+						DevelopmentTeam = D9LY44WD2H;
+					};
 					10A9540019B9911200EAAE4B = {
 						TestTargetID = 10A953DF19B9911200EAAE4B;
 					};
@@ -2061,13 +2064,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: William Morrison (RXJH7G9AHD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Morrison (RXJH7G9AHD)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61a9a237-3d30-4df3-9d26-07c215738803";
+				PROVISIONING_PROFILE = "94d1f17f-4538-46dd-9e10-4b8cdef230f0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2077,13 +2081,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Symposium Inc (D9LY44WD2H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Symposium Inc (D9LY44WD2H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61a9a237-3d30-4df3-9d26-07c215738803";
+				PROVISIONING_PROFILE = "c3c1ed56-2c95-4b44-bb5f-349f1cbfb875";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
