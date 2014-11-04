@@ -360,21 +360,21 @@
     else if([sectionTitle isEqualToString:WORK_EXPERIENCE])
     {
         C_Model_Work *myWork = userInfoGlobal.arr_WorkALL[indexPath.row];
-        C_Cell_PositionProfile *myEduCell = (C_Cell_PositionProfile *)[tblView dequeueReusableCellWithIdentifier:cellPositionProfilePreviewID];
-        myEduCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        C_Cell_PositionProfile *myExpCell = (C_Cell_PositionProfile *)[tblView dequeueReusableCellWithIdentifier:cellPositionProfilePreviewID];
+        myExpCell.selectionStyle = UITableViewCellSelectionStyleNone;
         /*--- setfonts ---*/
-        myEduCell.lblJobTitle.font = kFONT_ITALIC_LIGHT(15.0);
-        myEduCell.lblYear.font = kFONT_ITALIC_LIGHT(15.0);
-        myEduCell.lblCompanyName.font = kFONT_REGULAR(15.0);
-        myEduCell.lblSummary.font = kFONT_LIGHT(14.0);
+        myExpCell.lblJobTitle.font = kFONT_ITALIC_LIGHT(15.0);
+        myExpCell.lblYear.font = kFONT_ITALIC_LIGHT(15.0);
+        myExpCell.lblCompanyName.font = kFONT_REGULAR(15.0);
+        myExpCell.lblSummary.font = kFONT_LIGHT(14.0);
         
         /*--- settext ---*/
-        myEduCell.lblJobTitle.text = myWork.Title;
-        myEduCell.lblYear.text = [NSString stringWithFormat:@"%@ to %@",myWork.StartYear,([myWork.EndYear isEqualToString:@""]?@"Present":myWork.EndYear)];
-        myEduCell.lblCompanyName.text = myWork.EmployerName;
-        myEduCell.lblSummary.text = myWork.Summary;
+        myExpCell.lblJobTitle.text = myWork.Title;
+        myExpCell.lblYear.text = [NSString stringWithFormat:@"%@ to %@",myWork.StartYear,([myWork.EndYear isEqualToString:@""]?@"Present":myWork.EndYear)];
+        myExpCell.lblCompanyName.text = myWork.EmployerName;
+        myExpCell.lblSummary.text = myWork.Summary;
         
-        return myEduCell;
+        return myExpCell;
     }
     /*--- 3. recommendation ---*/
     else if([sectionTitle isEqualToString:RECOMMENDATION])

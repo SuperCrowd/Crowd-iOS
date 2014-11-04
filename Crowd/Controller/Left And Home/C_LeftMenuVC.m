@@ -83,6 +83,8 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUnreadCount:) name:@"updateUnreadMessageCount" object:nil];
+
+    
     /*--- Badge setup ---*/
     badgeView = [[M13BadgeView alloc] initWithFrame:CGRectMake(0, 0, 24.0, 24.0)];
     [badgeSuperView addSubview:badgeView];
@@ -118,18 +120,40 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 }
 -(void)updateUnreadCount:(NSNotification *)notif
 {
-    NSLog(@"%@",notif.object);
     badgeView.text = notif.object;
 }
 
 -(IBAction)btnMessageClicked:(id)sender
 {
-    C_MessageListVC *objM = [[C_MessageListVC alloc]initWithNibName:@"C_MessageListVC" bundle:nil];
-    UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objM];
-    navvv.navigationBar.translucent = NO;
-    [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
-        
-    }];
+    for (UIViewController *navC in appDel.navC.viewControllers)
+    {
+        if ([navC isKindOfClass:[MMDrawerController class]])
+        {
+            MMDrawerController *draw = (MMDrawerController *)navC;
+            UINavigationController *navvvv =  (UINavigationController *)draw.centerViewController;
+            UIViewController *vc = [[navvvv viewControllers]objectAtIndex:0];
+            if (![vc isKindOfClass:[C_MessageListVC class]]) {
+                C_MessageListVC *objM = [[C_MessageListVC alloc]initWithNibName:@"C_MessageListVC" bundle:nil];
+                UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objM];
+                navvv.navigationBar.translucent = NO;
+                [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                    
+                }];
+            }
+            else
+            {
+                [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+                    
+                }];
+            }
+            
+            
+            //[self pushViewUsingNav:navvvv withDict:userInfo withMMDraw:draw];
+        }
+    }
+    
+    
+    
 }
 -(IBAction)btnLogoutClicked:(id)sender
 {
@@ -140,12 +164,9 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 {
     switch (buttonIndex) {
         case 0:
-            NSLog(@"YES");
             [self logOutNow];
             break;
         case 1:
-            NSLog(@"NO");
-            
             break;
         default:
             break;

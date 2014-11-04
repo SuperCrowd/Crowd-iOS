@@ -35,8 +35,8 @@
 
     __weak IBOutlet UIImageView *imgVFavourite;
     __weak IBOutlet UIButton *btnFavourite;
-    __weak IBOutlet NSLayoutConstraint *con_viewContainerWidth;
-    __weak IBOutlet NSLayoutConstraint *con_btnFavourite;
+    //__weak IBOutlet NSLayoutConstraint *con_viewContainerWidth;
+    //__weak IBOutlet NSLayoutConstraint *con_btnFavourite;
     
     __weak IBOutlet UIButton *btnApply;
     
@@ -194,17 +194,19 @@
     if (_obj_myJob.IsJobFavorite)
     {
         imgVFavourite.hidden = NO;
-        con_btnFavourite.constant = 10.0;
-        con_viewContainerWidth.constant = 193.0;
-        btnFavourite.hidden = YES;
+        //con_btnFavourite.constant = 10.0;
+        //con_viewContainerWidth.constant = 193.0;
+        
+        //Unfavoutire image
+        [btnFavourite setImage:[UIImage imageNamed:@"favorite_remove"] forState:UIControlStateNormal];
     }
     else
     {
-        con_btnFavourite.constant = 71.0;
-        con_viewContainerWidth.constant = 254.0;
+        //con_btnFavourite.constant = 71.0;
+        //con_viewContainerWidth.constant = 254.0;
         
         imgVFavourite.hidden = YES;;
-        btnFavourite.hidden = NO;
+        [btnFavourite setImage:[UIImage imageNamed:@"favorite-btn"] forState:UIControlStateNormal];
     }
     
     if (_obj_myJob.IsJobApplied)
@@ -524,7 +526,7 @@
                 _obj_myJob.IsJobApplied = !_obj_myJob.IsJobApplied;
                 [self showViewContainer];;
                 
-                NSString *strT = [NSString stringWithFormat:@"Your information has been sent to %@ %@",_obj_myJob.FirstName,_obj_myJob.LastName];
+                NSString *strT = [NSString stringWithFormat:@"Your application has been submitted to %@ %@",_obj_myJob.FirstName,_obj_myJob.LastName];
                 showHUD_with_Success(strT);
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     hideHUD;

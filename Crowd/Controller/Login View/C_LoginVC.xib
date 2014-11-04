@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_LoginVC">
             <connections>
+                <outlet property="lblTTT" destination="k9W-9S-cvV" id="ubX-oL-pWt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -46,10 +48,21 @@
                         <action selector="btnLinkedInClicked:" destination="-1" eventType="touchUpInside" id="sD2-9j-p5D"/>
                     </connections>
                 </button>
+                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9W-9S-cvV">
+                    <rect key="frame" x="0.0" y="59" width="320" height="128"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="GIg-yQ-YRB"/>
+                        <constraint firstAttribute="height" constant="128" id="X55-NO-18D"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Nye-zA-xXY" secondAttribute="bottom" constant="-88" id="0PI-i8-x1a"/>
+                <constraint firstItem="k9W-9S-cvV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="3p2-IJ-ON8"/>
                 <constraint firstAttribute="centerX" secondItem="Tci-fK-u7Y" secondAttribute="centerX" id="ASi-US-9YW"/>
                 <constraint firstItem="Tci-fK-u7Y" firstAttribute="top" secondItem="fCl-jB-fVa" secondAttribute="bottom" constant="74" id="Dxu-co-tD5"/>
                 <constraint firstAttribute="centerX" secondItem="PNl-f0-UQU" secondAttribute="centerX" id="TFc-WM-7AN"/>
@@ -58,6 +71,7 @@
                 <constraint firstItem="Nye-zA-xXY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WR5-fW-u5C"/>
                 <constraint firstAttribute="trailing" secondItem="Nye-zA-xXY" secondAttribute="trailing" id="eO8-Td-IvW"/>
                 <constraint firstItem="PNl-f0-UQU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="gsf-rH-QZS"/>
+                <constraint firstItem="k9W-9S-cvV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="icp-T6-VMy"/>
                 <constraint firstItem="fCl-jB-fVa" firstAttribute="top" secondItem="PNl-f0-UQU" secondAttribute="bottom" constant="155" id="uCL-X3-rNd"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>

@@ -134,7 +134,7 @@
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-//    NSLog(@"HTTP RES :\n %@",[[NSString alloc]initWithData:self.webData encoding:NSUTF8StringEncoding]);
+    //NSLog(@"HTTP RES :\n %@",[[NSString alloc]initWithData:self.webData encoding:NSUTF8StringEncoding]);
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
     self.connection = nil;

@@ -102,7 +102,7 @@
     NSArray *arrFilterLocation = [_obj_ProfileUpdate.arr_WorkALL filteredArrayUsingPredicate:predLocation];
     if (arrFilterLocation.count>0)
     {
-        [CommonMethods displayAlertwithTitle:@"Please add all Location" withMessage:nil withViewController:self];
+        [CommonMethods displayAlertwithTitle:@"Please fill in all locations" withMessage:nil withViewController:self];
         return NO;
     }
     

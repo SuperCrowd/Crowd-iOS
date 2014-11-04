@@ -240,7 +240,7 @@
     //Get User Data
     if (userInfo)
     {
-        //NSString *data =  [NSString stringWithFormat:@"%@", userInfo];
+        //NSString *data =  [NSString stringWithFormat:@"%@", userInfo];0
         //NSLog(@"%@",data);
         if (application.applicationState == UIApplicationStateActive )
         {
@@ -259,8 +259,21 @@
                         if ([strType isEqualToString:@"NewMessage"])
                         {
                             //go to message + get notification count
-                            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMessage object:nil];
+                            @try
+                            {
+                                NSString *otherUserid = arr[1];
+                                [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMessage object:nil];
+                                [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_Update_MessageList object:otherUserid];
+                                                            }
+                            @catch (NSException *exception) {
+                                NSLog(@"%@",exception.description);
+                            }
+                            @finally {
+                            }
+                            
                             [self getMessageUnreadCount];
+
+                            
                         }
                     }
                 }
@@ -431,7 +444,7 @@
 }
 -(void)getDataSuccessfull:(id)objResponse
 {
-    NSLog(@"Response > %@",objResponse);
+    //NSLog(@"Response > %@",objResponse);
     if (![objResponse isKindOfClass:[NSDictionary class]])
     {
         return;
@@ -443,20 +456,21 @@
     else if([objResponse objectForKey:@"GetUnreadMessageCountResult"])
     {
         /*--- Save data here ---*/
-        BOOL isUnreadMessage = [[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.ResultStatus.Status"] boolValue];
-        if (isUnreadMessage)
+        @try
         {
-            //got
-            @try
+            BOOL isUnreadMessage = [[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.ResultStatus.Status"] boolValue];
+            if (isUnreadMessage)
             {
-                NSString *strNotifCount = [NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.NumberOfUnreadMessage"]];
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"updateUnreadMessageCount" object:strNotifCount];
+                //got
+                
+                    NSString *strNotifCount = [NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.NumberOfUnreadMessage"]];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"updateUnreadMessageCount" object:strNotifCount];
             }
-            @catch (NSException *exception) {
-                NSLog(@"%@",exception.description);
-            }
-            @finally {
-            }
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
         }
     }
     else

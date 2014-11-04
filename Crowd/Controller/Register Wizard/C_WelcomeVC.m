@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, btnTapped){
     {
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
         
-        viewWelcome.alpha = 0.0;
+        //viewWelcome.alpha = 0.0;
     }
     /*--- Show data ---*/
     [self showData];
@@ -62,28 +62,16 @@ typedef NS_ENUM(NSInteger, btnTapped){
 }
 -(void)showData
 {
-    if ([[UserDefaults objectForKey:PROFILE_PREVIEW]isEqualToString:@"yes"])
-    {
-        viewFirstName.txtName.userInteractionEnabled = YES;
-        viewLastName.txtName.userInteractionEnabled = YES;
-        
-        viewFirstName.btnEdit.hidden = NO;
-        viewLastName.btnEdit.hidden = NO;
-        
-        viewFirstName.btnTextField.userInteractionEnabled = YES;
-        viewLastName.btnTextField.userInteractionEnabled = YES;
-    }
-    else
-    {
-        viewFirstName.txtName.userInteractionEnabled = NO;
-        viewLastName.txtName.userInteractionEnabled = NO;
-        
-        viewFirstName.btnEdit.hidden = YES;
-        viewLastName.btnEdit.hidden = YES;
-        
-        viewFirstName.btnTextField.userInteractionEnabled = NO;
-        viewLastName.btnTextField.userInteractionEnabled = NO;
-    }
+
+    /*--- Name should not be editable field ---*/
+    viewFirstName.txtName.userInteractionEnabled = NO;
+    viewLastName.txtName.userInteractionEnabled = NO;
+    
+    viewFirstName.btnEdit.hidden = YES;
+    viewLastName.btnEdit.hidden = YES;
+    
+    viewFirstName.btnTextField.userInteractionEnabled = NO;
+    viewLastName.btnTextField.userInteractionEnabled = NO;
     
     viewFirstName.lblName.adjustsFontSizeToFitWidth = YES;
     viewLastName.lblName.adjustsFontSizeToFitWidth = YES;

@@ -255,7 +255,7 @@
             {
                 isAllDataRetrieved = YES;
                 if (pageNum == 1) {
-                    [CommonMethods displayAlertwithTitle:strR withMessage:@"No Records found" withViewController:self];
+                    [CommonMethods displayAlertwithTitle:strR withMessage:@"You have not favorited or posted any jobs yet." withViewController:self];
                 }
                 
             }

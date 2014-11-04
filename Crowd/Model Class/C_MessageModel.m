@@ -62,7 +62,7 @@
 
     if ([myMessage.Type isEqualToString:@"1"])
     {
-        myMessage.strDisplayText = [NSString stringWithFormat:@"Message from %@ %@",myMessage.FirstName,myMessage.LastName];
+        myMessage.strDisplayText = [NSString stringWithFormat:@"Conversation with %@ %@",myMessage.FirstName,myMessage.LastName];
     }
     else
     {

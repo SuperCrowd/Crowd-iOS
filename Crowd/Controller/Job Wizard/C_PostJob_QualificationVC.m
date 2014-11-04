@@ -1,36 +1,40 @@
 //
-//  C_PostJob_ExperienceVC.m
+//  C_PostJob_QualificationVC.m
 //  Crowd
 //
-//  Created by MAC107 on 22/09/14.
+//  Created by MAC107 on 31/10/14.
 //  Copyright (c) 2014 tatva. All rights reserved.
 //
 
-#import "C_PostJob_ExperienceVC.h"
-#import "AppConstant.h"
 #import "C_PostJob_QualificationVC.h"
+#import "AppConstant.h"
+
+#import "C_PostJob_RolesVC.h"
 #import "C_PostJob_PreviewVC.h"
 #import "C_PostJob_UpdateVC.h"
 #import "C_PostJobModel.h"
 
 #import "Update_PostJob.h"
-typedef NS_ENUM(NSInteger, btnExperience)
+
+typedef NS_ENUM(NSInteger, btnQualification)
 {
-    btn_0_to_1 = 0,
-    btn_1_to_3 = 1,
-    btn_3_to_5 = 2,
-    btn_5_to_8 = 3,
-    btn_8 = 4,
+    btn_0_HIGH_SCHOOL = 0,
+    btn_1_BACHELOR = 1,
+    btn_3_MASTER = 2,
+    btn_4_PHD = 3,
+    btn_5_NONE = 4,
 };
-@interface C_PostJob_ExperienceVC ()
+
+
+@interface C_PostJob_QualificationVC ()
 {
     __weak IBOutlet UIScrollView *scrlV;
 }
 @end
 
-@implementation C_PostJob_ExperienceVC
-
-- (void)viewDidLoad {
+@implementation C_PostJob_QualificationVC
+-(void)viewDidLoad
+{
     [super viewDidLoad];
     self.title = @"New Job Listing";
     self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
@@ -57,18 +61,43 @@ typedef NS_ENUM(NSInteger, btnExperience)
     for (UIButton *btn in scrlV.subviews)
         if ([btn isKindOfClass:[UIButton class]])
             [btn setBackgroundImage:[UIImage imageNamed:@"btnGreenBG-Big"] forState:UIControlStateNormal];
+    NSInteger index ;
+    NSString *strQ;
     if ([is_PostJob_Edit_update isEqualToString:@"update"])
     {
-        UIButton *btnSel = (UIButton *)[scrlV viewWithTag:[postJob_ModelClass.ExperienceLevel integerValue]];
-        [btnSel setBackgroundImage:[UIImage imageNamed:@"btnOrangeBG-Big"] forState:UIControlStateNormal];
+        strQ = postJob_ModelClass.Qualifications;
     }
     else
     {
-        if ([dictPostNewJob objectForKey:@"ExperienceLevel"]) {
-            UIButton *btnSel = (UIButton *)[scrlV viewWithTag:[dictPostNewJob[@"ExperienceLevel"] integerValue]];
-            [btnSel setBackgroundImage:[UIImage imageNamed:@"btnOrangeBG-Big"] forState:UIControlStateNormal];
-        }
+        strQ = [[NSString stringWithFormat:@"%@",dictPostNewJob[@"Qualifications"]]isNull];
     }
+    
+    if ([strQ isEqualToString:@""]) {
+        index = 25;
+    }
+    else if ([strQ isEqualToString:@"High School GED"]) {
+        index = 1;
+    }
+    else if ([strQ isEqualToString:@"Bachelor's"]) {
+        index = 2;
+    }
+    else if ([strQ isEqualToString:@"Master's"]) {
+        index = 3;
+    }
+    else if ([strQ isEqualToString:@"PhD"]) {
+        index = 4;
+    }
+    else
+    {
+        //None
+        index = 5;
+    }
+    if (index != 25)
+    {
+        UIButton *btnSel = (UIButton *)[scrlV viewWithTag:index];
+        [btnSel setBackgroundImage:[UIImage imageNamed:@"btnOrangeBG-Big"] forState:UIControlStateNormal];
+    }
+    
 }
 -(void)done
 {
@@ -107,19 +136,19 @@ typedef NS_ENUM(NSInteger, btnExperience)
     popView;
 }
 
--(IBAction)btnClicked:(UIButton *)btnExp
+-(IBAction)btnClicked:(UIButton *)btnQ
 {
-    NSLog(@"%@",btnExp.titleLabel.text);
+    //NSLog(@"%@",btnQ.titleLabel.text);
     if ([is_PostJob_Edit_update isEqualToString:@"update"])
     {
-        postJob_ModelClass.ExperienceLevel = [NSString stringWithFormat:@"%ld",(long)btnExp.tag];
+        postJob_ModelClass.Qualifications = [NSString stringWithFormat:@"%@",btnQ.titleLabel.text];
     }
     else
     {
-        [dictPostNewJob setValue:[NSString stringWithFormat:@"%ld",(long)btnExp.tag] forKey:@"ExperienceLevel"];
+        [dictPostNewJob setValue:[NSString stringWithFormat:@"%@",btnQ.titleLabel.text] forKey:@"Qualifications"];
     }
     [self showSelectedButton];
-    C_PostJob_QualificationVC *obj = [[C_PostJob_QualificationVC alloc]initWithNibName:@"C_PostJob_QualificationVC" bundle:nil];
+    C_PostJob_RolesVC *obj = [[C_PostJob_RolesVC alloc]initWithNibName:@"C_PostJob_RolesVC" bundle:nil];
     [self.navigationController pushViewController:obj animated:YES];
 }
 #pragma mark - Cancel Clicked

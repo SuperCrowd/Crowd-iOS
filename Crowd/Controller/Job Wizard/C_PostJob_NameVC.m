@@ -62,7 +62,14 @@
     if (![is_PostJob_Edit_update isEqualToString:@"edit"] && ![is_PostJob_Edit_update isEqualToString:@"update"])
     {
         [dictPostNewJob removeAllObjects];
-        txtName.text = @"";
+        if (userInfoGlobal.arr_WorkALL.count > 0)
+        {
+            C_Model_Work *myRecentWork = userInfoGlobal.arr_WorkALL[0];
+            txtName.text = myRecentWork.EmployerName;
+        }
+        else
+            txtName.text = @"";
+        
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     }
     if (_isComeFromRegularView)

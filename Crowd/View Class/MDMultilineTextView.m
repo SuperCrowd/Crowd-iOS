@@ -81,7 +81,9 @@
 /** Removes the placeholder label subview */
 - (void)removePlaceholder
 {
-    [self.placeholderLabel removeFromSuperview];
+    if ([self.placeholderLabel isDescendantOfView:self]) {
+        [self.placeholderLabel removeFromSuperview];
+    }
 }
 
 @end

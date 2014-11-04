@@ -171,6 +171,8 @@ CGFloat animatedDistance;
 
 
 #define kNotification_GetMessage @"getMessageNotification"
+#define kNotification_Update_MessageList @"updateMessageListNotification"
+
 /*-----------------------------------------------------------------------------*/
 
 #define text_InternetCheck @"Please check your internet connection"

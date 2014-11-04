@@ -33,7 +33,7 @@
     JSONParser *parser;
     
     NSMutableDictionary *dictUserLinkedinProfile;
-    
+    __weak IBOutlet UITextView *lblTTT;
     BOOL isGoToHome;
 }
 @end
@@ -162,7 +162,15 @@
          NSLog(@"%@",result);
          if ([result isKindOfClass:[NSDictionary class]])
          {
-             [self checkIfUserAlreadyExist:result[@"id"] withDictionary:result];
+             if ([result objectForKey:@"id"])
+             {
+                 [self checkIfUserAlreadyExist:result[@"id"] withDictionary:result];
+             }
+             else
+             {
+                 hideHUD
+                 [CommonMethods displayAlertwithTitle:@"Please Try Agin" withMessage:nil withViewController:self];
+             }
          }
          else
          {
@@ -212,11 +220,40 @@
 #pragma mark - Check User already exist
 -(void)checkIfUserAlreadyExist:(NSString *)strUserid withDictionary:(NSDictionary *)dict
 {
-    dictUserLinkedinProfile = [NSMutableDictionary dictionaryWithDictionary:dict];
-    //[C_UserModel addLinkedInProfile:dict];
+    if ([dict isKindOfClass:[NSDictionary class]])
+    {
+        @try
+        {
+            //hideHUD;
+            lblTTT.text = [NSString stringWithFormat:@"%@",dict];
+            dictUserLinkedinProfile = [[NSMutableDictionary alloc]initWithDictionary:dict];
+            //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                showHUD_with_Title(@"Let us check if you already exist on Crowd");
+                //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    parser = [[JSONParser alloc]initWith_withURL:Web_IS_USER_EXIST withParam:@{@"LinkedInID":strUserid,@"DeviceToken":[[NSString stringWithFormat:@"%@",[UserDefaults valueForKey:DEVICE_TOKEN]] isNull]} withData:nil withType:kURLPost withSelector:@selector(checkIfUserAlreadyExistSuccessful:) withObject:self];
+                //});
+                
+            //});
+           
+        }
+        @catch (NSException *exception) {
+            
+            hideHUD;
+            [CommonMethods displayAlertwithTitle:@"We could not get data from linkedin. Please try again." withMessage:nil withViewController:self];
+
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        //[C_UserModel addLinkedInProfile:dict];
+    }
+    else
+    {
+        hideHUD;
+        //We could not get data from linkedin. Please try again.
+        [CommonMethods displayAlertwithTitle:@"We could not get data from linkedin. Please try again." withMessage:nil withViewController:self];
+    }
     
-    showHUD_with_Title(@"Let us check if you already exist on Crowd");
-    parser = [[JSONParser alloc]initWith_withURL:Web_IS_USER_EXIST withParam:@{@"LinkedInID":strUserid,@"DeviceToken":[[UserDefaults valueForKey:DEVICE_TOKEN] isNull]} withData:nil withType:kURLPost withSelector:@selector(checkIfUserAlreadyExistSuccessful:) withObject:self];
 }
 -(void)checkIfUserAlreadyExistSuccessful:(id)objResponse
 {
