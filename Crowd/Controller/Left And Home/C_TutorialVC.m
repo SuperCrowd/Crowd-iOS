@@ -15,8 +15,8 @@ typedef NS_ENUM(NSInteger, btnNext) {
     Tutorial_1 = 1,
     Tutorial_2 = 2,
     Tutorial_3 = 3,
-    Tutorial_4 = 4,
-    Tutorial_5 = 5
+    Tutorial_4 = 4
+    //Tutorial_5 = 5
 
 };
 
@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, btnNext) {
     IBOutlet UIView *view2;
     IBOutlet UIView *view3;
     IBOutlet UIView *view4;
-    IBOutlet UIView *view5;
+    //IBOutlet UIView *view5;
 
     
     /*--- For view 1 only ---*/
@@ -50,14 +50,14 @@ typedef NS_ENUM(NSInteger, btnNext) {
     view2.translatesAutoresizingMaskIntoConstraints = NO;
     view3.translatesAutoresizingMaskIntoConstraints = NO;
     view4.translatesAutoresizingMaskIntoConstraints = NO;
-    view5.translatesAutoresizingMaskIntoConstraints = NO;
+    //view5.translatesAutoresizingMaskIntoConstraints = NO;
 
     
     view1.backgroundColor = [UIColor clearColor];
     view2.backgroundColor = [UIColor clearColor];
     view3.backgroundColor = [UIColor clearColor];
     view4.backgroundColor = [UIColor clearColor];
-    view5.backgroundColor = [UIColor clearColor];
+   // view5.backgroundColor = [UIColor clearColor];
 
 //    UILabel *lbl = [[UILabel alloc]init];
 //    lbl.layer.cornerRadius
@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, btnNext) {
     [scrollView addSubview:view2];
     [scrollView addSubview:view3];
     [scrollView addSubview:view4];
-    [scrollView addSubview:view5];
+    //[scrollView addSubview:view5];
 
     [self.view bringSubviewToFront:pageControl];
     /*--- setup scrollview ---*/
@@ -102,14 +102,13 @@ typedef NS_ENUM(NSInteger, btnNext) {
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[scrollView(height)]|" options:0 metrics:@{@"height":@(height)} views:dictScrollConst]];
     
     /*--- Subviews Constraint ---*/
-    NSDictionary *viewsDictionary   = NSDictionaryOfVariableBindings(view1, view2, view3, view4,view5);
-    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[view1(width)]-0-[view2(width)]-0-[view3(width)]-0-[view4(width)]-0-[view5(width)]-0-|" options:0 metrics:@{@"width":@(width)} views:viewsDictionary]];
+    NSDictionary *viewsDictionary   = NSDictionaryOfVariableBindings(view1, view2, view3, view4);
+    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[view1(width)]-0-[view2(width)]-0-[view3(width)]-0-[view4(width)]-0-|" options:0 metrics:@{@"width":@(width)} views:viewsDictionary]];
     
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view1(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view1)]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view2(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view2)]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view3(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view3)]];
     [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view4(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view4)]];
-    [scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view5(height)]-0-|" options:0 metrics:@{@"height":@(height)} views:NSDictionaryOfVariableBindings(view5)]];
 
 }
 
@@ -132,13 +131,13 @@ typedef NS_ENUM(NSInteger, btnNext) {
 
             break;
         case Tutorial_4:
-            pageControl.currentPage = 4;
-            [scrollView setContentOffset:CGPointMake(scrollView.frame.size.width*4, 0) animated:YES];
-
-            break;
-        case Tutorial_5:
-            //go to job posting
+            //pageControl.currentPage = 4;
+            //[scrollView setContentOffset:CGPointMake(scrollView.frame.size.width*4, 0) animated:YES];
             [self pushToHome];
+            break;
+        //case Tutorial_5:
+            //go to job posting
+            
             break;
             
         default:

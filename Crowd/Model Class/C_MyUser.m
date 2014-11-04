@@ -235,27 +235,65 @@
 {
     NSDictionary *dictUserInfo = dictTTTT[@"GetUserResult"];
     C_MyUser *myUser = [[C_MyUser alloc]init];
-    myUser.UserId = [[NSString stringWithFormat:@"%@",dictUserInfo[@"UserId"]] isNull];
-    myUser.Email = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Email"]] isNull];
-    myUser.FirstName = [[NSString stringWithFormat:@"%@",dictUserInfo[@"FirstName"]] isNull];
-    myUser.LastName = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LastName"]] isNull];
-    myUser.LinkedInId = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LinkedInId"]] isNull];
-    myUser.Token = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Token"]] isNull];
-    myUser.PhotoURL = [[NSString stringWithFormat:@"%@",dictUserInfo[@"PhotoURL"]] isNull];
-    myUser.Summary = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Summary"]] isNull];
-    
-    myUser.ExperienceLevel = [[NSString stringWithFormat:@"%@",dictUserInfo[@"ExperienceLevel"]] isNull];
-    myUser.Industry = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Industry"]] isNull];
-    myUser.Industry2 = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Industry2"]] isNull];
-    
-    myUser.LocationCity = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LocationCity"]] isNull];
-    myUser.LocationState = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LocationState"]] isNull];
-    myUser.LocationCountry = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LocationCountry"]] isNull];
 
-    myUser.NumberOfUnreadMessage = [[NSString stringWithFormat:@"%@",dictUserInfo[@"NumberOfUnreadMessage"]] isNull];
-
-    myUser.DateCreated = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateCreated"]] isNull];
-    myUser.DateModified = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateModified"]] isNull];
+    @try
+    {
+        myUser.UserId = [[NSString stringWithFormat:@"%@",dictUserInfo[@"UserId"]] isNull];
+        myUser.Email = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Email"]] isNull];
+        myUser.FirstName = [[NSString stringWithFormat:@"%@",dictUserInfo[@"FirstName"]] isNull];
+        myUser.LastName = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LastName"]] isNull];
+        myUser.LinkedInId = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LinkedInId"]] isNull];
+        myUser.Token = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Token"]] isNull];
+        myUser.PhotoURL = [[NSString stringWithFormat:@"%@",dictUserInfo[@"PhotoURL"]] isNull];
+        myUser.Summary = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Summary"]] isNull];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+    
+    @try
+    {
+        myUser.ExperienceLevel = [[NSString stringWithFormat:@"%@",dictUserInfo[@"ExperienceLevel"]] isNull];
+        myUser.Industry = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Industry"]] isNull];
+        myUser.Industry2 = [[NSString stringWithFormat:@"%@",dictUserInfo[@"Industry2"]] isNull];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+    
+    
+    @try
+    {
+        myUser.LocationCity = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LocationCity"]] isNull];
+        myUser.LocationState = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LocationState"]] isNull];
+        myUser.LocationCountry = [[NSString stringWithFormat:@"%@",dictUserInfo[@"LocationCountry"]] isNull];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+    
+    
+    @try
+    {
+        myUser.NumberOfUnreadMessage = [[NSString stringWithFormat:@"%@",dictUserInfo[@"NumberOfUnreadMessage"]] isNull];
+        
+        myUser.DateCreated = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateCreated"]] isNull];
+        myUser.DateModified = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateModified"]] isNull];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+    
+    
+   
     @try
     {
         /*--- education ---*/

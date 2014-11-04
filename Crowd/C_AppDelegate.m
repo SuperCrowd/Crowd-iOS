@@ -456,20 +456,21 @@
     else if([objResponse objectForKey:@"GetUnreadMessageCountResult"])
     {
         /*--- Save data here ---*/
-        BOOL isUnreadMessage = [[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.ResultStatus.Status"] boolValue];
-        if (isUnreadMessage)
+        @try
         {
-            //got
-            @try
+            BOOL isUnreadMessage = [[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.ResultStatus.Status"] boolValue];
+            if (isUnreadMessage)
             {
-                NSString *strNotifCount = [NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.NumberOfUnreadMessage"]];
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"updateUnreadMessageCount" object:strNotifCount];
+                //got
+                
+                    NSString *strNotifCount = [NSString stringWithFormat:@"%@",[objResponse valueForKeyPath:@"GetUnreadMessageCountResult.NumberOfUnreadMessage"]];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"updateUnreadMessageCount" object:strNotifCount];
             }
-            @catch (NSException *exception) {
-                NSLog(@"%@",exception.description);
-            }
-            @finally {
-            }
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
         }
     }
     else

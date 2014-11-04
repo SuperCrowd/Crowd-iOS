@@ -35,8 +35,17 @@
     {
         myJob.JobID = [[NSString stringWithFormat:@"%@",dictT[@"ID"]] isNull];
         myJob.UserId = [[NSString stringWithFormat:@"%@",dictT[@"UserId"]] isNull];
-        myJob.FirstName = [[NSString stringWithFormat:@"%@",dictT[@"FirstName"]] isNull];
-        myJob.LastName = [[NSString stringWithFormat:@"%@",dictT[@"LastName"]] isNull];
+        @try
+        {
+            myJob.FirstName = [[NSString stringWithFormat:@"%@",dictT[@"JobCreatorFirstName"]] isNull];
+            myJob.LastName = [[NSString stringWithFormat:@"%@",dictT[@"JobCreatorLastName"]] isNull];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@",exception.description);
+        }
+        @finally {
+        }
+        
         
         myJob.Title = [[NSString stringWithFormat:@"%@",dictT[@"Title"]] isNull];
         
@@ -94,9 +103,6 @@
 {
     myJob.IsJobApplied = [dictT[@"IsJobApplied"] boolValue];
     myJob.IsJobFavorite = [dictT[@"IsJobFavorite"] boolValue];
-
-    myJob.FirstName = [[NSString stringWithFormat:@"%@",dictT[@"FirstName"]] isNull];
-    myJob.LastName = [[NSString stringWithFormat:@"%@",dictT[@"LastName"]] isNull];
     
     if ([dictT[@"JobDetailsWithSkills"][@"JobSkills"] isKindOfClass:[NSArray class]])
     {

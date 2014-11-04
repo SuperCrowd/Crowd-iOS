@@ -134,8 +134,6 @@
                 [self.navigationController pushViewController:obj animated:YES];
             }
         }
-        
-        
     }
     @catch (NSException *exception) {
         NSLog(@"%@",exception.description);

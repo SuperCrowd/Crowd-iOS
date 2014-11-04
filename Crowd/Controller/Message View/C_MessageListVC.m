@@ -451,10 +451,9 @@
     {
         myMessage.IsUnreadMessages = NO;
         NSArray *arr = @[indexPath];
+        //[tblView reloadData];
         [tblView reloadRowsAtIndexPaths:arr withRowAnimation:UITableViewRowAnimationFade];
-    }
-    
-    if ([myMessage.Type isEqualToString:@"1"]) {
+        
         C_MessageView *obj = [[C_MessageView alloc]initWithNibName:@"C_MessageView" bundle:nil];
         obj.message_UserInfo = myMessage;
         [self.navigationController pushViewController:obj animated:YES];

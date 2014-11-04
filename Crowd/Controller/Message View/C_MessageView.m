@@ -274,7 +274,7 @@
                     NSArray *arr = [arrContent filteredArrayUsingPredicate:pred];
                     if (arr.count == 0)
                     {
-                        NSLog(@"Recent Message : %@    : %@",dict[@"Message"],msgID);
+                        //NSLog(@"Recent Message : %@    : %@",dict[@"Message"],msgID);
                         [arrContent addObject:[MessageDetailModel addMessageDetail:dict]];
 
                     }

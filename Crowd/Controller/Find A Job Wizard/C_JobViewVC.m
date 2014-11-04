@@ -191,7 +191,6 @@
 }
 -(void)showViewContainer
 {
-#warning - ADD UNFavourite Image
     if (_obj_myJob.IsJobFavorite)
     {
         imgVFavourite.hidden = NO;
@@ -199,8 +198,7 @@
         //con_viewContainerWidth.constant = 193.0;
         
         //Unfavoutire image
-        [btnFavourite setTitle:@"NO" forState:UIControlStateNormal];
-        [btnFavourite setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [btnFavourite setImage:[UIImage imageNamed:@"favorite_remove"] forState:UIControlStateNormal];
     }
     else
     {
