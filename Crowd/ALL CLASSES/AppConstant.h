@@ -189,7 +189,7 @@ CGFloat animatedDistance;
 #define MESSAGE @"message"
 #define ERROR_MESSAGE @"StatusMessage"
 
-
+/*-----------------------------------------------------------------------------*/
 C_UserModel *myUserModel;
 NSMutableDictionary *dictAddNewEducation;// use when add new education
 
