@@ -222,3 +222,15 @@ typedef enum {
     COMPANY
 }ViewType;
 
+
+#define WTLoginDidStart @"WTLoginDidStart"
+#define WTLoginDidFinish @"WTLoginDidFinish"
+#define WTLoginDidFailWithError @"WTLoginDidFailWithError"
+
+#define WTPendingIncomingConnectionReceived	@"WTPendingIncomingConnectionReceived"
+#define WTPendingIncomingConnectionDidDisconnect @"WTPendingIncomingConnectionDidDisconnect"
+#define WTPendingConnectionDidDisconnect    @"WTConnectionDidDisconnect"
+#define WTConnectionDidConnect			@"WTConnectionDidConnect"
+#define WTConnectionDidDisconnect		@"WTConnectionDidDisconnect"
+#define WTConnectionDidFailWithError	@"WTConnectionDidFailWithError"
+

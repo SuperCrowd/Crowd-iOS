@@ -22,6 +22,9 @@
 #define IMG_BASE_URL @"http://54.172.176.28/crowd/ImageUpload/"
 #define BASE_URL @"http://54.172.176.28/crowd/Service1.svc/"
 
+//BObbys Development Environment
+//#define IMG_BASE_URL @"http://192.168.1.9/crowd/ImageUpload/"
+//#define BASE_URL @"http://192.168.1.9/crowd/Service1.svc/"
 //#endif
 
 

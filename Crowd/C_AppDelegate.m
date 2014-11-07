@@ -21,6 +21,8 @@
 #import "C_MessageModel.h"
 
 #import "C_MessageView.h"
+#import "C_TwilioClient.h"
+#import "C_CallViewController.h"
 
 @interface C_AppDelegate()
 {
@@ -28,6 +30,8 @@
 }
 @end
 @implementation C_AppDelegate
+@synthesize twilioClient;
+@synthesize alertIncomingCall;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -66,6 +70,17 @@
     if ([UserDefaults objectForKey:APP_USER_INFO])
     {
         userInfoGlobal = [UserHandler_LoggedIn getMyUser_LoggedIN];
+        self.twilioClient = [C_TwilioClient sharedInstance];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(pendingIncomingConnectionReceived:)
+                                                     name:WTPendingIncomingConnectionReceived
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(pendingIncomingConnectionDidDisconnect:)
+                                                     name:WTPendingIncomingConnectionDidDisconnect
+                                                   object:nil];
     }
     else if ([UserDefaults objectForKey:USER_INFO])
     {
@@ -117,6 +132,100 @@
     if ([UserDefaults objectForKey:APP_USER_INFO]) {
         [self getMessageUnreadCount];
     }
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString* activityName = @"alertView:clickedButtonAtIndex:";
+    if (buttonIndex == 0)
+    {
+        LOG_TWILIO(0,@"%@User has chosen to accept incoming call",activityName);
+        
+        C_CallViewController* cvc = [C_CallViewController createForReceiving];
+        [self.navC presentViewController:cvc animated:YES completion:nil];
+        [[C_TwilioClient sharedInstance] acceptIncomingConnection];
+        
+    }
+    else if (buttonIndex == 1)
+    {
+        LOG_TWILIO(0,@"%@User has chosen to ignore incoming call",activityName);
+        [[C_TwilioClient sharedInstance] ignoreIncomingConnection];
+    }
+}
+#pragma mark - Call Handling
+
+-(void)constructAlert
+{
+    self.alertIncomingCall = [[UIAlertView alloc] initWithTitle:@"Incoming Call"
+                                             message:@"Accept or Ignore?"
+                                            delegate:self
+                                   cancelButtonTitle:nil
+                                   otherButtonTitles:@"Accept",@"Ignore",nil];
+    [self.alertIncomingCall show];
+}
+
+-(void)cancelAlert
+{
+    if ( self.alertIncomingCall )
+    {
+        [self.alertIncomingCall dismissWithClickedButtonIndex:1 animated:YES];
+        self.alertIncomingCall = nil;
+    }
+}
+
+-(BOOL)isForeground
+{
+
+    UIApplicationState state = [UIApplication sharedApplication].applicationState;
+    return (state==UIApplicationStateActive);
+}
+
+-(void)pendingIncomingConnectionReceived:(NSNotification*)notification
+{
+    NSString* activityName = @"pendingIncomingConnectionReceived:";
+    LOG_TWILIO(0,@"%@Delegate received notification of incoming call",activityName);
+    //Show alert view asking if user wants to accept or ignore call
+    [self performSelectorOnMainThread:@selector(constructAlert) withObject:nil waitUntilDone:NO];
+    
+    //Check for background support
+    if ( ![self isForeground] )
+    {
+        //App is not in the foreground, so send LocalNotification
+        UIApplication* app = [UIApplication sharedApplication];
+        UILocalNotification* notification = [[UILocalNotification alloc] init];
+        NSArray* oldNots = [app scheduledLocalNotifications];
+        
+        if ([oldNots count]>0)
+        {
+            [app cancelAllLocalNotifications];
+        }
+        
+        notification.alertBody = @"Incoming Call";
+        LOG_TWILIO(0,@"%@App is not in foreground, displaying call notification",activityName);
+        [app presentLocalNotificationNow:notification];
+ 
+    }
+    else
+    {
+        LOG_TWILIO(0,@"%@App is in foregound",activityName);
+    }
+    
+}
+
+
+-(void)pendingIncomingConnectionDidDisconnect:(NSNotification*)notification
+{
+    // Make sure to cancel any pending notifications/alerts
+    [self performSelectorOnMainThread:@selector(cancelAlert) withObject:nil waitUntilDone:NO];
+    if ( ![self isForeground] )
+    {
+        //App is not in the foreground, so kill the notification we posted.
+        UIApplication* app = [UIApplication sharedApplication];
+        [app cancelAllLocalNotifications];
+    }
+    
+   
 }
 
 #pragma mark - Notification

@@ -30,6 +30,8 @@
 
 #import "C_Cell_Chat_Me.h"
 #import "C_Cell_Chat_Other.h"
+#import "C_TwilioClient.h"
+#import "C_CallViewController.h"
 
 #define MESSAGE_COUNT @"30"
 
@@ -68,6 +70,7 @@
 }
 @property (assign, nonatomic) CGFloat originalKeyboardY;//keyboard Y Axis
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
+@property(nonatomic, strong)UIBarButtonItem* callBarButtonItem;
 @end
 
 @implementation C_MessageView
@@ -99,6 +102,10 @@
     multiTextView.layer.borderWidth = 0.25;
     multiTextView.layer.borderColor = RGBCOLOR(38, 38, 38).CGColor;
     [multiTextView setClipsToBounds:YES];
+    
+    /*----call button bar item --*/
+    self.callBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Call" style:UIBarButtonItemStylePlain target:self action:@selector(onCallButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = self.callBarButtonItem;
     
     /*--- add line on top ---*/
     [CommonMethods addTOPLine_to_View:viewChat];
@@ -160,6 +167,23 @@
     keyboardHideObserver = nil;
 }
 
+
+#pragma mark - Call Related Methods
+- (void) onCallButtonPressed:(id)sender
+{
+    NSString* activityName = @"onCallButtonPressed:";
+    NSString* otherUserID = _message_UserInfo.SenderID;
+    LOG_TWILIO(0,@"%@Attempting to place call to user %@",activityName,otherUserID);
+    
+    C_TwilioClient* twilioClient = [C_TwilioClient sharedInstance];
+    [twilioClient connect:otherUserID];
+    
+    NSString* userCalling = [NSString stringWithFormat:@"%@ %@",_message_UserInfo.FirstName,_message_UserInfo.LastName];
+    
+    C_CallViewController* cvc = [C_CallViewController createForDialing:userCalling];
+    [self presentViewController:cvc animated:YES completion:nil];
+    
+}
 #pragma mark - Get RecentMessages
 -(void)refreshControlRefresh
 {

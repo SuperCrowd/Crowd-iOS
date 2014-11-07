@@ -161,11 +161,6 @@
 		10A953F019B9911200EAAE4B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A953EF19B9911200EAAE4B /* main.m */; };
 		10A953F419B9911200EAAE4B /* C_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A953F319B9911200EAAE4B /* C_AppDelegate.m */; };
 		10A953FC19B9911200EAAE4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10A953FB19B9911200EAAE4B /* Images.xcassets */; };
-		10A9540319B9911200EAAE4B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A9540219B9911200EAAE4B /* XCTest.framework */; };
-		10A9540419B9911200EAAE4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A953E319B9911200EAAE4B /* Foundation.framework */; };
-		10A9540519B9911200EAAE4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A953E719B9911200EAAE4B /* UIKit.framework */; };
-		10A9540D19B9911200EAAE4B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10A9540B19B9911200EAAE4B /* InfoPlist.strings */; };
-		10A9540F19B9911200EAAE4B /* CrowdTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A9540E19B9911200EAAE4B /* CrowdTests.m */; };
 		10A9549719B9919700EAAE4B /* AFDownloadRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A9541B19B9919700EAAE4B /* AFDownloadRequestOperation.m */; };
 		10A9549819B9919700EAAE4B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A9541D19B9919700EAAE4B /* AFHTTPRequestOperation.m */; };
 		10A9549919B9919700EAAE4B /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A9541F19B9919700EAAE4B /* AFHTTPRequestOperationManager.m */; };
@@ -268,17 +263,19 @@
 		10ECE9C619EE331500FAE431 /* C_Cell_Chat_Other.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10ECE9C419EE331500FAE431 /* C_Cell_Chat_Other.xib */; };
 		10FD69FB19EBFFF200B248F3 /* C_MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FD69F919EBFFF200B248F3 /* C_MessageView.m */; };
 		10FD69FC19EBFFF200B248F3 /* C_MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10FD69FA19EBFFF200B248F3 /* C_MessageView.xib */; };
+		45E3EF582C8E6F2350018345 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2E8E868D8AE21C27B95B99 /* libPods.a */; };
+		C51461C41A05243500F43333 /* libTwilioClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461C31A05243500F43333 /* libTwilioClient.a */; };
+		C51461C71A0524ED00F43333 /* C_TwilioClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C51461C61A0524ED00F43333 /* C_TwilioClient.m */; };
+		C51461CA1A05255100F43333 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461C81A05255100F43333 /* libcrypto.a */; };
+		C51461CB1A05255100F43333 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461C91A05255100F43333 /* libssl.a */; };
+		C51461D91A052CAA00F43333 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461D61A052CAA00F43333 /* AudioToolbox.framework */; };
+		C51461DA1A052CAA00F43333 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461D71A052CAA00F43333 /* AVFoundation.framework */; };
+		C51461DB1A052CAA00F43333 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461D81A052CAA00F43333 /* CFNetwork.framework */; };
+		C51461DD1A052CB000F43333 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461DC1A052CB000F43333 /* SystemConfiguration.framework */; };
+		C51461E11A0532F900F43333 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C51461E01A0532F900F43333 /* Podfile */; };
+		C51461E71A054BAB00F43333 /* C_CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C51461E61A054BAB00F43333 /* C_CallViewController.m */; };
+		C51461E91A054BD500F43333 /* C_CallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C51461E81A054BD500F43333 /* C_CallViewController.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		10A9540619B9911200EAAE4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10A953D819B9911200EAAE4B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 10A953DF19B9911200EAAE4B;
-			remoteInfo = Crowd;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1002FF8319BF129F009F87AF /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTagList.h; sourceTree = "<group>"; };
@@ -521,7 +518,6 @@
 		10A953F219B9911200EAAE4B /* C_AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C_AppDelegate.h; sourceTree = "<group>"; };
 		10A953F319B9911200EAAE4B /* C_AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C_AppDelegate.m; sourceTree = "<group>"; };
 		10A953FB19B9911200EAAE4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		10A9540119B9911200EAAE4B /* CrowdTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrowdTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10A9540219B9911200EAAE4B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		10A9540A19B9911200EAAE4B /* CrowdTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CrowdTests-Info.plist"; sourceTree = "<group>"; };
 		10A9540C19B9911200EAAE4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -712,6 +708,29 @@
 		10FD69F819EBFFF200B248F3 /* C_MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_MessageView.h; sourceTree = "<group>"; };
 		10FD69F919EBFFF200B248F3 /* C_MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_MessageView.m; sourceTree = "<group>"; };
 		10FD69FA19EBFFF200B248F3 /* C_MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_MessageView.xib; sourceTree = "<group>"; };
+		5F2E8E868D8AE21C27B95B99 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		81755C0A76B9A83E6310E5E4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8B1FD497B23E8984446BEDD4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C51461C31A05243500F43333 /* libTwilioClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTwilioClient.a; path = Crowd/Sounds/libTwilioClient.a; sourceTree = "<group>"; };
+		C51461C51A0524ED00F43333 /* C_TwilioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_TwilioClient.h; sourceTree = "<group>"; };
+		C51461C61A0524ED00F43333 /* C_TwilioClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_TwilioClient.m; sourceTree = "<group>"; };
+		C51461C81A05255100F43333 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		C51461C91A05255100F43333 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		C51461CC1A0525DF00F43333 /* TCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCConnection.h; sourceTree = "<group>"; };
+		C51461CD1A0525DF00F43333 /* TCConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCConnectionDelegate.h; sourceTree = "<group>"; };
+		C51461CE1A0525DF00F43333 /* TCDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCDevice.h; sourceTree = "<group>"; };
+		C51461CF1A0525DF00F43333 /* TCDeviceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCDeviceDelegate.h; sourceTree = "<group>"; };
+		C51461D01A0525DF00F43333 /* TCPresenceEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPresenceEvent.h; sourceTree = "<group>"; };
+		C51461D11A0525DF00F43333 /* TwilioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwilioClient.h; sourceTree = "<group>"; };
+		C51461D61A052CAA00F43333 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C51461D71A052CAA00F43333 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C51461D81A052CAA00F43333 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C51461DC1A052CB000F43333 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C51461E01A0532F900F43333 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		C51461E31A05339700F43333 /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
+		C51461E51A054BAB00F43333 /* C_CallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_CallViewController.h; path = "Call Controller/C_CallViewController.h"; sourceTree = "<group>"; };
+		C51461E61A054BAB00F43333 /* C_CallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = C_CallViewController.m; path = "Call Controller/C_CallViewController.m"; sourceTree = "<group>"; };
+		C51461E81A054BD500F43333 /* C_CallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = C_CallViewController.xib; path = "Call Controller/C_CallViewController.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -719,19 +738,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C51461DD1A052CB000F43333 /* SystemConfiguration.framework in Frameworks */,
+				C51461D91A052CAA00F43333 /* AudioToolbox.framework in Frameworks */,
+				C51461DA1A052CAA00F43333 /* AVFoundation.framework in Frameworks */,
+				C51461DB1A052CAA00F43333 /* CFNetwork.framework in Frameworks */,
 				10A953E619B9911200EAAE4B /* CoreGraphics.framework in Frameworks */,
+				C51461CA1A05255100F43333 /* libcrypto.a in Frameworks */,
+				C51461CB1A05255100F43333 /* libssl.a in Frameworks */,
 				10A953E819B9911200EAAE4B /* UIKit.framework in Frameworks */,
+				C51461C41A05243500F43333 /* libTwilioClient.a in Frameworks */,
 				10A953E419B9911200EAAE4B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10A953FE19B9911200EAAE4B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10A9540319B9911200EAAE4B /* XCTest.framework in Frameworks */,
-				10A9540519B9911200EAAE4B /* UIKit.framework in Frameworks */,
-				10A9540419B9911200EAAE4B /* Foundation.framework in Frameworks */,
+				45E3EF582C8E6F2350018345 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1192,6 +1209,8 @@
 		10A953D719B9911200EAAE4B = {
 			isa = PBXGroup;
 			children = (
+				C51461E01A0532F900F43333 /* Podfile */,
+				C51461C21A05240500F43333 /* Twilio */,
 				1041B7CB1A00AE0700AB4111 /* Sounds */,
 				103B3C6A19D009870022FA33 /* All plist */,
 				10588A6219CC2CD500DC5633 /* Fonts ALL */,
@@ -1200,6 +1219,7 @@
 				10A9540819B9911200EAAE4B /* CrowdTests */,
 				10A953E219B9911200EAAE4B /* Frameworks */,
 				10A953E119B9911200EAAE4B /* Products */,
+				F44360B7773A73C04B826B27 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1207,7 +1227,6 @@
 			isa = PBXGroup;
 			children = (
 				10A953E019B9911200EAAE4B /* Crowd.app */,
-				10A9540119B9911200EAAE4B /* CrowdTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1215,10 +1234,15 @@
 		10A953E219B9911200EAAE4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C51461DC1A052CB000F43333 /* SystemConfiguration.framework */,
+				C51461D61A052CAA00F43333 /* AudioToolbox.framework */,
+				C51461D71A052CAA00F43333 /* AVFoundation.framework */,
+				C51461D81A052CAA00F43333 /* CFNetwork.framework */,
 				10A953E319B9911200EAAE4B /* Foundation.framework */,
 				10A953E519B9911200EAAE4B /* CoreGraphics.framework */,
 				10A953E719B9911200EAAE4B /* UIKit.framework */,
 				10A9540219B9911200EAAE4B /* XCTest.framework */,
+				5F2E8E868D8AE21C27B95B99 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1245,6 +1269,7 @@
 				10A953EC19B9911200EAAE4B /* InfoPlist.strings */,
 				10A953EF19B9911200EAAE4B /* main.m */,
 				10A953F119B9911200EAAE4B /* Crowd-Prefix.pch */,
+				C51461E31A05339700F43333 /* macros.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1474,6 +1499,7 @@
 		10A954CD19B991A000EAAE4B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C51461E41A054B5E00F43333 /* Call Controller */,
 				106485F119C017FF00BCD1EC /* ALL Cell */,
 				10DDA81C19DC006C0075FA7A /* General Controllers */,
 				109CE71719EBAE9C00DADF56 /* Message View */,
@@ -1595,6 +1621,43 @@
 			path = "General Controllers";
 			sourceTree = "<group>";
 		};
+		C51461C21A05240500F43333 /* Twilio */ = {
+			isa = PBXGroup;
+			children = (
+				C51461CC1A0525DF00F43333 /* TCConnection.h */,
+				C51461CD1A0525DF00F43333 /* TCConnectionDelegate.h */,
+				C51461CE1A0525DF00F43333 /* TCDevice.h */,
+				C51461CF1A0525DF00F43333 /* TCDeviceDelegate.h */,
+				C51461D01A0525DF00F43333 /* TCPresenceEvent.h */,
+				C51461D11A0525DF00F43333 /* TwilioClient.h */,
+				C51461C81A05255100F43333 /* libcrypto.a */,
+				C51461C91A05255100F43333 /* libssl.a */,
+				C51461C31A05243500F43333 /* libTwilioClient.a */,
+				C51461C51A0524ED00F43333 /* C_TwilioClient.h */,
+				C51461C61A0524ED00F43333 /* C_TwilioClient.m */,
+			);
+			name = Twilio;
+			sourceTree = "<group>";
+		};
+		C51461E41A054B5E00F43333 /* Call Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C51461E51A054BAB00F43333 /* C_CallViewController.h */,
+				C51461E61A054BAB00F43333 /* C_CallViewController.m */,
+				C51461E81A054BD500F43333 /* C_CallViewController.xib */,
+			);
+			name = "Call Controller";
+			sourceTree = "<group>";
+		};
+		F44360B7773A73C04B826B27 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				81755C0A76B9A83E6310E5E4 /* Pods.debug.xcconfig */,
+				8B1FD497B23E8984446BEDD4 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1602,9 +1665,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10A9541219B9911200EAAE4B /* Build configuration list for PBXNativeTarget "Crowd" */;
 			buildPhases = (
+				47F21CA7379FFF3FE0F5E519 /* Check Pods Manifest.lock */,
 				10A953DC19B9911200EAAE4B /* Sources */,
 				10A953DD19B9911200EAAE4B /* Frameworks */,
 				10A953DE19B9911200EAAE4B /* Resources */,
+				44446D9DAAB27429DDE8437B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1614,24 +1679,6 @@
 			productName = Crowd;
 			productReference = 10A953E019B9911200EAAE4B /* Crowd.app */;
 			productType = "com.apple.product-type.application";
-		};
-		10A9540019B9911200EAAE4B /* CrowdTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 10A9541519B9911200EAAE4B /* Build configuration list for PBXNativeTarget "CrowdTests" */;
-			buildPhases = (
-				10A953FD19B9911200EAAE4B /* Sources */,
-				10A953FE19B9911200EAAE4B /* Frameworks */,
-				10A953FF19B9911200EAAE4B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				10A9540719B9911200EAAE4B /* PBXTargetDependency */,
-			);
-			name = CrowdTests;
-			productName = CrowdTests;
-			productReference = 10A9540119B9911200EAAE4B /* CrowdTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1643,8 +1690,12 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = tatva;
 				TargetAttributes = {
-					10A9540019B9911200EAAE4B = {
-						TestTargetID = 10A953DF19B9911200EAAE4B;
+					10A953DF19B9911200EAAE4B = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1662,7 +1713,6 @@
 			projectRoot = "";
 			targets = (
 				10A953DF19B9911200EAAE4B /* Crowd */,
-				10A9540019B9911200EAAE4B /* CrowdTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1690,6 +1740,7 @@
 				104CD67E19D2CE6500E444F8 /* C_MP_SkillsVC.xib in Resources */,
 				1049E39B19E7D79900D10C2B /* C_JobsOther.xib in Resources */,
 				10588A6519CC2CD500DC5633 /* Helvetica_6.ttf in Resources */,
+				C51461E91A054BD500F43333 /* C_CallViewController.xib in Resources */,
 				10A948E519C9902C0042999F /* C_Cell_EducationProfile.xib in Resources */,
 				104CD64119D288F300E444F8 /* C_EditTextVC.xib in Resources */,
 				104CD64B19D288F300E444F8 /* C_LocationVC.xib in Resources */,
@@ -1733,6 +1784,7 @@
 				10AED95619E65A34009E3BE5 /* C_Cell_Dashboard.xib in Resources */,
 				104CD68419D2D04E00E444F8 /* C_MP_EditTagVC.xib in Resources */,
 				10A953EE19B9911200EAAE4B /* InfoPlist.strings in Resources */,
+				C51461E11A0532F900F43333 /* Podfile in Resources */,
 				1078C14019C3242800378CC4 /* C_Cell_Tags.xib in Resources */,
 				105ABB3E19BD9CB400177C6A /* C_ViewEditableTextField.xib in Resources */,
 				1049E38419E7B96200D10C2B /* C_Cell_Follower.xib in Resources */,
@@ -1765,15 +1817,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		10A953FF19B9911200EAAE4B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		44446D9DAAB27429DDE8437B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10A9540D19B9911200EAAE4B /* InfoPlist.strings in Resources */,
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-/* End PBXResourcesBuildPhase section */
+		47F21CA7379FFF3FE0F5E519 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		10A953DC19B9911200EAAE4B /* Sources */ = {
@@ -1788,6 +1865,7 @@
 				10A954A819B9919700EAAE4B /* NSUserDefaults+Helpers.m in Sources */,
 				10D48ACF19D2E76200B93675 /* C_MP_EditLocationVC.m in Sources */,
 				10A954A519B9919700EAAE4B /* NSMutableAttributedString+Validation.m in Sources */,
+				C51461C71A0524ED00F43333 /* C_TwilioClient.m in Sources */,
 				10A9549819B9919700EAAE4B /* AFHTTPRequestOperation.m in Sources */,
 				10A9549719B9919700EAAE4B /* AFDownloadRequestOperation.m in Sources */,
 				1046DD9B19D985EB00644CFC /* C_JobListModel.m in Sources */,
@@ -1929,6 +2007,7 @@
 				1078C13F19C3242800378CC4 /* C_Cell_Tags.m in Sources */,
 				10CAA75219DE9AD00039FBFB /* ContactsViewController.m in Sources */,
 				101824FF19D022670099E8F5 /* C_PostJob_IndustryListingVC.m in Sources */,
+				C51461E71A054BAB00F43333 /* C_CallViewController.m in Sources */,
 				1088D17A1A03A92600F8A2C4 /* C_PostJob_QualificationVC.m in Sources */,
 				104CD68319D2D04E00E444F8 /* C_MP_EditTagVC.m in Sources */,
 				104CD64219D288F300E444F8 /* C_EditTimeVC.m in Sources */,
@@ -1946,23 +2025,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		10A953FD19B9911200EAAE4B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				10A9540F19B9911200EAAE4B /* CrowdTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		10A9540719B9911200EAAE4B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 10A953DF19B9911200EAAE4B /* Crowd */;
-			targetProxy = 10A9540619B9911200EAAE4B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		10A953EC19B9911200EAAE4B /* InfoPlist.strings */ = {
@@ -2000,7 +2063,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2018,7 +2082,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "61a9a237-3d30-4df3-9d26-07c215738803";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2039,7 +2103,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2050,7 +2115,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "61a9a237-3d30-4df3-9d26-07c215738803";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2058,73 +2123,66 @@
 		};
 		10A9541319B9911200EAAE4B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81755C0A76B9A83E6310E5E4 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Crowd/Sounds",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-NSLogger\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3371c7a6-6320-4697-b218-d4350438c559";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		10A9541419B9911200EAAE4B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B1FD497B23E8984446BEDD4 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Crowd/Sounds",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-NSLogger\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3371c7a6-6320-4697-b218-d4350438c559";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		10A9541619B9911200EAAE4B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Crowd.app/Crowd";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CrowdTests/CrowdTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		10A9541719B9911200EAAE4B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Crowd.app/Crowd";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
-				INFOPLIST_FILE = "CrowdTests/CrowdTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -2145,15 +2203,6 @@
 			buildConfigurations = (
 				10A9541319B9911200EAAE4B /* Debug */,
 				10A9541419B9911200EAAE4B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		10A9541519B9911200EAAE4B /* Build configuration list for PBXNativeTarget "CrowdTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				10A9541619B9911200EAAE4B /* Debug */,
-				10A9541719B9911200EAAE4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
