@@ -233,4 +233,5 @@ typedef enum {
 #define WTConnectionDidConnect			@"WTConnectionDidConnect"
 #define WTConnectionDidDisconnect		@"WTConnectionDidDisconnect"
 #define WTConnectionDidFailWithError	@"WTConnectionDidFailWithError"
+#define WTPresenceUpdateForClient @"WTPresenceUpdateForClient"
 

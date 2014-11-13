@@ -46,6 +46,7 @@
     
     NSMutableArray *arrContent;
     JSONParser *parser;
+    JSONParser *parserForCallAvailability;
     
     /*--- To check if service is calling or not ---*/
     BOOL isCallingService;
@@ -71,9 +72,16 @@
 @property (assign, nonatomic) CGFloat originalKeyboardY;//keyboard Y Axis
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
 @property(nonatomic, strong)UIBarButtonItem* callBarButtonItem;
+@property(nonatomic, strong)NSTimer* timerCallAvailability;
+@property(nonatomic, strong)NSNumber* secondsToWaitToCheckAvailability;
+@property BOOL isAvailableForCall;
 @end
 
 @implementation C_MessageView
+@synthesize timerCallAvailability;
+@synthesize secondsToWaitToCheckAvailability;
+@synthesize isAvailableForCall;
+
 -(void)back
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kNotification_GetMessage object:nil];
@@ -105,6 +113,16 @@
     
     /*----call button bar item --*/
     self.callBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Call" style:UIBarButtonItemStylePlain target:self action:@selector(onCallButtonPressed:)];
+    
+    [self updateCallAvailabilityBasedOnCachedPresenceUpdates];
+    if (self.isAvailableForCall)
+    {
+            self.callBarButtonItem.enabled = YES;
+    }
+    else
+    {
+            self.callBarButtonItem.enabled = NO;
+    }
     self.navigationItem.rightBarButtonItem = self.callBarButtonItem;
     
     /*--- add line on top ---*/
@@ -129,6 +147,12 @@
     /*--- Code to Show Default Refresh when view appear ---*/
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getRecentMessages_withHUD:YES];
+        
+        if (!self.isAvailableForCall)
+        {
+            [self checkCallAvailability];
+        }
+        
     });
     
     /*--- set defaults ---*/
@@ -140,7 +164,130 @@
     /*--- notification when send new message ---*/
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kNotification_GetMessage object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getMessageNotification) name:kNotification_GetMessage object:nil];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:WTPresenceUpdateForClient object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onPresenceUpdateForClientNotification:) name:WTPresenceUpdateForClient object:nil];
+    
 }
+
+#pragma mark - Call Availability Methods
+- (void) updateCallAvailabilityBasedOnCachedPresenceUpdates
+{
+    NSString* activityName = @"updateCallAvailabilityBasedOnCachedPresenceUpdates:";
+    C_TwilioClient* twilioClient = [C_TwilioClient sharedInstance];
+    NSNumber* presenceObject = [twilioClient getPresenceForClient:_message_UserInfo.SenderID];
+    
+    if (presenceObject == nil)
+    {
+        //no data in the presence cache
+        LOG_TWILIO(0,@"%@No cached presence data available for client %@",activityName,_message_UserInfo.SenderID);
+    }
+    else
+    {
+        //we do have data
+        BOOL isAvailable = [presenceObject boolValue];
+        
+        if (isAvailable)
+        {
+            LOG_TWILIO(0,@"%@User %@ is available for calling based on cached twilio presence update",activityName, _message_UserInfo.SenderID);
+            self.isAvailableForCall = NO;
+        }
+        else
+        {
+            LOG_TWILIO(0,@"%@User %@ is NOT available for calling based on cached twilio presence update",activityName, _message_UserInfo.SenderID);
+            self.isAvailableForCall = NO;
+
+        }
+    }
+}
+
+- (void) onPresenceUpdateForClientNotification:(NSNotification*)notification
+{
+    NSString* activityName = @"OnPresenceUpdateForClientNotification:";
+    NSDictionary* userInfo = notification.userInfo;
+    
+    NSString* clientName = [userInfo objectForKey:@"Name"];
+    
+    if ([clientName isEqualToString:_message_UserInfo.SenderID])
+    {
+        NSNumber* availability = [userInfo objectForKey:@"Available"];
+        LOG_TWILIO(0,@"%@Received Twilio presence update notification for client %@ who's presence is %@",activityName,clientName,availability);
+        
+        if ([availability boolValue] == YES)
+        {
+            //client is available
+            self.callBarButtonItem.enabled = YES;
+            self.isAvailableForCall = YES;
+        }
+        else
+        {
+            //client is not available
+            self.callBarButtonItem.enabled = NO;
+            self.isAvailableForCall = NO;
+            
+            
+        }
+        
+        //we disable the timer because we've received an update from the twilio srvice
+        LOG_TWILIO(0,@"%@Disabling call availability timer for user %@",activityName,_message_UserInfo.SenderID);
+        [self.timerCallAvailability invalidate];
+        self.timerCallAvailability = nil;
+    }
+    
+}
+
+- (void) checkCallAvailability
+{
+    NSString* activityName = @"checkCallAvailability:";
+    LOG_TWILIO(0,@"%@Checking user %@  availibility for a call",activityName,_message_UserInfo.SenderID);
+    
+    NSDictionary *dictParam = @{@"UserID":_message_UserInfo.SenderID};
+    [self.timerCallAvailability invalidate];
+    self.timerCallAvailability = nil;
+    
+    parserForCallAvailability = [[JSONParser alloc]initWith_withURL:Web_GET_CALLAVAILABILITY withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(onCheckCallAvailabilitySuccessful:) withObject:self];
+    
+}
+
+- (void) onCheckCallAvailabilitySuccessful:(id)objResponse
+{
+    NSString* activityName = @"onCheckCallAvailabilitySuccessful:";
+    LOG_TWILIO(0,@"%@Successfully received GetCallAvailability result %@",activityName,objResponse);
+    
+    NSDictionary* responseDictionary = (NSDictionary*)objResponse;
+    
+    if (responseDictionary != nil)
+    {
+        NSDictionary* setAvailableForCallResult = [responseDictionary objectForKey:@"GetCallAvailabilityResult"];
+        
+        NSNumber* isAvailableForCallObj = [setAvailableForCallResult objectForKey:@"IsAvailableForCall"];
+        self.isAvailableForCall = [isAvailableForCallObj boolValue];
+        
+        if (isAvailableForCall)
+        {
+            LOG_TWILIO(0,@"%@ User %@ is available for a call at this time",activityName, _message_UserInfo.SenderID);
+            self.callBarButtonItem.enabled = YES;
+        }
+        else
+        {
+            LOG_TWILIO(0,@"%@ User %@ is unavailable for a call at this time",activityName, _message_UserInfo.SenderID);
+            self.callBarButtonItem.enabled = NO;
+        }
+        self.secondsToWaitToCheckAvailability = [setAvailableForCallResult objectForKey:@"RenewAfterSeconds"];
+        
+        
+        //now we schedule the timer to renew in the specified number of seconds
+        self.timerCallAvailability = [NSTimer scheduledTimerWithTimeInterval:[self.secondsToWaitToCheckAvailability doubleValue] target:self selector:@selector(checkCallAvailability) userInfo:nil repeats:NO];
+        
+        LOG_TWILIO(0,@"%@Successfully scheduled re-check of call availability to happen in %@ seconds",activityName,self.secondsToWaitToCheckAvailability);
+    }
+    else
+    {
+        LOG_TWILIO(1,@"%@Received null response from availibility method, unable to update user's call availability",activityName);
+    }
+}
+
+
 -(void)getMessageNotification
 {
     isNotificationReceived = YES;

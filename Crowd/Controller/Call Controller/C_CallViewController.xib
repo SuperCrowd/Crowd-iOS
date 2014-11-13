@@ -17,9 +17,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Calling" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWN-5G-cff">
-                    <rect key="frame" x="8" y="66" width="304" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Calling" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWN-5G-cff">
+                    <rect key="frame" x="101" y="66" width="123" height="30"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -35,7 +35,9 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="YWN-5G-cff" secondAttribute="centerX" id="2NO-Jc-P3J"/>
                 <constraint firstItem="YWN-5G-cff" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="66" id="3LC-de-b1w"/>
+                <constraint firstAttribute="centerX" secondItem="ygC-nr-Sde" secondAttribute="centerX" id="DRa-Zu-81y"/>
                 <constraint firstAttribute="centerX" secondItem="ygC-nr-Sde" secondAttribute="centerX" id="qu5-hv-Jgk"/>
                 <constraint firstAttribute="bottom" secondItem="ygC-nr-Sde" secondAttribute="bottom" constant="145" id="sLI-5r-UWw"/>
             </constraints>

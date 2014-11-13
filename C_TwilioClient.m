@@ -10,6 +10,7 @@
 #import "AppConstant.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "TCPresenceEvent.h"
 
 @implementation C_TwilioClient
 @synthesize connection;
@@ -20,6 +21,10 @@
 @synthesize loggedIn;
 //@synthesize internetReachability;
 @synthesize reachabilityManager;
+@synthesize parser;
+@synthesize heartbeatTimer;
+@synthesize secondsAfterToRenewHeartbeat;
+@synthesize clientPresenceInfo;
 
 + (C_TwilioClient *)sharedInstance {
     static C_TwilioClient *sharedMyManager = nil;
@@ -92,6 +97,8 @@
             [self loginHelper];
         }
         
+        self.clientPresenceInfo = [[NSMutableDictionary alloc]init];
+        
     }
     
     return self;
@@ -128,6 +135,77 @@
 //    {
 //        [self.internetReachability startNotifier];
 //    }
+}
+
+- (void)renewCallAvailability
+{
+    [self setCallAvaibility:YES];
+}
+
+- (void) setCallAvaibility:(BOOL)isAvailableForCall
+{
+    NSString* activityName = @"setCallAvailibility:";
+    @try
+    {
+  
+        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+                                    @"UserToken":userInfoGlobal.Token};
+        if (isAvailableForCall)
+        {
+            //renewing the availibility
+            LOG_TWILIO(0,@"%@Attempting to renew avaibility on server",activityName);
+            parser = [[JSONParser alloc]initWith_withURL:Web_SET_AVAILABLE_CALL withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(setAvailableForCallSuccessfull:) withObject:self];
+        }
+        else
+        {
+            //we clear the heartbeat timer so it doesnt run
+            [self.heartbeatTimer invalidate];
+            self.heartbeatTimer = nil;
+            //expiring the availibility
+            LOG_TWILIO(0,@"%@Attempting to clear avaibility on server",activityName);
+            parser = [[JSONParser alloc]initWith_withURL:Web_SET_UNAVAILABLE_CALL withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(setUnAvailableForCallSuccessfull:) withObject:self];
+        }
+        
+
+    }
+    @catch (NSException *exception) {
+        LOG_TWILIO(1,@"%@%@",activityName,exception.description);
+        
+    }
+
+    
+}
+
+- (void) setAvailableForCallSuccessfull:(id)objResponse
+{
+    NSString* activityName = @"setAvailableForCallSuccessfull:";
+    LOG_TWILIO(0,@"%@Successfully renewed user call availablility with result %@",activityName,objResponse);
+    
+    NSDictionary* responseDictionary = (NSDictionary*)objResponse;
+    
+    if (responseDictionary != nil)
+    {
+        NSDictionary* setAvailableForCallResult = [responseDictionary objectForKey:@"SetAvailableForCallResult"];
+        self.secondsAfterToRenewHeartbeat = [setAvailableForCallResult objectForKey:@"RenewAfterSeconds"];
+                                         
+    
+        //now we schedule the timer to renew in the specified number of seconds
+        self.heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:[self.secondsAfterToRenewHeartbeat doubleValue] target:self selector:@selector(renewCallAvailability) userInfo:nil repeats:NO];
+       
+        LOG_TWILIO(0,@"%@Successfully scheduled renewal of twilio heartbeat to happen in %@ seconds",activityName,self.secondsAfterToRenewHeartbeat);
+    }
+    else
+    {
+        LOG_TWILIO(1,@"%@Received null response from availibility method, unable to create heartbeat refresh timer",activityName);
+    }
+    
+    
+}
+
+- (void) setUnAvailableForCallSuccessfull:(id)objResponse
+{
+    NSString* activityName = @"setUnAvailableForCallSuccessfull:";
+    LOG_TWILIO(0,@"%@Successfully cleared user call availablility with result %@",activityName,objResponse);
 }
 
 -(void)loginHelper
@@ -220,6 +298,7 @@
         {
             capabilityToken = [[NSString alloc] initWithData:data
                                                      encoding:NSUTF8StringEncoding];
+            LOG_TWILIO(0,@"%@Successfully received capability token %@",activityName,capabilityToken);
         }
         else
         {
@@ -325,16 +404,20 @@
 -(void)deviceDidStartListeningForIncomingConnections:(TCDevice*)device
 {
     LOG_TWILIO(0,@"Device is now listening for incoming connections");
+    [self setCallAvaibility:YES];
 }
 
 -(void)device:(TCDevice*)device didStopListeningForIncomingConnections:(NSError*)error
 {
     NSString* activityName = @"device:didStopListeningForIncomingConnections:";
+
     if ( !error )
         LOG_TWILIO(0,@"%@Device went offline",activityName);
     else
         LOG_TWILIO(1,@"%@Device went offline due to error: %@",activityName, [error localizedDescription]);
 //        NSLog(@"Device went offline due to error: %@", [error localizedDescription]);
+    
+    [self setCallAvaibility:NO];
 }
 
 -(void)device:(TCDevice*)device didReceiveIncomingConnection:(TCConnection*)c
@@ -354,6 +437,49 @@
     self.pendingIncomingConnection.delegate = self;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:WTPendingIncomingConnectionReceived object:nil];
+}
+
+-(void)device:(TCDevice *)device didReceivePresenceUpdate:(TCPresenceEvent *)presenceEvent
+{
+    NSString* activityName = @"device:didReceivePresenceUpdate:";
+    
+    LOG_TWILIO(0,@"%@Client %@ is available for call? %d",activityName,presenceEvent.name,presenceEvent.available);
+    
+    NSString* clientName = presenceEvent.name;
+    NSNumber* isAvailable = [NSNumber numberWithBool:presenceEvent.available];
+    //we check and add the client's presence update to our dictionary cache
+    if ([self.clientPresenceInfo objectForKey:clientName] != nil)
+    {
+        
+        //client exists in our cache
+        [self.clientPresenceInfo removeObjectForKey:clientName];
+        [self.clientPresenceInfo setObject:isAvailable forKey:clientName];
+    }
+    else
+    {
+        //client doesnt eist in our cache
+        [self.clientPresenceInfo setObject:isAvailable forKey:clientName];
+    }
+    
+    //now we post a notification that this has happened
+    NSDictionary* userInfo = @{@"Name":presenceEvent.name, @"Available":[NSNumber numberWithBool:presenceEvent.available]};
+    
+     [[NSNotificationCenter defaultCenter] postNotificationName:WTPresenceUpdateForClient object:nil userInfo:userInfo];
+}
+
+- (NSNumber*)getPresenceForClient:(NSString *)clientName
+{
+ 
+    
+    if ([self.clientPresenceInfo objectForKey:clientName] == nil)
+    {
+        //client is not in our dictionary, we return nil
+        return nil;
+    }
+    else
+    {
+        return [self.clientPresenceInfo objectForKey:clientName];
+    }
 }
 
 #pragma mark -

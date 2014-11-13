@@ -24,6 +24,7 @@
 #import "C_TwilioClient.h"
 #import "C_CallViewController.h"
 
+
 @interface C_AppDelegate()
 {
     JSONParser *parser;
@@ -43,7 +44,7 @@
     //For iOS 8
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)] && [UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
     {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         
     }
@@ -55,6 +56,8 @@
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
+
+    
     /*--- Navigationbar setup ---*/    
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:62.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
@@ -93,6 +96,8 @@
     }
     
     
+
+    
     /*--- SDWebImage setup ---*/
     [SDWebImageManager.sharedManager.imageDownloader setValue:@"Crowd Image" forHTTPHeaderField:@"Crowd"];
     SDWebImageManager.sharedManager.imageDownloader.executionOrder = SDWebImageDownloaderLIFOExecutionOrder;
@@ -118,6 +123,8 @@
     
     return YES;
 }
+
+//- (BOOL)setKeepAliveTimeout:(NSTimeInterval)timeout handler:
 -(BOOL)isConnected
 {
     /*--- Check Internet Connectivity ---*/
@@ -591,6 +598,9 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -598,6 +608,12 @@
     
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    /*--VOIP Handler registration */
+    [[UIApplication sharedApplication] setKeepAliveTimeout:30.0f handler:^{
+        LOG_TWILIO(0,@"setKeepAliveTimeout: VOIP handler fired");
+        
+    }];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -610,6 +626,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    //we clear our availability with the server
+    C_TwilioClient* tc = [C_TwilioClient sharedInstance];
+    [tc setCallAvaibility:NO];
 }
 
 @end

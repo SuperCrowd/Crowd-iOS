@@ -731,6 +731,7 @@
 		C51461E51A054BAB00F43333 /* C_CallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_CallViewController.h; path = "Call Controller/C_CallViewController.h"; sourceTree = "<group>"; };
 		C51461E61A054BAB00F43333 /* C_CallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = C_CallViewController.m; path = "Call Controller/C_CallViewController.m"; sourceTree = "<group>"; };
 		C51461E81A054BD500F43333 /* C_CallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = C_CallViewController.xib; path = "Call Controller/C_CallViewController.xib"; sourceTree = "<group>"; };
+		C5E655001A14F361009DE9F8 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1234,6 +1235,7 @@
 		10A953E219B9911200EAAE4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C5E655001A14F361009DE9F8 /* Reveal.framework */,
 				C51461DC1A052CB000F43333 /* SystemConfiguration.framework */,
 				C51461D61A052CAA00F43333 /* AudioToolbox.framework */,
 				C51461D71A052CAA00F43333 /* AVFoundation.framework */,
@@ -2129,6 +2131,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
@@ -2142,6 +2148,8 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"Pods-NSLogger\"",
+					"-framework",
+					Reveal,
 					"-framework",
 					"\"CFNetwork\"",
 					"-framework",
@@ -2162,6 +2170,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";

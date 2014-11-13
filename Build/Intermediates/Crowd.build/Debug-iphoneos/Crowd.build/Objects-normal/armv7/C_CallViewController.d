@@ -7,6 +7,7 @@ dependencies: \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/TCDevice.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/TCDeviceDelegate.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFNetworkReachabilityManager.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/JSONParser/JSONParser.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AppConstant.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/C_AppDelegate.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/WebService.h \
@@ -14,7 +15,6 @@ dependencies: \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/Categories/NSString+Validation.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/Categories/NSAttributedString+Validation.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/Categories/NSMutableAttributedString+Validation.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/JSONParser/JSONParser.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Common\ Methods/CommonMethods.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Common\ Methods/UserHandler_LoggedIn.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/Categories/NSDate+Formatting.h \
