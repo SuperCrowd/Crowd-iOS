@@ -21,6 +21,9 @@
 #import "C_MessageModel.h"
 
 #import "C_MessageView.h"
+#import "C_TwilioClient.h"
+#import "C_CallViewController.h"
+
 
 @interface C_AppDelegate()
 {
@@ -28,9 +31,13 @@
 }
 @end
 @implementation C_AppDelegate
+@synthesize twilioClient;
+@synthesize alertIncomingCall;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSString* activityName = @"application:didFinishLaunchingWithOptions:";
+    
     /*--- com.symposium.crowd ---*/
     /*--- Create Initial Window ---*/
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
@@ -39,7 +46,7 @@
     //For iOS 8
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)] && [UIApplication instancesRespondToSelector:@selector(registerForRemoteNotifications)])
     {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         
     }
@@ -51,6 +58,8 @@
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
+
+    
     /*--- Navigationbar setup ---*/    
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithRed:62.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
@@ -65,10 +74,14 @@
      else if user login with linkedin but not register ---*/
     if ([UserDefaults objectForKey:APP_USER_INFO])
     {
+        LOG_TWILIO(0,@"%@Detected user is logged in, starting twilio client",activityName);
         userInfoGlobal = [UserHandler_LoggedIn getMyUser_LoggedIN];
+        self.twilioClient = [C_TwilioClient sharedInstance];
+
     }
     else if ([UserDefaults objectForKey:USER_INFO])
     {
+        LOG_TWILIO(0,@"%@User is not logged in, skipping initialization of Twilio client",activityName);
         myUserModel = [CommonMethods getMyUser];
     }
     if (![UserDefaults objectForKey:PROFILE_PREVIEW])
@@ -77,6 +90,25 @@
         [UserDefaults synchronize];
     }
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pendingIncomingConnectionReceived:)
+                                                 name:WTPendingIncomingConnectionReceived
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pendingIncomingConnectionDidDisconnect:)
+                                                 name:WTPendingIncomingConnectionDidDisconnect
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserLoggedInNotification:)
+                                                 name:kNotification_UserLoggedIn
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserLoggedOutNotification:)
+                                                 name:kNotification_UserLoggedOut
+                                               object:nil];
     
     /*--- SDWebImage setup ---*/
     [SDWebImageManager.sharedManager.imageDownloader setValue:@"Crowd Image" forHTTPHeaderField:@"Crowd"];
@@ -103,6 +135,29 @@
     
     return YES;
 }
+
+- (void) onUserLoggedInNotification:(NSNotification*)notification
+{
+    NSString* activityName = @"onUserLoggedInNotification:";
+
+    LOG_TWILIO(0,@"%@Received login notification, creating instance of TwilioClient to start call functionality",activityName);
+    self.twilioClient = [C_TwilioClient sharedInstance];
+    
+    if (!self.twilioClient.loggedIn)
+    {
+        [self.twilioClient login];
+    }
+}
+
+- (void) onUserLoggedOutNotification:(NSNotification*)notification
+{
+    NSString* activityName = @"onUserLoggedOutNotification:";
+   
+    LOG_TWILIO(0,@"%@Received logout notification, destroying instance of TwilioClient",activityName);
+    
+    self.twilioClient = nil;
+}
+//- (BOOL)setKeepAliveTimeout:(NSTimeInterval)timeout handler:
 -(BOOL)isConnected
 {
     /*--- Check Internet Connectivity ---*/
@@ -117,6 +172,100 @@
     if ([UserDefaults objectForKey:APP_USER_INFO]) {
         [self getMessageUnreadCount];
     }
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString* activityName = @"alertView:clickedButtonAtIndex:";
+    if (buttonIndex == 0)
+    {
+        LOG_TWILIO(0,@"%@User has chosen to accept incoming call",activityName);
+        
+        C_CallViewController* cvc = [C_CallViewController createForReceiving];
+        [self.navC presentViewController:cvc animated:YES completion:nil];
+        [[C_TwilioClient sharedInstance] acceptIncomingConnection];
+        
+    }
+    else if (buttonIndex == 1)
+    {
+        LOG_TWILIO(0,@"%@User has chosen to ignore incoming call",activityName);
+        [[C_TwilioClient sharedInstance] ignoreIncomingConnection];
+    }
+}
+#pragma mark - Call Handling
+
+-(void)constructAlert
+{
+    self.alertIncomingCall = [[UIAlertView alloc] initWithTitle:@"Incoming Call"
+                                             message:@"Accept or Ignore?"
+                                            delegate:self
+                                   cancelButtonTitle:nil
+                                   otherButtonTitles:@"Accept",@"Ignore",nil];
+    [self.alertIncomingCall show];
+}
+
+-(void)cancelAlert
+{
+    if ( self.alertIncomingCall )
+    {
+        [self.alertIncomingCall dismissWithClickedButtonIndex:1 animated:YES];
+        self.alertIncomingCall = nil;
+    }
+}
+
+-(BOOL)isForeground
+{
+
+    UIApplicationState state = [UIApplication sharedApplication].applicationState;
+    return (state==UIApplicationStateActive);
+}
+
+-(void)pendingIncomingConnectionReceived:(NSNotification*)notification
+{
+    NSString* activityName = @"pendingIncomingConnectionReceived:";
+    LOG_TWILIO(0,@"%@Delegate received notification of incoming call",activityName);
+    //Show alert view asking if user wants to accept or ignore call
+    [self performSelectorOnMainThread:@selector(constructAlert) withObject:nil waitUntilDone:NO];
+    
+    //Check for background support
+    if ( ![self isForeground] )
+    {
+        //App is not in the foreground, so send LocalNotification
+        UIApplication* app = [UIApplication sharedApplication];
+        UILocalNotification* notification = [[UILocalNotification alloc] init];
+        NSArray* oldNots = [app scheduledLocalNotifications];
+        
+        if ([oldNots count]>0)
+        {
+            [app cancelAllLocalNotifications];
+        }
+        
+        notification.alertBody = @"Incoming Call";
+        LOG_TWILIO(0,@"%@App is not in foreground, displaying call notification",activityName);
+        [app presentLocalNotificationNow:notification];
+ 
+    }
+    else
+    {
+        LOG_TWILIO(0,@"%@App is in foregound",activityName);
+    }
+    
+}
+
+
+-(void)pendingIncomingConnectionDidDisconnect:(NSNotification*)notification
+{
+    // Make sure to cancel any pending notifications/alerts
+    [self performSelectorOnMainThread:@selector(cancelAlert) withObject:nil waitUntilDone:NO];
+    if ( ![self isForeground] )
+    {
+        //App is not in the foreground, so kill the notification we posted.
+        UIApplication* app = [UIApplication sharedApplication];
+        [app cancelAllLocalNotifications];
+    }
+    
+   
 }
 
 #pragma mark - Notification
@@ -483,6 +632,9 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -490,6 +642,12 @@
     
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    /*--VOIP Handler registration */
+    [[UIApplication sharedApplication] setKeepAliveTimeout:30.0f handler:^{
+        LOG_TWILIO(0,@"setKeepAliveTimeout: VOIP handler fired");
+        
+    }];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -502,6 +660,9 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    //we clear our availability with the server
+    C_TwilioClient* tc = [C_TwilioClient sharedInstance];
+    [tc setCallAvaibility:NO];
 }
 
 @end
