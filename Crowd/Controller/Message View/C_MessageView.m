@@ -148,10 +148,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getRecentMessages_withHUD:YES];
         
-        if (!self.isAvailableForCall)
-        {
-            [self checkCallAvailability];
-        }
+
         
     });
     
@@ -229,9 +226,9 @@
         }
         
         //we disable the timer because we've received an update from the twilio srvice
-        LOG_TWILIO(0,@"%@Disabling call availability timer for user %@",activityName,_message_UserInfo.SenderID);
-        [self.timerCallAvailability invalidate];
-        self.timerCallAvailability = nil;
+//        LOG_TWILIO(0,@"%@Disabling call availability timer for user %@",activityName,_message_UserInfo.SenderID);
+//        [self.timerCallAvailability invalidate];
+//        self.timerCallAvailability = nil;
     }
     
 }
@@ -267,11 +264,16 @@
         {
             LOG_TWILIO(0,@"%@ User %@ is available for a call at this time",activityName, _message_UserInfo.SenderID);
             self.callBarButtonItem.enabled = YES;
+            
+            
         }
         else
         {
             LOG_TWILIO(0,@"%@ User %@ is unavailable for a call at this time",activityName, _message_UserInfo.SenderID);
             self.callBarButtonItem.enabled = NO;
+            
+            //we also inform the TwilioClient to mark the user as unavailable for call
+            [[C_TwilioClient sharedInstance]setCallAvailbilityForClient:_message_UserInfo.SenderID isAvailable:NO];
         }
         self.secondsToWaitToCheckAvailability = [setAvailableForCallResult objectForKey:@"RenewAfterSeconds"];
         
@@ -300,6 +302,20 @@
     
     /*--- set notification for keyboard open/close ---*/
     [self keyboardHandling];
+    
+    [self updateCallAvailabilityBasedOnCachedPresenceUpdates];
+    if (self.isAvailableForCall)
+    {
+        self.callBarButtonItem.enabled = YES;
+    }
+    else
+    {
+        self.callBarButtonItem.enabled = NO;
+    }
+    
+
+    [self checkCallAvailability];
+  
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -312,6 +328,9 @@
     
     keyboardShowObserver = nil;
     keyboardHideObserver = nil;
+    
+    [self.timerCallAvailability invalidate];
+    self.timerCallAvailability = nil;
 }
 
 

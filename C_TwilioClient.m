@@ -98,7 +98,11 @@
         }
         
         self.clientPresenceInfo = [[NSMutableDictionary alloc]init];
-        
+//        
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(onUserLoggedOutNotification:)
+//                                                     name:kNotification_UserLoggedOut
+//                                                   object:nil];
     }
     
     return self;
@@ -119,7 +123,7 @@
     [self beginBackgroundUpdateTask];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:WTLoginDidStart object:nil];
-    
+
 //    [[NSNotificationCenter defaultCenter] addObserver:self
 //                                             selector:@selector(reachabilityChanged:)
 //                                                 name:kReachabilityChangedNotification
@@ -137,6 +141,16 @@
 //    }
 }
 
+
+
+- (void) logout
+{
+    NSString* activityName = @"onUserLoggedOutNotification:";
+      LOG_TWILIO(0,@"%@Detected user has logged out, shutting down incoming connections and updating presence as offline on server",activityName);
+    [self.device unlisten];
+    
+    self.loggedIn = NO;
+}
 - (void)renewCallAvailability
 {
     [self setCallAvaibility:YES];
@@ -467,6 +481,7 @@
      [[NSNotificationCenter defaultCenter] postNotificationName:WTPresenceUpdateForClient object:nil userInfo:userInfo];
 }
 
+#pragma mark - Client Presence Get/Update
 - (NSNumber*)getPresenceForClient:(NSString *)clientName
 {
  
@@ -480,6 +495,12 @@
     {
         return [self.clientPresenceInfo objectForKey:clientName];
     }
+}
+
+- (void) setCallAvailbilityForClient:(NSString *)clientName isAvailable:(BOOL)isAvailable
+{
+    NSNumber* newValue = [NSNumber numberWithBool:isAvailable];
+    [self.clientPresenceInfo setObject:newValue forKey:clientName];
 }
 
 #pragma mark -

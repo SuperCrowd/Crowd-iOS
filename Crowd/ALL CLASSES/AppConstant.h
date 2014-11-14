@@ -169,7 +169,8 @@ CGFloat animatedDistance;
 #define showHUD_with_Success(successTitle) [SVProgressHUD showSuccessWithStatus:successTitle];
 /*-----------------------------------------------------------------------------*/
 
-
+#define kNotification_UserLoggedIn @"userLoggedIn"
+#define kNotification_UserLoggedOut @"userLoggedOut"
 #define kNotification_GetMessage @"getMessageNotification"
 #define kNotification_Update_MessageList @"updateMessageListNotification"
 

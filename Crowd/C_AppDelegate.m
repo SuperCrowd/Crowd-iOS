@@ -36,6 +36,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSString* activityName = @"application:didFinishLaunchingWithOptions:";
+    
     /*--- com.symposium.crowd ---*/
     /*--- Create Initial Window ---*/
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
@@ -72,21 +74,14 @@
      else if user login with linkedin but not register ---*/
     if ([UserDefaults objectForKey:APP_USER_INFO])
     {
+        LOG_TWILIO(0,@"%@Detected user is logged in, starting twilio client",activityName);
         userInfoGlobal = [UserHandler_LoggedIn getMyUser_LoggedIN];
         self.twilioClient = [C_TwilioClient sharedInstance];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(pendingIncomingConnectionReceived:)
-                                                     name:WTPendingIncomingConnectionReceived
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(pendingIncomingConnectionDidDisconnect:)
-                                                     name:WTPendingIncomingConnectionDidDisconnect
-                                                   object:nil];
+
     }
     else if ([UserDefaults objectForKey:USER_INFO])
     {
+        LOG_TWILIO(0,@"%@User is not logged in, skipping initialization of Twilio client",activityName);
         myUserModel = [CommonMethods getMyUser];
     }
     if (![UserDefaults objectForKey:PROFILE_PREVIEW])
@@ -96,7 +91,24 @@
     }
     
     
-
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pendingIncomingConnectionReceived:)
+                                                 name:WTPendingIncomingConnectionReceived
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pendingIncomingConnectionDidDisconnect:)
+                                                 name:WTPendingIncomingConnectionDidDisconnect
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserLoggedInNotification:)
+                                                 name:kNotification_UserLoggedIn
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserLoggedOutNotification:)
+                                                 name:kNotification_UserLoggedOut
+                                               object:nil];
     
     /*--- SDWebImage setup ---*/
     [SDWebImageManager.sharedManager.imageDownloader setValue:@"Crowd Image" forHTTPHeaderField:@"Crowd"];
@@ -124,6 +136,27 @@
     return YES;
 }
 
+- (void) onUserLoggedInNotification:(NSNotification*)notification
+{
+    NSString* activityName = @"onUserLoggedInNotification:";
+
+    LOG_TWILIO(0,@"%@Received login notification, creating instance of TwilioClient to start call functionality",activityName);
+    self.twilioClient = [C_TwilioClient sharedInstance];
+    
+    if (!self.twilioClient.loggedIn)
+    {
+        [self.twilioClient login];
+    }
+}
+
+- (void) onUserLoggedOutNotification:(NSNotification*)notification
+{
+    NSString* activityName = @"onUserLoggedOutNotification:";
+   
+    LOG_TWILIO(0,@"%@Received logout notification, destroying instance of TwilioClient",activityName);
+    
+    self.twilioClient = nil;
+}
 //- (BOOL)setKeepAliveTimeout:(NSTimeInterval)timeout handler:
 -(BOOL)isConnected
 {

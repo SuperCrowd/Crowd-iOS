@@ -26,6 +26,8 @@
 
 @property BOOL loggedIn;
 @property BOOL backgroundSupported;
+
+- (void) setCallAvailbilityForClient:(NSString*)clientName isAvailable:(BOOL)isAvailable;
 - (void) setCallAvaibility:(BOOL)isAvailableForCall;
 -(NSNumber*)getPresenceForClient:(NSString*)clientName;
 -(void)connect:(NSString*)clientName;
@@ -34,5 +36,6 @@
 -(void)ignoreIncomingConnection;
 -(void)login;
 -(void)loginHelper;
+- (void) logout;
 + (C_TwilioClient *)sharedInstance;
 @end

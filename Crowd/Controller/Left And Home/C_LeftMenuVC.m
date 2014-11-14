@@ -16,7 +16,7 @@
 #import "C_MyProfileVC.h"
 #import "C_MyCrowdVC.h"
 #import "C_MyJobsVC.h"
-
+#import "C_TwilioClient.h"
 //#import "C_FindAJobVC.h"
 //#import "C_Find_CandidateVC.h"
 
@@ -176,6 +176,8 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 {
     @try
     {
+
+        [[C_TwilioClient sharedInstance]logout];
         showHUD_with_Title(@"Please Wait");
         
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
@@ -213,7 +215,8 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
         BOOL isJobList = [[objResponse valueForKeyPath:@"LogoutUserResult.Status"] boolValue];
         if (isJobList)
         {
-
+            //lets raise the user has logged in notification here
+            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_UserLoggedOut object:nil];
             /*--- Remove all Defaults + Image Cache ---*/
             [UserDefaults removeObjectForKey:PROFILE_PREVIEW];
             [UserDefaults removeObjectForKey:USER_INFO];

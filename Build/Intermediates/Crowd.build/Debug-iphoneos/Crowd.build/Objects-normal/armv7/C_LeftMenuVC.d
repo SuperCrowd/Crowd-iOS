@@ -40,4 +40,10 @@ dependencies: \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/My\ Profile\ Wizard/C_MyProfileVC.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/My\ Crowd\ Wizard/C_MyCrowdVC.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/My\ Job\ Wizard/C_MyJobsVC.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/C_TwilioClient.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/TCConnection.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/TCConnectionDelegate.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/TCDevice.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/TCDeviceDelegate.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFNetworkReachabilityManager.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/General\ Controllers/MainViewController.h
