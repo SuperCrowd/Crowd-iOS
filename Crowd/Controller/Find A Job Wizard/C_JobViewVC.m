@@ -230,6 +230,12 @@
 }
 -(IBAction)btnApplyClicked:(id)sender
 {
+    if (_obj_myJob.State)
+    {
+        [CommonMethods displayAlertwithTitle:@"You can not apply this job. It is already filled." withMessage:nil withViewController:self];
+        return;
+    }
+    
     if (!_obj_myJob.IsJobApplied)
     {
         [self showApplyJobTitle:@"Would you like to apply for this job?"];

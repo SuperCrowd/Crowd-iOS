@@ -144,8 +144,8 @@
             NSDictionary *dictResult = [objResponse objectForKey:@"GetUserJobsResult"];
             //got
             //user’s name, Current Job Title, Current Employer, and Location (City and State only)
-            NSLog(@"%@",[dictResult objectForKey:@"FollowingMeUser"]);// Following users
-            NSLog(@"%@",[dictResult objectForKey:@"IAmFollowingUser"]);// Followed users
+            //NSLog(@"%@",[dictResult objectForKey:@"FollowingMeUser"]);// Following users
+            //NSLog(@"%@",[dictResult objectForKey:@"IAmFollowingUser"]);// Followed users
             if (pageNum==1)
             {
                 [arrPosted removeAllObjects];

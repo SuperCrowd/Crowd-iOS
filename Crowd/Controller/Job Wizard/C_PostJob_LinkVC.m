@@ -90,7 +90,8 @@
 -(BOOL)checkValidation
 {
     NSString *strURL = [[NSString stringWithFormat:@"%@",txtLink.text]isNull];;
-    if (strURL.length > 0) {
+    if (strURL.length > 0)
+    {
         if (![CommonMethods isValidateUrl:strURL])
         {
             showHUD_with_error(@"Please Enter Valid URL");
@@ -99,12 +100,14 @@
             });
             return NO;
         }
+        if (![strURL hasPrefix:@"http".uppercaseString])
+        {
+            strURL = [NSString stringWithFormat:@"http://%@",strURL];
+        }
+        
     }
     
-    if (![strURL hasPrefix:@"http".uppercaseString])
-    {
-        strURL = [NSString stringWithFormat:@"http://%@",strURL];
-    }
+    
     if ([is_PostJob_Edit_update isEqualToString:@"update"])
         postJob_ModelClass.URL = [[NSString stringWithFormat:@"%@",strURL]isNull];
     else
