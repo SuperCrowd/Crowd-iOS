@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "215"
             endingLineNumber = "215"
-            landmarkName = "-getCapabilityToken:"
+            landmarkName = "-setAvailableForCallSuccessfull:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "343"
             endingLineNumber = "343"
-            landmarkName = "-device:didReceiveIncomingConnection:"
+            landmarkName = "-capabilityTokenValid"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

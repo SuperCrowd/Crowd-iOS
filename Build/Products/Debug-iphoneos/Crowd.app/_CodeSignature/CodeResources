@@ -4,445 +4,441 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>AppIcon120x120~car.png</key>
-		<data>
-		Rb3WGoVl3ZSFC3BB++UqCHRz0EE=
-		</data>
 		<key>AppIcon29x29.png</key>
 		<data>
-		tOpjjvn6RsF+rVDgv9JYwJuqe3w=
+		QgQJaBBwP0N12JF593+JkXs6Swo=
 		</data>
 		<key>AppIcon29x29@2x.png</key>
 		<data>
-		kzFA6KkD9zwiXwSfw/17rvzhYqU=
+		cR/WU7gmalVsfAjG6g1LwEppJqs=
 		</data>
 		<key>AppIcon29x29@2x~ipad.png</key>
 		<data>
-		kzFA6KkD9zwiXwSfw/17rvzhYqU=
+		cR/WU7gmalVsfAjG6g1LwEppJqs=
 		</data>
 		<key>AppIcon29x29@3x.png</key>
 		<data>
-		taXYsYV+gJgff+vC4Z3KzhR9m2o=
+		nCWvghA8yfQqyuNupJZ0iX0JUiY=
 		</data>
 		<key>AppIcon29x29~ipad.png</key>
 		<data>
-		tOpjjvn6RsF+rVDgv9JYwJuqe3w=
+		QgQJaBBwP0N12JF593+JkXs6Swo=
 		</data>
 		<key>AppIcon40x40@2x.png</key>
 		<data>
-		0QY71hIe8jGUvJQfuMwSCJfoIoI=
+		5lFY++wva2XsRulV4a2IuCg47RY=
 		</data>
 		<key>AppIcon40x40@2x~ipad.png</key>
 		<data>
-		0QY71hIe8jGUvJQfuMwSCJfoIoI=
+		5lFY++wva2XsRulV4a2IuCg47RY=
 		</data>
 		<key>AppIcon40x40@3x.png</key>
 		<data>
-		q+F8YQ6OnAai7OZkGSDrP72jv+w=
+		mRrmlYadycRu234DWgQgEV4Q+gM=
 		</data>
 		<key>AppIcon40x40~ipad.png</key>
 		<data>
-		a5V1mngfEfBvplwCUGQ1xDy/qXc=
+		Fe3HZ9ie0XjO18fn1fgkEF5pyC4=
 		</data>
 		<key>AppIcon50x50@2x~ipad.png</key>
 		<data>
-		IUuRldQF4bPP43XtQQr6tMhsy8M=
+		nWFnvVQloSWQRGE/jb4IcExUaSs=
 		</data>
 		<key>AppIcon50x50~ipad.png</key>
 		<data>
-		DDsA3CC5jMn9MdylEKbjsKYFcfc=
+		FbRWu/rluaqU0OUTGA8l6BK8WJc=
 		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
-		7yhiVXAXabqT/fvzHm2Hmo4WHik=
+		ilWUcQc27CBwvEohe9F26ylfkRU=
 		</data>
 		<key>AppIcon57x57@2x.png</key>
 		<data>
-		eRJXdUn4GlIJTz4I/jPq4LsZpUE=
+		SC2y4xB+y9SvWXyzAAlcHkbWS70=
 		</data>
 		<key>AppIcon60x60@2x.png</key>
 		<data>
-		q+F8YQ6OnAai7OZkGSDrP72jv+w=
+		0B0Cplx0uLmzZMGZb6PpxwYNi5E=
 		</data>
 		<key>AppIcon60x60@3x.png</key>
 		<data>
-		7o7IzF4liUPA0Ago6hI6yMw6/wg=
+		sV4p+GF0TEzHGyDfP3m9N4Gpwm0=
 		</data>
 		<key>AppIcon72x72@2x~ipad.png</key>
 		<data>
-		HxY+ek/54DB/1wskuJg6FUlR5lg=
+		lM8BcE+Pfu5NZOHRT0uZKerI8pk=
 		</data>
 		<key>AppIcon72x72~ipad.png</key>
 		<data>
-		ziAexCxVclltEn4SM0Jr+PK+l6U=
+		FPcNjtz9ThJJBUvqry/cUOXK7uc=
 		</data>
 		<key>AppIcon76x76@2x~ipad.png</key>
 		<data>
-		fYrcAyi9+IpXBRuvi6tHDY0oerM=
+		SjfYMhVCEazw5+HPeElNkOFO8/E=
 		</data>
 		<key>AppIcon76x76~ipad.png</key>
 		<data>
-		gNBeXmZzypUj3cEmuEPl8fJiDKI=
+		DSuv+B1xnqE8DwtRtIZqKNJes9g=
 		</data>
 		<key>Assets.car</key>
 		<data>
-		ZY4qrRuhT/eQi7facFal7FyYH4Q=
+		tOAyFF2f+EMZXupU+IvxUww8FiU=
 		</data>
 		<key>C_CallViewController.nib/objects-8.0+.nib</key>
 		<data>
-		oPlOILhMFZ+f3Kkg1oLUYGni7BI=
+		Agj2BcU92t/iHX/haFwiQ5+y1X4=
 		</data>
 		<key>C_CallViewController.nib/runtime.nib</key>
 		<data>
-		tgV78rnc3UKf5jVXydPWREi+ug8=
+		lHe40oVGTxb8UQh1SK9jGQmyqWw=
 		</data>
 		<key>C_Cell_Chat_Me.nib</key>
 		<data>
-		7Qal2LTEET/9axHwbXBm4tQSoaE=
+		M6sfBQ9ausybY/kNtl1Jw+QwlQ8=
 		</data>
 		<key>C_Cell_Chat_Other.nib</key>
 		<data>
-		YLqRsaRm2hH9WGktjjrJdnGAwA8=
+		zqltV5AcHYiAdrgZGYBNWH5cYkY=
 		</data>
 		<key>C_Cell_Dashboard.nib/objects-8.0+.nib</key>
 		<data>
-		zlWTf8fQ+4DmQ2h+a3kdYiZ/lrE=
+		tBpSqJERxc7CIQBn9r30+E7iEoo=
 		</data>
 		<key>C_Cell_Dashboard.nib/runtime.nib</key>
 		<data>
-		tQXhBr2j1U370WsYz+TQAXtUrjI=
+		eJ15OuaQbl03PeoAqgBp/VrTfh4=
 		</data>
 		<key>C_Cell_EducationProfile.nib</key>
 		<data>
-		+fBQetwNXhW4orKcQeRyBRYoYQo=
+		iGVfGgUNOSwlaRWVmOJkCfUBKWI=
 		</data>
 		<key>C_Cell_FindAJobList.nib</key>
 		<data>
-		OXyDyt/zXy0marDCvJhd9ZwsGr8=
+		F7aRr6VTSSXjeF73uVIxD5vzQ1k=
 		</data>
 		<key>C_Cell_FindAJobList_Info.nib</key>
 		<data>
-		PLtfsycw4JhoRcr/c7q2upn5T+Y=
+		fYCMfNyS5EXiymjnI9nEBzJNi58=
 		</data>
 		<key>C_Cell_Find_CandidateList.nib/objects-8.0+.nib</key>
 		<data>
-		nrsh0+4nB9lzj7Tl2KVuvipDXxI=
+		Woqho4Uwlyu561ouDQaS07Bhags=
 		</data>
 		<key>C_Cell_Find_CandidateList.nib/runtime.nib</key>
 		<data>
-		o7EQw04JB5Y0HxmAJlXYuOjnXr8=
+		J0AGUFuR7XZA5ipxyq/6urAWJo4=
 		</data>
 		<key>C_Cell_Find_Candidate_Info.nib</key>
 		<data>
-		mF9FIiURbfxanloLONLVywn2QJY=
+		CCA5X8B9z2QqnGzm26zvkiIgmGc=
 		</data>
 		<key>C_Cell_Follower.nib/objects-8.0+.nib</key>
 		<data>
-		O1mGxFcBE2taI5fmnuGsQ/DTJ18=
+		eSJY7PeLtvaYjiqqfN18gSz0cr4=
 		</data>
 		<key>C_Cell_Follower.nib/runtime.nib</key>
 		<data>
-		eOzzZCWGQ1vq1I5bZZ2deA7UKIU=
+		t0bfhlNzjJLysAHGnCW4oOjJf8M=
 		</data>
 		<key>C_Cell_History.nib</key>
 		<data>
-		9hkJ0X+SEVkll5ey8SFSk9g8tBs=
+		HUcR7x7GTghxagjOE+5RGw1zUFY=
 		</data>
 		<key>C_Cell_Message_Job.nib</key>
 		<data>
-		4KNNUkE93Q1fEg9Qo350skEpQkY=
+		DQNX9UQRRj6wkUfZ3yvZERCUQTM=
 		</data>
 		<key>C_Cell_Message_Simple.nib</key>
 		<data>
-		Q02TMVDMtukkv3Pf8cdLQHRJqpY=
+		WhGcM6XB2MWYLUomG9pTt9ZZhPQ=
 		</data>
 		<key>C_Cell_PositionProfile.nib</key>
 		<data>
-		S/mQ4BM+i/UF8OgKpypy6cs/pwo=
+		eYUm0/62KPN0oDHgGR0J6UeIPKM=
 		</data>
 		<key>C_Cell_RecommendationProfile.nib</key>
 		<data>
-		hCJQ81BqFh/XvzDWLlqkz1YXnKc=
+		+8ZAaNAh3e5AbW61Oe5cIDgJG/w=
 		</data>
 		<key>C_Cell_SkillsProfile.nib</key>
 		<data>
-		BuTWLmndgwqiFvAImr6LUGkm/8o=
+		0VKcEJ6XnB1ZWe4wSkYLep6U72Y=
 		</data>
 		<key>C_Cell_Tags.nib/objects-8.0+.nib</key>
 		<data>
-		U/f0L1knm/835drMphzVLifSA/A=
+		m8mLCSlr2TBO0YB3+ob6Jn2/z80=
 		</data>
 		<key>C_Cell_Tags.nib/runtime.nib</key>
 		<data>
-		26s6i4CXX7T0XxvbUtxNoe+w6us=
+		o9jtmveR1St5CZhVyOO80eMDcBQ=
 		</data>
 		<key>C_ChooseImageVC.nib</key>
 		<data>
-		WtSLRzub4rJbl777N4rf9swr2A4=
+		Bs5Jl1agBQ/6uWQJZULsMPZxVR8=
 		</data>
 		<key>C_DashBoardVC.nib</key>
 		<data>
-		+u1IeDPenL52442hvjk78lcZYzc=
+		TsXpOfxx6Um3oncboJKLeAFYa8Q=
 		</data>
 		<key>C_EditLocationVC.nib</key>
 		<data>
-		Vc24TVLuD7cgMaHjGvS/630Nqkw=
+		QFATMu5vpKCZdXWNYLoxtzBKAzU=
 		</data>
 		<key>C_EditTagVC.nib</key>
 		<data>
-		glHDaL0+rbB0qu8aEV4rtO7lpqE=
+		zTqxN77e1MGHhk0bgK16Fo5CJsI=
 		</data>
 		<key>C_EditTextVC.nib</key>
 		<data>
-		MsIyj8JMAYJONC4mnrIOtykxXWE=
+		wd7gAinA8tVDCm4dg3C+PqjrdSk=
 		</data>
 		<key>C_EditTimeVC.nib</key>
 		<data>
-		/TSEGAP2FSDdbxukPpMGKERkWlA=
+		pLdmL4uvlq2j865gCDW2V+16eDc=
 		</data>
 		<key>C_EducationHistory.nib</key>
 		<data>
-		98vOpqmOV3FRtCsInMakc/PRssM=
+		8827QokafLe1Iax04hg9QfAjC/A=
 		</data>
 		<key>C_Education_Courses.nib</key>
 		<data>
-		C6k1GGAYsKs++ri6jCGx0tty++g=
+		viXFBanhncCMhjkYHhsO/WVtUHc=
 		</data>
 		<key>C_Education_Degree.nib</key>
 		<data>
-		LzLfbqRdgJQCER4ZKFaQxfbW0NI=
+		BQiVbrgQqglL0R95FxiP8OarZpo=
 		</data>
 		<key>C_Education_SchoolVC.nib</key>
 		<data>
-		NiLoRUyH7z1lD8Npw8H3UfEjgJ8=
+		wyWVQRLvxnu0CXHxEsVVLae3xfQ=
 		</data>
 		<key>C_Education_Time.nib</key>
 		<data>
-		h1qm34e9BSFAeWMc0CLjU+7firk=
+		p+CSQ7nGHpccQtA91p9n7GnMB88=
 		</data>
 		<key>C_ExperienceVC.nib</key>
 		<data>
-		G5hAlv6pOdtOd36RLCD89mJ6TzM=
+		XLJaOdpRfiSxi5/xPTDrcP+cG94=
 		</data>
 		<key>C_FindAJobListingVC.nib</key>
 		<data>
-		7smhYJibjQqtHPCJBsU1/wuCMmc=
+		qMmYOblaE0IbLBdsGHxOSNeTNXA=
 		</data>
 		<key>C_Find_CandidateListingVC.nib</key>
 		<data>
-		QTttutEa0cTUiltlI4sW1RY0Gss=
+		Vg6TySUI+hiZKMfTVCuSbexaCl4=
 		</data>
 		<key>C_Header_ProfilePreview.nib</key>
 		<data>
-		Fl21bLw89SLbeAhrAR2cNtyrWXY=
+		wUNYBOND1OGm3kGpCtEyvRFPH5E=
 		</data>
 		<key>C_IndustryVC.nib</key>
 		<data>
-		nmpRZ7uUWkAfwa6H2qOwyuEfTHs=
+		l8RP+kUdEWhvi2Cc7QoTgYahpo0=
 		</data>
 		<key>C_JobViewVC.nib</key>
 		<data>
-		c+6FPoNioCb+RrFSNGs09ND6I9o=
+		vAbhsAgaCIA1WnAUmV+mD6qSdN4=
 		</data>
 		<key>C_JobsOther.nib/objects-8.0+.nib</key>
 		<data>
-		BxTWFpF2Z5FtR0eaFFwzSHyQLJo=
+		Gr7spKL3+N3/L/ZT32mOmUHikao=
 		</data>
 		<key>C_JobsOther.nib/runtime.nib</key>
 		<data>
-		g+Xy9PsVKNafGQFNJr1SLVSyHpg=
+		FCTT/+6WEQX9isVRKjayQWvn+GM=
 		</data>
 		<key>C_LeftMenuVC.nib</key>
 		<data>
-		DmFGU3MkpcaC1QWTyM1jD2ye5Mk=
+		Cx/jqkPeD8mrL32GXSNRMCJw/U4=
 		</data>
 		<key>C_LocationVC.nib</key>
 		<data>
-		48gDollLdLkbdqt7NsSNE3d6hjo=
+		YiTIlWTZLKKpwtufht+RqLn1/SA=
 		</data>
 		<key>C_LoginVC.nib/objects-8.0+.nib</key>
 		<data>
-		S0e9ArIloFsL+FzznHBt63E9k8o=
+		ehDoM1nToTWfdgQIavTuxkw0WXQ=
 		</data>
 		<key>C_LoginVC.nib/runtime.nib</key>
 		<data>
-		Lk2dul22toIJhZUZsj4K+M+xf94=
+		ymJ0bqTy2a5FM8s29FSL2EFNTP8=
 		</data>
 		<key>C_MP_ChooseImageVC.nib</key>
 		<data>
-		xB0W1XNhIVskF0peZ5KIkUl03/o=
+		cCqwKJ4C0mGcNwQ9RfShc0EcbbA=
 		</data>
 		<key>C_MP_EditLocationVC.nib</key>
 		<data>
-		PqaccV83m+PkUScTuDOb8DEbbss=
+		ZWu0EHJmBwe6R2LsTNhE/hjs4/U=
 		</data>
 		<key>C_MP_EditTagVC.nib</key>
 		<data>
-		qIT+cVZgo8W7Jk2wNYBBWcL5XHg=
+		nl4BXp8Jpwf7GD75myGE/RXCfT4=
 		</data>
 		<key>C_MP_EditTextVC.nib</key>
 		<data>
-		5FVLeOd6jgDMxKJZ0z6Tf7k4uhA=
+		u4cXuuEZVkE3SxmWVzWxiVNOwxQ=
 		</data>
 		<key>C_MP_EditTimeVC.nib</key>
 		<data>
-		NdJjQEdgsclQq6a2PcQpsQxfvUk=
+		y6tQdaGoGm9qFf90Qb+1z4fSHco=
 		</data>
 		<key>C_MP_EducationHistory.nib</key>
 		<data>
-		OeW8CjqEtVDhMpjasCelRq7hZu0=
+		/InIguz3ApmcPSDTT+gqA1JUevw=
 		</data>
 		<key>C_MP_ExperienceVC.nib</key>
 		<data>
-		VjvKBQYjKuOqenp8CoQKXkRSP/c=
+		4PLNW9v9z1nDm42/M98VB5U/EIQ=
 		</data>
 		<key>C_MP_IndustryListVC.nib</key>
 		<data>
-		5xSdMn9941Lu3RKWUg3cZQa6FUM=
+		WPPxFRpmBKbXDy2yR7vkCGC5MZ4=
 		</data>
 		<key>C_MP_IndustryVC.nib</key>
 		<data>
-		OuXhnspANT/CeOyR7Xnw91tJbNM=
+		2R7SzdnTfreaoelWxrIijfkyXGw=
 		</data>
 		<key>C_MP_LocationVC.nib</key>
 		<data>
-		Ctc9cbHvkcOalyW8zm6tJAUmSvU=
+		hr9OyS4q9NJ8BvhoAxDCGNTvjYY=
 		</data>
 		<key>C_MP_NameVC.nib</key>
 		<data>
-		Z42jMGYP4zcuLLdIdl1OFIcfjaE=
+		Qadvuor1K6i4W9Nqfp+G5fOXbNY=
 		</data>
 		<key>C_MP_ProffesionalSummaryVC.nib</key>
 		<data>
-		hOGtCiJQdxCU42fbVx+Fbc6VFGw=
+		8Vp6abxHPEZlpcPBZk18+rJZZm4=
 		</data>
 		<key>C_MP_SkillsVC.nib</key>
 		<data>
-		J74Tud6mpMgJqwuEcElxAUZPq58=
+		KRMQo+48cnvDQPjsnwulGAD+sb8=
 		</data>
 		<key>C_MP_WorkHistoryVC.nib</key>
 		<data>
-		PQTLtNNq8hvBIAI4uBb3q667KaY=
+		MOyKjfSsVBBuzkoYG7jTrEEOzrY=
 		</data>
 		<key>C_MessageListVC.nib</key>
 		<data>
-		Bb4GN90xMxTX/zkupakvGExpuys=
+		41XWaJtvTAPwxwsyCasrAEHpsQo=
 		</data>
 		<key>C_MessageView.nib</key>
 		<data>
-		AQcPePS8GGP0DrAotWYcChLj2xE=
+		jCMCFYLb6FOL27PkrPA5qFR5Cy8=
 		</data>
 		<key>C_MyCrowdVC.nib/objects-8.0+.nib</key>
 		<data>
-		Jqs/Bnhv+9eOptfqFEasiMCzAEA=
+		4sQaHnqdnwzGWmChqmStS8pHCOw=
 		</data>
 		<key>C_MyCrowdVC.nib/runtime.nib</key>
 		<data>
-		2wNbtzGYyAUOdxXr7jfmIlv74+g=
+		o64dNjG8KXtA1S/SqmJvuB2XE6Q=
 		</data>
 		<key>C_MyJobsVC.nib/objects-8.0+.nib</key>
 		<data>
-		ZGjcuH47ibDsoGGdTVKKZfmV2zY=
+		QikD80AnZLGpaWcRVONKztUbpX4=
 		</data>
 		<key>C_MyJobsVC.nib/runtime.nib</key>
 		<data>
-		vQikY7MOd6Kx+zL7cX43HO+0qIc=
+		NLBjm3vNrz5S6c8ECqHH3wMah+I=
 		</data>
 		<key>C_MyProfileVC.nib</key>
 		<data>
-		qivYZlxPPUcTiARzdMWw5RR1buU=
+		QQlYHsSFllmUBCJFGBG9TAfmiVA=
 		</data>
 		<key>C_OtherUserProfileVC.nib</key>
 		<data>
-		MANFYNvrFAiV6VjY0KN9pbxsG/o=
+		4BP8l8GRByLDyo4vgwI/7XgzN2k=
 		</data>
 		<key>C_PostJob_ExperienceVC.nib</key>
 		<data>
-		nXCKZuA2D05B1d54TFaXAG40Kk8=
+		O4WiDbbT6M/VeKmMv9YP2Su/8KQ=
 		</data>
 		<key>C_PostJob_IndustryListingVC.nib</key>
 		<data>
-		evZdmyaAQ6DdZOtCxChjy3dAbeo=
+		9MjtS3XfRKf4bh/gB55TCFR6oNg=
 		</data>
 		<key>C_PostJob_IndustryVC.nib</key>
 		<data>
-		n08PtVBItPQPnQUFVckfSeZaH8k=
+		fOQhWJZjv2N3PbBi6QuI3w8Y4/E=
 		</data>
 		<key>C_PostJob_LinkVC.nib</key>
 		<data>
-		crvdh35SHuWIAZpNrjm+jYqwfR0=
+		yq8DLRd0aLnS9GuiIhTJsMRVOeE=
 		</data>
 		<key>C_PostJob_LocationVC.nib</key>
 		<data>
-		ekFHRbK0ujea1KHglwJOOJ8EDMU=
+		dpSfkSRIn8yblHvVrtlhNOtb5Cc=
 		</data>
 		<key>C_PostJob_NameVC.nib</key>
 		<data>
-		ty/Ug4Y4HHs2VJ6i6zcoeiEo5LQ=
+		TT4NfNwBycqDwcoWWEVTUqWpewY=
 		</data>
 		<key>C_PostJob_PositionVC.nib</key>
 		<data>
-		5d8Ab/kx9b+hu6WQse5Re8qjVsE=
+		QBz7ownVEX+CqkgL9cRi8EEpXYc=
 		</data>
 		<key>C_PostJob_PreviewVC.nib</key>
 		<data>
-		Sl8dJ/0nFgieYE3Z80QG53qWBBo=
+		Py+Wc6Are3i8WQHLme4yJQe5ph0=
 		</data>
 		<key>C_PostJob_QualificationVC.nib</key>
 		<data>
-		izZZIWpvsi4faXIKnC93S3PVAiE=
+		hWOCpho74s564n6nGFZE+7m1fxs=
 		</data>
 		<key>C_PostJob_RolesVC.nib</key>
 		<data>
-		AgEFQBUNdTEa/jxX5HJGc4zRwgo=
+		AqamHrsBsiTSPG7XGIC6i2sdOeA=
 		</data>
 		<key>C_PostJob_SkillsVC.nib</key>
 		<data>
-		ZZzp7pe8luDhs8v+M/z3EKqcM9A=
+		1yUWKkpr3l2BNQcuSIf3HkyzHXk=
 		</data>
 		<key>C_PostJob_UpdateVC.nib</key>
 		<data>
-		1hmKS9gN+UVJMVw9//sBqyUnZwc=
+		+V1cfvjqdN9Q4D7Cum4eAOGwYJg=
 		</data>
 		<key>C_ProffessionalSummaryVC.nib</key>
 		<data>
-		S6tN0RntO8u4XCFvecQhemU7ptQ=
+		pSTuMMdqulA8MJN//485Bw0lgTg=
 		</data>
 		<key>C_ProfilePreviewVC.nib</key>
 		<data>
-		QOKtyv0JGxAhcJRkGURDwPCIOoE=
+		riE1sCopAp6m+EUV6ITQfzRU3p8=
 		</data>
 		<key>C_SearchVC.nib</key>
 		<data>
-		uLnSmDNwowoMeGrdFjuHSyUPziE=
+		VpNcEkbaVOgln8PwkbaEtFXoWEg=
 		</data>
 		<key>C_SkillsVC.nib</key>
 		<data>
-		WTT19BCTqd7Lq5MY48u87HTyq4Q=
+		40rhI5YZlhdz6qFh2eZ9NBhq/cQ=
 		</data>
 		<key>C_TutorialVC.nib</key>
 		<data>
-		6nYTpf39v3dxL4D2WZzSd0Xq0Gs=
+		mLvsns8Lu2I8kDedEfL/unfTTCs=
 		</data>
 		<key>C_ViewEditableTextField.nib</key>
 		<data>
-		aUsQHdYEWcciXkvJfbXnyBQ9Z+Y=
+		zQlAOeeNNzgMJADszfxSQn00Bzs=
 		</data>
 		<key>C_WebVC.nib</key>
 		<data>
-		JG3nj4MoZmsnSWVutTJsSOZnjpo=
+		Jw9bg/YuL1dU9UvYDpmW3uJ4IoY=
 		</data>
 		<key>C_WelcomeVC.nib</key>
 		<data>
-		s7l/xm7ruJmhK10kCl4bMSw9qZ4=
+		JcZlzz2xgK1rGfXo3MpcQ6PcKTI=
 		</data>
 		<key>C_WorkHistory.nib</key>
 		<data>
-		mhQOQWMGax0yNAsGyVtJwYIqlW8=
+		FQrBkA4f9qt2huybYsmUN7BLaQY=
 		</data>
 		<key>ContactsViewController.nib</key>
 		<data>
-		N1pyNbby5mZK3F0ZMY/BIl2JaQc=
+		mvow9OrpLibRi7HeBDZFEFFQbq4=
 		</data>
 		<key>Helvetica_6.ttf</key>
 		<data>
@@ -454,39 +450,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		lm8wN82ii9Ji3P+Y0dY9J3jNE20=
+		CKvP/C5tT+UrPpms0LC1dWbLKGU=
 		</data>
 		<key>JobCell.nib/objects-8.0+.nib</key>
 		<data>
-		EtID08tgemgPmBQaPtMAwkIDCpo=
+		AUdJ1BSg0RfAvduYY7ai7+clTD0=
 		</data>
 		<key>JobCell.nib/runtime.nib</key>
 		<data>
-		CyjPqi6K74zwUeSNmUriNN3Oupo=
+		BhSxrmKbGssj3tf2eh2kba4N5Mw=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
-		4y6PhUirjQzgYcA3Ph5gnAJT7hI=
+		xGUVsqYMRy/PwLdG/VkRWLcSy9k=
 		</data>
 		<key>LaunchImage-700-568h@2x.png</key>
 		<data>
-		4y6PhUirjQzgYcA3Ph5gnAJT7hI=
+		xGUVsqYMRy/PwLdG/VkRWLcSy9k=
 		</data>
 		<key>LaunchImage-700@2x.png</key>
 		<data>
-		9lS9M/BDnTZCb1uZSl/HHKmFTyI=
+		sVPi0h9TbnJ3wbb4OOPOGnnSveY=
 		</data>
 		<key>LaunchImage.png</key>
 		<data>
-		eXSDYtL5Yz0Vv5cz5y82fCMrQhI=
+		0btj0+fudQfKZ/9TObFhpVrwpHI=
 		</data>
 		<key>LaunchImage@2x.png</key>
 		<data>
-		9lS9M/BDnTZCb1uZSl/HHKmFTyI=
+		sVPi0h9TbnJ3wbb4OOPOGnnSveY=
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		lAThILR+ndyTwVAQURDuN3Q4uic=
+		bTNJdxbl3pJ/y7Id9IkEwhGLwi0=
 		</data>
 		<key>Oswald-Regular.ttf</key>
 		<data>
@@ -514,15 +510,15 @@
 		</data>
 		<key>ViewFindType.nib</key>
 		<data>
-		Lza8BBR3jHbkSDA//rRTlImMwCk=
+		GblECouljyqtC8lG2zSBIQekaoU=
 		</data>
 		<key>ViewSelection.nib/objects-8.0+.nib</key>
 		<data>
-		+6czPwxYjzj+yPdXgFL5bj5q6WM=
+		pysorCMmVmN1jUOkADm2f4JnPyU=
 		</data>
 		<key>ViewSelection.nib/runtime.nib</key>
 		<data>
-		7sXhmwgMoav94/3+rD+ZQUEP3vU=
+		CHuXI0oy91Q0UsapbmLAw9+OErQ=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -544,445 +540,441 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>AppIcon120x120~car.png</key>
-		<data>
-		Rb3WGoVl3ZSFC3BB++UqCHRz0EE=
-		</data>
 		<key>AppIcon29x29.png</key>
 		<data>
-		tOpjjvn6RsF+rVDgv9JYwJuqe3w=
+		QgQJaBBwP0N12JF593+JkXs6Swo=
 		</data>
 		<key>AppIcon29x29@2x.png</key>
 		<data>
-		kzFA6KkD9zwiXwSfw/17rvzhYqU=
+		cR/WU7gmalVsfAjG6g1LwEppJqs=
 		</data>
 		<key>AppIcon29x29@2x~ipad.png</key>
 		<data>
-		kzFA6KkD9zwiXwSfw/17rvzhYqU=
+		cR/WU7gmalVsfAjG6g1LwEppJqs=
 		</data>
 		<key>AppIcon29x29@3x.png</key>
 		<data>
-		taXYsYV+gJgff+vC4Z3KzhR9m2o=
+		nCWvghA8yfQqyuNupJZ0iX0JUiY=
 		</data>
 		<key>AppIcon29x29~ipad.png</key>
 		<data>
-		tOpjjvn6RsF+rVDgv9JYwJuqe3w=
+		QgQJaBBwP0N12JF593+JkXs6Swo=
 		</data>
 		<key>AppIcon40x40@2x.png</key>
 		<data>
-		0QY71hIe8jGUvJQfuMwSCJfoIoI=
+		5lFY++wva2XsRulV4a2IuCg47RY=
 		</data>
 		<key>AppIcon40x40@2x~ipad.png</key>
 		<data>
-		0QY71hIe8jGUvJQfuMwSCJfoIoI=
+		5lFY++wva2XsRulV4a2IuCg47RY=
 		</data>
 		<key>AppIcon40x40@3x.png</key>
 		<data>
-		q+F8YQ6OnAai7OZkGSDrP72jv+w=
+		mRrmlYadycRu234DWgQgEV4Q+gM=
 		</data>
 		<key>AppIcon40x40~ipad.png</key>
 		<data>
-		a5V1mngfEfBvplwCUGQ1xDy/qXc=
+		Fe3HZ9ie0XjO18fn1fgkEF5pyC4=
 		</data>
 		<key>AppIcon50x50@2x~ipad.png</key>
 		<data>
-		IUuRldQF4bPP43XtQQr6tMhsy8M=
+		nWFnvVQloSWQRGE/jb4IcExUaSs=
 		</data>
 		<key>AppIcon50x50~ipad.png</key>
 		<data>
-		DDsA3CC5jMn9MdylEKbjsKYFcfc=
+		FbRWu/rluaqU0OUTGA8l6BK8WJc=
 		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
-		7yhiVXAXabqT/fvzHm2Hmo4WHik=
+		ilWUcQc27CBwvEohe9F26ylfkRU=
 		</data>
 		<key>AppIcon57x57@2x.png</key>
 		<data>
-		eRJXdUn4GlIJTz4I/jPq4LsZpUE=
+		SC2y4xB+y9SvWXyzAAlcHkbWS70=
 		</data>
 		<key>AppIcon60x60@2x.png</key>
 		<data>
-		q+F8YQ6OnAai7OZkGSDrP72jv+w=
+		0B0Cplx0uLmzZMGZb6PpxwYNi5E=
 		</data>
 		<key>AppIcon60x60@3x.png</key>
 		<data>
-		7o7IzF4liUPA0Ago6hI6yMw6/wg=
+		sV4p+GF0TEzHGyDfP3m9N4Gpwm0=
 		</data>
 		<key>AppIcon72x72@2x~ipad.png</key>
 		<data>
-		HxY+ek/54DB/1wskuJg6FUlR5lg=
+		lM8BcE+Pfu5NZOHRT0uZKerI8pk=
 		</data>
 		<key>AppIcon72x72~ipad.png</key>
 		<data>
-		ziAexCxVclltEn4SM0Jr+PK+l6U=
+		FPcNjtz9ThJJBUvqry/cUOXK7uc=
 		</data>
 		<key>AppIcon76x76@2x~ipad.png</key>
 		<data>
-		fYrcAyi9+IpXBRuvi6tHDY0oerM=
+		SjfYMhVCEazw5+HPeElNkOFO8/E=
 		</data>
 		<key>AppIcon76x76~ipad.png</key>
 		<data>
-		gNBeXmZzypUj3cEmuEPl8fJiDKI=
+		DSuv+B1xnqE8DwtRtIZqKNJes9g=
 		</data>
 		<key>Assets.car</key>
 		<data>
-		ZY4qrRuhT/eQi7facFal7FyYH4Q=
+		tOAyFF2f+EMZXupU+IvxUww8FiU=
 		</data>
 		<key>C_CallViewController.nib/objects-8.0+.nib</key>
 		<data>
-		oPlOILhMFZ+f3Kkg1oLUYGni7BI=
+		Agj2BcU92t/iHX/haFwiQ5+y1X4=
 		</data>
 		<key>C_CallViewController.nib/runtime.nib</key>
 		<data>
-		tgV78rnc3UKf5jVXydPWREi+ug8=
+		lHe40oVGTxb8UQh1SK9jGQmyqWw=
 		</data>
 		<key>C_Cell_Chat_Me.nib</key>
 		<data>
-		7Qal2LTEET/9axHwbXBm4tQSoaE=
+		M6sfBQ9ausybY/kNtl1Jw+QwlQ8=
 		</data>
 		<key>C_Cell_Chat_Other.nib</key>
 		<data>
-		YLqRsaRm2hH9WGktjjrJdnGAwA8=
+		zqltV5AcHYiAdrgZGYBNWH5cYkY=
 		</data>
 		<key>C_Cell_Dashboard.nib/objects-8.0+.nib</key>
 		<data>
-		zlWTf8fQ+4DmQ2h+a3kdYiZ/lrE=
+		tBpSqJERxc7CIQBn9r30+E7iEoo=
 		</data>
 		<key>C_Cell_Dashboard.nib/runtime.nib</key>
 		<data>
-		tQXhBr2j1U370WsYz+TQAXtUrjI=
+		eJ15OuaQbl03PeoAqgBp/VrTfh4=
 		</data>
 		<key>C_Cell_EducationProfile.nib</key>
 		<data>
-		+fBQetwNXhW4orKcQeRyBRYoYQo=
+		iGVfGgUNOSwlaRWVmOJkCfUBKWI=
 		</data>
 		<key>C_Cell_FindAJobList.nib</key>
 		<data>
-		OXyDyt/zXy0marDCvJhd9ZwsGr8=
+		F7aRr6VTSSXjeF73uVIxD5vzQ1k=
 		</data>
 		<key>C_Cell_FindAJobList_Info.nib</key>
 		<data>
-		PLtfsycw4JhoRcr/c7q2upn5T+Y=
+		fYCMfNyS5EXiymjnI9nEBzJNi58=
 		</data>
 		<key>C_Cell_Find_CandidateList.nib/objects-8.0+.nib</key>
 		<data>
-		nrsh0+4nB9lzj7Tl2KVuvipDXxI=
+		Woqho4Uwlyu561ouDQaS07Bhags=
 		</data>
 		<key>C_Cell_Find_CandidateList.nib/runtime.nib</key>
 		<data>
-		o7EQw04JB5Y0HxmAJlXYuOjnXr8=
+		J0AGUFuR7XZA5ipxyq/6urAWJo4=
 		</data>
 		<key>C_Cell_Find_Candidate_Info.nib</key>
 		<data>
-		mF9FIiURbfxanloLONLVywn2QJY=
+		CCA5X8B9z2QqnGzm26zvkiIgmGc=
 		</data>
 		<key>C_Cell_Follower.nib/objects-8.0+.nib</key>
 		<data>
-		O1mGxFcBE2taI5fmnuGsQ/DTJ18=
+		eSJY7PeLtvaYjiqqfN18gSz0cr4=
 		</data>
 		<key>C_Cell_Follower.nib/runtime.nib</key>
 		<data>
-		eOzzZCWGQ1vq1I5bZZ2deA7UKIU=
+		t0bfhlNzjJLysAHGnCW4oOjJf8M=
 		</data>
 		<key>C_Cell_History.nib</key>
 		<data>
-		9hkJ0X+SEVkll5ey8SFSk9g8tBs=
+		HUcR7x7GTghxagjOE+5RGw1zUFY=
 		</data>
 		<key>C_Cell_Message_Job.nib</key>
 		<data>
-		4KNNUkE93Q1fEg9Qo350skEpQkY=
+		DQNX9UQRRj6wkUfZ3yvZERCUQTM=
 		</data>
 		<key>C_Cell_Message_Simple.nib</key>
 		<data>
-		Q02TMVDMtukkv3Pf8cdLQHRJqpY=
+		WhGcM6XB2MWYLUomG9pTt9ZZhPQ=
 		</data>
 		<key>C_Cell_PositionProfile.nib</key>
 		<data>
-		S/mQ4BM+i/UF8OgKpypy6cs/pwo=
+		eYUm0/62KPN0oDHgGR0J6UeIPKM=
 		</data>
 		<key>C_Cell_RecommendationProfile.nib</key>
 		<data>
-		hCJQ81BqFh/XvzDWLlqkz1YXnKc=
+		+8ZAaNAh3e5AbW61Oe5cIDgJG/w=
 		</data>
 		<key>C_Cell_SkillsProfile.nib</key>
 		<data>
-		BuTWLmndgwqiFvAImr6LUGkm/8o=
+		0VKcEJ6XnB1ZWe4wSkYLep6U72Y=
 		</data>
 		<key>C_Cell_Tags.nib/objects-8.0+.nib</key>
 		<data>
-		U/f0L1knm/835drMphzVLifSA/A=
+		m8mLCSlr2TBO0YB3+ob6Jn2/z80=
 		</data>
 		<key>C_Cell_Tags.nib/runtime.nib</key>
 		<data>
-		26s6i4CXX7T0XxvbUtxNoe+w6us=
+		o9jtmveR1St5CZhVyOO80eMDcBQ=
 		</data>
 		<key>C_ChooseImageVC.nib</key>
 		<data>
-		WtSLRzub4rJbl777N4rf9swr2A4=
+		Bs5Jl1agBQ/6uWQJZULsMPZxVR8=
 		</data>
 		<key>C_DashBoardVC.nib</key>
 		<data>
-		+u1IeDPenL52442hvjk78lcZYzc=
+		TsXpOfxx6Um3oncboJKLeAFYa8Q=
 		</data>
 		<key>C_EditLocationVC.nib</key>
 		<data>
-		Vc24TVLuD7cgMaHjGvS/630Nqkw=
+		QFATMu5vpKCZdXWNYLoxtzBKAzU=
 		</data>
 		<key>C_EditTagVC.nib</key>
 		<data>
-		glHDaL0+rbB0qu8aEV4rtO7lpqE=
+		zTqxN77e1MGHhk0bgK16Fo5CJsI=
 		</data>
 		<key>C_EditTextVC.nib</key>
 		<data>
-		MsIyj8JMAYJONC4mnrIOtykxXWE=
+		wd7gAinA8tVDCm4dg3C+PqjrdSk=
 		</data>
 		<key>C_EditTimeVC.nib</key>
 		<data>
-		/TSEGAP2FSDdbxukPpMGKERkWlA=
+		pLdmL4uvlq2j865gCDW2V+16eDc=
 		</data>
 		<key>C_EducationHistory.nib</key>
 		<data>
-		98vOpqmOV3FRtCsInMakc/PRssM=
+		8827QokafLe1Iax04hg9QfAjC/A=
 		</data>
 		<key>C_Education_Courses.nib</key>
 		<data>
-		C6k1GGAYsKs++ri6jCGx0tty++g=
+		viXFBanhncCMhjkYHhsO/WVtUHc=
 		</data>
 		<key>C_Education_Degree.nib</key>
 		<data>
-		LzLfbqRdgJQCER4ZKFaQxfbW0NI=
+		BQiVbrgQqglL0R95FxiP8OarZpo=
 		</data>
 		<key>C_Education_SchoolVC.nib</key>
 		<data>
-		NiLoRUyH7z1lD8Npw8H3UfEjgJ8=
+		wyWVQRLvxnu0CXHxEsVVLae3xfQ=
 		</data>
 		<key>C_Education_Time.nib</key>
 		<data>
-		h1qm34e9BSFAeWMc0CLjU+7firk=
+		p+CSQ7nGHpccQtA91p9n7GnMB88=
 		</data>
 		<key>C_ExperienceVC.nib</key>
 		<data>
-		G5hAlv6pOdtOd36RLCD89mJ6TzM=
+		XLJaOdpRfiSxi5/xPTDrcP+cG94=
 		</data>
 		<key>C_FindAJobListingVC.nib</key>
 		<data>
-		7smhYJibjQqtHPCJBsU1/wuCMmc=
+		qMmYOblaE0IbLBdsGHxOSNeTNXA=
 		</data>
 		<key>C_Find_CandidateListingVC.nib</key>
 		<data>
-		QTttutEa0cTUiltlI4sW1RY0Gss=
+		Vg6TySUI+hiZKMfTVCuSbexaCl4=
 		</data>
 		<key>C_Header_ProfilePreview.nib</key>
 		<data>
-		Fl21bLw89SLbeAhrAR2cNtyrWXY=
+		wUNYBOND1OGm3kGpCtEyvRFPH5E=
 		</data>
 		<key>C_IndustryVC.nib</key>
 		<data>
-		nmpRZ7uUWkAfwa6H2qOwyuEfTHs=
+		l8RP+kUdEWhvi2Cc7QoTgYahpo0=
 		</data>
 		<key>C_JobViewVC.nib</key>
 		<data>
-		c+6FPoNioCb+RrFSNGs09ND6I9o=
+		vAbhsAgaCIA1WnAUmV+mD6qSdN4=
 		</data>
 		<key>C_JobsOther.nib/objects-8.0+.nib</key>
 		<data>
-		BxTWFpF2Z5FtR0eaFFwzSHyQLJo=
+		Gr7spKL3+N3/L/ZT32mOmUHikao=
 		</data>
 		<key>C_JobsOther.nib/runtime.nib</key>
 		<data>
-		g+Xy9PsVKNafGQFNJr1SLVSyHpg=
+		FCTT/+6WEQX9isVRKjayQWvn+GM=
 		</data>
 		<key>C_LeftMenuVC.nib</key>
 		<data>
-		DmFGU3MkpcaC1QWTyM1jD2ye5Mk=
+		Cx/jqkPeD8mrL32GXSNRMCJw/U4=
 		</data>
 		<key>C_LocationVC.nib</key>
 		<data>
-		48gDollLdLkbdqt7NsSNE3d6hjo=
+		YiTIlWTZLKKpwtufht+RqLn1/SA=
 		</data>
 		<key>C_LoginVC.nib/objects-8.0+.nib</key>
 		<data>
-		S0e9ArIloFsL+FzznHBt63E9k8o=
+		ehDoM1nToTWfdgQIavTuxkw0WXQ=
 		</data>
 		<key>C_LoginVC.nib/runtime.nib</key>
 		<data>
-		Lk2dul22toIJhZUZsj4K+M+xf94=
+		ymJ0bqTy2a5FM8s29FSL2EFNTP8=
 		</data>
 		<key>C_MP_ChooseImageVC.nib</key>
 		<data>
-		xB0W1XNhIVskF0peZ5KIkUl03/o=
+		cCqwKJ4C0mGcNwQ9RfShc0EcbbA=
 		</data>
 		<key>C_MP_EditLocationVC.nib</key>
 		<data>
-		PqaccV83m+PkUScTuDOb8DEbbss=
+		ZWu0EHJmBwe6R2LsTNhE/hjs4/U=
 		</data>
 		<key>C_MP_EditTagVC.nib</key>
 		<data>
-		qIT+cVZgo8W7Jk2wNYBBWcL5XHg=
+		nl4BXp8Jpwf7GD75myGE/RXCfT4=
 		</data>
 		<key>C_MP_EditTextVC.nib</key>
 		<data>
-		5FVLeOd6jgDMxKJZ0z6Tf7k4uhA=
+		u4cXuuEZVkE3SxmWVzWxiVNOwxQ=
 		</data>
 		<key>C_MP_EditTimeVC.nib</key>
 		<data>
-		NdJjQEdgsclQq6a2PcQpsQxfvUk=
+		y6tQdaGoGm9qFf90Qb+1z4fSHco=
 		</data>
 		<key>C_MP_EducationHistory.nib</key>
 		<data>
-		OeW8CjqEtVDhMpjasCelRq7hZu0=
+		/InIguz3ApmcPSDTT+gqA1JUevw=
 		</data>
 		<key>C_MP_ExperienceVC.nib</key>
 		<data>
-		VjvKBQYjKuOqenp8CoQKXkRSP/c=
+		4PLNW9v9z1nDm42/M98VB5U/EIQ=
 		</data>
 		<key>C_MP_IndustryListVC.nib</key>
 		<data>
-		5xSdMn9941Lu3RKWUg3cZQa6FUM=
+		WPPxFRpmBKbXDy2yR7vkCGC5MZ4=
 		</data>
 		<key>C_MP_IndustryVC.nib</key>
 		<data>
-		OuXhnspANT/CeOyR7Xnw91tJbNM=
+		2R7SzdnTfreaoelWxrIijfkyXGw=
 		</data>
 		<key>C_MP_LocationVC.nib</key>
 		<data>
-		Ctc9cbHvkcOalyW8zm6tJAUmSvU=
+		hr9OyS4q9NJ8BvhoAxDCGNTvjYY=
 		</data>
 		<key>C_MP_NameVC.nib</key>
 		<data>
-		Z42jMGYP4zcuLLdIdl1OFIcfjaE=
+		Qadvuor1K6i4W9Nqfp+G5fOXbNY=
 		</data>
 		<key>C_MP_ProffesionalSummaryVC.nib</key>
 		<data>
-		hOGtCiJQdxCU42fbVx+Fbc6VFGw=
+		8Vp6abxHPEZlpcPBZk18+rJZZm4=
 		</data>
 		<key>C_MP_SkillsVC.nib</key>
 		<data>
-		J74Tud6mpMgJqwuEcElxAUZPq58=
+		KRMQo+48cnvDQPjsnwulGAD+sb8=
 		</data>
 		<key>C_MP_WorkHistoryVC.nib</key>
 		<data>
-		PQTLtNNq8hvBIAI4uBb3q667KaY=
+		MOyKjfSsVBBuzkoYG7jTrEEOzrY=
 		</data>
 		<key>C_MessageListVC.nib</key>
 		<data>
-		Bb4GN90xMxTX/zkupakvGExpuys=
+		41XWaJtvTAPwxwsyCasrAEHpsQo=
 		</data>
 		<key>C_MessageView.nib</key>
 		<data>
-		AQcPePS8GGP0DrAotWYcChLj2xE=
+		jCMCFYLb6FOL27PkrPA5qFR5Cy8=
 		</data>
 		<key>C_MyCrowdVC.nib/objects-8.0+.nib</key>
 		<data>
-		Jqs/Bnhv+9eOptfqFEasiMCzAEA=
+		4sQaHnqdnwzGWmChqmStS8pHCOw=
 		</data>
 		<key>C_MyCrowdVC.nib/runtime.nib</key>
 		<data>
-		2wNbtzGYyAUOdxXr7jfmIlv74+g=
+		o64dNjG8KXtA1S/SqmJvuB2XE6Q=
 		</data>
 		<key>C_MyJobsVC.nib/objects-8.0+.nib</key>
 		<data>
-		ZGjcuH47ibDsoGGdTVKKZfmV2zY=
+		QikD80AnZLGpaWcRVONKztUbpX4=
 		</data>
 		<key>C_MyJobsVC.nib/runtime.nib</key>
 		<data>
-		vQikY7MOd6Kx+zL7cX43HO+0qIc=
+		NLBjm3vNrz5S6c8ECqHH3wMah+I=
 		</data>
 		<key>C_MyProfileVC.nib</key>
 		<data>
-		qivYZlxPPUcTiARzdMWw5RR1buU=
+		QQlYHsSFllmUBCJFGBG9TAfmiVA=
 		</data>
 		<key>C_OtherUserProfileVC.nib</key>
 		<data>
-		MANFYNvrFAiV6VjY0KN9pbxsG/o=
+		4BP8l8GRByLDyo4vgwI/7XgzN2k=
 		</data>
 		<key>C_PostJob_ExperienceVC.nib</key>
 		<data>
-		nXCKZuA2D05B1d54TFaXAG40Kk8=
+		O4WiDbbT6M/VeKmMv9YP2Su/8KQ=
 		</data>
 		<key>C_PostJob_IndustryListingVC.nib</key>
 		<data>
-		evZdmyaAQ6DdZOtCxChjy3dAbeo=
+		9MjtS3XfRKf4bh/gB55TCFR6oNg=
 		</data>
 		<key>C_PostJob_IndustryVC.nib</key>
 		<data>
-		n08PtVBItPQPnQUFVckfSeZaH8k=
+		fOQhWJZjv2N3PbBi6QuI3w8Y4/E=
 		</data>
 		<key>C_PostJob_LinkVC.nib</key>
 		<data>
-		crvdh35SHuWIAZpNrjm+jYqwfR0=
+		yq8DLRd0aLnS9GuiIhTJsMRVOeE=
 		</data>
 		<key>C_PostJob_LocationVC.nib</key>
 		<data>
-		ekFHRbK0ujea1KHglwJOOJ8EDMU=
+		dpSfkSRIn8yblHvVrtlhNOtb5Cc=
 		</data>
 		<key>C_PostJob_NameVC.nib</key>
 		<data>
-		ty/Ug4Y4HHs2VJ6i6zcoeiEo5LQ=
+		TT4NfNwBycqDwcoWWEVTUqWpewY=
 		</data>
 		<key>C_PostJob_PositionVC.nib</key>
 		<data>
-		5d8Ab/kx9b+hu6WQse5Re8qjVsE=
+		QBz7ownVEX+CqkgL9cRi8EEpXYc=
 		</data>
 		<key>C_PostJob_PreviewVC.nib</key>
 		<data>
-		Sl8dJ/0nFgieYE3Z80QG53qWBBo=
+		Py+Wc6Are3i8WQHLme4yJQe5ph0=
 		</data>
 		<key>C_PostJob_QualificationVC.nib</key>
 		<data>
-		izZZIWpvsi4faXIKnC93S3PVAiE=
+		hWOCpho74s564n6nGFZE+7m1fxs=
 		</data>
 		<key>C_PostJob_RolesVC.nib</key>
 		<data>
-		AgEFQBUNdTEa/jxX5HJGc4zRwgo=
+		AqamHrsBsiTSPG7XGIC6i2sdOeA=
 		</data>
 		<key>C_PostJob_SkillsVC.nib</key>
 		<data>
-		ZZzp7pe8luDhs8v+M/z3EKqcM9A=
+		1yUWKkpr3l2BNQcuSIf3HkyzHXk=
 		</data>
 		<key>C_PostJob_UpdateVC.nib</key>
 		<data>
-		1hmKS9gN+UVJMVw9//sBqyUnZwc=
+		+V1cfvjqdN9Q4D7Cum4eAOGwYJg=
 		</data>
 		<key>C_ProffessionalSummaryVC.nib</key>
 		<data>
-		S6tN0RntO8u4XCFvecQhemU7ptQ=
+		pSTuMMdqulA8MJN//485Bw0lgTg=
 		</data>
 		<key>C_ProfilePreviewVC.nib</key>
 		<data>
-		QOKtyv0JGxAhcJRkGURDwPCIOoE=
+		riE1sCopAp6m+EUV6ITQfzRU3p8=
 		</data>
 		<key>C_SearchVC.nib</key>
 		<data>
-		uLnSmDNwowoMeGrdFjuHSyUPziE=
+		VpNcEkbaVOgln8PwkbaEtFXoWEg=
 		</data>
 		<key>C_SkillsVC.nib</key>
 		<data>
-		WTT19BCTqd7Lq5MY48u87HTyq4Q=
+		40rhI5YZlhdz6qFh2eZ9NBhq/cQ=
 		</data>
 		<key>C_TutorialVC.nib</key>
 		<data>
-		6nYTpf39v3dxL4D2WZzSd0Xq0Gs=
+		mLvsns8Lu2I8kDedEfL/unfTTCs=
 		</data>
 		<key>C_ViewEditableTextField.nib</key>
 		<data>
-		aUsQHdYEWcciXkvJfbXnyBQ9Z+Y=
+		zQlAOeeNNzgMJADszfxSQn00Bzs=
 		</data>
 		<key>C_WebVC.nib</key>
 		<data>
-		JG3nj4MoZmsnSWVutTJsSOZnjpo=
+		Jw9bg/YuL1dU9UvYDpmW3uJ4IoY=
 		</data>
 		<key>C_WelcomeVC.nib</key>
 		<data>
-		s7l/xm7ruJmhK10kCl4bMSw9qZ4=
+		JcZlzz2xgK1rGfXo3MpcQ6PcKTI=
 		</data>
 		<key>C_WorkHistory.nib</key>
 		<data>
-		mhQOQWMGax0yNAsGyVtJwYIqlW8=
+		FQrBkA4f9qt2huybYsmUN7BLaQY=
 		</data>
 		<key>ContactsViewController.nib</key>
 		<data>
-		N1pyNbby5mZK3F0ZMY/BIl2JaQc=
+		mvow9OrpLibRi7HeBDZFEFFQbq4=
 		</data>
 		<key>Helvetica_6.ttf</key>
 		<data>
@@ -994,35 +986,35 @@
 		</data>
 		<key>JobCell.nib/objects-8.0+.nib</key>
 		<data>
-		EtID08tgemgPmBQaPtMAwkIDCpo=
+		AUdJ1BSg0RfAvduYY7ai7+clTD0=
 		</data>
 		<key>JobCell.nib/runtime.nib</key>
 		<data>
-		CyjPqi6K74zwUeSNmUriNN3Oupo=
+		BhSxrmKbGssj3tf2eh2kba4N5Mw=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
-		4y6PhUirjQzgYcA3Ph5gnAJT7hI=
+		xGUVsqYMRy/PwLdG/VkRWLcSy9k=
 		</data>
 		<key>LaunchImage-700-568h@2x.png</key>
 		<data>
-		4y6PhUirjQzgYcA3Ph5gnAJT7hI=
+		xGUVsqYMRy/PwLdG/VkRWLcSy9k=
 		</data>
 		<key>LaunchImage-700@2x.png</key>
 		<data>
-		9lS9M/BDnTZCb1uZSl/HHKmFTyI=
+		sVPi0h9TbnJ3wbb4OOPOGnnSveY=
 		</data>
 		<key>LaunchImage.png</key>
 		<data>
-		eXSDYtL5Yz0Vv5cz5y82fCMrQhI=
+		0btj0+fudQfKZ/9TObFhpVrwpHI=
 		</data>
 		<key>LaunchImage@2x.png</key>
 		<data>
-		9lS9M/BDnTZCb1uZSl/HHKmFTyI=
+		sVPi0h9TbnJ3wbb4OOPOGnnSveY=
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		lAThILR+ndyTwVAQURDuN3Q4uic=
+		bTNJdxbl3pJ/y7Id9IkEwhGLwi0=
 		</data>
 		<key>Oswald-Regular.ttf</key>
 		<data>
@@ -1046,15 +1038,15 @@
 		</data>
 		<key>ViewFindType.nib</key>
 		<data>
-		Lza8BBR3jHbkSDA//rRTlImMwCk=
+		GblECouljyqtC8lG2zSBIQekaoU=
 		</data>
 		<key>ViewSelection.nib/objects-8.0+.nib</key>
 		<data>
-		+6czPwxYjzj+yPdXgFL5bj5q6WM=
+		pysorCMmVmN1jUOkADm2f4JnPyU=
 		</data>
 		<key>ViewSelection.nib/runtime.nib</key>
 		<data>
-		7sXhmwgMoav94/3+rD+ZQUEP3vU=
+		CHuXI0oy91Q0UsapbmLAw9+OErQ=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
