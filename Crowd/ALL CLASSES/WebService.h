@@ -22,6 +22,9 @@
 #define IMG_BASE_URL @"http://54.172.176.28/crowd/ImageUpload/"
 #define BASE_URL @"http://54.172.176.28/crowd/Service1.svc/"
 
+//BObbys Development Environment
+//#define IMG_BASE_URL @"http://192.168.1.9/crowd/ImageUpload/"
+//#define BASE_URL @"http://192.168.1.9/crowd/Service1.svc/"
 //#endif
 
 
@@ -47,6 +50,12 @@
 
 //section 1
 #define Web_DASHBOARD BASE_URL@"GetActivityFeeds"
+
+
+//call availibility
+#define Web_SET_AVAILABLE_CALL BASE_URL@"SetAvailableForCall"
+#define Web_SET_UNAVAILABLE_CALL BASE_URL@"SetUnAvailableForCall"
+#define Web_GET_CALLAVAILABILITY BASE_URL@"GetCallAvailability"
 
 // my jobs + other user jobs
 #define Web_JOB_FAVOURITE BASE_URL@"FavoriteJob"

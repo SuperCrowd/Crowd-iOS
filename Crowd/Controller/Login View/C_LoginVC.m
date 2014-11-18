@@ -296,6 +296,9 @@
             [UserHandler_LoggedIn saveMyUser_LoggedIN:userInfoGlobal];
             userInfoGlobal = [UserHandler_LoggedIn getMyUser_LoggedIN];
             
+            //lets raise the user has logged in notification here
+            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_UserLoggedIn object:nil];
+            
             [UserDefaults setValue:@"done" forKey:PROFILE_PREVIEW];
             [UserDefaults removeObjectForKey:USER_INFO];
             [UserDefaults synchronize];

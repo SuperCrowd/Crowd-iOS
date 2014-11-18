@@ -169,7 +169,8 @@ CGFloat animatedDistance;
 #define showHUD_with_Success(successTitle) [SVProgressHUD showSuccessWithStatus:successTitle];
 /*-----------------------------------------------------------------------------*/
 
-
+#define kNotification_UserLoggedIn @"userLoggedIn"
+#define kNotification_UserLoggedOut @"userLoggedOut"
 #define kNotification_GetMessage @"getMessageNotification"
 #define kNotification_Update_MessageList @"updateMessageListNotification"
 
@@ -221,4 +222,17 @@ typedef enum {
     LOCATION,
     COMPANY
 }ViewType;
+
+
+#define WTLoginDidStart @"WTLoginDidStart"
+#define WTLoginDidFinish @"WTLoginDidFinish"
+#define WTLoginDidFailWithError @"WTLoginDidFailWithError"
+
+#define WTPendingIncomingConnectionReceived	@"WTPendingIncomingConnectionReceived"
+#define WTPendingIncomingConnectionDidDisconnect @"WTPendingIncomingConnectionDidDisconnect"
+#define WTPendingConnectionDidDisconnect    @"WTConnectionDidDisconnect"
+#define WTConnectionDidConnect			@"WTConnectionDidConnect"
+#define WTConnectionDidDisconnect		@"WTConnectionDidDisconnect"
+#define WTConnectionDidFailWithError	@"WTConnectionDidFailWithError"
+#define WTPresenceUpdateForClient @"WTPresenceUpdateForClient"
 
