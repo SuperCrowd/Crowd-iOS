@@ -21,12 +21,8 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-<<<<<<< HEAD
-	<string>1.6</string>
-=======
 	<string>1.7</string>
 
->>>>>>> ace0fee147dc347a2e383697bdd5fe15455653fc
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>

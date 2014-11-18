@@ -238,10 +238,15 @@
             [self showData];
             [tblView reloadData];
         }
+        else if([[objResponse valueForKeyPath:@"GetJobDetailsResult.ResultStatus.StatusMessage"] isEqualToString:@"Job does not exist!"])
+        {
+            hideHUD;
+            [self showAlert_JobNotExist:@"We are sorry, this job no longer is available."];
+        }
         else
         {
             hideHUD;
-            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"SearchJobResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
+            [CommonMethods displayAlertwithTitle:[objResponse valueForKeyPath:@"GetJobDetailsResult.ResultStatus.StatusMessage"] withMessage:nil withViewController:self];
         }
     }
     else
@@ -444,6 +449,31 @@
     return nil;
 }
 
+-(void)showAlert_JobNotExist:(NSString *)title
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                   {
+                                       popView;
+                                   }];
+        [alert addAction:okAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK",nil];
+        alertView.tag = 102;
+        [alertView show];
+    }
+}
+
+
 #pragma mark - UIAlert Delegate
 -(void)showAlert_withTitle:(NSString *)title
 {
@@ -481,6 +511,19 @@
                 break;
             case 1:
                 [self deleteJOB];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else if (alertView.tag == 102) {
+        switch (buttonIndex) {
+            case 0:
+                
+                break;
+            case 1:
+                popView;
                 break;
                 
             default:
