@@ -22,4 +22,12 @@
     [super setSelected:selected animated:animated];
 }
 
+- (IBAction)onCallButtonPressed:(id)sender
+{
+    if (self.delegate != nil)
+    {
+        [self.delegate onCellCallButtonPressed:self];
+    }
+}
+
 @end

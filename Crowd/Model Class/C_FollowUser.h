@@ -54,6 +54,7 @@
 @property NSString *DateCreated;
 @property NSString *DateModified;
 
+@property NSNumber* IsAvailableForCall;
 
 @property NSMutableArray *arr_WorkALL;
 

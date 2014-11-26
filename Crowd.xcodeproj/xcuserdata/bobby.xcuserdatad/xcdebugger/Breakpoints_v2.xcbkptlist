@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crowd/Controller/Message View/C_MessageView.m"
-            timestampString = "437665137.625729"
+            timestampString = "438706940.063823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "-onCheckCallAvailabilitySuccessful:"
             landmarkType = "5">
          </BreakpointContent>

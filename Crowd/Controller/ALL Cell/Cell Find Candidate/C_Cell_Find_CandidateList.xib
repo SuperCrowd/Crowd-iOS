@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Cell_Find_CandidateList"/>
@@ -91,6 +91,15 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKF-wh-0eA">
+                        <rect key="frame" x="264" y="1" width="46" height="30"/>
+                        <state key="normal" title="Call">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onCallButtonPressed:" destination="KeW-5p-AC0" eventType="touchUpInside" id="tBm-Dp-Qm0"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fWt-Mh-KT2" firstAttribute="top" secondItem="vsO-Ew-0yO" secondAttribute="bottom" constant="3" id="30C-9c-YVM"/>
@@ -118,6 +127,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="btnCall" destination="CKF-wh-0eA" id="8Sd-XF-VXt"/>
                 <outlet property="btnInfo" destination="brO-s2-fNp" id="FcS-vb-Q6o"/>
                 <outlet property="imgVUserPic" destination="TGb-iG-9Kd" id="9Jy-Xx-6kt"/>
                 <outlet property="lblCity_State" destination="dVg-Ec-Raw" id="9Mm-Af-1Sj"/>

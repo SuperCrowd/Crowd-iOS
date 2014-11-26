@@ -225,10 +225,7 @@
             
         }
         
-        //we disable the timer because we've received an update from the twilio srvice
-//        LOG_TWILIO(0,@"%@Disabling call availability timer for user %@",activityName,_message_UserInfo.SenderID);
-//        [self.timerCallAvailability invalidate];
-//        self.timerCallAvailability = nil;
+
     }
     
 }

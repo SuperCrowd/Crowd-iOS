@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface C_Cell_Find_Candidate_Info : UITableViewCell
+
 @property(nonatomic,strong)IBOutlet UIButton *btnLocation;
 @property(nonatomic,strong)IBOutlet UIButton *btnCandidate;
 @property(nonatomic,strong)IBOutlet UIImageView *imgVCandidate;
 
 @property(nonatomic,strong)IBOutlet UILabel *lblDescription;
+
 @end

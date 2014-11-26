@@ -11,7 +11,8 @@
 #import "C_Header_ProfilePreview.h"
 #import "C_Cell_Follower.h"
 #import "C_FollowUser.h"
-
+#import "C_CallViewController.h"
+#import "C_TwilioClient.h"
 
 #import "C_OtherUserProfileVC.h"
 @interface C_MyCrowdVC ()<UITableViewDataSource,UITableViewDelegate>
@@ -79,10 +80,214 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:WTPresenceUpdateForClient object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onPresenceUpdateForClientNotification:) name:WTPresenceUpdateForClient object:nil];
+    
+    [self updateCallAvailabilityBasedOnCachedPresenceUpdates];
+    
     if (_isPresented)
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     else
         [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+}
+
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:WTPresenceUpdateForClient object:nil];
+}
+
+#pragma mark - Presence Update Notification Handler
+- (void) updateCallAvailabilityBasedOnCachedPresenceUpdates
+{
+    NSString* activityName = @"C_MyCrowdVC.updateCallAvailabilityBasedOnCachedPresenceUpdates:";
+    C_TwilioClient* twilioClient = [C_TwilioClient sharedInstance];
+    NSMutableArray* arrayOfIndexPathsToReload = [[NSMutableArray alloc]init];
+    
+    //we need to loop through all of the following
+    int section = 0;
+    int i = 0;
+    for(C_FollowUser* searchResult in arrFollwing)
+    {
+        NSNumber* presenceObject = [twilioClient getPresenceForClient:searchResult.UserId];
+        if (presenceObject != nil)
+        {
+            //we do have data
+            BOOL isAvailable = [presenceObject boolValue];
+            BOOL currentAvailbility = [searchResult.IsAvailableForCall boolValue];
+            
+            if (isAvailable != currentAvailbility)
+            {
+                //we need to reload this index path
+                LOG_TWILIO(0,@"%@Reloading following user at index %d based on updated presence information",activityName,i);
+                searchResult.IsAvailableForCall = presenceObject;
+                [arrayOfIndexPathsToReload addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+            }
+        }
+        i++;
+    }
+    section = 1;
+    i = 0;
+    //we need to loop through the followers
+    for(C_FollowUser* searchResult in arrFollowers)
+    {
+        NSNumber* presenceObject = [twilioClient getPresenceForClient:searchResult.UserId];
+        if (presenceObject != nil)
+        {
+            //we do have data
+            BOOL isAvailable = [presenceObject boolValue];
+            BOOL currentAvailbility = [searchResult.IsAvailableForCall boolValue];
+            
+            if (isAvailable != currentAvailbility)
+            {
+                //we need to reload this index path
+                LOG_TWILIO(0,@"%@Reloading follower user at index %d based on updated presence information",activityName,i);
+                searchResult.IsAvailableForCall = presenceObject;
+                [arrayOfIndexPathsToReload addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+            }
+        }
+        i++;
+    }
+    
+    //lets reload these cells
+    [tblView reloadRowsAtIndexPaths:arrayOfIndexPathsToReload withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void) onPresenceUpdateForClientNotification:(NSNotification*)notification
+{
+    NSString* activityName = @"C_MyCrowdVC.OnPresenceUpdateForClientNotification:";
+    NSDictionary* userInfo = notification.userInfo;
+    
+    NSString* clientName = [userInfo objectForKey:@"Name"];
+    
+    
+    //check to see if we need to update the following table
+    C_FollowUser* following = [self followingUserForClientName:clientName];
+    
+    if (following != nil)
+    {
+        NSNumber* availability = [userInfo objectForKey:@"Available"];
+        LOG_TWILIO(0,@"%@Received Twilio presence update notification for client in following table %@ who's presence is %@",activityName,clientName,availability);
+        
+        int indexOfCandidate = [arrFollwing indexOfObject:following];
+        
+        //we update our internal model with the user's availibility
+        if ([availability boolValue] == YES)
+        {
+            //client is available
+            following.IsAvailableForCall = [NSNumber numberWithBool:YES];
+        }
+        else
+        {
+            //client is not available
+            following.IsAvailableForCall = [NSNumber numberWithBool:NO];
+            
+            
+        }
+        
+        LOG_TWILIO(0,@"%@Reloading table index %d to reflect update in client's availibility",activityName,indexOfCandidate);
+        [tblView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexOfCandidate inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        
+    }
+    
+    //check to see if we need to update the follower table
+    C_FollowUser* follower = [self followerUserForClientName:clientName];
+    
+    if (follower != nil)
+    {
+        NSNumber* availability = [userInfo objectForKey:@"Available"];
+        LOG_TWILIO(0,@"%@Received Twilio presence update notification for client in follower table %@ who's presence is %@",activityName,clientName,availability);
+        
+        int indexOfCandidate = [arrFollowers indexOfObject:follower];
+        
+        //we update our internal model with the user's availibility
+        if ([availability boolValue] == YES)
+        {
+            //client is available
+            follower.IsAvailableForCall = [NSNumber numberWithBool:YES];
+        }
+        else
+        {
+            //client is not available
+            follower.IsAvailableForCall = [NSNumber numberWithBool:NO];
+            
+            
+        }
+        
+        LOG_TWILIO(0,@"%@Reloading table index %d to reflect update in client's availibility",activityName,indexOfCandidate);
+        [tblView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexOfCandidate inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+        
+    }
+
+}
+
+- (C_FollowUser*)followerUserForClientName:(NSString*)clientID
+{
+    C_FollowUser* retVal = nil;
+    
+    if ([self isClientInFollower:clientID])
+    {
+        for (C_FollowUser* searchResult in arrFollowers)
+        {
+            if ([searchResult.UserId isEqualToString:clientID])
+            {
+                retVal = searchResult;
+                return retVal;
+            }
+        }
+    }
+    return retVal;
+}
+
+- (BOOL) isClientInFollower:(NSString*)clientID
+{
+    BOOL retVal = NO;
+    
+    for (C_FollowUser* searchResult in arrFollowers)
+    {
+        if ([searchResult.UserId isEqualToString:clientID])
+        {
+            retVal = YES;
+            return retVal;
+        }
+    }
+    return retVal;
+}
+
+- (C_FollowUser*)followingUserForClientName:(NSString*)clientID
+{
+    C_FollowUser* retVal = nil;
+    
+    if ([self isClientInFollowing:clientID])
+    {
+        for (C_FollowUser* searchResult in arrFollwing)
+        {
+            if ([searchResult.UserId isEqualToString:clientID])
+            {
+                retVal = searchResult;
+                return retVal;
+            }
+        }
+    }
+    return retVal;
+}
+
+- (BOOL) isClientInFollowing:(NSString*)clientID
+{
+    BOOL retVal = NO;
+    
+    for (C_FollowUser* searchResult in arrFollwing)
+    {
+        if ([searchResult.UserId isEqualToString:clientID])
+        {
+            retVal = YES;
+            return retVal;
+        }
+    }
+    return retVal;
 }
 
 -(void)btnMenuClicked:(id)sender
@@ -329,6 +534,16 @@
         myFollowCell.lblCompanyName.text = [JobModel.EmployerName isNull];
         myFollowCell.lblName.text = [NSString stringWithFormat:@"%@ %@",followerUser.FirstName ,followerUser.LastName];
         [myFollowCell.ivPhoto sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:followerUser.PhotoURL]]];
+        
+        if ([followerUser.IsAvailableForCall boolValue])
+        {
+            myFollowCell.btnCall.hidden = NO;
+        }
+        else
+        {
+             myFollowCell.btnCall.hidden = YES;
+        }
+        myFollowCell.delegate = self;
         return myFollowCell;
     }
     
@@ -357,6 +572,16 @@
         myFollowCell.lblCompanyName.text = [JobModel.EmployerName isNull];
         myFollowCell.lblName.text = [NSString stringWithFormat:@"%@ %@",followerUser.FirstName,followerUser.LastName];
         [myFollowCell.ivPhoto sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:followerUser.PhotoURL]]];
+        
+        if ([followerUser.IsAvailableForCall boolValue])
+        {
+            myFollowCell.btnCall.hidden = NO;
+        }
+        else
+        {
+            myFollowCell.btnCall.hidden = YES;
+        }
+        myFollowCell.delegate = self;
         return myFollowCell;
     }
     return nil;
@@ -403,6 +628,46 @@
     
 }
 
+#pragma mark - Call Enabled Cell Delegate
+- (void) onCellCallButtonPressed:(UITableViewCell*)cell
+{
+    NSString* activityName = @"onCellCallButtonPressed:";
+    
+    NSIndexPath* indexForCell = [tblView indexPathForCell:cell];
+    
+    C_FollowUser* user = nil;
+    
+    if ([indexForCell section] == 0)
+    {
+        //following
+        user = [arrFollwing objectAtIndex:[indexForCell row]];
+    }
+    else
+    {
+        //follower
+        user = [arrFollowers objectAtIndex:[indexForCell row]];
+    }
+    LOG_TWILIO(0,@"%@Call button pressed on index path [%ld,%ld] which corresponds to user %@",activityName,(long)[indexForCell section],(long)[indexForCell row],user.UserId);
+    
+    if ([user.IsAvailableForCall boolValue])
+    {
+        LOG_TWILIO(0,@"%@Attempting to place call to user %@",activityName,user.UserId);
+        
+        C_TwilioClient* twilioClient = [C_TwilioClient sharedInstance];
+        [twilioClient connect:user.UserId];
+
+        //launch the call view controller
+        C_CallViewController* cvc = [C_CallViewController createForDialing:user.UserId];
+        [self presentViewController:cvc animated:YES completion:nil];
+    }
+    else
+    {
+        //user i snot available
+        LOG_TWILIO(0,@"%@User is not available for call, skipping launching of view controller",activityName);
+    }
+    
+    
+}
 #pragma mark - Extra
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

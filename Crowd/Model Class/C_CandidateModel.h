@@ -29,6 +29,8 @@
 @property NSString *ExperienceLevel;
 
 @property NSString *EmployerName;
+@property NSNumber* IsAvailableForCall;
+
 @property BOOL isShowDescription;
 +(C_CandidateModel *)addCandidateListModel:(NSDictionary *)dictT;
 

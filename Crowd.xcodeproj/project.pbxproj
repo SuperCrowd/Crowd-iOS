@@ -264,6 +264,7 @@
 		10FD69FB19EBFFF200B248F3 /* C_MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FD69F919EBFFF200B248F3 /* C_MessageView.m */; };
 		10FD69FC19EBFFF200B248F3 /* C_MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10FD69FA19EBFFF200B248F3 /* C_MessageView.xib */; };
 		45E3EF582C8E6F2350018345 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2E8E868D8AE21C27B95B99 /* libPods.a */; };
+		C50B00F31A26269C0058FC0C /* C_BaseTwilioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C50B00F21A26269C0058FC0C /* C_BaseTwilioViewController.m */; };
 		C51461C41A05243500F43333 /* libTwilioClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461C31A05243500F43333 /* libTwilioClient.a */; };
 		C51461C71A0524ED00F43333 /* C_TwilioClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C51461C61A0524ED00F43333 /* C_TwilioClient.m */; };
 		C51461CA1A05255100F43333 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461C81A05255100F43333 /* libcrypto.a */; };
@@ -711,6 +712,9 @@
 		5F2E8E868D8AE21C27B95B99 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		81755C0A76B9A83E6310E5E4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8B1FD497B23E8984446BEDD4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C50B00F11A26269C0058FC0C /* C_BaseTwilioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_BaseTwilioViewController.h; sourceTree = "<group>"; };
+		C50B00F21A26269C0058FC0C /* C_BaseTwilioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_BaseTwilioViewController.m; sourceTree = "<group>"; };
+		C50B00F41A2636940058FC0C /* CallEnabledCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallEnabledCell.h; sourceTree = "<group>"; };
 		C51461C31A05243500F43333 /* libTwilioClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTwilioClient.a; path = Crowd/Sounds/libTwilioClient.a; sourceTree = "<group>"; };
 		C51461C51A0524ED00F43333 /* C_TwilioClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_TwilioClient.h; sourceTree = "<group>"; };
 		C51461C61A0524ED00F43333 /* C_TwilioClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_TwilioClient.m; sourceTree = "<group>"; };
@@ -1155,6 +1159,7 @@
 				1078C13C19C3242800378CC4 /* C_Cell_Tags.h */,
 				1078C13D19C3242800378CC4 /* C_Cell_Tags.m */,
 				1078C13E19C3242800378CC4 /* C_Cell_Tags.xib */,
+				C50B00F41A2636940058FC0C /* CallEnabledCell.h */,
 			);
 			path = "ALL Cell";
 			sourceTree = "<group>";
@@ -1619,6 +1624,8 @@
 				10DDA81D19DC007F0075FA7A /* C_WebVC.h */,
 				10DDA81E19DC007F0075FA7A /* C_WebVC.m */,
 				10DDA81F19DC007F0075FA7A /* C_WebVC.xib */,
+				C50B00F11A26269C0058FC0C /* C_BaseTwilioViewController.h */,
+				C50B00F21A26269C0058FC0C /* C_BaseTwilioViewController.m */,
 			);
 			path = "General Controllers";
 			sourceTree = "<group>";
@@ -1961,6 +1968,7 @@
 				10A954B719B9919700EAAE4B /* MMDrawerController.m in Sources */,
 				102FC4A419CB0156007F37E9 /* C_LeftMenuVC.m in Sources */,
 				104CD63819D288F300E444F8 /* C_Education_Time.m in Sources */,
+				C50B00F31A26269C0058FC0C /* C_BaseTwilioViewController.m in Sources */,
 				10AC82D719D1327F0090A039 /* C_PostJob_LinkVC.m in Sources */,
 				10A954C519B9919700EAAE4B /* UIButton+WebCache.m in Sources */,
 				105CD2BE19E4F9FE00DF7E61 /* Update_PostJob.m in Sources */,
@@ -2130,7 +2138,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Crowd/Sounds",
@@ -2138,6 +2146,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-l\"Pods-NSLogger\"",
 					"-framework",
@@ -2170,7 +2179,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Crowd/Crowd-Prefix.pch";
 				INFOPLIST_FILE = "Crowd/Crowd-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2178,6 +2187,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-l\"Pods-NSLogger\"",
 					"-framework",

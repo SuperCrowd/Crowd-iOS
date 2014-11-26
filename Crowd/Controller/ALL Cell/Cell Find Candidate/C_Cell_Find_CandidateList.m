@@ -13,6 +13,12 @@
 @end
 
 @implementation C_Cell_Find_CandidateList
-
+- (IBAction)onCallButtonPressed:(id)sender
+{
+    if (self.delegate != nil)
+    {
+        [self.delegate onCellCallButtonPressed:self];
+    }
+}
 
 @end

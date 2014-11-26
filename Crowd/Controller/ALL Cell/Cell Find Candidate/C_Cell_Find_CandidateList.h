@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CallEnabledCell.h"
 @interface C_Cell_Find_CandidateList : UITableViewCell
+{
+    id<CallEnabledCell> delegate;
+}
 @property(nonatomic,strong)IBOutlet UILabel *lblName;
 @property(nonatomic,strong)IBOutlet UILabel *lblCompany;
 @property(nonatomic,strong)IBOutlet UILabel *lblCity_State;
 @property(nonatomic,strong)IBOutlet UILabel *lblCountry;
-
+@property(nonatomic,strong)IBOutlet UIButton* btnCall;
 @property(nonatomic,strong)IBOutlet UIImageView *imgVUserPic;
-
+@property (nonatomic, assign) id<CallEnabledCell> delegate;
 @property(nonatomic,strong)IBOutlet UIButton *btnInfo;
 @end
