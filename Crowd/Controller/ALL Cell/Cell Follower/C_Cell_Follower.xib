@@ -57,9 +57,9 @@
                         <color key="textColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m47-ic-ihY">
-                        <rect key="frame" x="280" y="20" width="30" height="30"/>
-                        <state key="normal" title="Call">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m47-ic-ihY">
+                        <rect key="frame" x="21" y="75" width="49" height="22"/>
+                        <state key="normal" image="mycrowd-call">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -77,6 +77,7 @@
                     <constraint firstItem="JfD-6m-4yz" firstAttribute="top" secondItem="m9l-NS-dkX" secondAttribute="bottom" constant="1" id="QZc-xg-naD"/>
                     <constraint firstItem="8Jy-bb-5Hr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="UL3-aa-6wh"/>
                     <constraint firstAttribute="trailing" secondItem="3hC-Uc-xAT" secondAttribute="trailing" constant="10" id="YIP-sD-Obh"/>
+                    <constraint firstItem="8Jy-bb-5Hr" firstAttribute="centerX" secondItem="m47-ic-ihY" secondAttribute="centerX" id="anU-JG-xa1"/>
                     <constraint firstItem="JfD-6m-4yz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="97" id="c2b-3r-HXG"/>
                     <constraint firstAttribute="trailing" secondItem="PAk-f9-Dgs" secondAttribute="trailing" constant="10" id="m8p-Or-B3M"/>
                     <constraint firstAttribute="trailing" secondItem="m9l-NS-dkX" secondAttribute="trailing" constant="10" id="nGF-fv-f11"/>
@@ -95,4 +96,7 @@
             <point key="canvasLocation" x="249" y="230"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="mycrowd-call" width="18" height="9"/>
+    </resources>
 </document>

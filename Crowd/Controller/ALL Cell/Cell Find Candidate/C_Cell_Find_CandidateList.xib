@@ -91,9 +91,13 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKF-wh-0eA">
-                        <rect key="frame" x="264" y="1" width="46" height="30"/>
-                        <state key="normal" title="Call">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKF-wh-0eA">
+                        <rect key="frame" x="258" y="26" width="19" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="C2r-cR-1mk"/>
+                            <constraint firstAttribute="width" constant="19" id="Vfy-TQ-qpY"/>
+                        </constraints>
+                        <state key="normal" image="message-call">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -122,6 +126,7 @@
                     <constraint firstAttribute="trailing" secondItem="brO-s2-fNp" secondAttribute="trailing" constant="10" id="t84-ag-x6O"/>
                     <constraint firstAttribute="trailing" secondItem="bk3-ly-b2F" secondAttribute="trailing" constant="5" id="taJ-Pe-apu"/>
                     <constraint firstItem="Sww-vr-Vqd" firstAttribute="leading" secondItem="x0t-1i-Z5d" secondAttribute="leading" constant="3" id="uog-gn-qw8"/>
+                    <constraint firstItem="CKF-wh-0eA" firstAttribute="centerY" secondItem="brO-s2-fNp" secondAttribute="centerY" id="vbS-Ob-hAV"/>
                     <constraint firstAttribute="bottom" secondItem="HnX-Sv-d7y" secondAttribute="bottom" constant="7" id="yG1-J1-dH1"/>
                     <constraint firstItem="HnX-Sv-d7y" firstAttribute="leading" secondItem="x0t-1i-Z5d" secondAttribute="leading" constant="60" id="yc0-8u-JKQ"/>
                 </constraints>
@@ -141,5 +146,6 @@
     <resources>
         <image name="info_btn" width="20" height="20"/>
         <image name="location_pin" width="8" height="15"/>
+        <image name="message-call" width="19" height="19"/>
     </resources>
 </document>

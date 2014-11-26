@@ -129,9 +129,9 @@
                                 <constraint firstAttribute="width" constant="254" id="pg5-4D-AaR"/>
                             </constraints>
                         </view>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQq-Ix-xbt">
-                            <rect key="frame" x="241" y="10" width="46" height="30"/>
-                            <state key="normal" title="Call">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQq-Ix-xbt">
+                            <rect key="frame" x="270" y="10" width="50" height="22"/>
+                            <state key="normal" image="profile-call">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -150,6 +150,7 @@
                         <constraint firstItem="xhb-Ur-uHx" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="Gpa-zj-ea5"/>
                         <constraint firstItem="xhb-Ur-uHx" firstAttribute="top" secondItem="068-LY-cgi" secondAttribute="top" constant="11" id="LWh-m5-QPb"/>
                         <constraint firstAttribute="bottom" secondItem="fwi-VS-O7g" secondAttribute="bottom" id="MSF-yg-GkG"/>
+                        <constraint firstAttribute="trailing" secondItem="RQq-Ix-xbt" secondAttribute="trailing" constant="10" id="Mdx-dR-O7X"/>
                         <constraint firstAttribute="trailing" secondItem="xhb-Ur-uHx" secondAttribute="trailing" constant="10" id="Oka-fZ-m9N"/>
                         <constraint firstItem="xaS-69-HiS" firstAttribute="top" secondItem="xhb-Ur-uHx" secondAttribute="bottom" constant="3" id="QTh-Db-Rkz"/>
                         <constraint firstItem="aNN-vE-8r0" firstAttribute="top" secondItem="cT1-aK-Dpx" secondAttribute="bottom" constant="3" id="Qu9-Tn-B2M"/>
@@ -161,6 +162,7 @@
                         <constraint firstAttribute="trailing" secondItem="xaS-69-HiS" secondAttribute="trailing" constant="10" id="bCa-Aj-zTN"/>
                         <constraint firstItem="J2B-hc-pb6" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="cZM-AN-7RL"/>
                         <constraint firstItem="J2B-hc-pb6" firstAttribute="top" secondItem="aNN-vE-8r0" secondAttribute="bottom" constant="3" id="cbq-QP-CTO"/>
+                        <constraint firstItem="RQq-Ix-xbt" firstAttribute="top" secondItem="068-LY-cgi" secondAttribute="top" constant="10" id="e3F-EM-NSU"/>
                         <constraint firstAttribute="trailing" secondItem="J2B-hc-pb6" secondAttribute="trailing" constant="10" id="oFI-vE-PQt"/>
                         <constraint firstAttribute="centerX" secondItem="bWw-Pd-gXO" secondAttribute="centerX" id="sa1-Ep-Cfw"/>
                         <constraint firstItem="xaS-69-HiS" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="vGq-3M-Q97"/>
@@ -199,6 +201,7 @@
         <image name="follow-btn" width="51" height="51"/>
         <image name="jobs-btn" width="51" height="51"/>
         <image name="msg-btn" width="51" height="51"/>
+        <image name="profile-call" width="19" height="19"/>
         <image name="share-btn" width="51" height="51"/>
         <image name="tag" width="11" height="25"/>
     </resources>

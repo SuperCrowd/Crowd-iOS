@@ -112,7 +112,7 @@
     [multiTextView setClipsToBounds:YES];
     
     /*----call button bar item --*/
-    self.callBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Call" style:UIBarButtonItemStylePlain target:self action:@selector(onCallButtonPressed:)];
+    self.callBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"message-call"] style:UIBarButtonItemStylePlain target:self action:@selector(onCallButtonPressed:)];
     
     [self updateCallAvailabilityBasedOnCachedPresenceUpdates];
     if (self.isAvailableForCall)
