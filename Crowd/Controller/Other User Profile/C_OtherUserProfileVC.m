@@ -24,6 +24,8 @@
 #import "C_MessageView.h"
 #import "C_MessageModel.h"
 #import "MHFacebookImageViewer.h"
+#import "C_CallViewController.h"
+#import "C_TwilioClient.h"
 
 #define PROFFESSIONAL_SUMMARY @"Professional Summary"
 #define WORK_EXPERIENCE @"Work Experience"
@@ -45,6 +47,7 @@
     
     __weak IBOutlet UIButton *btnFollow_unFollow;
     __weak IBOutlet UIImageView *imgVFavourite;
+    __weak IBOutlet UIButton* btnCall;
     
     /*--- Section Header Table ---*/
     NSMutableArray *arrSectionHeader;
@@ -81,6 +84,16 @@
         
     }];
     
+    //We enable/disable the call button based on availibility
+    if (self.isAvailableForCall)
+    {
+        btnCall.hidden = NO;
+    }
+    else
+    {
+        btnCall.hidden = YES;
+    }
+    
     /*--- Set fonts for all label and show data ---*/
     [self setFonts];
 
@@ -106,6 +119,15 @@
 {
     [super viewWillAppear:animated];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+
+    if (self.isAvailableForCall)
+    {
+        btnCall.hidden = NO;
+    }
+    else
+    {
+        btnCall.hidden = YES;
+    }
 }
 -(void)setFonts
 {
@@ -116,6 +138,52 @@
     lbl_School.font = kFONT_LIGHT(14.0);
 }
 
+#pragma mark - Call Button
+- (IBAction) onCallButtonPressed:(id)sender
+{
+    NSString* activityName = @"onCallButtonPressed:";
+    NSString* otherUserID = self.OtherUserID;
+    LOG_TWILIO(0,@"%@Attempting to place call to user %@",activityName,self.OtherUserID);
+
+    C_TwilioClient* twilioClient = [C_TwilioClient sharedInstance];
+    [twilioClient connect:otherUserID];
+
+    NSString* userCalling = [NSString stringWithFormat:@"%@ %@",otherUserDetail.FirstName,otherUserDetail.LastName];
+
+    C_CallViewController* cvc = [C_CallViewController createForDialing:userCalling];
+    [self presentViewController:cvc animated:YES completion:nil];
+
+}
+
+#pragma mark - Presence Updates
+- (void) onPresenceUpdateForClientNotification:(NSNotification *)notification
+{
+    [super onPresenceUpdateForClientNotification:notification];
+    if (self.isAvailableForCall)
+    {
+        btnCall.hidden = NO;
+    }
+    else
+    {
+        btnCall.hidden  = YES;
+        
+    }
+}
+
+- (void) onCheckCallAvailabilitySuccessful:(id)objResponse
+{
+    [super onCheckCallAvailabilitySuccessful:objResponse];
+    if (self.isAvailableForCall)
+    {
+        btnCall.hidden = NO;
+    }
+    else
+    {
+        btnCall.hidden  = YES;
+        
+    }
+    
+}
 
 #pragma mark - Get data
 -(void)getData
@@ -130,7 +198,7 @@
         showHUD_with_Title(@"Getting Profile");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
-                                    @"OtherUserID":_OtherUserID};
+                                    @"OtherUserID":self.OtherUserID};
         parser = [[JSONParser alloc]initWith_withURL:Web_GET_USER_DETAILS withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getDataSuccessfull:) withObject:self];
     }
     @catch (NSException *exception) {
@@ -500,7 +568,7 @@
         showHUD_with_Title(@"Please wait");
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
-                                    @"FollowUserID":_OtherUserID,
+                                    @"FollowUserID":self.OtherUserID,
                                     @"Status":followUnfollow};
         parser = [[JSONParser alloc]initWith_withURL:Web_FOLLOW_UNFOLLOW withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(follow_unFollow_Successful:) withObject:self];
     }

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface C_Find_CandidateListingVC : UIViewController
+#import "CallEnabledCell.h"
+@interface C_Find_CandidateListingVC : UIViewController<CallEnabledCell>
 @property(nonatomic,strong)NSMutableDictionary *dictInfoCandidate;
 
 @end

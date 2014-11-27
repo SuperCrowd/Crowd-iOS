@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Cell_Find_CandidateList"/>
@@ -91,6 +91,19 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKF-wh-0eA">
+                        <rect key="frame" x="258" y="26" width="19" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="C2r-cR-1mk"/>
+                            <constraint firstAttribute="width" constant="19" id="Vfy-TQ-qpY"/>
+                        </constraints>
+                        <state key="normal" image="message-call">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onCallButtonPressed:" destination="KeW-5p-AC0" eventType="touchUpInside" id="tBm-Dp-Qm0"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fWt-Mh-KT2" firstAttribute="top" secondItem="vsO-Ew-0yO" secondAttribute="bottom" constant="3" id="30C-9c-YVM"/>
@@ -113,11 +126,13 @@
                     <constraint firstAttribute="trailing" secondItem="brO-s2-fNp" secondAttribute="trailing" constant="10" id="t84-ag-x6O"/>
                     <constraint firstAttribute="trailing" secondItem="bk3-ly-b2F" secondAttribute="trailing" constant="5" id="taJ-Pe-apu"/>
                     <constraint firstItem="Sww-vr-Vqd" firstAttribute="leading" secondItem="x0t-1i-Z5d" secondAttribute="leading" constant="3" id="uog-gn-qw8"/>
+                    <constraint firstItem="CKF-wh-0eA" firstAttribute="centerY" secondItem="brO-s2-fNp" secondAttribute="centerY" id="vbS-Ob-hAV"/>
                     <constraint firstAttribute="bottom" secondItem="HnX-Sv-d7y" secondAttribute="bottom" constant="7" id="yG1-J1-dH1"/>
                     <constraint firstItem="HnX-Sv-d7y" firstAttribute="leading" secondItem="x0t-1i-Z5d" secondAttribute="leading" constant="60" id="yc0-8u-JKQ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="btnCall" destination="CKF-wh-0eA" id="8Sd-XF-VXt"/>
                 <outlet property="btnInfo" destination="brO-s2-fNp" id="FcS-vb-Q6o"/>
                 <outlet property="imgVUserPic" destination="TGb-iG-9Kd" id="9Jy-Xx-6kt"/>
                 <outlet property="lblCity_State" destination="dVg-Ec-Raw" id="9Mm-Af-1Sj"/>
@@ -131,5 +146,6 @@
     <resources>
         <image name="info_btn" width="20" height="20"/>
         <image name="location_pin" width="8" height="15"/>
+        <image name="message-call" width="19" height="19"/>
     </resources>
 </document>

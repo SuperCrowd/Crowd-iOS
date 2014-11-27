@@ -30,6 +30,8 @@
     [encoder encodeObject:self.DateCreated forKey:@"DateCreated"];
     [encoder encodeObject:self.DateModified forKey:@"DateModified"];
     
+   
+    
 }
 - (id)initWithCoder:(NSCoder *)decoder {
     if((self = [super init])) {
@@ -80,6 +82,8 @@
     [encoder encodeObject:self.DateCreated forKey:@"DateCreated"];
     [encoder encodeObject:self.DateModified forKey:@"DateModified"];
     
+    [encoder encodeObject:self.IsAvailableForCall forKey:@"IsAvailableForCall"];
+    
     [encoder encodeObject:self.arr_WorkALL forKey:@"arr_WorkALL"];
 }
 
@@ -107,6 +111,8 @@
         self.DateModified = [decoder decodeObjectForKey:@"DateModified"];
         
         self.arr_WorkALL = [decoder decodeObjectForKey:@"arr_WorkALL"];
+        
+        self.IsAvailableForCall = [decoder decodeObjectForKey:@"IsAvailableForCall"];
         
     }
     return self;
@@ -138,7 +144,8 @@
     myUser.DateCreated = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateCreated"]] isNull];
     myUser.DateModified = [[NSString stringWithFormat:@"%@",dictUserInfo[@"DateModified"]] isNull];
         
-    
+    myUser.IsAvailableForCall = [[NSString stringWithFormat:@"%@", dictUserInfo[@"IsAvailableForCall"]]isNull];
+                                                                                
     @try
     {
         /*--- Work ---*/

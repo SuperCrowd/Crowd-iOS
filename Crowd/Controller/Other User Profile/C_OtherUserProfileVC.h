@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface C_OtherUserProfileVC : UIViewController
-@property(nonatomic,strong)NSString *OtherUserID;
+#import "C_BaseTwilioViewController.h"
+@interface C_OtherUserProfileVC : C_BaseTwilioViewController
+//@property(nonatomic,strong)NSString *OtherUserID;
 @end

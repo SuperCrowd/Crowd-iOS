@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CallEnabledCell.h"
 @protocol selectUserProtocol<NSObject>
 -(void)userSelected:(NSString *)strUserID;
 @end
 
-@interface C_MyCrowdVC : UIViewController
+@interface C_MyCrowdVC : UIViewController<CallEnabledCell>
 @property(nonatomic,readwrite)BOOL isPresented;
 @property(nonatomic,strong)NSString *strReceiverID;
 @property(nonatomic,strong)id <selectUserProtocol> delegate;

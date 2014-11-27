@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_OtherUserProfileVC">
             <connections>
+                <outlet property="btnCall" destination="RQq-Ix-xbt" id="HkH-MS-Nyg"/>
                 <outlet property="btnFollow_unFollow" destination="tkb-ui-j1w" id="phJ-j1-Wch"/>
                 <outlet property="imgVFavourite" destination="sMB-rr-E6z" id="JOA-LT-WcB"/>
                 <outlet property="imgVUserPic" destination="J0a-ys-dNa" id="7Ck-OH-yAV"/>
@@ -128,6 +129,16 @@
                                 <constraint firstAttribute="width" constant="254" id="pg5-4D-AaR"/>
                             </constraints>
                         </view>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQq-Ix-xbt">
+                            <rect key="frame" x="270" y="10" width="50" height="22"/>
+                            <state key="normal" image="profile-call">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onCallButtonPressed:" destination="-1" eventType="touchUpInside" id="Nxr-fz-IWN"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -139,6 +150,7 @@
                         <constraint firstItem="xhb-Ur-uHx" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="Gpa-zj-ea5"/>
                         <constraint firstItem="xhb-Ur-uHx" firstAttribute="top" secondItem="068-LY-cgi" secondAttribute="top" constant="11" id="LWh-m5-QPb"/>
                         <constraint firstAttribute="bottom" secondItem="fwi-VS-O7g" secondAttribute="bottom" id="MSF-yg-GkG"/>
+                        <constraint firstAttribute="trailing" secondItem="RQq-Ix-xbt" secondAttribute="trailing" constant="10" id="Mdx-dR-O7X"/>
                         <constraint firstAttribute="trailing" secondItem="xhb-Ur-uHx" secondAttribute="trailing" constant="10" id="Oka-fZ-m9N"/>
                         <constraint firstItem="xaS-69-HiS" firstAttribute="top" secondItem="xhb-Ur-uHx" secondAttribute="bottom" constant="3" id="QTh-Db-Rkz"/>
                         <constraint firstItem="aNN-vE-8r0" firstAttribute="top" secondItem="cT1-aK-Dpx" secondAttribute="bottom" constant="3" id="Qu9-Tn-B2M"/>
@@ -150,6 +162,7 @@
                         <constraint firstAttribute="trailing" secondItem="xaS-69-HiS" secondAttribute="trailing" constant="10" id="bCa-Aj-zTN"/>
                         <constraint firstItem="J2B-hc-pb6" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="cZM-AN-7RL"/>
                         <constraint firstItem="J2B-hc-pb6" firstAttribute="top" secondItem="aNN-vE-8r0" secondAttribute="bottom" constant="3" id="cbq-QP-CTO"/>
+                        <constraint firstItem="RQq-Ix-xbt" firstAttribute="top" secondItem="068-LY-cgi" secondAttribute="top" constant="10" id="e3F-EM-NSU"/>
                         <constraint firstAttribute="trailing" secondItem="J2B-hc-pb6" secondAttribute="trailing" constant="10" id="oFI-vE-PQt"/>
                         <constraint firstAttribute="centerX" secondItem="bWw-Pd-gXO" secondAttribute="centerX" id="sa1-Ep-Cfw"/>
                         <constraint firstItem="xaS-69-HiS" firstAttribute="leading" secondItem="068-LY-cgi" secondAttribute="leading" constant="123" id="vGq-3M-Q97"/>
@@ -188,6 +201,7 @@
         <image name="follow-btn" width="51" height="51"/>
         <image name="jobs-btn" width="51" height="51"/>
         <image name="msg-btn" width="51" height="51"/>
+        <image name="profile-call" width="19" height="19"/>
         <image name="share-btn" width="51" height="51"/>
         <image name="tag" width="11" height="25"/>
     </resources>

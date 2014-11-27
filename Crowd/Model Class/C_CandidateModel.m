@@ -36,6 +36,8 @@
 
         myCandidate.ExperienceLevel = [[NSString stringWithFormat:@"%@",dictT[@"ExperienceLevel"]] isNull];
 
+        myCandidate.IsAvailableForCall = [[NSString stringWithFormat:@"%@",dictT[@"IsAvailableForCall"]] isNull];
+        
         if ([dictT[@"UserCurrentEmployer"] isKindOfClass:[NSArray class]])
         {
             NSArray *arrCurrentEmployer = dictT[@"UserCurrentEmployer"];

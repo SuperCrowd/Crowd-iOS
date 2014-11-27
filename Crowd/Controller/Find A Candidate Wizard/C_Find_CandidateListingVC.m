@@ -12,7 +12,8 @@
 
 #import "C_Cell_Find_CandidateList.h"
 #import "C_Cell_Find_Candidate_Info.h"
-
+#import "C_CallViewController.h"
+#import "C_TwilioClient.h"
 #import "C_OtherUserProfileVC.h"
 #import "C_MyProfileVC.h"
 @interface C_Find_CandidateListingVC ()<UITableViewDataSource,UITableViewDelegate>
@@ -71,8 +72,123 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:WTPresenceUpdateForClient object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onPresenceUpdateForClientNotification:) name:WTPresenceUpdateForClient object:nil];
+    
+    [self updateCallAvailabilityBasedOnCachedPresenceUpdates];
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:WTPresenceUpdateForClient object:nil];
+}
+
+
+#pragma mark - Presence Update Notification Handler
+- (void) updateCallAvailabilityBasedOnCachedPresenceUpdates
+{
+    NSString* activityName = @"C_Find_CandidateListingVC.updateCallAvailabilityBasedOnCachedPresenceUpdates:";
+    C_TwilioClient* twilioClient = [C_TwilioClient sharedInstance];
+    NSMutableArray* arrayOfIndexPathsToReload = [[NSMutableArray alloc]init];
+    
+    //we need to loop through all of the search results and update them
+    int i = 0;
+    for(C_CandidateModel* searchResult in arrContent)
+    {
+        NSNumber* presenceObject = [twilioClient getPresenceForClient:searchResult.UserId];
+        if (presenceObject != nil)
+        {
+            //we do have data
+            BOOL isAvailable = [presenceObject boolValue];
+            BOOL currentAvailbility = [searchResult.IsAvailableForCall boolValue];
+            
+            if (isAvailable != currentAvailbility)
+            {
+                //we need to reload this index path
+                LOG_TWILIO(0,@"%@Reloading search result at index %d based on updated presence information",activityName,i);
+                searchResult.IsAvailableForCall = presenceObject;
+                [arrayOfIndexPathsToReload addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+        }
+        i++;
+    }
+    
+    //lets reload these cells
+    [tblView reloadRowsAtIndexPaths:arrayOfIndexPathsToReload withRowAnimation:UITableViewRowAnimationNone];
+}
+- (void) onPresenceUpdateForClientNotification:(NSNotification*)notification
+{
+    NSString* activityName = @"C_Find_CandidateListingVC.OnPresenceUpdateForClientNotification:";
+    NSDictionary* userInfo = notification.userInfo;
+    
+    NSString* clientName = [userInfo objectForKey:@"Name"];
+    
+    C_CandidateModel* candidate = [self candidateForClientName:clientName];
+    
+    if (candidate != nil)
+    {
+        NSNumber* availability = [userInfo objectForKey:@"Available"];
+        LOG_TWILIO(0,@"%@Received Twilio presence update notification for client in search result %@ who's presence is %@",activityName,clientName,availability);
+        
+        int indexOfCandidate = [arrContent indexOfObject:candidate];
+        
+        //we update our internal model with the user's availibility
+        if ([availability boolValue] == YES)
+        {
+            //client is available
+            candidate.IsAvailableForCall = [NSNumber numberWithBool:YES];
+        }
+        else
+        {
+            //client is not available
+            candidate.IsAvailableForCall = [NSNumber numberWithBool:NO];
+            
+            
+        }
+        
+        LOG_TWILIO(0,@"%@Reloading table index %d to reflect update in client's availibility",activityName,indexOfCandidate);
+        [tblView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexOfCandidate inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        
+    }
+    
+}
+
+- (C_CandidateModel*)candidateForClientName:(NSString*)clientID
+{
+    C_CandidateModel* retVal = nil;
+    
+    if ([self isClientInSearchResult:clientID])
+    {
+        for (C_CandidateModel* searchResult in arrContent)
+        {
+            if ([searchResult.UserId isEqualToString:clientID])
+            {
+                retVal = searchResult;
+                return retVal;
+            }
+        }
+    }
+    return retVal;
+}
+
+- (BOOL) isClientInSearchResult:(NSString*)clientID
+{
+    BOOL retVal = NO;
+    
+    for (C_CandidateModel* searchResult in arrContent)
+    {
+        if ([searchResult.UserId isEqualToString:clientID])
+        {
+            retVal = YES;
+            return retVal;
+        }
+    }
+    return retVal;
+}
 
 #pragma mark - Get Data
 -(void)refreshControlRefresh
@@ -364,6 +480,8 @@
 
         [cell.btnCandidate addTarget:self action:@selector(btnEdit_LocationClicked:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnLocation addTarget:self action:@selector(btnEdit_LocationClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+
         return cell;
     }
     else
@@ -388,6 +506,16 @@
         
         cell.btnInfo.tag = indexPath.row;
         [cell.btnInfo addTarget:self action:@selector(btnInfoClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([myCan.IsAvailableForCall boolValue])
+        {
+            cell.btnCall.hidden = NO;
+        }
+        else
+        {
+            cell.btnCall.hidden = YES;
+        }
+        cell.delegate = self;
         return cell;
     }
     return nil;
@@ -410,6 +538,38 @@
         [self.navigationController pushViewController:obj animated:YES];
     }
 
+}
+
+#pragma mark - Call Enabled Cell Delegate
+- (void) onCellCallButtonPressed:(UITableViewCell*)cell
+{
+    NSString* activityName = @"onCellCallButtonPressed:";
+    
+    NSIndexPath* indexForCell = [tblView indexPathForCell:cell];
+    
+    C_CandidateModel* user = [arrContent objectAtIndex:[indexForCell row]];;
+    
+   
+    LOG_TWILIO(0,@"%@Call button pressed on index path [%ld,%ld] which corresponds to user %@",activityName,(long)[indexForCell section],(long)[indexForCell row],user.UserId);
+    
+    if ([user.IsAvailableForCall boolValue])
+    {
+        LOG_TWILIO(0,@"%@Attempting to place call to user %@",activityName,user.UserId);
+        
+        C_TwilioClient* twilioClient = [C_TwilioClient sharedInstance];
+        [twilioClient connect:user.UserId];
+
+        //launch the call view controller
+        C_CallViewController* cvc = [C_CallViewController createForDialing:user.UserId];
+        [self presentViewController:cvc animated:YES completion:nil];
+    }
+    else
+    {
+        //user i snot available
+        LOG_TWILIO(0,@"%@User is not available for call, skipping launching of view controller",activityName);
+    }
+    
+    
 }
 #pragma mark - Info + Edit
 -(void)btnInfoClicked:(UIButton *)btnInfo
