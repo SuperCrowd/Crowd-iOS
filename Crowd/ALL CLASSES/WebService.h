@@ -28,6 +28,8 @@
 //#endif
 
 
+//Crowd: Staging Server: http://54.173.46.73/crowd/Service1.svc
+
 
 #define Web_IS_USER_EXIST BASE_URL@"IsUserExists"
 #define Web_IS_USER_REGISTER_OR_UPDATE BASE_URL@"AddEditUserDetails"

@@ -14,6 +14,7 @@
 #import "C_Cell_Find_Candidate_Info.h"
 
 #import "C_OtherUserProfileVC.h"
+#import "C_MyProfileVC.h"
 @interface C_Find_CandidateListingVC ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -402,7 +403,11 @@
     }
     else
     {
+        
         //[CommonMethods displayAlertwithTitle:@"Under construction remove from server" withMessage:nil withViewController:self];
+        C_MyProfileVC *obj = [[C_MyProfileVC alloc]initWithNibName:@"C_MyProfileVC" bundle:nil];
+        obj.isPush = YES;
+        [self.navigationController pushViewController:obj animated:YES];
     }
 
 }

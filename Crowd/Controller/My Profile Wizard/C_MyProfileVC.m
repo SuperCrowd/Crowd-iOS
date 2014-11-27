@@ -60,10 +60,18 @@
 
 @implementation C_MyProfileVC
 #pragma mark - View Did Load
+-(void)back
+{
+    popView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Profile";
-    self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+    
+    if (_isPush)
+        self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+    else
+        self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
     
     arrSectionHeader = [[NSMutableArray alloc]init];
     
@@ -101,7 +109,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    
+    if (_isPush)
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    else
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    
     [self showData];
     [tblView reloadData];
 }

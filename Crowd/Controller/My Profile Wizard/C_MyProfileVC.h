@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "C_MyUser.h"
 @interface C_MyProfileVC : UIViewController
-
+@property(nonatomic,readwrite)BOOL isPush;
 @end
