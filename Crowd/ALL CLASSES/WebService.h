@@ -21,6 +21,8 @@
 // Device
 #define IMG_BASE_URL @"http://54.172.176.28/crowd/ImageUpload/"
 #define BASE_URL @"http://54.172.176.28/crowd/Service1.svc/"
+#define SHARE_URL @"http://symposium.club/CrowdWeb/Share/Job?JobID="
+#define USER_SHARE_URL @"http://symposium.club/CrowdWeb/Share/User?UserID="
 
 //BObbys Development Environment
 //#define IMG_BASE_URL @"http://192.168.1.9/crowd/ImageUpload/"

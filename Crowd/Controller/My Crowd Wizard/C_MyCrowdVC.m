@@ -537,11 +537,11 @@
         
         if ([followerUser.IsAvailableForCall boolValue])
         {
-            myFollowCell.btnCall.hidden = NO;
+            myFollowCell.btnCall.enabled = YES;
         }
         else
         {
-             myFollowCell.btnCall.hidden = YES;
+             myFollowCell.btnCall.enabled = NO;
         }
         myFollowCell.delegate = self;
         return myFollowCell;
@@ -575,11 +575,11 @@
         
         if ([followerUser.IsAvailableForCall boolValue])
         {
-            myFollowCell.btnCall.hidden = NO;
+            myFollowCell.btnCall.enabled = YES;
         }
         else
         {
-            myFollowCell.btnCall.hidden = YES;
+            myFollowCell.btnCall.enabled = NO;
         }
         myFollowCell.delegate = self;
         return myFollowCell;

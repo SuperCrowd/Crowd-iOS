@@ -121,6 +121,9 @@
                                     <state key="normal" image="share-btn">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="btnShareClicked:" destination="-1" eventType="touchUpInside" id="pWQ-Wj-RgW"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -129,7 +132,7 @@
                                 <constraint firstAttribute="width" constant="254" id="pg5-4D-AaR"/>
                             </constraints>
                         </view>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQq-Ix-xbt">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQq-Ix-xbt">
                             <rect key="frame" x="270" y="10" width="50" height="22"/>
                             <state key="normal" image="profile-call">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

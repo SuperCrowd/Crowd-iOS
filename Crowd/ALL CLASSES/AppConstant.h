@@ -119,6 +119,10 @@
 
 
 /*-----------------------------------------------------------------------------*/
+#pragma mark - Share Strings
+#define JOB_SHARE_TEXT @"I found this job posted on Crowd"
+#define USER_SHARE_TEXT @"I found this candidate on Crowd"
+/*-----------------------------------------------------------------------------*/
 #pragma mark - Web Service parameters declaration
 
 #define kURLGet @"GET"
@@ -223,6 +227,7 @@ typedef enum {
     COMPANY
 }ViewType;
 
+#define CALL_AVAILABILITY_HEARTBEAT_INTERVAL    60
 
 #define WTLoginDidStart @"WTLoginDidStart"
 #define WTLoginDidFinish @"WTLoginDidFinish"

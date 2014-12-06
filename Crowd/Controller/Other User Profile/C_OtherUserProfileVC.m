@@ -87,11 +87,11 @@
     //We enable/disable the call button based on availibility
     if (self.isAvailableForCall)
     {
-        btnCall.hidden = NO;
+        btnCall.enabled = YES;
     }
     else
     {
-        btnCall.hidden = YES;
+        btnCall.enabled = NO;
     }
     
     /*--- Set fonts for all label and show data ---*/
@@ -122,11 +122,11 @@
 
     if (self.isAvailableForCall)
     {
-        btnCall.hidden = NO;
+        btnCall.enabled = YES;
     }
     else
     {
-        btnCall.hidden = YES;
+        btnCall.enabled = NO;
     }
 }
 -(void)setFonts
@@ -138,6 +138,45 @@
     lbl_School.font = kFONT_LIGHT(14.0);
 }
 
+#pragma mark - Share Button
+- (IBAction)btnShareClicked:(id)sender
+{
+    //share button clicked
+    NSString* text = USER_SHARE_TEXT;
+    NSString* url = [NSString stringWithFormat:@"%@%@", USER_SHARE_URL, self.OtherUserID];
+    [self shareText:text andImage:nil andUrl:[NSURL URLWithString:url]];
+}
+
+#pragma mark - Sharing
+- (void)shareText:(NSString *)text andImage:(UIImage *)image andUrl:(NSURL *)url
+{
+    NSMutableArray *sharingItems = [NSMutableArray new];
+    
+    if (text) {
+        [sharingItems addObject:text];
+    }
+    if (image) {
+        [sharingItems addObject:image];
+    }
+    if (url) {
+        [sharingItems addObject:url];
+    }
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+    
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityController.excludedActivityTypes = excludeActivities;
+    
+    [self presentViewController:activityController animated:YES completion:nil];
+}
 #pragma mark - Call Button
 - (IBAction) onCallButtonPressed:(id)sender
 {
@@ -161,11 +200,11 @@
     [super onPresenceUpdateForClientNotification:notification];
     if (self.isAvailableForCall)
     {
-        btnCall.hidden = NO;
+        btnCall.enabled = YES;
     }
     else
     {
-        btnCall.hidden  = YES;
+        btnCall.enabled  = NO;
         
     }
 }
@@ -175,11 +214,11 @@
     [super onCheckCallAvailabilitySuccessful:objResponse];
     if (self.isAvailableForCall)
     {
-        btnCall.hidden = NO;
+        btnCall.enabled = YES;
     }
     else
     {
-        btnCall.hidden  = YES;
+        btnCall.enabled  = NO;
         
     }
     

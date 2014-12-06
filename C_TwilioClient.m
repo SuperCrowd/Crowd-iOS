@@ -199,8 +199,8 @@
     
     if (responseDictionary != nil)
     {
-        NSDictionary* setAvailableForCallResult = [responseDictionary objectForKey:@"SetAvailableForCallResult"];
-        self.secondsAfterToRenewHeartbeat = [setAvailableForCallResult objectForKey:@"RenewAfterSeconds"];
+      //  NSDictionary* setAvailableForCallResult = [responseDictionary objectForKey:@"SetAvailableForCallResult"];
+        self.secondsAfterToRenewHeartbeat = [NSNumber numberWithInt: CALL_AVAILABILITY_HEARTBEAT_INTERVAL];
                                          
     
         //now we schedule the timer to renew in the specified number of seconds

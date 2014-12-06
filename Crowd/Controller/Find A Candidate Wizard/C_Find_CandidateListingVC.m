@@ -509,11 +509,11 @@
         
         if ([myCan.IsAvailableForCall boolValue])
         {
-            cell.btnCall.hidden = NO;
+            cell.btnCall.enabled = YES;
         }
         else
         {
-            cell.btnCall.hidden = YES;
+            cell.btnCall.enabled = NO;
         }
         cell.delegate = self;
         return cell;
