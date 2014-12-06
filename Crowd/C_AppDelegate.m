@@ -17,7 +17,7 @@
 #import "C_JobListModel.h"
 #import "C_JobViewVC.h"
 #import "C_PostJob_UpdateVC.h"
-
+#import <Crashlytics/Crashlytics.h>
 #import "C_MessageModel.h"
 
 #import "C_MessageView.h"
@@ -41,6 +41,8 @@
     /*--- com.symposium.crowd ---*/
     /*--- Create Initial Window ---*/
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
+    [Crashlytics startWithAPIKey:@"b53fcf08df9b183b382153735d57a10862fc5348"];
     
     /*--- Setup Push Notification ---*/
     //For iOS 8

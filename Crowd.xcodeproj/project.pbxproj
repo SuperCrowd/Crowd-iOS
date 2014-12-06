@@ -276,6 +276,7 @@
 		C51461E11A0532F900F43333 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C51461E01A0532F900F43333 /* Podfile */; };
 		C51461E71A054BAB00F43333 /* C_CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C51461E61A054BAB00F43333 /* C_CallViewController.m */; };
 		C51461E91A054BD500F43333 /* C_CallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C51461E81A054BD500F43333 /* C_CallViewController.xib */; };
+		C5FDAB371A33B64800729C99 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5FDAB361A33B64800729C99 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -736,6 +737,7 @@
 		C51461E61A054BAB00F43333 /* C_CallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = C_CallViewController.m; path = "Call Controller/C_CallViewController.m"; sourceTree = "<group>"; };
 		C51461E81A054BD500F43333 /* C_CallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = C_CallViewController.xib; path = "Call Controller/C_CallViewController.xib"; sourceTree = "<group>"; };
 		C5E655001A14F361009DE9F8 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		C5FDAB361A33B64800729C99 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -753,6 +755,7 @@
 				10A953E819B9911200EAAE4B /* UIKit.framework in Frameworks */,
 				C51461C41A05243500F43333 /* libTwilioClient.a in Frameworks */,
 				10A953E419B9911200EAAE4B /* Foundation.framework in Frameworks */,
+				C5FDAB371A33B64800729C99 /* Crashlytics.framework in Frameworks */,
 				45E3EF582C8E6F2350018345 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1240,6 +1243,7 @@
 		10A953E219B9911200EAAE4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C5FDAB361A33B64800729C99 /* Crashlytics.framework */,
 				C5E655001A14F361009DE9F8 /* Reveal.framework */,
 				C51461DC1A052CB000F43333 /* SystemConfiguration.framework */,
 				C51461D61A052CAA00F43333 /* AudioToolbox.framework */,
@@ -1679,6 +1683,7 @@
 				10A953DD19B9911200EAAE4B /* Frameworks */,
 				10A953DE19B9911200EAAE4B /* Resources */,
 				44446D9DAAB27429DDE8437B /* Copy Pods Resources */,
+				C5FDAB351A33B58100729C99 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1849,6 +1854,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		C5FDAB351A33B58100729C99 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run b53fcf08df9b183b382153735d57a10862fc5348 ec359be998ef924b33c345ab3dc42190e39c3cfb7d24adc8fb566851ce5e3f67";
 		};
 /* End PBXShellScriptBuildPhase section */
 
