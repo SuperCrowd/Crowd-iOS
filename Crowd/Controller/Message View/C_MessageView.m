@@ -272,7 +272,7 @@
             //we also inform the TwilioClient to mark the user as unavailable for call
             [[C_TwilioClient sharedInstance]setCallAvailbilityForClient:_message_UserInfo.SenderID isAvailable:NO];
         }
-        self.secondsToWaitToCheckAvailability = [setAvailableForCallResult objectForKey:@"RenewAfterSeconds"];
+        self.secondsToWaitToCheckAvailability = [NSNumber numberWithInt: CALL_AVAILABILITY_HEARTBEAT_INTERVAL];
         
         
         //now we schedule the timer to renew in the specified number of seconds
