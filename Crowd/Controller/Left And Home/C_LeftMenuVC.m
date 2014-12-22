@@ -17,6 +17,9 @@
 #import "C_MyCrowdVC.h"
 #import "C_MyJobsVC.h"
 #import "C_TwilioClient.h"
+
+#import "C_FindAJobListingVC.h"
+#import "C_Find_CandidateListingVC.h"
 //#import "C_FindAJobVC.h"
 //#import "C_Find_CandidateVC.h"
 
@@ -29,10 +32,12 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     DASHBOARD = 0,
     MY_PROFILE = 1,
     FIND_A_JOB = 2,
-    FIND_A_CANDIDATE = 3,
-    POST_A_JOB = 4,
-    MY_CROWD = 5,
-    MY_JOBS = 6
+    SUGGESTED_JOB = 3,
+    FIND_A_CANDIDATE = 4,
+    SUGGESTED_CANDIDATE = 5,
+    POST_A_JOB = 6,
+    MY_CROWD = 7,
+    MY_JOBS = 8
 };
 @interface C_LeftMenuVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
@@ -58,11 +63,13 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
 #pragma mark - View Did Load
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];//profile_suggested
     arrInfo =  @[@{NAME:@"HOME",IMG:@"profile_home"},
                 @{NAME:@"MY PROFILE",IMG:@"profile_my_profile"},
                 @{NAME:@"FIND A JOB",IMG:@"profile_find_a_job"},
+                @{NAME:@"SUGGESTED JOBS",IMG:@"profile_suggested"},
                 @{NAME:@"FIND A CANDIDATE",IMG:@"profile_find_a_candidate"},
+                @{NAME:@"SUGGESTED CANDIDATES",IMG:@"profile_suggested"},
                 @{NAME:@"POST A JOB LISTING",IMG:@"profile_post_a_jpb"},
                 @{NAME:@"MY CROWD",IMG:@"profile_my_crowd"},
                 @{NAME:@"MY JOBS",IMG:@"profile_job"}];
@@ -381,10 +388,32 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
             }];
         }
             break;
+        case SUGGESTED_JOB:
+        {
+            C_FindAJobListingVC *objC = [[C_FindAJobListingVC alloc]initWithNibName:@"C_FindAJobListingVC" bundle:nil];
+            objC.isComingFromLeft = YES;
+            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
+            navvv.navigationBar.translucent = NO;
+            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                
+            }];
+        }
+            break;
         case FIND_A_CANDIDATE:
         {
             MainViewController *objC = [[MainViewController alloc]initWithNibName:@"MainViewController" bundle:nil];
             objC.isForCandidate = YES;
+            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
+            navvv.navigationBar.translucent = NO;
+            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+                
+            }];
+        }
+            break;
+        case SUGGESTED_CANDIDATE:
+        {
+            C_Find_CandidateListingVC *objC = [[C_Find_CandidateListingVC alloc]initWithNibName:@"C_Find_CandidateListingVC" bundle:nil];
+            objC.isComingFromLeft = YES;
             UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
             navvv.navigationBar.translucent = NO;
             [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {

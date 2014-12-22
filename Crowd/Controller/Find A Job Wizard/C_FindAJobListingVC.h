@@ -10,5 +10,6 @@
 
 @interface C_FindAJobListingVC : UIViewController
 @property(nonatomic,strong)NSMutableDictionary *dictInfoJob;
+@property(nonatomic,readwrite)BOOL isComingFromLeft;
 
 @end

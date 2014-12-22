@@ -33,16 +33,28 @@
 @end
 
 @implementation C_FindAJobListingVC
+-(void)btnMenuClicked:(id)sender
+{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
 -(void)back
 {
     popView;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Search Results";
-    self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(back)];
-    
+    if (_isComingFromLeft)
+    {
+        self.title = @"Suggested Jobs";
+        self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    }
+    else
+    {
+        self.title = @"Search Results";
+        self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(back)];
+    }
     
     
     /*--- Add code to setup refresh control ---*/
@@ -77,6 +89,10 @@
     
     [super viewWillAppear:animated];
     [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    if (_isComingFromLeft)
+    {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    }
     if (arrContent.count > 0)
     {
         [tblView reloadData];
@@ -97,17 +113,40 @@
     {
         isCallingService = YES;
         showHUD_with_Title(@"Getting Job List");
-        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
-                                    @"UserToken":userInfoGlobal.Token,
-                                    @"Industry":[_dictInfoJob[@"Industry"] isNull],
-                                    @"Industry2":[_dictInfoJob[@"Industry2"] isNull],
-                                    @"ExperienceLevel":[_dictInfoJob[@"ExperienceLevel"] isNull],
-                                    @"Position":[_dictInfoJob[@"Position"] isNull],
-                                    @"LocationCity":[_dictInfoJob[@"LocationCity"] isNull],
-                                    @"LocationState":[_dictInfoJob[@"LocationState"] isNull],
-                                    @"LocationCountry":[_dictInfoJob[@"LocationCountry"] isNull],
-                                    @"Company":[_dictInfoJob[@"Company"] isNull],
-                                    @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum]};
+        NSDictionary *dictParam;
+        if (_isComingFromLeft)
+        {
+            NSString *strCompany = @"";
+            if (userInfoGlobal.arr_WorkALL.count > 0) {
+                C_Model_Work *myRecentWork = userInfoGlobal.arr_WorkALL[0];
+                strCompany = myRecentWork.EmployerName;
+            }
+            dictParam = @{@"UserID":userInfoGlobal.UserId,
+                          @"UserToken":userInfoGlobal.Token,
+                          @"Industry":[userInfoGlobal.Industry isNull],
+                          @"Industry2":[userInfoGlobal.Industry2 isNull],
+                          @"ExperienceLevel":[userInfoGlobal.ExperienceLevel isNull],
+                          @"LocationCity":[userInfoGlobal.LocationCity isNull],
+                          @"LocationState":[userInfoGlobal.LocationState isNull],
+                          @"LocationCountry":[userInfoGlobal.LocationCountry isNull],
+                          @"Company":[strCompany isNull],
+                          @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum]};
+        }
+        else
+        {
+            dictParam = @{@"UserID":userInfoGlobal.UserId,
+                          @"UserToken":userInfoGlobal.Token,
+                          @"Industry":[_dictInfoJob[@"Industry"] isNull],
+                          @"Industry2":[_dictInfoJob[@"Industry2"] isNull],
+                          @"ExperienceLevel":[_dictInfoJob[@"ExperienceLevel"] isNull],
+                          @"Position":[_dictInfoJob[@"Position"] isNull],
+                          @"LocationCity":[_dictInfoJob[@"LocationCity"] isNull],
+                          @"LocationState":[_dictInfoJob[@"LocationState"] isNull],
+                          @"LocationCountry":[_dictInfoJob[@"LocationCountry"] isNull],
+                          @"Company":[_dictInfoJob[@"Company"] isNull],
+                          @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum]};
+        }
+        
         parser = [[JSONParser alloc]initWith_withURL:Web_JOB_LIST withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getDataSuccessfull:) withObject:self];
     }
     @catch (NSException *exception) {

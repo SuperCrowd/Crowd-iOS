@@ -34,12 +34,27 @@
 {
     popView;
 }
+-(void)btnMenuClicked:(id)sender
+{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Search Results";
-    self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
-    self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(back)];
-    [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    if (_isComingFromLeft)
+    {
+        self.title = @"Suggested Candidates";
+        self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    }
+    else
+    {
+        self.title = @"Search Results";
+        self.navigationItem.leftBarButtonItem =  [CommonMethods backBarButtton_NewNavigation:self withSelector:@selector(back)];
+        self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Cancel" withSelector:@selector(back)];
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+    }
+    
     
     
     /*--- Add code to setup refresh control ---*/
@@ -76,7 +91,10 @@
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter]removeObserver:self name:WTPresenceUpdateForClient object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(onPresenceUpdateForClientNotification:) name:WTPresenceUpdateForClient object:nil];
-    
+    if (_isComingFromLeft)
+    {
+        [self.mm_drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    }
     [self updateCallAvailabilityBasedOnCachedPresenceUpdates];
 }
 
@@ -227,7 +245,27 @@
         NSLog(@"page Num : %ld",(long)pageNum);
         isCallingService = YES;
         showHUD_with_Title(@"Getting Candidate List");
-        NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
+        NSDictionary *dictParam;
+        if (_isComingFromLeft)
+        {
+            NSString *strCompany = @"";
+            if (userInfoGlobal.arr_WorkALL.count > 0) {
+                C_Model_Work *myRecentWork = userInfoGlobal.arr_WorkALL[0];
+                strCompany = myRecentWork.EmployerName;
+            }
+            dictParam = @{@"UserID":userInfoGlobal.UserId,
+                          @"UserToken":userInfoGlobal.Token,
+                          @"Industry":[userInfoGlobal.Industry isNull],
+                          @"Industry2":[userInfoGlobal.Industry2 isNull],
+                          @"ExperienceLevel":[userInfoGlobal.ExperienceLevel isNull],
+                          @"LocationCity":[userInfoGlobal.LocationCity isNull],
+                          @"LocationState":[userInfoGlobal.LocationState isNull],
+                          @"LocationCountry":[userInfoGlobal.LocationCountry isNull],
+                          @"Company":[strCompany isNull],
+                          @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum]};
+        }
+        else
+            dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
                                     @"Industry":[_dictInfoCandidate[@"Industry"] isNull],
                                     @"Industry2":[_dictInfoCandidate[@"Industry2"] isNull],
