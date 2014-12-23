@@ -16,6 +16,7 @@
 @class C_JobListModel;
 @interface C_PostJob_UpdateVC : UIViewController
 @property (nonatomic,strong)NSString *strComingFrom;
+@property(nonatomic,readwrite)BOOL isNewJobPost;
 @property(nonatomic,strong)C_JobListModel *obj_JobListModel;
 
 @property(nonatomic,strong)id <postJobProtocol> delegate;

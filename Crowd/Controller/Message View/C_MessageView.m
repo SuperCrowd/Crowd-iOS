@@ -33,9 +33,13 @@
 #import "C_TwilioClient.h"
 #import "C_CallViewController.h"
 
+//filepiker
+#import <FPPicker/FPPicker.h>
+
+
 #define MESSAGE_COUNT @"30"
 
-@interface C_MessageView ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIActionSheetDelegate,selectJobProtocol,selectUserProtocol,UIAlertViewDelegate>
+@interface C_MessageView ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIActionSheetDelegate,selectJobProtocol,selectUserProtocol,UIAlertViewDelegate,FPPickerControllerDelegate,FPSaveControllerDelegate>
 {
     __weak IBOutlet UITableView *tblView;
     IBOutlet UIView *viewChat;// chat view
@@ -63,7 +67,8 @@
     NSString *strLink_JobCreaterID;
     NSString *strLink_UserID;
     NSString *strLink_Website;
-    
+    NSString *strLink_Resume;
+
     NSString *OtherUserPhotoURL;
     
     
@@ -129,6 +134,7 @@
     [CommonMethods addTOPLine_to_View:viewChat];
     
     strLink_Website = @"";
+    strLink_Resume = @"";
     strLink_JobID = @"";
     strLink_UserID = @"";
     strLink_JobCreaterID = @"";
@@ -614,6 +620,7 @@
                 strLink_JobID = @"";
                 strLink_UserID = @"";
                 strLink_Website = @"";
+                strLink_Resume = @"";
                 strLink_JobCreaterID = @"";
                 [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
                 if (![multiTextView.text isEqualToString:@""])
@@ -943,7 +950,8 @@
 {
     if (![strLink_JobID isEqualToString:@""] ||
         ![strLink_UserID isEqualToString:@""] ||
-        ![strLink_Website isEqualToString:@""])
+        ![strLink_Website isEqualToString:@""] ||
+        ![strLink_Resume isEqualToString:@""])
     {
         [self sendNow];
     }
@@ -970,9 +978,14 @@
 {
     @try
     {
+        NSString *strLink = @"";
         if (![strLink_Website isEqualToString:@""] && ![strLink_Website hasPrefix:@"http".uppercaseString])
         {
             strLink_Website = [NSString stringWithFormat:@"http://%@",strLink_Website];
+            strLink = strLink_Website;
+        }
+        if (![strLink_Resume isEqualToString:@""]) {
+            strLink = strLink_Resume;
         }
         strTextMessage = [[NSString stringWithFormat:@"%@",multiTextView.text] isNull];
         showHUD_with_Title(@"Sending Message");
@@ -980,7 +993,7 @@
                                     @"UserToken":userInfoGlobal.Token,
                                     @"ReceiverID":_message_UserInfo.SenderID,
                                     @"Message":strTextMessage,
-                                    @"LinkURL":[strLink_Website isNull],
+                                    @"LinkURL":[strLink isNull],
                                     @"LinkUserID":[strLink_UserID isNull],
                                     @"LinkJobID":[strLink_JobID isNull]};
         parser = [[JSONParser alloc]initWith_withURL:Web_MESSAGES_SEND withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(sendMessagesSuccessfull:) withObject:self];
@@ -1047,12 +1060,21 @@
             {
                 NSLog(@"SEND Message : %@    : %@",multiTextView.text,strMSGID);
 
+                NSString *strLink = @"";
+                if (![strLink_Website isEqualToString:@""])
+                {
+                    strLink = strLink_Website;
+                }
+                if (![strLink_Resume isEqualToString:@""]) {
+                    strLink = strLink_Resume;
+                }
+                
                 NSString *strDateGMT = [[NSDate date] getGMTDateString:@"MM/dd/yyyy h:mm:ss a"];
                 NSDictionary *dictTemp = @{@"ID":[objResponse valueForKeyPath:@"SendMessageResult.MessageID"],
                                            @"SenderID":userInfoGlobal.UserId,
                                            @"ID":strMSGID,
                                            @"Message":[strTextMessage isNull],
-                                           @"LincURL":[strLink_Website isNull],
+                                           @"LincURL":[strLink isNull],
                                            @"LincJobID":[strLink_JobID isNull],
                                            @"LinkJobCreatorID":[strLink_JobCreaterID isNull],
                                            @"LincUserID":[strLink_UserID isNull],
@@ -1073,6 +1095,7 @@
             strLink_JobCreaterID = @"";
             strLink_UserID = @"";
             strLink_Website = @"";
+            strLink_Resume = @"";
             strTextMessage = @"";
             [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
             btnSend.enabled = NO;
@@ -1271,7 +1294,8 @@
         multiTextView.placeholder = @"Type Message Here";
         if (![strLink_JobID isEqualToString:@""] ||
             ![strLink_UserID isEqualToString:@""] ||
-            ![strLink_Website isEqualToString:@""])
+            ![strLink_Website isEqualToString:@""] ||
+            ![strLink_Resume isEqualToString:@""])
         {
             btnSend.enabled = YES;
             btnSend.alpha = 1.0;
@@ -1311,6 +1335,7 @@
                                          strLink_JobID = @"";
                                          strLink_UserID = @"";
                                          strLink_Website = @"";
+                                         strLink_Resume = @"";
                                          strLink_JobCreaterID = @"";
                                          [btnPlus setImage:[UIImage imageNamed:@"btnPlusGreen"] forState:UIControlStateNormal];
                                          if (![multiTextView.text isEqualToString:@""])
@@ -1340,7 +1365,8 @@
 {
     if (![strLink_JobID isEqualToString:@""] ||
         ![strLink_UserID isEqualToString:@""] ||
-        ![strLink_Website isEqualToString:@""])
+        ![strLink_Website isEqualToString:@""] ||
+        ![strLink_Resume isEqualToString:@""])
     {
         /*--- remove attachment when press (-) ---*/
         [self removeAttachment];
@@ -1367,6 +1393,10 @@
                                                 [self link_Website_3];
                                             }];
             
+            UIAlertAction *act_Resume_4 = [UIAlertAction actionWithTitle:@"Add Resume (PDF Only)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                            {
+                                                [self link_Resume_4];
+                                            }];
             
             UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
                                      {
@@ -1376,6 +1406,7 @@
             [actionSheetController addAction:act_Job_1];
             [actionSheetController addAction:act_User_2];
             [actionSheetController addAction:act_Website_3];
+            [actionSheetController addAction:act_Resume_4];
             [actionSheetController addAction:cancel];
             
             actionSheetController.view.tintColor = RGBCOLOR_GREEN;
@@ -1384,7 +1415,7 @@
         }
         else
         {
-            UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Add a Link to a Job",@"Add a Link to a User",@"Add a Link to a Website",nil];
+            UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Add a Link to a Job",@"Add a Link to a User",@"Add a Link to a Website",@"Add Resume (PDF Only)",nil];
             [actionSheet showInView:self.view];
         }
     }
@@ -1400,6 +1431,9 @@
             break;
         case 2:
             [self link_Website_3];
+            break;
+        case 3:
+            [self link_Resume_4];
             break;
         default:
             break;
@@ -1468,7 +1502,95 @@
         [alert show];
     }
 }
+-(void)link_Resume_4
+{
+    /*
+     * Create the object
+     */
+    FPPickerController *fpController = [FPPickerController new];
+    
+    /*
+     * Set the delegate
+     */
+    fpController.fpdelegate = self;
+    
+    /*
+     * Ask for specific data types. (Optional) Default is all files.
+     */
+    fpController.dataTypes = @[@"/*"];
+    
+    /*
+     * Should file be uploaded? Default is YES.
+     */
+    fpController.shouldUpload = NO;
+    fpController.shouldDownload = NO;
+    /*
+     * Select and order the sources (Optional) Default is all sources
+     Google Docs
+     Dropbox
+     Box
+     OneDrive
+     FPSourceBox
+     FPSourceDropbox
+     FPSourceGoogleDrive
+     FPSourceSkydrive
+     */
+    fpController.sourceNames = @[FPSourceBox,FPSourceDropbox,FPSourceGoogleDrive,FPSourceSkydrive];
+    
+    /*
+     * Enable multselect (Optional) Default is single select
+     */
+    fpController.selectMultiple = NO;
+    
+    /*
+     * Specify the maximum number of files (Optional) Default is 0, no limit
+     */
+    fpController.maxFiles = 1;
+    
+    /*
+     * Display it.
+     */
+    [self presentViewController:fpController
+                       animated:YES
+                     completion:nil];
+}
 
+#pragma mark - FPPickerDelegate
+- (void) FPPickerController:(FPPickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    FPMediaInfo *media = (FPMediaInfo *)info;
+    NSLog(@"%@",info);
+    
+    NSString* fileExtension = [media.filename pathExtension];
+    
+    if (![fileExtension isEqualToString:@""] &&
+        ![fileExtension isEqualToString:@"pdf"])
+    {
+        //error, we dont support this file type
+        [picker dismissViewControllerAnimated:YES completion:^{
+            NSLog(@"User selected file extension of `%@` which is unsupported",fileExtension);
+            showHUD_with_error(@"Please Select PDF Only");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                hideHUD;
+            });
+        }];
+    }
+    else
+    {
+        [picker dismissViewControllerAnimated:YES completion:^{
+            strLink_Resume = [media.remoteURL absoluteString];
+            NSLog(@"File Selected %@ ",media.remoteURL);
+            [btnPlus setImage:[UIImage imageNamed:@"btnMinusGreen"] forState:UIControlStateNormal];
+            btnSend.enabled = YES;
+            btnSend.alpha = 1.0;
+        }];
+    }
+}
+
+- (void) FPPickerControllerDidCancel:(FPPickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark - Validation + Custom Protocol
 -(void)jobSelected:(NSString *)strJobID withJobCreaterID:(NSString *)strJobCreaterID
 {

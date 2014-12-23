@@ -11,5 +11,5 @@
 @interface C_Find_CandidateListingVC : UIViewController<CallEnabledCell>
 @property(nonatomic,strong)NSMutableDictionary *dictInfoCandidate;
 
-@property(nonatomic,readwrite)BOOL isComingFromLeft;
+@property(nonatomic,readwrite)BOOL hideCancelButton;
 @end

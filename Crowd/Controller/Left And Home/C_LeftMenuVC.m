@@ -34,10 +34,10 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
     FIND_A_JOB = 2,
     SUGGESTED_JOB = 3,
     FIND_A_CANDIDATE = 4,
-    SUGGESTED_CANDIDATE = 5,
-    POST_A_JOB = 6,
-    MY_CROWD = 7,
-    MY_JOBS = 8
+//    SUGGESTED_CANDIDATE = 5,
+    POST_A_JOB = 5,
+    MY_CROWD = 6,
+    MY_JOBS = 7
 };
 @interface C_LeftMenuVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
                 @{NAME:@"FIND A JOB",IMG:@"profile_find_a_job"},
                 @{NAME:@"SUGGESTED JOBS",IMG:@"profile_suggested"},
                 @{NAME:@"FIND A CANDIDATE",IMG:@"profile_find_a_candidate"},
-                @{NAME:@"SUGGESTED CANDIDATES",IMG:@"profile_suggested"},
+//                @{NAME:@"SUGGESTED CANDIDATES",IMG:@"profile_suggested"},
                 @{NAME:@"POST A JOB LISTING",IMG:@"profile_post_a_jpb"},
                 @{NAME:@"MY CROWD",IMG:@"profile_my_crowd"},
                 @{NAME:@"MY JOBS",IMG:@"profile_job"}];
@@ -410,17 +410,17 @@ typedef NS_ENUM(NSInteger, ChooseIndex)
             }];
         }
             break;
-        case SUGGESTED_CANDIDATE:
-        {
-            C_Find_CandidateListingVC *objC = [[C_Find_CandidateListingVC alloc]initWithNibName:@"C_Find_CandidateListingVC" bundle:nil];
-            objC.isComingFromLeft = YES;
-            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
-            navvv.navigationBar.translucent = NO;
-            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
-                
-            }];
-        }
-            break;
+//        case SUGGESTED_CANDIDATE:
+//        {
+//            C_Find_CandidateListingVC *objC = [[C_Find_CandidateListingVC alloc]initWithNibName:@"C_Find_CandidateListingVC" bundle:nil];
+//            objC.isComingFromLeft = YES;
+//            UINavigationController *navvv = [[UINavigationController alloc]initWithRootViewController:objC];
+//            navvv.navigationBar.translucent = NO;
+//            [self.mm_drawerController setCenterViewController:navvv withCloseAnimation:YES completion:^(BOOL finished) {
+//                
+//            }];
+//        }
+//            break;
         case POST_A_JOB:
         {
             is_PostJob_Edit_update = @"no";

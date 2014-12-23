@@ -1,10 +1,39 @@
 PODS:
+  - AFNetworking (2.4.1):
+    - AFNetworking/NSURLConnection (= 2.4.1)
+    - AFNetworking/NSURLSession (= 2.4.1)
+    - AFNetworking/Reachability (= 2.4.1)
+    - AFNetworking/Security (= 2.4.1)
+    - AFNetworking/Serialization (= 2.4.1)
+    - AFNetworking/UIKit (= 2.4.1)
+  - AFNetworking/NSURLConnection (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - FPPicker (4.0.2):
+    - AFNetworking (~> 2.4.1)
+    - MBProgressHUD (~> 0.9)
+  - MBProgressHUD (0.9)
   - NSLogger (1.5)
 
 DEPENDENCIES:
+  - FPPicker (~> 4.0.0)
   - NSLogger
 
 SPEC CHECKSUMS:
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  FPPicker: 4046e8698732a371424b5e30bae45f747b6a72ad
+  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   NSLogger: 84ed0bf00985df483153ce344d8171c9ec83be2b
 
-COCOAPODS: 0.34.2
+COCOAPODS: 0.35.0

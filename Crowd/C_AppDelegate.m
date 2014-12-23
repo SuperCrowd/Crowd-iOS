@@ -24,7 +24,7 @@
 #import "C_TwilioClient.h"
 #import "C_CallViewController.h"
 
-
+#import <FPPicker/FPPicker.h>
 @interface C_AppDelegate()
 {
     JSONParser *parser;
@@ -33,7 +33,10 @@
 @implementation C_AppDelegate
 @synthesize twilioClient;
 @synthesize alertIncomingCall;
-
++ (void)initialize
+{
+    [FPConfig sharedInstance].APIKey = @"Aa9HqNoAIR2uxiYKrXMSpz";
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSString* activityName = @"application:didFinishLaunchingWithOptions:";
@@ -42,7 +45,10 @@
     /*--- Create Initial Window ---*/
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     
-    [Crashlytics startWithAPIKey:@"b53fcf08df9b183b382153735d57a10862fc5348"];
+    /*
+     ./Crashlytics.framework/run b53fcf08df9b183b382153735d57a10862fc5348 ec359be998ef924b33c345ab3dc42190e39c3cfb7d24adc8fb566851ce5e3f67
+     */
+    //[Crashlytics startWithAPIKey:@"b53fcf08df9b183b382153735d57a10862fc5348"];
     
     /*--- Setup Push Notification ---*/
     //For iOS 8

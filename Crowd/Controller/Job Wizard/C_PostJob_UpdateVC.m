@@ -22,6 +22,8 @@
 
 #import "C_WebVC.h"
 
+#import "C_Find_CandidateListingVC.h"
+
 #define FIND_A_JOB @"FindAJob"
 
 #define MORE @"More Information"
@@ -81,8 +83,6 @@
         self.navigationItem.leftBarButtonItem =  [CommonMethods leftMenuButton:self withSelector:@selector(btnMenuClicked:)];
     }
     
-    
-    
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"updateJobListModel" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateModelList) name:@"updateJobListModel" object:nil];
     
@@ -103,8 +103,15 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self getData];
         });
-        
     }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (_isNewJobPost) {
+            [self showAlert_SuggestedCandidate:@"Job Posted!" withMessage:@"Would you like to search for the best candidates for this job?"];
+        }
+    });
+    
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -175,7 +182,59 @@
         [btn_Fill_ReOpen setImage:[UIImage imageNamed:@"fill-btn"] forState:UIControlStateNormal];
     }
 }
-
+#pragma mark - NEW JOB POST CANDIDATE SUGGESTION
+-(void)showAlert_SuggestedCandidate:(NSString *)title withMessage:(NSString *)strMessage
+{
+    if (ios8)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:strMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* CancelAction = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleCancel  handler:^(UIAlertAction * action)
+                                       {
+                                           [alert dismissViewControllerAnimated:YES completion:nil];
+                                       }];
+        [alert addAction:CancelAction];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Search" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+                                   {
+                                       [self pushToSuggestedCandidate];
+                                   }];
+        [alert addAction:okAction];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:strMessage delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"Search",nil];
+        alertView.tag = 103;
+        [alertView show];
+    }
+}
+-(void)pushToSuggestedCandidate
+{
+    NSMutableDictionary *dictSend = [[NSMutableDictionary alloc]init];
+    @try
+    {
+        [dictSend setValue:postJob_ModelClass.Industry forKey:@"Industry"];
+        [dictSend setValue:postJob_ModelClass.Industry2 forKey:@"Industry2"];
+        [dictSend setValue:postJob_ModelClass.Title forKey:@"Position"];
+        [dictSend setValue:postJob_ModelClass.ExperienceLevel forKey:@"ExperienceLevel"];
+        [dictSend setValue:postJob_ModelClass.LocationCity forKey:@"LocationCity"];
+        [dictSend setValue:postJob_ModelClass.LocationState forKey:@"LocationState"];
+        [dictSend setValue:postJob_ModelClass.LocationCountry forKey:@"LocationCountry"];
+        [dictSend setValue:postJob_ModelClass.Company forKey:@"Company"];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception.description);
+    }
+    @finally {
+    }
+    
+    C_Find_CandidateListingVC *obj = [[C_Find_CandidateListingVC alloc]initWithNibName:@"C_Find_CandidateListingVC" bundle:nil];
+    obj.hideCancelButton = YES;
+    obj.dictInfoCandidate = dictSend;
+    [self.navigationController pushViewController:obj animated:YES];
+}
 #pragma mark - Get Data
 -(void)getData
 {
@@ -526,6 +585,21 @@
                 popView;
                 break;
                 
+            default:
+                break;
+        }
+    }
+    else if(alertView.tag == 103)
+    {
+        switch (buttonIndex) {
+            case 0:
+                
+                break;
+            case 1:
+            {
+                [self pushToSuggestedCandidate];
+            }
+                break;
             default:
                 break;
         }
