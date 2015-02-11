@@ -1,0 +1,32 @@
+dependencies: \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPLibrary+iOS.m \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPLibrary+iOS.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPLibrary.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPTypedefs.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPInternalHeaders.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPSharedInternalHeaders.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPAPIClient.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/AFNetworking/AFNetworking/AFURLConnectionOperation.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/AFNetworking/AFNetworking/AFURLRequestSerialization.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/AFNetworking/AFNetworking/AFURLResponseSerialization.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/AFNetworking/AFNetworking/AFSecurityPolicy.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/AFNetworking/AFNetworking/AFNetworkReachabilityManager.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPConstants.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPMediaInfo.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPPrivateConfig.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPConfig.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPProgressTracker.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPSession+ConvenienceMethods.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPSession.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPSource.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPAuthController.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPUtils+iOS.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPUtils.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPPickerController.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Shared/FPExternalHeaders.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPSaveController.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPSourceListController.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/FPPicker/FPPicker/Platforms/iOS/FPTableWithUploadButtonViewController.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Pods/MBProgressHUD/MBProgressHUD.h

@@ -27,11 +27,6 @@ dependencies: \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/MMDrawerController/MMDrawerVisualState.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/MMDrawerController/UIViewController+MMDrawerController.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFDownloadRequestOperation.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFHTTPRequestOperation.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFURLConnectionOperation.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFURLRequestSerialization.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFURLResponseSerialization.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFSecurityPolicy.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/Categories/Base64.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/ALL\ Cell/Cell\ Profile\ Preview/C_Header_ProfilePreview.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/ALL\ Cell/Cell\ Profile\ Preview/C_Cell_PositionProfile.h \

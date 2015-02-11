@@ -26,11 +26,6 @@ dependencies: \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/MMDrawerController/MMDrawerVisualState.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/MMDrawerController/UIViewController+MMDrawerController.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFDownloadRequestOperation.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFHTTPRequestOperation.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFURLConnectionOperation.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFURLRequestSerialization.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFURLResponseSerialization.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/AFNetworking/AFSecurityPolicy.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/Categories/Base64.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Model\ Class/C_MyUser.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/Job\ Wizard/C_PostJob_NameVC.h \
@@ -42,4 +37,6 @@ dependencies: \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/ALL\ CLASSES/DWTagList/DWTagList.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Model\ Class/C_PostJobModel.h \
   /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Model\ Class/C_JobListModel.h \
-  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/General\ Controllers/C_WebVC.h
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/General\ Controllers/C_WebVC.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/Find\ A\ Candidate\ Wizard/C_Find_CandidateListingVC.h \
+  /Users/bobby/Documents/dev/BlueLabelLabs-BL074-Crowd-iOS/Crowd/Controller/ALL\ Cell/CallEnabledCell.h
