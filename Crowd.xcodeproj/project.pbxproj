@@ -2106,7 +2106,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8cf4ce0-a368-4e46-a854-9b8291a916c3";
+				PROVISIONING_PROFILE = "c3c1ed56-2c95-4b44-bb5f-349f1cbfb875";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2145,7 +2145,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8cf4ce0-a368-4e46-a854-9b8291a916c3";
+				PROVISIONING_PROFILE = "c3c1ed56-2c95-4b44-bb5f-349f1cbfb875";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
