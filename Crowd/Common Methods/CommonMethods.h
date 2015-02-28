@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "iToast.h"
 @class MMDrawerController;
 @class C_UserModel;
 @interface CommonMethods : NSObject
@@ -22,6 +23,7 @@
 /*--- Get Document Directory path ---*/
 NSString *DocumentsDirectoryPath() ;
 
++ (void)showToastWithMessage:(NSString *)message;
 
 /*--- Do not back up on iCloud ---*/
 + (BOOL)addSkipBackupAttributeToItemAtPath;
@@ -52,6 +54,8 @@ NSString *DocumentsDirectoryPath() ;
 + (UIBarButtonItem*)backBarButtton_NewNavigation:(UIViewController *)viewC withSelector:(SEL)mySelector;
 
 + (UIBarButtonItem*)createRightButton_withVC:(UIViewController *)vc withText:(NSString *)strText withSelector:(SEL)mySelector;
+
++ (UIBarButtonItem*)getBarButtton:(NSString*)imageName VC:(UIViewController *)vc withSelector:(SEL)mySelector;
 
 +(NSString *)getMonthName:(NSString *)strMonthNumber;
 +(NSInteger)getMonthNumber:(NSString *)strMonthName;

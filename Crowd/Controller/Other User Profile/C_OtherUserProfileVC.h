@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "C_BaseTwilioViewController.h"
-@interface C_OtherUserProfileVC : C_BaseTwilioViewController
+@interface C_OtherUserProfileVC : C_BaseTwilioViewController <UIActionSheetDelegate>
 //@property(nonatomic,strong)NSString *OtherUserID;
 @end

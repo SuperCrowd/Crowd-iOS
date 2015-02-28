@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 @class C_JobListModel;
-@interface C_JobViewVC : UIViewController
+@interface C_JobViewVC : UIViewController <UIActionSheetDelegate>
 @property(nonatomic,strong)C_JobListModel *obj_myJob;
 @end

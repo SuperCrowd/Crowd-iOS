@@ -41,6 +41,23 @@
 }
 
 #pragma mark - Methods
++ (void)showToastWithMessage:(NSString *)message {
+    [[[iToast makeText:[NSString stringWithFormat:@"%@",message]] setDuration:iToastDurationNormal] show];
+
+    
+}
+
++ (UIBarButtonItem*)getBarButtton:(NSString*)imageName VC:(UIViewController *)vc withSelector:(SEL)mySelector
+{
+    UIImage *buttonImage = [UIImage imageNamed:imageName];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, buttonImage.size.width, buttonImage.size.height);
+    [button addTarget:vc action:mySelector forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *retVal = [[UIBarButtonItem alloc] initWithCustomView:button];
+    return retVal;
+}
+
 + (NSString *)totalDiskSpace {
     long long space = [[[[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil] objectForKey:NSFileSystemSize] longLongValue];
     return [self memoryFormatter:space];

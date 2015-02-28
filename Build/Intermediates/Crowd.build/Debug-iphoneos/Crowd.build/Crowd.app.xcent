@@ -3,14 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>PC9L37637U.com.symposium.crowd</string>
+	<string>D9LY44WD2H.com.symposium.crowd</string>
+	<key>aps-environment</key>
+	<string>development</string>
 	<key>com.apple.developer.team-identifier</key>
-	<string>PC9L37637U</string>
+	<string>D9LY44WD2H</string>
 	<key>get-task-allow</key>
 	<true/>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>PC9L37637U.com.symposium.crowd</string>
+		<string>D9LY44WD2H.com.symposium.crowd</string>
 	</array>
 </dict>
 </plist>

@@ -48,6 +48,8 @@
 // App Name
 #define App_Name @"Crowd"
 
+#define SHOWINDICATOR [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:YES];
+#define HIDEINDICATOR [[UIApplication sharedApplication]setNetworkActivityIndicatorVisible:NO];
 
 #pragma mark - Extra
 /*-----------------------------------------------------------------------------*/
@@ -78,7 +80,7 @@
 /*-----------------------------------------------------------------------------*/
 
 #pragma mark - DeviceCheck
-
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define iPhone ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define IS_DEVICE_iPHONE_5 ((UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPhone) && ([[UIScreen mainScreen ] bounds].size.height>=568.0f))
 #define iPhone5ExHeight ((IS_DEVICE_iPHONE_5)?88:0)

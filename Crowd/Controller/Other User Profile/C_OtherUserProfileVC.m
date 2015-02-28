@@ -109,11 +109,15 @@
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_EducationProfile" bundle:nil] forCellReuseIdentifier:cellEducationProfilePreviewID];
     [tblView registerNib:[UINib nibWithNibName:@"C_Cell_SkillsProfile" bundle:nil] forCellReuseIdentifier:cellSkillsProfilePreviewID];
     
+    self.navigationItem.rightBarButtonItem=[CommonMethods getBarButtton:@"blockBtn" VC:self withSelector:@selector(btnFlagStatusPressed:)];
+    
     imgVFavourite.hidden = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //getdata
         [self getData];
     });
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -222,6 +226,77 @@
         
     }
     
+}
+
+-(IBAction)btnFlagStatusPressed:(UIButton*)btn{
+
+        [self openActionSheet];
+
+
+    
+}
+
+-(void)openActionSheet{
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
+
+        
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:nil
+                                              message:nil
+                                              preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        
+        UIAlertAction *cancelAction = [UIAlertAction
+                                       actionWithTitle:@"Cancel"
+                                       style:UIAlertActionStyleCancel
+                                       handler:^(UIAlertAction *action)
+                                       {
+                                           
+                                           //action.button.titleLabel.font = kMJCustom(kMJRoboRegular,17);
+                                           NSLog(@"Cancel action");
+                                       }];
+        
+      
+        
+        UIAlertAction *flagAction = [UIAlertAction
+                                     actionWithTitle:@"Flag Profile"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction *action)
+                                     {
+                                         NSLog(@"OK action");
+                                         [self flagStatus];
+                                         
+                                     }];
+        
+        
+        
+        [alertController addAction:cancelAction];
+        [alertController addAction:flagAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    }
+    else{
+        //@"Block User",@"Unblock User",
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Flag Profile" ,nil];
+        actionSheet.tag = 3001;
+        [actionSheet showInView:self.view.window];
+    }
+}
+
+-(void)flagStatus{
+    SHOWINDICATOR
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(showProfileFlagged) userInfo:nil repeats:NO];
+    
+    HIDEINDICATOR
+}
+
+- (void)showProfileFlagged
+{
+    [CommonMethods showToastWithMessage:@"Profile has been flagged for moderation."];
 }
 
 #pragma mark - Get data

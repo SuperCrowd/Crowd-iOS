@@ -263,6 +263,7 @@
 		C51461E11A0532F900F43333 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C51461E01A0532F900F43333 /* Podfile */; };
 		C51461E71A054BAB00F43333 /* C_CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C51461E61A054BAB00F43333 /* C_CallViewController.m */; };
 		C51461E91A054BD500F43333 /* C_CallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C51461E81A054BD500F43333 /* C_CallViewController.xib */; };
+		C57406791AA2114D0086674A /* iToast.m in Sources */ = {isa = PBXBuildFile; fileRef = C57406781AA2114D0086674A /* iToast.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C5D2481B1A8B87E400042352 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D248181A8B87E400042352 /* libcrypto.a */; };
 		C5D2481C1A8B87E400042352 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D248191A8B87E400042352 /* libssl.a */; };
 		C5D2481D1A8B87E400042352 /* libTwilioClient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D2481A1A8B87E400042352 /* libTwilioClient.a */; };
@@ -697,6 +698,8 @@
 		C51461E51A054BAB00F43333 /* C_CallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_CallViewController.h; path = "Call Controller/C_CallViewController.h"; sourceTree = "<group>"; };
 		C51461E61A054BAB00F43333 /* C_CallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = C_CallViewController.m; path = "Call Controller/C_CallViewController.m"; sourceTree = "<group>"; };
 		C51461E81A054BD500F43333 /* C_CallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = C_CallViewController.xib; path = "Call Controller/C_CallViewController.xib"; sourceTree = "<group>"; };
+		C57406771AA2114D0086674A /* iToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iToast.h; sourceTree = "<group>"; };
+		C57406781AA2114D0086674A /* iToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iToast.m; sourceTree = "<group>"; };
 		C5D248121A8B87CD00042352 /* TCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCConnection.h; sourceTree = "<group>"; };
 		C5D248131A8B87CD00042352 /* TCConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCConnectionDelegate.h; sourceTree = "<group>"; };
 		C5D248141A8B87CD00042352 /* TCDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCDevice.h; sourceTree = "<group>"; };
@@ -1278,6 +1281,7 @@
 		10A9541819B9919700EAAE4B /* ALL CLASSES */ = {
 			isa = PBXGroup;
 			children = (
+				C57406761AA211350086674A /* iToast */,
 				10CAA75619DEAF080039FBFB /* TPKeyboardAvoiding */,
 				105D46E119D1AAE800C09272 /* Badge */,
 				1002FF8219BF129F009F87AF /* DWTagList */,
@@ -1613,6 +1617,15 @@
 				C51461E81A054BD500F43333 /* C_CallViewController.xib */,
 			);
 			name = "Call Controller";
+			sourceTree = "<group>";
+		};
+		C57406761AA211350086674A /* iToast */ = {
+			isa = PBXGroup;
+			children = (
+				C57406771AA2114D0086674A /* iToast.h */,
+				C57406781AA2114D0086674A /* iToast.m */,
+			);
+			name = iToast;
 			sourceTree = "<group>";
 		};
 		F44360B7773A73C04B826B27 /* Pods */ = {
@@ -1955,6 +1968,7 @@
 				10A948CF19C948AA0042999F /* C_Header_ProfilePreview.m in Sources */,
 				1078C13F19C3242800378CC4 /* C_Cell_Tags.m in Sources */,
 				10CAA75219DE9AD00039FBFB /* ContactsViewController.m in Sources */,
+				C57406791AA2114D0086674A /* iToast.m in Sources */,
 				101824FF19D022670099E8F5 /* C_PostJob_IndustryListingVC.m in Sources */,
 				C51461E71A054BAB00F43333 /* C_CallViewController.m in Sources */,
 				1088D17A1A03A92600F8A2C4 /* C_PostJob_QualificationVC.m in Sources */,
