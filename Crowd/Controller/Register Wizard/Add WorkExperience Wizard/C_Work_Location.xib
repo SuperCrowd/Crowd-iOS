@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Work_Location">
+            <connections>
+                <outlet property="scrlV" destination="EUF-ov-a87" id="HBp-Gz-ouV"/>
+                <outlet property="view" destination="It7-sf-pW0" id="3Mv-fi-v88"/>
+                <outlet property="viewCity" destination="zTH-cE-jmh" id="HWC-PA-TYO"/>
+                <outlet property="viewCountry" destination="5xT-XP-cwH" id="RyE-9x-6bP"/>
+                <outlet property="viewState" destination="z3N-2M-lH3" id="Lty-wg-G84"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="It7-sf-pW0">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EUF-ov-a87" customClass="C_ScrollViewKeyboard">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8v-x8-pDC">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.61568627450000002" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="JaL-Fw-24J"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTH-cE-jmh" userLabel="City" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="70" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="PJM-c5-nG5"/>
+                                <constraint firstAttribute="width" constant="320" id="fHH-81-qf4"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3N-2M-lH3" userLabel="State" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="134" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="320" id="aW1-Ih-rXY"/>
+                                <constraint firstAttribute="height" constant="44" id="joT-pO-Lx8"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5xT-XP-cwH" userLabel="Country" customClass="C_ViewEditableTextField">
+                            <rect key="frame" x="0.0" y="198" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="2zr-fg-l1p"/>
+                                <constraint firstAttribute="width" constant="320" id="Vau-s4-WM1"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="5xT-XP-cwH" firstAttribute="top" secondItem="z3N-2M-lH3" secondAttribute="bottom" constant="20" id="67R-zC-4xP"/>
+                        <constraint firstAttribute="trailing" secondItem="5xT-XP-cwH" secondAttribute="trailing" id="8u0-10-r9u"/>
+                        <constraint firstItem="5xT-XP-cwH" firstAttribute="leading" secondItem="EUF-ov-a87" secondAttribute="leading" id="AMz-Eg-tg1"/>
+                        <constraint firstItem="zTH-cE-jmh" firstAttribute="top" secondItem="EUF-ov-a87" secondAttribute="top" constant="70" id="Jdt-32-ZAX"/>
+                        <constraint firstAttribute="trailing" secondItem="E8v-x8-pDC" secondAttribute="trailing" id="KM4-XT-uRd"/>
+                        <constraint firstAttribute="centerX" secondItem="z3N-2M-lH3" secondAttribute="centerX" id="Ova-d4-wBt"/>
+                        <constraint firstAttribute="centerX" secondItem="zTH-cE-jmh" secondAttribute="centerX" id="SrP-YX-Utf"/>
+                        <constraint firstItem="E8v-x8-pDC" firstAttribute="leading" secondItem="EUF-ov-a87" secondAttribute="leading" id="VG3-e6-jeE"/>
+                        <constraint firstItem="zTH-cE-jmh" firstAttribute="leading" secondItem="EUF-ov-a87" secondAttribute="leading" id="Z23-lF-ilW"/>
+                        <constraint firstAttribute="bottom" secondItem="5xT-XP-cwH" secondAttribute="bottom" constant="20" id="dC0-Pu-oxo"/>
+                        <constraint firstAttribute="trailing" secondItem="z3N-2M-lH3" secondAttribute="trailing" id="fvn-QQ-WWW"/>
+                        <constraint firstItem="z3N-2M-lH3" firstAttribute="top" secondItem="zTH-cE-jmh" secondAttribute="bottom" constant="20" id="igm-bI-A4f"/>
+                        <constraint firstAttribute="centerX" secondItem="5xT-XP-cwH" secondAttribute="centerX" id="p9K-BX-6gE"/>
+                        <constraint firstItem="z3N-2M-lH3" firstAttribute="leading" secondItem="EUF-ov-a87" secondAttribute="leading" id="q4f-wE-nCo"/>
+                        <constraint firstAttribute="trailing" secondItem="zTH-cE-jmh" secondAttribute="trailing" id="wjb-my-ePW"/>
+                        <constraint firstItem="E8v-x8-pDC" firstAttribute="top" secondItem="EUF-ov-a87" secondAttribute="top" id="xug-wc-Ovy"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="EUF-ov-a87" firstAttribute="leading" secondItem="It7-sf-pW0" secondAttribute="leading" id="L8V-16-osB"/>
+                <constraint firstAttribute="trailing" secondItem="EUF-ov-a87" secondAttribute="trailing" id="aX2-dK-eHd"/>
+                <constraint firstItem="EUF-ov-a87" firstAttribute="top" secondItem="It7-sf-pW0" secondAttribute="top" id="f3s-PR-w9Z"/>
+                <constraint firstAttribute="bottom" secondItem="EUF-ov-a87" secondAttribute="bottom" id="nIS-VA-n3u"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="481" y="491"/>
+        </view>
+    </objects>
+</document>

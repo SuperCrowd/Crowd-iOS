@@ -17,7 +17,7 @@
 
 @property(nonatomic,strong)IBOutlet NSLayoutConstraint *const_imgV_Other;
 
-@property(nonatomic,strong)IBOutlet UIButton *btnLink;
+@property(nonatomic,strong)IBOutlet UIButton *btnLink,*btn_OtherProfilePic;
 
 //@property(nonatomic,strong)IBOutlet NSLayoutConstraint *const_imgV_Height;
 @end

@@ -52,6 +52,7 @@
 
 @property NSString *DateCreated;
 @property NSString *DateModified;
+@property BOOL isCurrent;
 @end
 
 #pragma mark -

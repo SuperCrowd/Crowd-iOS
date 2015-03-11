@@ -846,6 +846,9 @@
         bubble = [bubble resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 3.0, 3.0, 14.0)];
         cell.imgV_Me.image = bubble;
         
+//        [cell.btn_MeProfilePic addTarget:self action:@selector(btnProfileImageClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        cell.btn_MeProfilePic.tag = 100+indexPath.row;
+        
         return cell;
     }
     else
@@ -899,6 +902,9 @@
         bubble = [bubble resizableImageWithCapInsets:UIEdgeInsetsMake(20.0, 14.0, 3.0, 3.0)];
         cell.imgV_Other.image = bubble;
 
+        
+        [cell.btn_OtherProfilePic addTarget:self action:@selector(btnProfileImageClicked:) forControlEvents:UIControlEventTouchUpInside];
+        cell.btn_OtherProfilePic.tag = 100+indexPath.row;
         return cell;
     }
     return nil;
@@ -944,6 +950,13 @@
         obj.OtherUserID = myMessage.LincUserID;
         [self.navigationController pushViewController:obj animated:YES];
     }
+}
+
+-(void)btnProfileImageClicked:(UIButton *)btnUser{
+     MessageDetailModel *myMessage = (MessageDetailModel *)arrContent[[btnUser tag]-100];
+    C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+    obj.OtherUserID = myMessage.SenderID;
+    [self.navigationController pushViewController:obj animated:YES];
 }
 #pragma mark - Send
 -(IBAction)btnSendClicked:(id)sender

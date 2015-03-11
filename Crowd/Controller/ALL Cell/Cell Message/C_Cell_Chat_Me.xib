@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Cell_Chat_Me"/>
@@ -23,6 +23,16 @@
                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Exe-m4-O63">
+                        <rect key="frame" x="275" y="20" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="5BA-Ho-6WL"/>
+                            <constraint firstAttribute="height" constant="35" id="a4O-qG-Kgi"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHv-i6-AgV" userLabel="User Pic">
                         <rect key="frame" x="275" y="20" width="35" height="35"/>
                         <constraints>
@@ -69,6 +79,8 @@
                 <constraints>
                     <constraint firstItem="p1p-rM-vZB" firstAttribute="width" secondItem="uRh-zA-3nP" secondAttribute="width" priority="750" constant="-26" id="1ZM-eL-fpD"/>
                     <constraint firstItem="Lsd-5N-zEt" firstAttribute="leading" secondItem="VrS-q0-R7P" secondAttribute="leading" constant="10" id="3lQ-kk-Ii2"/>
+                    <constraint firstItem="Exe-m4-O63" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="topMargin" constant="12" id="4BT-kC-rOP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Exe-m4-O63" secondAttribute="trailing" constant="2" id="4Z0-hY-Fvp"/>
                     <constraint firstItem="DHv-i6-AgV" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="20" id="71v-FO-e1V"/>
                     <constraint firstItem="Lsd-5N-zEt" firstAttribute="top" secondItem="VrS-q0-R7P" secondAttribute="top" constant="5" id="7QS-no-VoG"/>
                     <constraint firstItem="Ufa-jM-GZQ" firstAttribute="top" secondItem="p1p-rM-vZB" secondAttribute="bottom" id="8Ra-ao-cH2"/>
@@ -86,6 +98,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnLink" destination="Ufa-jM-GZQ" id="TRK-Bw-O2B"/>
+                <outlet property="btn_MeProfilePic" destination="Exe-m4-O63" id="u9k-Bu-OsO"/>
                 <outlet property="const_lblText_Me" destination="93L-kh-spC" id="uN8-Ss-8f5"/>
                 <outlet property="imgV_Me" destination="uRh-zA-3nP" id="PAb-43-0kb"/>
                 <outlet property="imgV_MeProfilePic" destination="DHv-i6-AgV" id="iES-xd-aAN"/>

@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     
     [self setupEditableView];
     
+   
     C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
 
     viewCity.txtName.text = myWork.LocationCity;
@@ -116,12 +117,23 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     NSString *strCity = [viewCity.txtName.text isNull];
     NSString *strState = [viewState.txtName.text isNull];
     NSString *strCountry= [viewCountry.txtName.text isNull];
-    if ([strCity isEqualToString:@""])
+    
+     /*---------Need to check for current work now-----------*/
+    BOOL isCurrent;
+    C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
+    if (myWork.EndMonth && myWork.EndMonth.length==0) {
+        isCurrent = YES;
+    }
+    else{
+        isCurrent = NO;
+    }
+    
+    if ([strCity isEqualToString:@""] && isCurrent)
     {
         [CommonMethods displayAlertwithTitle:@"Please Enter City name" withMessage:nil withViewController:self];
         return NO;
     }
-    else if ([strCountry isEqualToString:@""])
+    else if ([strCountry isEqualToString:@""] && isCurrent)
     {
         [CommonMethods displayAlertwithTitle:@"Please Enter Country name" withMessage:nil withViewController:self];
         return NO;

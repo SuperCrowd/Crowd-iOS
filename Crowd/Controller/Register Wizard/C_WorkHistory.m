@@ -19,6 +19,7 @@
 #import "C_EducationHistory.h"
 
 #import "C_ProfilePreviewVC.h"
+#import "C_Work_JobTitle.h"
 @interface C_WorkHistory ()<UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UITableView *tblView;
@@ -101,7 +102,7 @@
     }
     
     
-    NSPredicate *predLocation = [NSPredicate predicateWithFormat:@"(self.location_city == nil) OR (self.location_city == '')"];
+    NSPredicate *predLocation = [NSPredicate predicateWithFormat:@"(self.location_city == nil) OR (self.location_city == '') && And self.isCurrent == YES"];
     NSArray *arrFilterLocation = [myUserModel.arrPositionUser filteredArrayUsingPredicate:predLocation];
     if (arrFilterLocation.count>0)
     {
@@ -125,10 +126,13 @@
 #pragma mark - Table Delegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return arrSectionHeader.count;
+    return  arrSectionHeader.count+ 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == arrSectionHeader.count) {
+        return 0;
+    }
     if ([arrSectionHeader[section] isEqualToString:@"Recommendations"])
     {
         return myUserModel.arrRecommendationsUser.count;
@@ -137,6 +141,10 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == arrSectionHeader.count) {
+        return 50;
+    }
+
     return 34.0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -145,6 +153,25 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (section == arrSectionHeader.count)
+    {
+        UIView *viewHeader = [[UIView alloc]init];
+        viewHeader.frame = CGRectMake(0, 0, screenSize.size.width, 34.0);
+        viewHeader.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *btnAddSchool = [[UIButton alloc]initWithFrame:CGRectMake(60.0,10.0, screenSize.size.width-100.0, 30.0)];
+        btnAddSchool.layer.cornerRadius = 10.0;
+        if (arrSectionHeader.count == 0)
+            [btnAddSchool setTitle:@"Add Work Experience" forState:UIControlStateNormal];
+        else
+            [btnAddSchool setTitle:@"Add Another Work Experience" forState:UIControlStateNormal];
+        
+        [btnAddSchool.titleLabel setFont:kFONT_LIGHT(15.0)];
+        [btnAddSchool setBackgroundImage:[UIImage imageNamed:@"btnGreenBG"] forState:UIControlStateNormal];
+        [btnAddSchool addTarget:self action:@selector(btnAddNewWorkCliked:) forControlEvents:UIControlEventTouchUpInside];
+        [viewHeader addSubview:btnAddSchool];
+        return viewHeader;
+    }
     UIView *viewHeader = [[UIView alloc]init];
     viewHeader.frame = CGRectMake(0, 0, screenSize.size.width, 34.0);
     viewHeader.backgroundColor = RGBCOLOR_DARK_BROWN;
@@ -300,6 +327,21 @@
     
     return cell;
 }
+
+#pragma mark - Add New Experience
+-(void)btnAddNewWorkCliked:(UIButton*)btnNew{
+    [dictAddNewEducation removeAllObjects];
+    NSLog(@"Add new school");
+    C_Work_JobTitle *obj = [[C_Work_JobTitle alloc]initWithNibName:@"C_Work_JobTitle" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:obj];
+    nav.navigationBar.translucent = NO;
+    
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
+    
+}
+
 
 #pragma mark - Edit Cliked - Open Specific Screen
 -(void)btnEditClicked:(UIButton *)btnEdit

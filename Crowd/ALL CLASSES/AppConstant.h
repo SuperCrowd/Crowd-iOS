@@ -200,6 +200,7 @@ CGFloat animatedDistance;
 C_UserModel *myUserModel;
 NSMutableDictionary *dictAddNewEducation;// use when add new education
 
+NSMutableDictionary *dictAddWorkExperience;// use when add new work experience
 
 
 NSMutableDictionary *dictPostNewJob; // global dict to add new job

@@ -18,5 +18,5 @@
 
 @property(nonatomic,strong)IBOutlet UIImageView *imgV_Me;
 
-@property(nonatomic,strong)IBOutlet UIButton *btnLink;
+@property(nonatomic,strong)IBOutlet UIButton *btnLink,*btn_MeProfilePic;
 @end

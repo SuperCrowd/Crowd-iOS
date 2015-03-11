@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C_Cell_Chat_Other"/>
@@ -34,6 +35,16 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bI2-YQ-j81">
+                        <rect key="frame" x="10" y="20" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="9kB-f9-gDW"/>
+                            <constraint firstAttribute="height" constant="35" id="x0p-hy-Zx0"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_green_cell" translatesAutoresizingMaskIntoConstraints="NO" id="HeN-sl-0Ov">
                         <rect key="frame" x="46" y="26" width="36" height="43"/>
                         <constraints>
@@ -69,6 +80,7 @@
                     <constraint firstItem="JlN-Vo-W99" firstAttribute="leading" secondItem="wEs-WY-xWO" secondAttribute="leading" constant="10" id="1Cp-DO-aUT"/>
                     <constraint firstAttribute="trailing" secondItem="ImN-fY-35Z" secondAttribute="trailing" constant="8" id="1cX-oz-RcD"/>
                     <constraint firstItem="ImN-fY-35Z" firstAttribute="top" secondItem="wEs-WY-xWO" secondAttribute="top" constant="5" id="1dA-EE-MBX"/>
+                    <constraint firstItem="bI2-YQ-j81" firstAttribute="top" secondItem="wEs-WY-xWO" secondAttribute="topMargin" constant="12" id="35C-eN-s2p"/>
                     <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="HeN-sl-0Ov" secondAttribute="trailing" priority="750" constant="238" id="6tK-rY-FOg"/>
                     <constraint firstItem="HeN-sl-0Ov" firstAttribute="top" secondItem="wEs-WY-xWO" secondAttribute="top" constant="26" id="7FM-z5-jGB"/>
                     <constraint firstAttribute="trailing" secondItem="smF-Ab-zBD" secondAttribute="trailing" constant="10" id="Fh7-Zp-qPA"/>
@@ -81,10 +93,12 @@
                     <constraint firstAttribute="trailing" secondItem="7wy-vz-5Ba" secondAttribute="trailing" priority="250" constant="227" id="hxw-mV-7W8"/>
                     <constraint firstItem="ImN-fY-35Z" firstAttribute="leading" secondItem="wEs-WY-xWO" secondAttribute="leading" constant="10" id="lBf-0X-50I"/>
                     <constraint firstAttribute="bottom" secondItem="HeN-sl-0Ov" secondAttribute="bottom" constant="11" id="oBE-or-cqe"/>
+                    <constraint firstItem="bI2-YQ-j81" firstAttribute="leading" secondItem="wEs-WY-xWO" secondAttribute="leadingMargin" constant="2" id="xB3-kv-bNi"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnLink" destination="smF-Ab-zBD" id="NSb-q7-leA"/>
+                <outlet property="btn_OtherProfilePic" destination="bI2-YQ-j81" id="5W3-x8-QEV"/>
                 <outlet property="const_imgV_Other" destination="6tK-rY-FOg" id="aJu-0p-jY4"/>
                 <outlet property="imgV_Other" destination="HeN-sl-0Ov" id="clu-yB-CYK"/>
                 <outlet property="imgV_OtherProfilePic" destination="JlN-Vo-W99" id="rAr-1d-9e5"/>

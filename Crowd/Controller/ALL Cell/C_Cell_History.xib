@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -24,7 +25,7 @@
                         <color key="textColor" red="0.14117647058823529" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="7L8-is-7Rj" userLabel="Name">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="256" translatesAutoresizingMaskIntoConstraints="NO" id="7L8-is-7Rj" userLabel="Name">
                         <rect key="frame" x="54" y="39" width="256" height="3"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,7 +34,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ppK-GD-Bez" firstAttribute="top" secondItem="43G-lS-B15" secondAttribute="top" constant="12" id="1lR-qY-Bvh"/>
-                    <constraint firstItem="7L8-is-7Rj" firstAttribute="top" secondItem="ppK-GD-Bez" secondAttribute="bottom" constant="7" id="Dlc-LA-NNM"/>
                     <constraint firstItem="ppK-GD-Bez" firstAttribute="leading" secondItem="43G-lS-B15" secondAttribute="leading" constant="54" id="KV1-pK-ny6"/>
                     <constraint firstItem="7L8-is-7Rj" firstAttribute="leading" secondItem="43G-lS-B15" secondAttribute="leading" constant="54" id="Sg7-6a-NII"/>
                     <constraint firstAttribute="bottom" secondItem="7L8-is-7Rj" secondAttribute="bottom" constant="2" id="bO8-6L-IYg"/>

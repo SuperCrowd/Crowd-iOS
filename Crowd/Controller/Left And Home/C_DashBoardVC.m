@@ -388,7 +388,7 @@
 {
     DashBoardModel *myDash = (DashBoardModel *)arrContent[indexPath.row];
 
-    if ([myDash.Type isEqualToString:@"1"])
+    if ([myDash.Type isEqualToString:@"1"] || [myDash.Type isEqualToString:@"3"])
     {
         C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
         obj.OtherUserID = myDash.OtherUserID;

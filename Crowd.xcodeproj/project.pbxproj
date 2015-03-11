@@ -254,6 +254,16 @@
 		10ECE9C619EE331500FAE431 /* C_Cell_Chat_Other.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10ECE9C419EE331500FAE431 /* C_Cell_Chat_Other.xib */; };
 		10FD69FB19EBFFF200B248F3 /* C_MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FD69F919EBFFF200B248F3 /* C_MessageView.m */; };
 		10FD69FC19EBFFF200B248F3 /* C_MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10FD69FA19EBFFF200B248F3 /* C_MessageView.xib */; };
+		1AD325C71AAF031D00A7B323 /* C_Work_JobTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD325C51AAF031D00A7B323 /* C_Work_JobTitle.m */; };
+		1AD325C81AAF031D00A7B323 /* C_Work_JobTitle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD325C61AAF031D00A7B323 /* C_Work_JobTitle.xib */; };
+		1AD325CC1AAF033D00A7B323 /* C_Work_Employer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD325CA1AAF033D00A7B323 /* C_Work_Employer.m */; };
+		1AD325CD1AAF033D00A7B323 /* C_Work_Employer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD325CB1AAF033D00A7B323 /* C_Work_Employer.xib */; };
+		1AD325D11AAF036900A7B323 /* C_Work_TimePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD325CF1AAF036900A7B323 /* C_Work_TimePeriod.m */; };
+		1AD325D21AAF036900A7B323 /* C_Work_TimePeriod.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD325D01AAF036900A7B323 /* C_Work_TimePeriod.xib */; };
+		1AD325D61AAF03E300A7B323 /* C_Work_Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD325D41AAF03E300A7B323 /* C_Work_Location.m */; };
+		1AD325D71AAF03E300A7B323 /* C_Work_Location.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD325D51AAF03E300A7B323 /* C_Work_Location.xib */; };
+		1AD325DB1AAF040900A7B323 /* C_Work_Roles.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AD325D91AAF040900A7B323 /* C_Work_Roles.m */; };
+		1AD325DC1AAF040900A7B323 /* C_Work_Roles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AD325DA1AAF040900A7B323 /* C_Work_Roles.xib */; };
 		45E3EF582C8E6F2350018345 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2E8E868D8AE21C27B95B99 /* libPods.a */; };
 		C50B00F31A26269C0058FC0C /* C_BaseTwilioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C50B00F21A26269C0058FC0C /* C_BaseTwilioViewController.m */; };
 		C51461D91A052CAA00F43333 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C51461D61A052CAA00F43333 /* AudioToolbox.framework */; };
@@ -683,6 +693,21 @@
 		10FD69F819EBFFF200B248F3 /* C_MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_MessageView.h; sourceTree = "<group>"; };
 		10FD69F919EBFFF200B248F3 /* C_MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_MessageView.m; sourceTree = "<group>"; };
 		10FD69FA19EBFFF200B248F3 /* C_MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_MessageView.xib; sourceTree = "<group>"; };
+		1AD325C41AAF031D00A7B323 /* C_Work_JobTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Work_JobTitle.h; sourceTree = "<group>"; };
+		1AD325C51AAF031D00A7B323 /* C_Work_JobTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Work_JobTitle.m; sourceTree = "<group>"; };
+		1AD325C61AAF031D00A7B323 /* C_Work_JobTitle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Work_JobTitle.xib; sourceTree = "<group>"; };
+		1AD325C91AAF033D00A7B323 /* C_Work_Employer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Work_Employer.h; sourceTree = "<group>"; };
+		1AD325CA1AAF033D00A7B323 /* C_Work_Employer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Work_Employer.m; sourceTree = "<group>"; };
+		1AD325CB1AAF033D00A7B323 /* C_Work_Employer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Work_Employer.xib; sourceTree = "<group>"; };
+		1AD325CE1AAF036900A7B323 /* C_Work_TimePeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Work_TimePeriod.h; sourceTree = "<group>"; };
+		1AD325CF1AAF036900A7B323 /* C_Work_TimePeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Work_TimePeriod.m; sourceTree = "<group>"; };
+		1AD325D01AAF036900A7B323 /* C_Work_TimePeriod.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Work_TimePeriod.xib; sourceTree = "<group>"; };
+		1AD325D31AAF03E300A7B323 /* C_Work_Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Work_Location.h; sourceTree = "<group>"; };
+		1AD325D41AAF03E300A7B323 /* C_Work_Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Work_Location.m; sourceTree = "<group>"; };
+		1AD325D51AAF03E300A7B323 /* C_Work_Location.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Work_Location.xib; sourceTree = "<group>"; };
+		1AD325D81AAF040900A7B323 /* C_Work_Roles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_Work_Roles.h; sourceTree = "<group>"; };
+		1AD325D91AAF040900A7B323 /* C_Work_Roles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C_Work_Roles.m; sourceTree = "<group>"; };
+		1AD325DA1AAF040900A7B323 /* C_Work_Roles.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C_Work_Roles.xib; sourceTree = "<group>"; };
 		5F2E8E868D8AE21C27B95B99 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		81755C0A76B9A83E6310E5E4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8B1FD497B23E8984446BEDD4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -942,6 +967,7 @@
 		104CD5F719D288F300E444F8 /* Register Wizard */ = {
 			isa = PBXGroup;
 			children = (
+				1AD325C31AAF00D500A7B323 /* Add WorkExperience Wizard */,
 				104CD65819D2890700E444F8 /* Edit Screens */,
 				104CD5F819D288F300E444F8 /* Add Education Wizard */,
 				104CD62C19D288F300E444F8 /* C_WelcomeVC.h */,
@@ -1591,6 +1617,28 @@
 			path = "General Controllers";
 			sourceTree = "<group>";
 		};
+		1AD325C31AAF00D500A7B323 /* Add WorkExperience Wizard */ = {
+			isa = PBXGroup;
+			children = (
+				1AD325C41AAF031D00A7B323 /* C_Work_JobTitle.h */,
+				1AD325C51AAF031D00A7B323 /* C_Work_JobTitle.m */,
+				1AD325C61AAF031D00A7B323 /* C_Work_JobTitle.xib */,
+				1AD325C91AAF033D00A7B323 /* C_Work_Employer.h */,
+				1AD325CA1AAF033D00A7B323 /* C_Work_Employer.m */,
+				1AD325CB1AAF033D00A7B323 /* C_Work_Employer.xib */,
+				1AD325CE1AAF036900A7B323 /* C_Work_TimePeriod.h */,
+				1AD325CF1AAF036900A7B323 /* C_Work_TimePeriod.m */,
+				1AD325D01AAF036900A7B323 /* C_Work_TimePeriod.xib */,
+				1AD325D31AAF03E300A7B323 /* C_Work_Location.h */,
+				1AD325D41AAF03E300A7B323 /* C_Work_Location.m */,
+				1AD325D51AAF03E300A7B323 /* C_Work_Location.xib */,
+				1AD325D81AAF040900A7B323 /* C_Work_Roles.h */,
+				1AD325D91AAF040900A7B323 /* C_Work_Roles.m */,
+				1AD325DA1AAF040900A7B323 /* C_Work_Roles.xib */,
+			);
+			path = "Add WorkExperience Wizard";
+			sourceTree = "<group>";
+		};
 		C51461C21A05240500F43333 /* Twilio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1693,8 +1741,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				10ECE9C619EE331500FAE431 /* C_Cell_Chat_Other.xib in Resources */,
+				1AD325D71AAF03E300A7B323 /* C_Work_Location.xib in Resources */,
 				104CD66A19D2BA7B00E444F8 /* C_MP_ChooseImageVC.xib in Resources */,
 				10454A6D19CBE4C8009FCFF7 /* C_TutorialVC.xib in Resources */,
+				1AD325D21AAF036900A7B323 /* C_Work_TimePeriod.xib in Resources */,
 				1041B7CD1A00AE0700AB4111 /* notification.wav in Resources */,
 				10DDA80819DBDA430075FA7A /* C_Cell_FindAJobList.xib in Resources */,
 				104CD64519D288F300E444F8 /* C_EducationHistory.xib in Resources */,
@@ -1737,6 +1787,7 @@
 				10D48ACB19D2E12100B93675 /* C_MP_EditTimeVC.xib in Resources */,
 				104CD66219D2959600E444F8 /* C_MP_NameVC.xib in Resources */,
 				10D48AC619D2DBB700B93675 /* C_MP_EditTextVC.xib in Resources */,
+				1AD325C81AAF031D00A7B323 /* C_Work_JobTitle.xib in Resources */,
 				104CD63919D288F300E444F8 /* C_Education_Time.xib in Resources */,
 				104CD67919D2C94F00E444F8 /* C_MP_IndustryListVC.xib in Resources */,
 				105D46DA19D15E2E00C09272 /* C_PostJob_UpdateVC.xib in Resources */,
@@ -1756,6 +1807,7 @@
 				10A953EE19B9911200EAAE4B /* InfoPlist.strings in Resources */,
 				C51461E11A0532F900F43333 /* Podfile in Resources */,
 				1078C14019C3242800378CC4 /* C_Cell_Tags.xib in Resources */,
+				1AD325DC1AAF040900A7B323 /* C_Work_Roles.xib in Resources */,
 				105ABB3E19BD9CB400177C6A /* C_ViewEditableTextField.xib in Resources */,
 				1049E38419E7B96200D10C2B /* C_Cell_Follower.xib in Resources */,
 				104CD63519D288F300E444F8 /* C_Education_Degree.xib in Resources */,
@@ -1778,6 +1830,7 @@
 				1018250019D022670099E8F5 /* C_PostJob_IndustryListingVC.xib in Resources */,
 				108285B819D40C820001F124 /* ViewFindType.xib in Resources */,
 				102FC4A519CB0156007F37E9 /* C_LeftMenuVC.xib in Resources */,
+				1AD325CD1AAF033D00A7B323 /* C_Work_Employer.xib in Resources */,
 				10A948DB19C96ECE0042999F /* C_Cell_PositionProfile.xib in Resources */,
 				103B3C6C19D009870022FA33 /* IndustryList.plist in Resources */,
 				10A948E019C97BF10042999F /* C_Cell_RecommendationProfile.xib in Resources */,
@@ -1856,6 +1909,7 @@
 				10FD69FB19EBFFF200B248F3 /* C_MessageView.m in Sources */,
 				1002FF8519BF129F009F87AF /* DWTagList.m in Sources */,
 				10A954A619B9919700EAAE4B /* NSObject+Validation.m in Sources */,
+				1AD325CC1AAF033D00A7B323 /* C_Work_Employer.m in Sources */,
 				10A954AF19B9919700EAAE4B /* DownloadManager.m in Sources */,
 				10A954C319B9919700EAAE4B /* SDWebImageManager.m in Sources */,
 				100ABDAF19B99470009C1372 /* LIALinkedInHttpClient.m in Sources */,
@@ -1865,6 +1919,7 @@
 				10A954CA19B9919700EAAE4B /* UIImageView+WebCache.m in Sources */,
 				10CAA75F19DEAF080039FBFB /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				100ABDB019B99470009C1372 /* NSString+LIAEncode.m in Sources */,
+				1AD325C71AAF031D00A7B323 /* C_Work_JobTitle.m in Sources */,
 				104CD64419D288F300E444F8 /* C_EducationHistory.m in Sources */,
 				1049E38319E7B96200D10C2B /* C_Cell_Follower.m in Sources */,
 				104CD65219D288F300E444F8 /* C_SkillsVC.m in Sources */,
@@ -1880,6 +1935,7 @@
 				104CD67319D2C85D00E444F8 /* C_MP_IndustryVC.m in Sources */,
 				102FC49F19CAE6D2007F37E9 /* C_MyUser.m in Sources */,
 				104CD67819D2C94F00E444F8 /* C_MP_IndustryListVC.m in Sources */,
+				1AD325DB1AAF040900A7B323 /* C_Work_Roles.m in Sources */,
 				10A954B919B9919700EAAE4B /* MMExampleDrawerVisualStateManager.m in Sources */,
 				10DDA7FF19DBD55E0075FA7A /* C_CandidateModel.m in Sources */,
 				10CAA75419DE9AD00039FBFB /* MainViewController.m in Sources */,
@@ -1931,6 +1987,7 @@
 				104CD63819D288F300E444F8 /* C_Education_Time.m in Sources */,
 				C50B00F31A26269C0058FC0C /* C_BaseTwilioViewController.m in Sources */,
 				10AC82D719D1327F0090A039 /* C_PostJob_LinkVC.m in Sources */,
+				1AD325D11AAF036900A7B323 /* C_Work_TimePeriod.m in Sources */,
 				10A954C519B9919700EAAE4B /* UIButton+WebCache.m in Sources */,
 				105CD2BE19E4F9FE00DF7E61 /* Update_PostJob.m in Sources */,
 				1018251619D049F90099E8F5 /* C_PostJob_ExperienceVC.m in Sources */,
@@ -1957,6 +2014,7 @@
 				105F8F3519ED52900061C494 /* MDMultilineTextView.m in Sources */,
 				10AED95519E65A34009E3BE5 /* C_Cell_Dashboard.m in Sources */,
 				10A953F019B9911200EAAE4B /* main.m in Sources */,
+				1AD325D61AAF03E300A7B323 /* C_Work_Location.m in Sources */,
 				10A954C619B9919700EAAE4B /* UIImage+GIF.m in Sources */,
 				10A954AC19B9919700EAAE4B /* UINavigationController+Rotation_IOS6.m in Sources */,
 				104CD64619D288F300E444F8 /* C_ExperienceVC.m in Sources */,
