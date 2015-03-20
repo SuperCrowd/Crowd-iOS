@@ -40,16 +40,7 @@
         self.navigationItem.rightBarButtonItem = [CommonMethods createRightButton_withVC:self withText:@"Done" withSelector:@selector(btnDoneClicked:)];
     }
     
-    NSArray *arrT = @[@"Job Title",@"Employer",@"Time Period",@"Location",@"Roles and Responsibilities"];
-    arrSectionHeader = [[NSMutableArray alloc]init];
-    for (int i = 0; i<myUserModel.arrPositionUser.count; i++)
-    {
-        [arrSectionHeader addObjectsFromArray:arrT];
-    }
-    if (myUserModel.arrRecommendationsUser.count > 0)
-    {
-        [arrSectionHeader addObject:@"Recommendations"];
-    }
+
     
     
     /*--- Register Cell ---*/
@@ -76,6 +67,25 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
+    //nidhi
+    if (arrSectionHeader) {
+        [arrSectionHeader removeAllObjects];
+    }
+    arrSectionHeader = [[NSMutableArray alloc]init];
+
+    NSArray *arrT = @[@"Job Title",@"Employer",@"Time Period",@"Location",@"Roles and Responsibilities"];
+    for (int i = 0; i<myUserModel.arrPositionUser.count; i++)
+    {
+        [arrSectionHeader addObjectsFromArray:arrT];
+    }
+    if (myUserModel.arrRecommendationsUser.count > 0)
+    {
+        [arrSectionHeader addObject:@"Recommendations"];
+    }
+
+    
+    
     if (arrSectionHeader.count > 0)
     {
         lbl_Static_NoHistoryFound.alpha = 0.0;
@@ -102,7 +112,7 @@
     }
     
     
-    NSPredicate *predLocation = [NSPredicate predicateWithFormat:@"(self.location_city == nil) OR (self.location_city == '') && And self.isCurrent == YES"];
+    NSPredicate *predLocation = [NSPredicate predicateWithFormat:@"(self.location_city == nil) OR (self.location_city == '')  And self.isCurrent == YES"];
     NSArray *arrFilterLocation = [myUserModel.arrPositionUser filteredArrayUsingPredicate:predLocation];
     if (arrFilterLocation.count>0)
     {
@@ -210,7 +220,7 @@
                 break;
             case 2:
                 fontT = kFONT_BOLD(17.0);
-                if ([myPosition.isCurrent boolValue])
+                if (myPosition.isCurrent)
                 {
                     strText = [[NSString stringWithFormat:@"%@ - Present",myPosition.startDate_year] isNull];
                 }
@@ -285,7 +295,8 @@
                 break;
             case 2:
                 fontT = kFONT_BOLD(17.0);
-                if ([myPosition.isCurrent boolValue])
+               
+                if (myPosition.isCurrent)
                 {
                     strText = [[NSString stringWithFormat:@"%@ - Present",myPosition.startDate_year] isNull];
                 }
@@ -378,7 +389,7 @@
                 strText = [myPosition.company_name isNull];
                 break;
             case 2:
-                if ([myPosition.isCurrent boolValue])
+                if (myPosition.isCurrent)
                 {
                     strText = [[NSString stringWithFormat:@"%@ - Present",myPosition.startDate_year] isNull];
                 }

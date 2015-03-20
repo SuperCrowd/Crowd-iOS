@@ -410,6 +410,11 @@
          */
         if ([myMessage.Type isEqualToString:@"2"])
         {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewUserProfileTapped:)];
+            cell.imgVUserPic.userInteractionEnabled = YES;
+            cell.imgVUserPic.tag = indexPath.row;
+            [cell.imgVUserPic addGestureRecognizer:tap];
+            
             cell.lblDeclined.alpha = 0.0;
             cell.btnViewProfile.alpha = 0.0;
             cell.btnAccept.alpha = 1.0;
@@ -475,6 +480,17 @@
     C_MessageModel *myMessage = (C_MessageModel *)arrContent[btnDecline.tag];
     [self accept_or_decline:myMessage withStatus:@"0"];
 }
+
+- (void)viewUserProfileTapped:(UITapGestureRecognizer *)recognizer
+{
+    UIImageView *imgView = (UIImageView *)recognizer.view;
+
+    C_MessageModel *myMessage = (C_MessageModel *)arrContent[imgView.tag];
+    C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
+    obj.OtherUserID = myMessage.SenderID;
+    [self.navigationController pushViewController:obj animated:YES];
+}
+
 -(void)btnViewProfileClicked:(UIButton *)btnViewProfile
 {
     C_MessageModel *myMessage = (C_MessageModel *)arrContent[btnViewProfile.tag];
@@ -502,7 +518,9 @@
                                     @"UserToken":userInfoGlobal.Token,
                                     @"MessageID":myMessage.msgID,
                                     @"JobID":myMessage.LincJobID,
-                                    @"Status":status};
+                                    @"Status":status,
+                                    @"IsRequiredFeedCreated":@"1"
+                                    };
         parser = [[JSONParser alloc]initWith_withURL:Web_JOB_ACCEPT_DECLINE withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(accept_decline_Successfull:) withObject:self];
     }
     @catch (NSException *exception) {

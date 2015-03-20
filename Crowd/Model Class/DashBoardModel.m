@@ -300,6 +300,31 @@ UserId = 61;
         myDashBoard.attribS = attrib;
 
     }
+    else if([myDashBoard.Type isEqualToString:@"6"])
+    {
+        //accept
+        NSString *StrM = [NSString stringWithFormat:@"%@ %@ has accepted your job application.",myDashBoard.FirstName,myDashBoard.LastName];
+        /*--- Set full strig same font ---*/
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:StrM];
+        NSRange fullString = [[attrib string] rangeOfString:StrM];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:fullString];
+        
+        myDashBoard.strClickable = @"";
+        myDashBoard.attribS = attrib;
+        
+    }
+    else if([myDashBoard.Type isEqualToString:@"7"])
+    {
+        //declined
+        NSString *StrM = [NSString stringWithFormat:@"%@ %@ has declined your job application.",myDashBoard.FirstName,myDashBoard.LastName];
+        /*--- Set full strig same font ---*/
+        NSMutableAttributedString *attrib = [[NSMutableAttributedString alloc] initWithString:StrM];
+        NSRange fullString = [[attrib string] rangeOfString:StrM];
+        [attrib addAttribute:NSFontAttributeName value:kFONT_LIGHT(14.0) range:fullString];
+        
+        myDashBoard.strClickable = @"";
+        myDashBoard.attribS = attrib;
+    }
     else
     {
 //        myDashBoard.strDisplayText = [NSMutableString stringWithFormat:@""];

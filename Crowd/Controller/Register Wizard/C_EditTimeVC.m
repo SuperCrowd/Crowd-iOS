@@ -289,7 +289,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
         /*--- If user choose present no need to check validation otherwise check date Validation ---*/
         if ([[txtTo.text isNull] isEqualToString:@"Present"])
         {
-            myPosition.isCurrent = @"1";
+            myPosition.isCurrent = YES;
             myPosition.endDate_month = @"";
             myPosition.endDate_year = @"";
             result = YES;
@@ -297,7 +297,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
         else
         {
             NSArray *arrMonthEnd = [[txtTo.text isNull] componentsSeparatedByString:@" "];
-            myPosition.isCurrent = @"0";
+            myPosition.isCurrent = NO;
             myPosition.endDate_month = [NSString stringWithFormat:@"%ld",(long)[CommonMethods getMonthNumber:arrMonthEnd[0]]];
             myPosition.endDate_year = arrMonthEnd[1];;
             
@@ -415,7 +415,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
 -(NSString *)getPosition_EndMonth
 {
     Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
-    if ([myPosition.isCurrent boolValue])
+    if (myPosition.isCurrent )
     {
         return @"Present";
     }
@@ -424,7 +424,7 @@ typedef NS_ENUM(NSInteger, btnTapped)
 -(NSString *)getPosition_EndYear
 {
     Positions *myPosition = _arrContent[_selectedIndexToUpdate];//
-    if ([myPosition.isCurrent boolValue])
+    if (myPosition.isCurrent)
     {
         return @"";
     }

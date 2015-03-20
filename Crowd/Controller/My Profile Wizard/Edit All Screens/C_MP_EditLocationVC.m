@@ -42,13 +42,13 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     
     [self setupEditableView];
     
-   
+    
     C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
-
+    
     viewCity.txtName.text = myWork.LocationCity;
     viewState.txtName.text = myWork.LocationState;
     viewCountry.txtName.text = myWork.LocationCountry;
-
+    
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -118,7 +118,7 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     NSString *strState = [viewState.txtName.text isNull];
     NSString *strCountry= [viewCountry.txtName.text isNull];
     
-     /*---------Need to check for current work now-----------*/
+    /*---------Need to check for current work now-----------*/
     BOOL isCurrent;
     C_Model_Work *myWork = _arrContent[_selectedIndexToUpdate];
     if (myWork.EndMonth && myWork.EndMonth.length==0) {
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     else{
         isCurrent = NO;
     }
-    
+  
     if ([strCity isEqualToString:@""] && isCurrent)
     {
         [CommonMethods displayAlertwithTitle:@"Please Enter City name" withMessage:nil withViewController:self];
@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, btnEdit) {
             [_obj_ProfileUpdate.arr_WorkALL replaceObjectAtIndex:_selectedIndexToUpdate withObject:myWork];
             
         }
-
+        
         return YES;
     }
     
@@ -184,13 +184,13 @@ typedef NS_ENUM(NSInteger, btnEdit) {
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

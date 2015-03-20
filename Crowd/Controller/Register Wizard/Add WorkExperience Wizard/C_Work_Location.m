@@ -121,6 +121,8 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     NSString *strCountry= [viewCountry.txtName.text isNull];
     
     BOOL isCurrent = [[dictAddWorkExperience valueForKey:@"isCurrent"]boolValue];
+    
+  
     if ([strCity isEqualToString:@""]&&isCurrent)
     {
         [CommonMethods displayAlertwithTitle:@"Please Enter City name" withMessage:nil withViewController:self];

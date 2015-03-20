@@ -105,7 +105,7 @@ values = (
 @interface Positions : NSObject
 @property NSString *company_name;
 @property NSString *title;
-@property NSString *isCurrent;
+@property BOOL isCurrent;
 @property NSString *startDate_month;
 @property NSString *startDate_year;
 @property NSString *endDate_month;

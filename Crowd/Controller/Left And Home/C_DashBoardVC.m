@@ -125,7 +125,9 @@
         
         NSDictionary *dictParam = @{@"UserID":userInfoGlobal.UserId,
                                     @"UserToken":userInfoGlobal.Token,
-                                    @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum]};
+                                    @"PageNumber":[NSString stringWithFormat:@"%ld",(long)pageNum],
+                                    @"IsRequiredAcceptDeclineJobFeed":@"1"
+                                    };
         parser = [[JSONParser alloc]initWith_withURL:Web_DASHBOARD withParam:dictParam withData:nil withType:kURLPost withSelector:@selector(getDataSuccessfull:) withObject:self];
     }
     @catch (NSException *exception) {
@@ -378,7 +380,8 @@
         cell.lblDescription.alpha = 1.0;
         cell.lblDescription.font = kFONT_LIGHT(14.0);
         cell.lblDescription.attributedText = myDash.attribS;
-    }
+   }
+
     cell.imgVOtherUser.layer.borderColor = RGBCOLOR_GREEN.CGColor;
     [cell.imgVOtherUser sd_setImageWithURL:[NSString stringWithFormat:@"%@%@",IMG_BASE_URL,[CommonMethods makeThumbFromOriginalImageString:myDash.PhotoURL ]]];
 
@@ -387,7 +390,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DashBoardModel *myDash = (DashBoardModel *)arrContent[indexPath.row];
-
+    NSLog(@"%@",myDash.Type);
+        
     if ([myDash.Type isEqualToString:@"1"] || [myDash.Type isEqualToString:@"3"])
     {
         C_OtherUserProfileVC *obj = [[C_OtherUserProfileVC alloc]initWithNibName:@"C_OtherUserProfileVC" bundle:nil];
@@ -403,6 +407,16 @@
         obj.message_UserInfo = model;
         [self.navigationController pushViewController:obj animated:YES];
     }
+    else if ([myDash.Type isEqualToString:@"6"] ||[myDash.Type isEqualToString:@"7"])//my own job
+    {
+        C_JobListModel *myJob = [[C_JobListModel alloc]init];
+        myJob.JobID = myDash.JobID;
+        C_PostJob_UpdateVC *objD = [[C_PostJob_UpdateVC alloc]initWithNibName:@"C_PostJob_UpdateVC" bundle:nil];
+        objD.obj_JobListModel = myJob;
+        objD.strComingFrom = @"FindAJob";
+        [self.navigationController pushViewController:objD animated:YES];
+    }
+    
 }
 
 #pragma mark - Get TextView height

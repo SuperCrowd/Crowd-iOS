@@ -122,22 +122,22 @@ typedef NS_ENUM(NSInteger, btnEdit) {
     NSString *strCountry= [viewCountry.txtName.text isNull];
     
     
-//    BOOL isCurrent;
-//    Positions *myPosition = _arrContent[_selectedIndexToUpdate];
-//    if (myPosition.endDate_month && myPosition.endDate_month.length==0) {
-//        isCurrent = YES;
-//    }
-//    else{
-//        isCurrent = NO;
-//    }
+    BOOL isCurrent;
+    Positions *myPosition = _arrContent[_selectedIndexToUpdate];
+    if (myPosition.endDate_month && myPosition.endDate_month.length==0) {
+        isCurrent = YES;
+    }
+    else{
+        isCurrent = NO;
+    }
 
     
-    if ([strCity isEqualToString:@""])
+    if ([strCity isEqualToString:@""] && isCurrent)
     {
         [CommonMethods displayAlertwithTitle:@"Please Enter City name" withMessage:nil withViewController:self];
         return NO;
     }
-    else if ([strCountry isEqualToString:@""])
+    else if ([strCountry isEqualToString:@""] && isCurrent)
     {
         [CommonMethods displayAlertwithTitle:@"Please Enter Country name" withMessage:nil withViewController:self];
         return NO;

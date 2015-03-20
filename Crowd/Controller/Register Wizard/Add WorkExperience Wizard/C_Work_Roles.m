@@ -96,7 +96,7 @@
         myposition.location_state = dictAddWorkExperience[@"location_state"];
         myposition.location_country = dictAddWorkExperience[@"location_country"];
     
-     myposition.isCurrent = dictAddWorkExperience[@"isCurrent"];
+     myposition.isCurrent = [dictAddWorkExperience[@"isCurrent"]boolValue];
     
     
     myposition.summary = strRoles;

@@ -48,7 +48,7 @@
     [encoder encodeObject:self.company_name forKey:@"company_name"];
     [encoder encodeObject:self.title forKey:@"title"];
     [encoder encodeObject:self.summary forKey:@"summary"];
-    [encoder encodeObject:self.isCurrent forKey:@"isCurrent"];
+    [encoder encodeBool:self.isCurrent forKey:@"isCurrent"];
     [encoder encodeObject:self.startDate_year forKey:@"startDate_year"];
     [encoder encodeObject:self.startDate_month forKey:@"startDate_month"];
     [encoder encodeObject:self.endDate_month forKey:@"endDate_month"];
@@ -64,7 +64,7 @@
         self.company_name = [decoder decodeObjectForKey:@"company_name"];
         self.title = [decoder decodeObjectForKey:@"title"];
         self.summary = [decoder decodeObjectForKey:@"summary"];
-        self.isCurrent = [decoder decodeObjectForKey:@"isCurrent"];
+        self.isCurrent = [decoder decodeBoolForKey:@"isCurrent"];
         self.startDate_year = [decoder decodeObjectForKey:@"startDate_year"];
         self.startDate_month = [decoder decodeObjectForKey:@"startDate_month"];
         self.endDate_month = [decoder decodeObjectForKey:@"endDate_month"];
@@ -318,8 +318,8 @@
                 myPositions.title = [[NSString stringWithFormat:@"%@",dictT[@"title"]]isNull];
                 myPositions.summary =[[NSString stringWithFormat:@"%@",dictT[@"summary"]]isNull] ;
                 
-                myPositions.isCurrent = [[NSString stringWithFormat:@"%@",dictT[@"isCurrent"]]isNull];
-                
+                myPositions.isCurrent = [dictT[@"isCurrent"] boolValue];
+
                 myPositions.startDate_year = [[NSString stringWithFormat:@"%@",dictT[@"startDate"][@"year"] ]isNull];
                 
                 NSString *strM = [[NSString stringWithFormat:@"%@",dictT[@"startDate"][@"month"]]isNull];
